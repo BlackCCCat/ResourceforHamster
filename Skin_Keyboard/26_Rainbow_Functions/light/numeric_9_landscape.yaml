@@ -1,0 +1,1034 @@
+# 自定义功能按键前景通用属性
+alphabeticCustomButtonForegroundStyle: &alphabeticCustomButtonForegroundStyle
+  normalColor: 000000
+  highlightColor: 000000
+  fontSize: 18
+  #  fontWeight: regular
+  center:
+    x: 0.5
+    y: 0.5
+    
+    
+# 1字母按键背景样式
+alphabet1ButtonBackgroundStyle:
+  type: original
+  insets: { top: 3, left: 3, bottom: 3, right: 3 }
+  normalColor: D50000
+  highlightColor: D50000
+  cornerRadius: 5
+  normalLowerEdgeColor: 000000
+  highlightLowerEdgeColor: 000000
+  animation: alphabeticBackgroundAnimation
+
+
+# 2字母按键背景样式
+alphabet2ButtonBackgroundStyle:
+  type: original
+  insets: { top: 3, left: 3, bottom: 3, right: 3 }
+  normalColor: DD2C00
+  highlightColor: DD2C00
+  cornerRadius: 5
+  normalLowerEdgeColor: 000000
+  highlightLowerEdgeColor: 000000
+  animation: alphabeticBackgroundAnimation
+
+
+# 3字母按键背景样式
+alphabet3ButtonBackgroundStyle:
+  type: original
+  insets: { top: 3, left: 3, bottom: 3, right: 3 }
+  normalColor: FF6D00
+  highlightColor: FF6D00
+  cornerRadius: 5
+  normalLowerEdgeColor: 000000
+  highlightLowerEdgeColor: 000000
+  animation: alphabeticBackgroundAnimation
+
+
+# 4字母按键背景样式
+alphabet4ButtonBackgroundStyle:
+  type: original
+  insets: { top: 3, left: 3, bottom: 3, right: 3 }
+  normalColor: FFAB00
+  highlightColor: FFAB00
+  cornerRadius: 5
+  normalLowerEdgeColor: 000000
+  highlightLowerEdgeColor: 000000
+  animation: alphabeticBackgroundAnimation
+
+
+# 5字母按键背景样式
+alphabet5ButtonBackgroundStyle:
+  type: original
+  insets: { top: 3, left: 3, bottom: 3, right: 3 }
+  normalColor: FFD600
+  highlightColor: FFD600
+  cornerRadius: 5
+  normalLowerEdgeColor: 000000
+  highlightLowerEdgeColor: 000000
+  animation: alphabeticBackgroundAnimation
+
+
+# 6字母按键背景样式
+alphabet6ButtonBackgroundStyle:
+  type: original
+  insets: { top: 3, left: 3, bottom: 3, right: 3 }
+  normalColor: AEEA00
+  highlightColor: AEEA00
+  cornerRadius: 5
+  normalLowerEdgeColor: 000000
+  highlightLowerEdgeColor: 000000
+  animation: alphabeticBackgroundAnimation
+
+
+# 7字母按键背景样式
+alphabet7ButtonBackgroundStyle:
+  type: original
+  insets: { top: 3, left: 3, bottom: 3, right: 3 }
+  normalColor: 00C853
+  highlightColor: 00C853
+  cornerRadius: 5
+  normalLowerEdgeColor: 000000
+  highlightLowerEdgeColor: 000000
+  animation: alphabeticBackgroundAnimation
+
+
+# 8字母按键背景样式
+alphabet8ButtonBackgroundStyle:
+  type: original
+  insets: { top: 3, left: 3, bottom: 3, right: 3 }
+  normalColor: 2962FF
+  highlightColor: 2962FF
+  cornerRadius: 5
+  normalLowerEdgeColor: 000000
+  highlightLowerEdgeColor: 000000
+  animation: alphabeticBackgroundAnimation
+
+
+# 9字母按键背景样式
+alphabet9ButtonBackgroundStyle:
+  type: original
+  insets: { top: 3, left: 3, bottom: 3, right: 3 }
+  normalColor: 304FFE
+  highlightColor: 304FFE
+  cornerRadius: 5
+  normalLowerEdgeColor: 000000
+  highlightLowerEdgeColor: 000000
+  animation: alphabeticBackgroundAnimation
+
+
+# 0字母按键背景样式
+alphabet0ButtonBackgroundStyle:
+  type: original
+  insets: { top: 3, left: 3, bottom: 3, right: 3 }
+  normalColor: FF00AA
+  highlightColor: FF00AA
+  cornerRadius: 5
+  normalLowerEdgeColor: 000000
+  highlightLowerEdgeColor: 000000
+  animation: alphabeticBackgroundAnimation
+
+
+
+
+### 通用样式声明 begin ###
+
+# 字母按键背景样式
+alphabeticButtonBackgroundStyle: &alphabeticButtonBackgroundStyle
+  type: original
+  insets: { top: 3, left: 3, bottom: 3, right: 3 }
+  normalColor: FFFFFF
+  highlightColor: ABB0BA
+  cornerRadius: 5
+  normalLowerEdgeColor: 88898D
+  highlightLowerEdgeColor: 89898B
+  animation: alphabeticBackgroundAnimation
+
+# 字母键前景通用属性
+alphabeticButtonForegroundStyle: &alphabeticButtonForegroundStyle
+  normalColor: 000000
+  highlightColor: 000000
+  fontSize: 20
+  #  fontWeight: regular
+  center:
+    y: 0.8
+# 大写状态下字母键前景通用属性
+alphabeticButtonUppercasedStateForegroundStyle:
+  &alphabeticButtonUppercasedStateForegroundStyle
+  normalColor: 000000
+  highlightColor: 000000
+  fontSize: 20
+  #  fontWeight: regular
+  center:
+    y: 0.85
+
+# 字母键上划角标前景通用属性
+alphabeticSwipeUpBadgeStyle: &alphabeticSwipeUpBadgeStyle
+  normalColor: 575757
+  highlightColor: 575757
+  fontSize: 12
+  #  fontWeight: regular
+  center:
+    x: 0.75
+    y: 0.65
+
+# 字母键 hint 气泡前景通用属性
+alphabeticHintStyle: &alphabeticHintStyle
+  fontSize: 30
+  normalColor: 000000
+  center:
+    y: 0.55
+
+# 字母键长按前景通用属性
+alphabeticHoldSymbolStyle: &alphabeticHoldSymbolStyle
+  fontSize: 28
+  normalColor: 575757
+  highlightColor: ffffff
+  center:
+    y: 0.5
+
+# 字母按键 hint 气泡背景样式
+alphabeticHintBackgroundStyle:
+  type: original
+  normalColor: ffffff
+  borderColor: 69686A
+  borderSize: 1
+  topCornerRadius: 10
+  bottomCornerRadius: 5
+  # shadowColor: 797B7E
+  # shadowOffset: { x: 0, y: 5 }
+
+# 字母按键长按背景样式
+alphabeticHoldSymbolsBackgroundStyle:
+  type: original
+  normalColor: ffffff
+  borderColor: 69686A
+  borderSize: 1
+  topCornerRadius: 10
+  bottomCornerRadius: 5
+
+# 字母按键长按选中状态背景样式
+alphabeticHoldSymbolsSelectedStyle:
+  type: original
+  normalColor: 0279FE
+  cornerRadius: 5
+
+# 功能按键背景样式
+systemButtonBackgroundStyle: &systemButtonBackgroundStyle
+  type: original
+  insets: { top: 3, left: 3, bottom: 3, right: 3 }
+  normalColor: ABB0BA
+  highlightColor: FFFFFF
+  cornerRadius: 5
+  normalLowerEdgeColor: 89898B
+  highlightLowerEdgeColor: 88898D
+  animation: alphabeticBackgroundAnimation
+
+# 蓝色功能按键背景样式
+blueSystemButtonBackgroundStyle:
+  type: original
+  insets: { top: 3, left: 3, bottom: 3, right: 3 }
+  normalColor: 0279FE
+  highlightColor: FFFFFF
+  cornerRadius: 5
+  normalLowerEdgeColor: 696967
+  highlightLowerEdgeColor: 88898D
+  animation: alphabeticBackgroundAnimation
+
+# 功能键前景通用属性
+systemButtonForegroundStyle: &systemButtonForegroundStyle
+  normalColor: 000000
+  highlightColor: 000000
+  fontSize: 16
+  #  fontWeight: regular
+  center:
+    y: 0.8
+
+# 键盘背景通用属性
+backgroundOriginalStyle: &backgroundOriginalStyle
+  type: original
+  normalColor: D1D2D9FC
+
+# 字母按键背景动画
+alphabeticBackgroundAnimation:
+  # type: 动画类型
+  # - bounds: 尺寸大小变化动画
+  - type: bounds
+    duration: 40 # 动画时长，单位毫秒
+    repeatCount: 1
+    fromScale: 1
+    toScale: 0.87
+  - type: bounds
+    duration: 80
+    repeatCount: 1
+    fromScale: 0.87
+    toScale: 1
+
+### 通用样式声明 end ###
+
+### 键盘定义 ###
+
+preeditHeight: 12
+
+toolbarHeight: 25
+
+keyboardHeight: 195 # 160
+
+preedit:
+  insets: { left: 4, top: 1 }
+  backgroundStyle: preeditBackgroundStyle
+  foregroundStyle: preeditForegroundStyle
+
+preeditBackgroundStyle:
+  <<: *backgroundOriginalStyle
+
+preeditForegroundStyle:
+  textColor: 000000
+  fontSize: 12
+  fontWeight: regular
+
+toolbar:
+  backgroundStyle: toolbarBackgroundStyle
+  # primaryButtonStyle: primaryButtonStyle
+  secondaryButtonStyle:
+    - toolbarButton1Style
+    - toolbarButton2Style
+#     - toolbarButton3Style
+    - toolbarButton4Style
+    - toolbarButton5Style
+    - toolbarButton6Style
+  horizontalCandidateStyle: horizontalCandidateStyle
+  verticalCandidateStyle: verticalCandidateStyle
+  candidateContextMenu: candidateContextMenu
+
+toolbarBackgroundStyle:
+  <<: *backgroundOriginalStyle
+
+# primaryButtonStyle:
+#   backgroundStyle: toolbarButtonBackgroundStyle
+#   foregroundStyle: primaryButtonForegroundStyle
+#   action: { openURL: "hamster://" }
+
+primaryButtonForegroundStyle:
+  systemImageName: "paperplane.circle"
+  normalColor: 575757
+  highlightColor: 575757
+  fontSize: 16
+
+toolbarButtonBackgroundStyle:
+  # normalColor: 00000000
+  # highlightColor: 00000000
+
+toolbarButton1Style:
+  backgroundStyle: toolbarButtonBackgroundStyle
+  foregroundStyle: toolbarButton1ForegroundStyle
+  action: dismissKeyboard
+
+toolbarButton1ForegroundStyle:
+  systemImageName: "keyboard.chevron.compact.down.fill"
+  normalColor: 575757
+  highlightColor: 575757
+  fontSize: 16
+
+toolbarButton2Style:
+  backgroundStyle: toolbarButtonBackgroundStyle
+  foregroundStyle: toolbarButton2ForegroundStyle
+  action: { keyboardType: alphabetic }
+
+toolbarButton2ForegroundStyle:
+  assetImageName: chineseState
+  normalColor: 575757
+  highlightColor: 575757
+  fontSize: 16
+#  fontWeight: regular
+
+# toolbarButton2Style:
+#   backgroundStyle: toolbarButtonBackgroundStyle
+#   foregroundStyle: toolbarButton2ForegroundStyle
+#   action: { shortcutCommand: "#中英切换" }
+# 
+# toolbarButton2ForegroundStyle:
+#   text: |-
+#     // JavaScript
+#     function getText() {
+#       return $getRimeOptionState("ascii_mode") ? "英" : "中";
+#     }
+#   normalColor: 575757
+#   highlightColor: 575757
+#   fontSize: 16
+#  fontWeight: regular
+
+toolbarButton3Style:
+  backgroundStyle: toolbarButtonBackgroundStyle
+  foregroundStyle: toolbarButton3ForegroundStyle
+  action: { shortcutCommand: "#toggleScriptView" }
+
+toolbarButton3ForegroundStyle:
+  systemImageName: "atom"
+  normalColor: 575757
+  highlightColor: 575757
+  fontSize: 16
+
+toolbarButton4Style:
+  backgroundStyle: toolbarButtonBackgroundStyle
+  foregroundStyle: toolbarButton4ForegroundStyle
+  action: { shortcutCommand: "#showPasteboardView" }
+
+toolbarButton4ForegroundStyle:
+  systemImageName: "doc.on.clipboard.fill"
+  normalColor: 575757
+  highlightColor: 575757
+  fontSize: 16
+
+toolbarButton5Style:
+  backgroundStyle: toolbarButtonBackgroundStyle
+  foregroundStyle: toolbarButton5ForegroundStyle
+  action: { shortcutCommand: "#showPhraseView" }
+
+toolbarButton5ForegroundStyle:
+  systemImageName: "arrow.up.doc.on.clipboard"
+  normalColor: 575757
+  highlightColor: 575757
+  fontSize: 16
+
+toolbarButton6Style:
+  backgroundStyle: toolbarButtonBackgroundStyle
+  foregroundStyle: toolbarButton6ForegroundStyle
+  action: { keyboardType: emoji }
+
+toolbarButton6ForegroundStyle:
+  systemImageName: "face.dashed.fill"
+  normalColor: 575757
+  highlightColor: 575757
+  fontSize: 16
+
+horizontalCandidateStyle:
+  insets: { left: 3, bottom: 1, top: 3 }
+  candidateStateButtonStyle: candidateStateButtonStyle
+  highlightBackgroundColor: ffffff
+  preferredBackgroundColor: ffffff
+  preferredIndexColor: 000000
+  preferredTextColor: 000000
+  preferredCommentColor: 000000
+  indexColor: 000000
+  textColor: 000000
+  commentColor: 000000
+  indexFontSize: 18
+  indexFontWeight: regular
+  textFontSize: 18
+  textFontWeight: regular
+  commentFontSize: 18
+  commentFontWeight: regular
+
+candidateStateButtonStyle:
+  backgroundStyle: toolbarButtonBackgroundStyle
+  foregroundStyle: candidateStateButtonForegroundStyle
+
+candidateStateButtonForegroundStyle:
+  systemImageName: "chevron.down"
+  normalColor: 575757
+  highlightColor: 575757
+  fontSize: 16
+
+verticalCandidateStyle:
+  insets: { top: 3, bottom: 3, left: 4, right: 4 }
+  bottomRowHeight: 50
+  backgroundStyle: verticalCandidateBackgroundStyle
+  candidateStyle: verticalCandidateOfCandidateStyle
+  pageUpButtonStyle: verticalCandidatePageUpButtonStyle
+  pageDownButtonStyle: verticalCandidatePageDownButtonStyle
+  returnButtonStyle: verticalCandidateReturnButtonStyle
+  backspaceButtonStyle: verticalCandidateBackspaceButtonStyle
+
+verticalCandidateBackgroundStyle:
+  <<: *backgroundOriginalStyle
+
+verticalCandidateOfCandidateStyle:
+  insets: { top: 8, bottom: 8, left: 8, right: 8 }
+  backgroundColor: 00000000
+  separatorColor: 383838
+  highlightBackgroundColor: ffffff00
+  preferredBackgroundColor: ffffff00
+  preferredIndexColor: 1a73e9
+  preferredTextColor: 1a73e9
+  preferredCommentColor: 1a73e9
+  indexColor: 000000
+  textColor: 000000
+  commentColor: 000000
+  indexFontSize: 16
+  indexFontWeight: regular
+  textFontSize: 16
+  textFontWeight: regular
+  commentFontSize: 16
+  commentFontWeight: regular
+
+verticalCandidatePageUpButtonStyle:
+  backgroundStyle: verticalCandidateButtonBackgroundStyle
+  foregroundStyle: verticalCandidatePageUpButtonForegroundStyle
+
+verticalCandidateButtonBackgroundStyle:
+  <<: *systemButtonBackgroundStyle
+
+verticalCandidatePageUpButtonForegroundStyle:
+  systemImageName: "chevron.up"
+  normalColor: 000000
+  highlightColor: 000000
+  fontSize: 16
+
+verticalCandidatePageDownButtonStyle:
+  backgroundStyle: verticalCandidateButtonBackgroundStyle
+  foregroundStyle: verticalCandidatePageDownButtonForegroundStyle
+
+verticalCandidatePageDownButtonForegroundStyle:
+  systemImageName: "chevron.down"
+  normalColor: 000000
+  highlightColor: 000000
+  fontSize: 16
+
+verticalCandidateReturnButtonStyle:
+  backgroundStyle: verticalCandidateButtonBackgroundStyle
+  foregroundStyle: verticalCandidateReturnButtonForegroundStyle
+
+verticalCandidateReturnButtonForegroundStyle:
+  systemImageName: "return"
+  normalColor: 000000
+  highlightColor: 000000
+  fontSize: 16
+
+verticalCandidateBackspaceButtonStyle:
+  backgroundStyle: verticalCandidateButtonBackgroundStyle
+  foregroundStyle:
+    - verticalCandidateBackspaceButtonForegroundStyle
+
+verticalCandidateBackspaceButtonForegroundStyle:
+  systemImageName: "delete.left"
+  normalColor: 000000
+  highlightColor: 000000
+  fontSize: 16
+
+keyboard:
+  subviews:
+    - HStack:
+        style: rowofFunctionStyle
+        subviews:
+          - Cell: leftButton
+          - Cell: atomButton
+          - Cell: rimeButton
+          - Cell: cutButton
+          - Cell: copyButton
+          - Cell: pasteButton
+          - Cell: selectButton
+          - Cell: rightButton
+    - HStack:
+        style: keyboardStyle
+        subviews:
+          - VStack:
+              style: VStackStyle1
+              subviews:
+                - Cell: collection
+                - Cell: returnButton
+          - VStack:
+              style: VStackStyle2
+              subviews:
+                - Cell: number1Button
+                - Cell: number4Button
+                - Cell: number7Button
+                - Cell: symbolButton
+          - VStack:
+              style: VStackStyle2
+              subviews:
+                - Cell: number2Button
+                - Cell: number5Button
+                - Cell: number8Button
+                - Cell: number0Button
+          - VStack:
+              style: VStackStyle2
+              subviews:
+                - Cell: number3Button
+                - Cell: number6Button
+                - Cell: number9Button
+                - Cell: spaceButton
+          - VStack:
+              style: VStackStyle1
+              subviews:
+                - Cell: backspaceButton
+                - Cell: periodButton
+                - Cell: atButton
+                - Cell: enterButton
+
+owofFunctionStyle:
+  size:
+    height: 30
+  backgroundStyle: keyboardBackgroundStyle
+
+
+keyboardStyle:
+  size: 
+    height: 160
+  backgroundStyle: keyboardBackgroundStyle
+
+keyboardBackgroundStyle:
+  <<: *backgroundOriginalStyle
+
+
+leftButton:
+  size:
+    width: 140.625/1125
+  backgroundStyle: alphabeticButtonBackgroundStyle
+  foregroundStyle:
+    - leftButtonForegroundStyle
+  action: { shortcutCommand: "#左移" }
+  swipeUpAction: { shortcutCommand: "#行首" }
+  swipeDownAction: { character: "[" }
+  holdSymbolsStyle: leftButtonHoldSymbolsStyle
+
+leftButtonForegroundStyle:
+  systemImageName: "arrowshape.turn.up.left.fill"
+  <<: *alphabeticCustomButtonForegroundStyle
+
+leftButtonHoldSymbolsStyle:
+  backgroundStyle: alphabeticHoldSymbolsBackgroundStyle
+  foregroundStyle:
+    - leftButtonHoldSymbolsForegroundStyle
+  actions:
+    - { shortcutCommand: "#行首" }
+  selectedStyle: alphabeticHoldSymbolsSelectedStyle
+
+leftButtonHoldSymbolsForegroundStyle:
+  systemImageName: "arrow.left.to.line"
+  <<: *alphabeticHoldSymbolStyle
+
+atomButton:
+  size:
+    width: 140.625/1125
+  backgroundStyle: alphabeticButtonBackgroundStyle
+  foregroundStyle:
+    - atomButtonForegroundStyle
+  action: { shortcutCommand: "#toggleScriptView" }
+
+atomButtonForegroundStyle:
+  systemImageName: "atom"
+  <<: *alphabeticCustomButtonForegroundStyle
+
+rimeButton:
+  size:
+    width: 140.625/1125
+  backgroundStyle: alphabeticButtonBackgroundStyle
+  foregroundStyle:
+    - rimeButtonForegroundStyle
+  action: { openURL: "hamster://dev.fuxiao.app.hamster/main" }
+  holdSymbolsStyle: rimeButtonHoldSymbolsStyle
+  
+rimeButtonForegroundStyle:
+  systemImageName: "r.square.on.square.fill"
+  <<: *alphabeticCustomButtonForegroundStyle
+
+rimeButtonHoldSymbolsStyle:
+  backgroundStyle: alphabeticHoldSymbolsBackgroundStyle
+  foregroundStyle:
+    - rimeButtonHoldSymbolsOffirstForegroundStyle
+    - rimeButtonHoldSymbolsOfsecondForegroundStyle
+    - rimeButtonHoldSymbolsOfthirdForegroundStyle
+  actions:
+    - { openURL: "https://www.google.com/search?q=#pasteboardContent" }
+    - { openURL: "#pasteboardContent" }
+    - { openURL: "itms-apps://search.itunes.apple.com/WebObjects/MZSearch.woa/wa/search?media=software&term=#pasteboardContent" }
+  selectedStyle: alphabeticHoldSymbolsSelectedStyle
+  selectedIndex: 0
+
+rimeButtonHoldSymbolsOffirstForegroundStyle:
+  systemImageName: "g.circle.fill"
+  <<: *alphabeticHoldSymbolStyle
+
+rimeButtonHoldSymbolsOfsecondForegroundStyle:
+  systemImageName: "safari.fill"
+  <<: *alphabeticHoldSymbolStyle
+
+rimeButtonHoldSymbolsOfthirdForegroundStyle:
+  systemImageName: "apple.logo"
+  <<: *alphabeticHoldSymbolStyle
+
+cutButton:
+  size:
+    width: 140.625/1125
+  backgroundStyle: alphabeticButtonBackgroundStyle
+  foregroundStyle:
+    - cutButtonForegroundStyle
+  action: { shortcutCommand: "#剪切" }
+  holdSymbolsStyle: cutButtonHoldSymbolsStyle
+
+cutButtonForegroundStyle:
+  systemImageName: "scissors"
+  <<: *alphabeticCustomButtonForegroundStyle
+
+cutButtonHoldSymbolsStyle:
+  actions: { openURL: "hamster://dev.fuxiao.app.hamster/clipboard" }
+
+copyButton:
+  size:
+    width: 140.625/1125
+  backgroundStyle: alphabeticButtonBackgroundStyle
+  foregroundStyle:
+    - copyButtonForegroundStyle
+  action: { shortcutCommand: "#复制" }
+  holdSymbolsStyle: copyButtonHoldSymbolsStyle
+
+copyButtonForegroundStyle:
+  systemImageName: "arrow.up.doc.on.clipboard"
+  <<: *alphabeticCustomButtonForegroundStyle
+
+copyButtonHoldSymbolsStyle:
+  actions: { openURL: "#showPhraseView" }
+  
+pasteButton:
+  size:
+    width: 140.625/1125
+  backgroundStyle: alphabeticButtonBackgroundStyle
+  foregroundStyle:
+    - pasteButtonForegroundStyle
+  action: { shortcutCommand: "#粘贴" }
+  holdSymbolsStyle: pasteButtonHoldSymbolsStyle
+
+pasteButtonForegroundStyle:
+  systemImageName: "doc.on.clipboard.fill"
+  <<: *alphabeticCustomButtonForegroundStyle
+
+pasteButtonHoldSymbolsStyle:
+  actions: { shortcutCommand: "#showPasteboardView" }
+
+
+selectButton:
+  size:
+    width: 140.625/1125
+  backgroundStyle: alphabeticButtonBackgroundStyle
+  foregroundStyle:
+    - selectButtonForegroundStyle
+  action: { shortcutCommand: "#selectText" }
+  holdSymbolsStyle: selectButtonHoldSymbolsStyle
+
+selectButtonForegroundStyle:
+  systemImageName: "square.grid.3x3.fill"
+  <<: *alphabeticCustomButtonForegroundStyle
+
+
+rightButton:
+  size:
+    width: 140.625/1125
+  backgroundStyle: alphabeticButtonBackgroundStyle
+  foregroundStyle:
+    - rightButtonForegroundStyle
+  action: { shortcutCommand: "#右移" }
+  swipeUpAction: { shortcutCommand: "#行尾" }
+  swipeDownAction: { character: "]" }
+  holdSymbolsStyle: rightButtonHoldSymbolsStyle
+
+rightButtonForegroundStyle:
+  systemImageName: "arrowshape.turn.up.right.fill"
+  <<: *alphabeticCustomButtonForegroundStyle
+
+rightButtonHoldSymbolsStyle:
+  backgroundStyle: alphabeticHoldSymbolsBackgroundStyle
+  foregroundStyle:
+    - rightButtonHoldSymbolsForegroundStyle
+  actions:
+    - { shortcutCommand: "#行尾" }
+  selectedStyle: alphabeticHoldSymbolsSelectedStyle
+
+rightButtonHoldSymbolsForegroundStyle:
+  systemImageName: "arrow.right.to.line"
+  <<: *alphabeticHoldSymbolStyle
+
+VStackStyle1:
+  size:
+    width: 63/375
+VStackStyle2:
+  size:
+    width: 83/375
+
+collection:
+  size:
+    height: 3/4
+  backgroundStyle: systemButtonBackgroundStyle
+  type: symbols
+  dataSource: symbols
+  cellStyle: collectionCellStyle
+
+listBackgroundStyle:
+  <<: *systemButtonBackgroundStyle
+
+collectionCellStyle:
+  backgroundStyle: collectionCellBackgroundStyle
+  foregroundStyle: collectionCellForegroundStyle
+
+collectionCellBackgroundStyle:
+  <<: *alphabeticButtonBackgroundStyle
+
+collectionCellForegroundStyle:
+  normalColor: 575757
+  highlightColor: 000000
+  fontSize: 18
+
+returnButton:
+  size:
+    height: 1/4
+  backgroundStyle: systemButtonBackgroundStyle
+  foregroundStyle:
+    - returnButtonForegroundStyle
+  action: { keyboardType: chinese }
+  swipeUpAction: { keyboardType: alphabetic }
+
+returnButtonForegroundStyle:
+  text: 返回
+  <<: *systemButtonForegroundStyle
+
+number1Button:
+  size:
+    height: 1/4
+  backgroundStyle: alphabet1ButtonBackgroundStyle
+  foregroundStyle: number1ButtonForegroundStyle
+  action: { character: 1 }
+
+number1ButtonForegroundStyle:
+  text: "1"
+  <<: *alphabeticButtonForegroundStyle
+
+number4Button:
+  size:
+    height: 1/4
+  backgroundStyle: alphabet4ButtonBackgroundStyle
+  foregroundStyle: number4ButtonForegroundStyle
+  action: { character: 4 }
+
+number4ButtonForegroundStyle:
+  text: "4"
+  <<: *alphabeticButtonForegroundStyle
+
+number7Button:
+  size:
+    height: 1/4
+  backgroundStyle: alphabet7ButtonBackgroundStyle
+  foregroundStyle: number7ButtonForegroundStyle
+  action: { character: 7 }
+
+number7ButtonForegroundStyle:
+  text: "7"
+  <<: *alphabeticButtonForegroundStyle
+
+symbolButton:
+  size:
+    height: 1/4
+  backgroundStyle: systemButtonBackgroundStyle
+  foregroundStyle:
+    - symbolButtonForegroundStyle
+  action: { keyboardType: symbolic }
+
+symbolButtonForegroundStyle:
+  text: "#+="
+  <<: *systemButtonForegroundStyle
+
+number2Button:
+  size:
+    height: 1/4
+  backgroundStyle: alphabet2ButtonBackgroundStyle
+  foregroundStyle: number2ButtonForegroundStyle
+  action: { character: 2 }
+
+number2ButtonForegroundStyle:
+  text: "2"
+  <<: *alphabeticButtonForegroundStyle
+
+number5Button:
+  size:
+    height: 1/4
+  backgroundStyle: alphabet5ButtonBackgroundStyle
+  foregroundStyle: number5ButtonForegroundStyle
+  action: { character: 5 }
+
+number5ButtonForegroundStyle:
+  text: "5"
+  <<: *alphabeticButtonForegroundStyle
+
+number8Button:
+  size:
+    height: 1/4
+  backgroundStyle: alphabet8ButtonBackgroundStyle
+  foregroundStyle: number8ButtonForegroundStyle
+  action: { character: 8 }
+
+number8ButtonForegroundStyle:
+  text: "8"
+  <<: *alphabeticButtonForegroundStyle
+
+number0Button:
+  size:
+    height: 1/4
+  backgroundStyle: alphabet0ButtonBackgroundStyle
+  foregroundStyle: number0ButtonForegroundStyle
+  action: { character: 0 }
+
+number0ButtonForegroundStyle:
+  text: "0"
+  <<: *alphabeticButtonForegroundStyle
+
+number3Button:
+  size:
+    height: 1/4
+  backgroundStyle: alphabet3ButtonBackgroundStyle
+  foregroundStyle: number3ButtonForegroundStyle
+  action: { character: 3 }
+
+number3ButtonForegroundStyle:
+  text: "3"
+  <<: *alphabeticButtonForegroundStyle
+
+number6Button:
+  size:
+    height: 1/4
+  backgroundStyle: alphabet6ButtonBackgroundStyle
+  foregroundStyle: number6ButtonForegroundStyle
+  action: { character: 6 }
+
+number6ButtonForegroundStyle:
+  text: "6"
+  <<: *alphabeticButtonForegroundStyle
+
+number9Button:
+  size:
+    height: 1/4
+  backgroundStyle: alphabet9ButtonBackgroundStyle
+  foregroundStyle: number9ButtonForegroundStyle
+  action: { character: 9 }
+
+number9ButtonForegroundStyle:
+  text: "9"
+  <<: *alphabeticButtonForegroundStyle
+
+spaceButton:
+  size:
+    height: 1/4
+  backgroundStyle: systemButtonBackgroundStyle
+  foregroundStyle: spaceButtonForegroundStyle
+  action: space
+
+spaceButtonForegroundStyle:
+  systemImageName: "space"
+  normalColor: 575757
+  highlightColor: 575757
+  fontSize: 16
+
+backspaceButton:
+  size:
+    height: 1/4
+  backgroundStyle: systemButtonBackgroundStyle
+  foregroundStyle:
+    - backspaceButtonForegroundStyle
+    - backspaceButtonForegroundStyle2
+  action: backspace
+  repeatAction: backspace
+  swipeLeftAction: { shortcutCommand: "#重输" }
+
+backspaceButtonForegroundStyle:
+  systemImageName: "delete.left"
+  normalColor: 000000
+  highlightColor: 000000
+  fontSize: 20
+
+periodButton:
+  size:
+    height: 1/4
+  backgroundStyle: systemButtonBackgroundStyle
+  foregroundStyle: periodButtonForegroundStyle
+  action: { symbol: "." }
+
+periodButtonForegroundStyle:
+  text: "."
+  normalColor: 575757
+  highlightColor: 575757
+  fontSize: 30
+  fontWeight: bold
+
+atButton:
+  size:
+    height: 1/4
+  backgroundStyle: systemButtonBackgroundStyle
+  foregroundStyle: atButtonForegroundStyle
+  action: { character: "@" }
+
+atButtonForegroundStyle:
+  text: "@"
+  <<: *systemButtonForegroundStyle
+
+enterButton:
+  size:
+    height: 1/4
+  backgroundStyle: |-
+    // JavaScript
+    function getText() {
+      let type = $getReturnKeyType();
+      if (type === 1 || type === 4) {
+        return "blueSystemButtonBackgroundStyle";
+      }
+      return "systemButtonBackgroundStyle";
+    }
+  foregroundStyle: |-
+    // JavaScript
+    function getText() {
+      let type = $getReturnKeyType();
+      if (type === 1 || type === 4) {
+        return "enterButtonWhiteForegroundStyle";
+      }
+      return "enterButtonBlackForegroundStyle";
+    }
+  action: enter
+  swipeUpAction: { shortcutCommand: "#换行" }
+
+enterButtonWhiteForegroundStyle:
+  text: "前往"
+  normalColor: ffffff
+  highlightColor: ffffff
+  fontSize: 16
+  fontWeight: regular
+  center:
+    y: 0.8
+
+enterButtonBlackForegroundStyle:
+  text: |-
+    // JavaScript
+    function getText() {
+      const type = $getReturnKeyType();
+      switch (type) {
+        case 1:
+          return "前往";
+        case 3:
+          return "加入";
+        case 4:
+          return "前往";
+        case 6:
+          return "搜索"
+        case 7:
+          return "发送"
+        case 9:
+          return "完成";
+        default:
+          return "换行";
+      }
+    }
+  <<: *systemButtonForegroundStyle
+
+dataSource:
+  symbols:
+    - "="
+    - "+"
+    - "*"
+    - "-"
+    - "/"
+    - "("
+    - ")"
+    - "."
+    - "@"
+    - ","
+    - "#"
+    - ":"
+    - "_"
+    - "?"
+    - "￥"

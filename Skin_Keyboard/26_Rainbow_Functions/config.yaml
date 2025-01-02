@@ -1,0 +1,49 @@
+name: 26键彩虹键盘
+author: BlackCat
+
+# 中文键盘
+pinyin:
+  iPhone:
+    portrait: pinyin_26_portrait
+    landscape: pinyin_26_landscape
+  iPad:
+    portrait: iPad_pinyin_26_portrait
+    landscape: iPad_pinyin_26_landscape
+    floating: iPad_pinyin_26_float
+
+# 英文键盘
+alphabetic:
+  iPhone:
+    portrait: en_26_portrait
+    landscape: en_26_landscape
+  iPad:
+    portrait: iPad_pinyin_26_portrait
+    landscape: iPad_pinyin_26_landscape
+    floating: iPad_pinyin_26_float
+
+# 数字键盘
+numeric:
+  iPhone:
+    portrait: numeric_9_portrait
+    landscape: numeric_9_landscape
+  iPad:
+    portrait: iPad_numeric_26_portrait
+    landscape: iPad_numeric_26_landscape
+    floating: numeric_9_portrait
+
+# 符号键盘
+symbolic:
+  iPhone:
+    portrait: symbolic_portrait
+    landscape: symbolic_landscape
+  iPad:
+    portrait: iPad_symbolic_portrait
+    landscape: iPad_symbolic_landscape
+    floating: iPad_symbolic_float
+
+# emoji键盘
+emoji:
+  iPhone:
+    portrait: emoji_portrait
+    landscape: emoji_landscape
+
