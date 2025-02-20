@@ -1,0 +1,21 @@
+patch:
+  keyboard:
+    style:
+      fontFace:
+        - url: "MiSans L3.ttf"
+        - name: "PingFangSC-Regular"
+        - url: "MiSans-Regular.otf"
+        - url: "MiSansLatin-Regular.otf"
+        - url: "MisansTC-Regular.otf"
+        - url: "HanaMinA.ttf"
+        - url: "LXGWWenKaiMono-Regular.ttf"
+        - url: "MesloLGSDZNerdFont-Regular.ttf"
+        - url: "SymbolsNerdFont-Regular.ttf"
+        - url: "ziti.ttf"
+
+
+# 配色方案
+  # 来源: https://github.com/rime/squirrel/blob/master/data/squirrel.yaml
+  # hamster_color_schemas  为引用的颜色文件名称
+    colorSchemas:
+      __include: hamster_color_schemas:/colorSchemas

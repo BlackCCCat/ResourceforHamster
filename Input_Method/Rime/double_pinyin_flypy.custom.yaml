@@ -1,0 +1,213 @@
+patch:
+  engine/filters:
+    - lua_filter@corrector                          # 错音错字提示
+    - lua_filter@autocap_filter                     # 英文自动大写
+    - lua_filter@pin_cand_filter                    # 置顶候选项（顺序要求：置顶候选项 > Emoji > 简繁切换）
+    - lua_filter@long_word_filter  # 增加长词优先
+    - simplifier@emoji                              # Emoji
+    - simplifier@traditionalize                     # 简繁切换
+    - lua_filter@search@radical_pinyin              # 部件拆字辅码
+    - lua_filter@reduce_english_filter              # 降低部分英语单词在候选项的位置
+    - lua_filter@is_in_user_dict                    # 是否给在用户词库中的增加星号
+    - lua_filter@*aux_code@flypy_full               # RIME 输入法辅助码与音形分离插件
+    - reverse_lookup_filter@radical_reverse_lookup  # 部件拆字滤镜
+    - uniquifier                                    # 去重
+    # - lua_filter@*merge_comment                      # 注释合并
+
+  engine/processors/@before 0: predictor
+
+  engine/translators:
+    - predict_translator
+    - lua_translator@*all_time
+    - lua_translator@*commit_history
+    - punct_translator
+    - script_translator
+    - lua_translator@date_translator    # 时间、日期、星期
+    - lua_translator@lunar              # 农历
+    - table_translator@custom_phrase    # 自定义短语 custom_phrase_double.txt
+    - table_translator@melt_eng         # 英文输入
+    - table_translator@cn_en            # 中英混合词汇
+    - table_translator@radical_lookup   # 部件拆字反查
+    - lua_translator@unicode            # Unicode
+    - lua_translator@number_translator  # 数字、金额大写
+    - lua_translator@force_gc           # 暴力 GC
+    - lua_translator@*calculator_translator
+    - lua_translator@*calculator
+    
+    
+
+        
+  # 计算器
+  recognizer/patterns/expression: "^=.*$"
+  # 上屏历史
+  recognizer/patterns/history: "^Vhs$"
+    
+    
+  # 增加星号：true
+  is_in_user_dict: true
+
+  # 形码辅助是否显示
+  key_binder/show_aux_notice: true
+  
+  # 强制删词，就是删除当前打的所有未上屏的内容
+  drop_cand: "Control+d"
+    
+
+  # 长词优先设置为提升 10 个词到第 2 个位置，1会导致很多自动联想词，不好用
+  long_word_filter:
+    count: 10
+    idx: 2
+    
+  # 双拼不转换为全拼编码
+  translator/preedit_format: []
+  
+  # 自定义“RIME 输入法辅助码与音形分离插件”的触发符号，若没有下面的补丁，则默认为分号;，且应该添加;不直接上屏
+  #  key_binder/+:
+  #    aux_code_trigger: ""
+  
+  # @符号增加邮箱后缀
+  punctuator/half_shape/+:
+    '@':
+     - '@'
+     - '@gmail.com'
+     - '@outlook.com'
+     - '@qq.com'
+     - '@163.com'
+    '[':
+     - '〔'
+     - '｛'
+     - '〖'
+     - '『'
+    ']':
+     - '〕'
+     - '｝'
+     - '〗'
+     - '』'
+
+
+  
+  
+  # 增加@和〔〕不直接上屏，以便读取邮箱后缀，添加;以触发形码
+  speller/alphabet/+: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA@〔〕;
+    
+  # xform 变形改为 derive 派生，以实现全拼双拼混合输入
+  speller/algebra:
+    - derive/^([jqxy])u$/$1v/
+    - derive/^([aoe])([ioun])$/$1$1$2/
+    - derive/^([aoe])(ng)?$/$1$1$2/
+    - derive/iu$/Ⓠ/
+    - derive/(.)ei$/$1Ⓦ/
+    - derive/uan$/Ⓡ/
+    - derive/[uv]e$/Ⓣ/
+    - derive/un$/Ⓨ/
+    - derive/^sh/Ⓤ/
+    - derive/^ch/Ⓘ/
+    - derive/^zh/Ⓥ/
+    - derive/uo$/Ⓞ/
+    - derive/ie$/Ⓟ/
+    - derive/(.)i?ong$/$1Ⓢ/
+    - derive/ing$|uai$/Ⓚ/
+    - derive/(.)ai$/$1Ⓓ/
+    - derive/(.)en$/$1Ⓕ/
+    - derive/(.)eng$/$1Ⓖ/
+    - derive/[iu]ang$/Ⓛ/
+    - derive/(.)ang$/$1Ⓗ/
+    - derive/ian$/Ⓜ/
+    - derive/(.)an$/$1Ⓙ/
+    - derive/(.)ou$/$1Ⓩ/
+    - derive/[iu]a$/Ⓧ/
+    - derive/iao$/Ⓝ/
+    - derive/(.)ao$/$1Ⓒ/
+    - derive/ui$/Ⓥ/
+    - derive/in$/Ⓑ/
+    - xlit/ⓆⓌⓇⓉⓎⓊⒾⓄⓅⓈⒹⒻⒼⒽⒿⓀⓁⓏⓍⒸⓋⒷⓃⓂ/qwrtyuiopsdfghjklzxcvbnm/
+    
+  # 自定义短语
+  custom_phrase:
+    dictionary: ""
+    user_dict: custom_phrase_double  # 需要手动创建 custom_phrase_double.txt 文件
+    db_class: stabledb
+    enable_completion: false # 补全提示
+    enable_sentence: false   # 禁止造句
+    initial_quality: 99      # custom_phrase 的权重应该比 pinyin 和 melt_eng 大
+    
+  # 部件拆字滤镜
+  radical_reverse_lookup:
+    tags: [ radical_lookup ]
+    # dictionary 为拼音标注来源。目前是显示本方案词库的注音，可去部件拆字方案下载更全的、带声调的、已编译好的词典
+    # https://github.com/mirtlecn/rime-radical-pinyin?tab=readme-ov-file#%E5%8F%8D%E6%9F%A5%E5%B8%A6%E5%A3%B0%E8%B0%83%E6%B3%A8%E9%9F%B3
+    dictionary: kMandarin # zdict
+    # dictionary: rime_ice
+    # comment_format:     # 自定义 comment，例如在左右加上括号
+    #  - xform/^/(/
+    #  - xform/$/)/
+
+
+  # 八股文
+  # grammar:
+    # language: zh-hans-t-essay-bgw
+    # language: zh-hans-t-huayu-v7-bgw
+
+# 开关
+# reset: 默认状态。注释掉后，切换窗口时不会重置到默认状态。
+# states: 方案选单显示的名称。可以注释掉，仍可以通过快捷键切换。
+# abbrev: 默认的缩写取 states 的第一个字符，abbrev 可自定义一个字符
+  switches:
+    - name: ascii_mode
+      states: [ 中, Ａ ]
+    - name: ascii_punct  # 中英标点
+      states: [ ¥, $ ]
+    - name: traditionalization
+      states: [ 简, 繁 ]
+    - name: emoji
+      states: [ 💀, 😄 ]
+      reset: 1
+    - name: full_shape
+      states: [ 半角, 全角 ]
+    - name: search_single_char  # search.lua 的功能开关，辅码查词时是否单字优先
+      abbrev: [词, 单]
+      states: [正常, 单字]
+    - name: prediction
+      states: [关闭预测, 开启预测] # [ 關閉預測, 開啓預測 ]
+      reset: 1
+
+  predictor:
+  # predict db file in user directory/shared directory
+  # default to 'predict.db'
+    db: predict.db
+  # max prediction candidates every time
+  # default to 0, which means showing all candidates
+  # you may set it the same with page_size so that period doesn't trigger next page
+    max_candidates: 5
+  # max continuous prediction times
+  # default to 0, which means no limitation
+    max_iterations: 1
+
+  # __include: octagram   #启用语法模型
+  #语法模型
+# octagram:
+#     __patch:
+#       grammar:
+#         language: amz-v3n2m1-zh-hans  
+#         collocation_max_length: 5
+#         collocation_min_length: 2
+#       translator/contextual_suggestions: true
+#       translator/max_homophones: 7
+#       translator/max_homographs: 7
+
+  # __include: octagram   #启用语言模型
+  #语言模型
+  octagram:
+    __patch:
+      grammar:
+        language: wanxiang-lts-zh-hans
+        collocation_max_length: 8         #命中的最长词组
+        collocation_min_length: 3         #命中的最短词组，搭配词频健全的词库时候应当最小值设为3避开2字高频词
+        collocation_penalty: -10          #默认-12 对常见搭配词组施加的惩罚值。较高的负值会降低这些搭配被选中的概率，防止过于频繁地出现某些固定搭配。
+        non_collocation_penalty: -12      #默认-12 对非搭配词组施加的惩罚值。较高的负值会降低非搭配词组被选中的概率，避免不合逻辑或不常见的词组组合。
+        weak_collocation_penalty: -24     #默认-24 对弱搭配词组施加的惩罚值。保持默认值通常是为了有效过滤掉不太常见但仍然合理的词组组合。
+        rear_penalty: -30                 #默认-18 对词组中后续词语的位置施加的惩罚值。较高的负值会降低某些词语在句子后部出现的概率，防止句子结构不自然。
+      translator/contextual_suggestions: false
+      translator/max_homophones: 5
+      translator/max_homographs: 5
+
