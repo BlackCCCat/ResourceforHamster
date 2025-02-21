@@ -219,6 +219,10 @@ if __name__ == '__main__':
         args = parser.parse_args()
         main(args.source)
     else:
-        source_dir = "修改为你的皮肤文件夹名"
-        main(source_dir)
+        comments.CommentedBase.yaml_set_anchor = yaml_set_anchor # 保留锚点
+        dir_list = ["26_Black&White","26_Gradient","26_NewRainbow","26_PartColor","26_Rainbow","26_White&Black","26_Normal"]
+        # dir_list = ["26_Normal"]
+        for son_dir in dir_list:
+            source_dir = f"多色合集/{son_dir}"
+            main(source_dir)
 

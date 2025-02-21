@@ -57,11 +57,11 @@ pinyin26_down = {
     "k": {"action": { "symbol": ";" }, "label": {'text': ";"}},
     "l": {"action": { "symbol": "'" }, "label": {"text": "'"}},
     "z": {"action": { "" }, "label": {'text': ""}},
-    "x": {"action": { "sendKeys": "Vhs" }, "label": {'text': ""}},
-    "c": {"action": { "sendKeys": "orq" }, "label": {'text': ""}},
-    "v": {"action": { "sendKeys": "datetime" }, "label": {'text': "󰃰"}},
-    "b": {"action": { "sendKeys": "R" }, "label": {'text': ""}},
-    "n": {"action": { "sendKeys": "N" }, "label": {'text': "󰥌"}},
+    "x": {"action": { "sendKeys": "Vhs" }, "label": {'systemImageName': "clock.arrow.circlepath"}},
+    "c": {"action": { "sendKeys": "orq" }, "label": {'systemImageName': "calendar"}},
+    "v": {"action": { "sendKeys": "datetime" }, "label": {'systemImageName': "calendar.badge.clock"}},
+    "b": {"action": { "sendKeys": "R" }, "label": {'systemImageName': "chineseyuanrenminbisign.square.fill"}},
+    "n": {"action": { "sendKeys": "N" }, "label": {'systemImageName': "calendar.badge.exclamationmark"}},
     "m": {"action": { "" }, "label": {'text': ""}}
 }
 
@@ -89,11 +89,17 @@ def add_swipes(data: CommentedMap, button: str, direction: str, action, label: d
     # 定义上划和下划样式
     up_style = CommentedMap()
     up_style.update(label)
-    up_style.add_yaml_merge([(1, data["alphabeticSwipeUpBadgeStyle"])])
+    if label.get("systemImageName"): # 如果划动配置的前景是systemImageName则使用sfsymbol样式
+        up_style.add_yaml_merge([(0, data["sfsymbolSwipeUpBadgeStyle"])])
+    else:
+        up_style.add_yaml_merge([(1, data["alphabeticSwipeUpBadgeStyle"])])
 
     down_style = CommentedMap()
     down_style.update(label)
-    down_style.add_yaml_merge([(0, data["alphabeticSwipeDownBadgeStyle"])])
+    if label.get("systemImageName"): 
+        down_style.add_yaml_merge([(0, data["sfsymbolSwipeDownBadgeStyle"])])
+    else:
+        down_style.add_yaml_merge([(0, data["alphabeticSwipeDownBadgeStyle"])])
     swipe_style = up_style if direction == "up" else down_style
 
     section = data[button_key] # 26按键配置部分
@@ -129,7 +135,7 @@ def add_swipes(data: CommentedMap, button: str, direction: str, action, label: d
     
     hint_swipe_style = CommentedMap()
     hint_swipe_style.update(label)
-    hint_swipe_style.add_yaml_merge([(0, data["alphabeticHintStyle"])])
+    hint_swipe_style.add_yaml_merge([(0, data["sfsymbolHintStyle"])]) if label.get("systemImageName") else hint_swipe_style.add_yaml_merge([(0, data["alphabeticHintStyle"])])
 
     hint_section = data[hint_button_key] # 26按键划动气泡配置部分
     
@@ -199,5 +205,9 @@ if __name__ == '__main__':
         args = parser.parse_args()
         main(args.source)
     else:
-        source_dir = "修改为你的皮肤文件夹名"
-        main(source_dir)
+        comments.CommentedBase.yaml_set_anchor = yaml_set_anchor # 保留锚点
+        # dir_list = ["26_Black&White","26_Gradient","26_NewRainbow","26_PartColor","26_Rainbow","26_White&Black","26_Normal","26_Normal_原声"]
+        dir_list = ["26_Normal_原声2"]
+        for son_dir in dir_list:
+            source_dir = f"多色合集/{son_dir}"
+            main(source_dir)
