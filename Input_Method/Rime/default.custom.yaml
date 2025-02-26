@@ -14,6 +14,8 @@ patch:
     # 翻页 , .
     - { when: paging, accept: comma, send: Page_Up }
     - { when: has_menu, accept: period, send: Page_Down }
+    - { when: always, toggle: prediction, accept: Control+Shift+p }       # 切换预测功能
+    - { when: always, toggle: traditionalization, accept: Control+Shift+t }       # 切换简繁
 
   schema_list:
     - {schema: t9}

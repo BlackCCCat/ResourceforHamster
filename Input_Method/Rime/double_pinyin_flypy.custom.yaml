@@ -178,10 +178,10 @@ patch:
   # max prediction candidates every time
   # default to 0, which means showing all candidates
   # you may set it the same with page_size so that period doesn't trigger next page
-    max_candidates: 5
+    max_candidates: 0
   # max continuous prediction times
   # default to 0, which means no limitation
-    max_iterations: 1
+    max_iterations: 0
 
   # __include: octagram   #启用语法模型
   #语法模型
