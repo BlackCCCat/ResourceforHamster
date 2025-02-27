@@ -84,6 +84,12 @@ patch:
      - '〗'
      - '』'
 
+  # Lua 配置: 置顶候选项
+  # 注释太长了，请参考 pin_cand_filter.lua 开头的说明书。
+  pin_cand_filter:
+    # 格式：编码<Tab>字词1<Space>字词2……
+    - d	的
+
 
   
   

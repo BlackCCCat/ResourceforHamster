@@ -16,11 +16,12 @@ patch:
     - { when: has_menu, accept: period, send: Page_Down }
     - { when: always, toggle: prediction, accept: Control+Shift+p }       # 切换预测功能
     - { when: always, toggle: traditionalization, accept: Control+Shift+t }       # 切换简繁
+    - { when: always, select: .next, accept: Control+Shift+n }                  # 在最近的两个方案之间切换
 
   schema_list:
-    - {schema: t9}
-    - {schema: rime_ice}
-    - {schema: double_pinyin_flypy}
-    - {schema: melt_eng}
-    - {schema: radical_pinyin}
+    # - schema: t9
+    # - schema: rime_ice
+    - schema: double_pinyin_flypy
+    - schema: melt_eng
+    # - schema: radical_pinyin
     
