@@ -1,40 +1,20 @@
 patch:
-  engine/filters:
-    - lua_filter@corrector                          # 错音错字提示
-    - lua_filter@autocap_filter                     # 英文自动大写
-    - lua_filter@pin_cand_filter                    # 置顶候选项（顺序要求：置顶候选项 > Emoji > 简繁切换）
+  engine/filters/+:
     - lua_filter@long_word_filter  # 增加长词优先
-    - simplifier@emoji                              # Emoji
-    - simplifier@traditionalize                     # 简繁切换
-    - lua_filter@search@radical_pinyin              # 部件拆字辅码
-    - lua_filter@reduce_english_filter              # 降低部分英语单词在候选项的位置
     - lua_filter@is_in_user_dict                    # 是否给在用户词库中的增加星号
     - lua_filter@*aux_code@flypy_full               # RIME 输入法辅助码与音形分离插件
-    - reverse_lookup_filter@radical_reverse_lookup  # 部件拆字滤镜
-    - uniquifier                                    # 去重
     # - lua_filter@*merge_comment                      # 注释合并
 
-  engine/processors/@before 0: predictor
 
-  engine/translators:
+  engine/processors/@before 0: predictor
+  engine/translators/+:
     - predict_translator
     - lua_translator@*all_time
     - lua_translator@*commit_history
-    - punct_translator
-    - script_translator
-    - lua_translator@date_translator    # 时间、日期、星期
-    - lua_translator@lunar              # 农历
-    - table_translator@custom_phrase    # 自定义短语 custom_phrase_double.txt
-    - table_translator@melt_eng         # 英文输入
-    - table_translator@cn_en            # 中英混合词汇
-    - table_translator@radical_lookup   # 部件拆字反查
-    - lua_translator@unicode            # Unicode
-    - lua_translator@number_translator  # 数字、金额大写
-    - lua_translator@force_gc           # 暴力 GC
     - lua_translator@*calculator_translator
     - lua_translator@*calculator
-    
-    
+
+
 
         
   # 计算器
@@ -86,9 +66,10 @@ patch:
 
   # Lua 配置: 置顶候选项
   # 注释太长了，请参考 pin_cand_filter.lua 开头的说明书。
-  pin_cand_filter:
+  pin_cand_filter/+:
     # 格式：编码<Tab>字词1<Space>字词2……
-    - d	的
+    - ve vs	这种
+
 
 
   
@@ -158,24 +139,12 @@ patch:
 # reset: 默认状态。注释掉后，切换窗口时不会重置到默认状态。
 # states: 方案选单显示的名称。可以注释掉，仍可以通过快捷键切换。
 # abbrev: 默认的缩写取 states 的第一个字符，abbrev 可自定义一个字符
-  switches:
-    - name: ascii_mode
-      states: [ 中, Ａ ]
-    - name: ascii_punct  # 中英标点
-      states: [ ¥, $ ]
-    - name: traditionalization
-      states: [ 简, 繁 ]
-    - name: emoji
-      states: [ 💀, 😄 ]
-      reset: 1
-    - name: full_shape
-      states: [ 半角, 全角 ]
-    - name: search_single_char  # search.lua 的功能开关，辅码查词时是否单字优先
-      abbrev: [词, 单]
-      states: [正常, 单字]
+  switches/+:
     - name: prediction
       states: [关闭预测, 开启预测] # [ 關閉預測, 開啓預測 ]
       reset: 1
+
+
 
   predictor:
   # predict db file in user directory/shared directory
@@ -202,6 +171,7 @@ patch:
 #       translator/max_homographs: 7
 
   # __include: octagram   #启用语言模型
+  # 启用语言模型会导致comment部分失效，双拼会强制显示全拼拼音
   #语言模型
   octagram:
     __patch:

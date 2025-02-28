@@ -14,6 +14,8 @@ X光片	Xglpm
 X光片	xglpm
 X射线	Xuexm
 X射线	xuexm
+Nabla算子	Nablasrzi
+Nabla算子	nablasrzi
 T恤	Txu
 T恤	txu
 T恤衫	Txuuj
@@ -310,8 +312,6 @@ N遍	nbm
 蒙奇·D·路飞	mgqidlufw
 蒙奇·D·龙	mgqiDls
 蒙奇·D·龙	mgqidls
-乔治·R·R·马丁	qnviRRmadk
-乔治·R·R·马丁	qnvirrmadk
 哥尔·D·罗杰	geerDlojp
 哥尔·D·罗杰	geerdlojp
 马歇尔·D·蒂奇	maxperDdiqi
@@ -565,8 +565,6 @@ Esc键	Escjm
 Esc键	escjm
 Eject键	Ejectjm
 Eject键	ejectjm
-J·K·罗琳	JKlolb
-J·K·罗琳	jklolb
 周刊少年Jump	vzkjucnmJump
 周刊少年Jump	vzkjucnmjump
 ICP备案	ICPbwan
@@ -581,8 +579,12 @@ ICP备案	icpbwan
 改bug	gdbug
 查bug	iabug
 找bug	vcbug
-J·R·R·托尔金	JRRtoerjb
-J·R·R·托尔金	jrrtoerjb
+J.K.罗琳	JKlolb
+J.K.罗琳	jklolb
+J.R.R.托尔金	JRRtoerjb
+J.R.R.托尔金	jrrtoerjb
+乔治·R.R.马丁	qnviRRmadk
+乔治·R.R.马丁	qnvirrmadk
 异维A酸	yiwwAsr
 异维A酸	yiwwasr
 互fo	hufo
@@ -934,3 +936,6 @@ V8引擎	vbaybqk
 2D电影	erddmyk
 3D电影	sjDdmyk
 3D电影	sjddmyk
+city不city	citybucity
+打call	dacall
+hold住	holdvu
