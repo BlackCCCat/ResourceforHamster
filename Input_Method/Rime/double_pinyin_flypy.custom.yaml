@@ -39,7 +39,7 @@ patch:
     idx: 2
     
   # 双拼不转换为全拼编码
-  translator/preedit_format: []
+  # translator/preedit_format: []
   
   # 自定义“RIME 输入法辅助码与音形分离插件”的触发符号，若没有下面的补丁，则默认为分号;，且应该添加;不直接上屏
   #  key_binder/+:
@@ -143,7 +143,6 @@ patch:
     - name: prediction
       states: [关闭预测, 开启预测] # [ 關閉預測, 開啓預測 ]
       reset: 1
-
 
 
   predictor:

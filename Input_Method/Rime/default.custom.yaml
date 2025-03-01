@@ -18,6 +18,7 @@ patch:
     - { when: always, toggle: traditionalization, accept: Control+Shift+t }       # 切换简繁
     - { when: always, select: .next, accept: Control+Shift+n }                  # 在最近的两个方案之间切换
 
+
   schema_list:
     # - schema: t9
     # - schema: rime_ice
