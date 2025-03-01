@@ -1,7 +1,8 @@
 # 使用说明
 - `26_Normal_New.hskin`可用于关闭app中的划动分页功能，且中英切换键为键盘按键并非功能区按键（推荐）
-- `26_Normal_Default.hskin`或`26_Normal.hskin`可用于关闭app中的划动分页功能（推荐）
-- `26_Normal_Default下划分页.hskin`或`26_Normal下划分页.hskin`可用于开启app的划动分页功能（停止更新，暂不推荐使用）
+- `26_Normal_Final.hskin`在`New`基础上更新，增加app搜索功能，调整键盘高度更适合关闭内嵌模式使用（开启内嵌模式有一些bug）（推荐）
+- ~~`26_Normal_Default.hskin`或`26_Normal.hskin`可用于关闭app中的划动分页功能（推荐）~~
+- ~~`26_Normal_Default下划分页.hskin`或`26_Normal下划分页.hskin`可用于开启app的划动分页功能（停止更新，暂不推荐使用）~~
 ## 输入法案
 雾凇拼音的小鹤双拼（部分功能需要自定义，如x按键下滑为历史上屏，需要自行添加相关lua脚本等）
 ## 功能按键说明
@@ -37,6 +38,8 @@
 ## 键盘外观
 ### `26_Normal_New.hskin`外观
 ![demo1](assets/demo1.png)
+### `26_Normal_Final.hskin`外观
+![demo3](assets/demo3.png)
 ### `26_Normal_Default.hskin`或`26_Normal.hskin`外观
 ![demo](assets/demo.png)
 ## 脚本说明
