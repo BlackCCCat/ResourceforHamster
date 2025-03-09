@@ -1,0 +1,28 @@
+customization:
+  distribution_code_name: hamster
+  distribution_version: ""
+  generator: "Rime::SwitcherSettings"
+  modified_time: "Tue Dec 17 18:57:31 2024"
+  rime_version: 1.12.0
+patch:
+  ascii_composer:
+    good_old_caps_lock: true
+    switch_key: {Caps_Lock: clear, Control_L: noop, Control_R: noop, Shift_L: commit_code, Shift_R: commit_code}
+  menu:
+    page_size: 10
+  key_binder/bindings/+:
+    # 翻页 , .
+    - { when: paging, accept: comma, send: Page_Up }
+    - { when: has_menu, accept: period, send: Page_Down }
+    - { when: always, toggle: prediction, accept: Control+Shift+p }       # 切换预测功能
+    - { when: always, toggle: traditionalization, accept: Control+Shift+t }       # 切换简繁
+    - { when: always, select: .next, accept: Control+Shift+n }                  # 在最近的两个方案之间切换
+
+
+  schema_list:
+    # - schema: t9
+    # - schema: rime_ice
+    - schema: double_pinyin_flypy
+    - schema: melt_eng
+    # - schema: radical_pinyin
+    
