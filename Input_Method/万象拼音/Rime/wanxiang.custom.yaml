@@ -3,7 +3,7 @@ patch:
 
   pro_comment_format:           # 超级注释模块，子项配置 true 开启，false 关闭
     candidate_length: 50         # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理    
-    fuzhu_type: flypy             # 用于匹配对应的辅助码注释显示，基于默认词典的可选注释类型有：( moqi, flypy, zrm, jdh, cj, tiger, wubi, hanxin) tone (这个参数特殊，在注释里显示声调，不算辅助码，也填入此处)选择一个填入，之所以单独列出是因为这里有更多的可配置性，而真正的辅助码默认只有8种
+    fuzhu_type: moqi             # 用于匹配对应的辅助码注释显示，基于默认词典的可选注释类型有：( moqi, flypy, zrm, jdh, cj, tiger, wubi, hanxin) tone (这个参数特殊，在注释里显示声调，不算辅助码，也填入此处)选择一个填入，之所以单独列出是因为这里有更多的可配置性，而真正的辅助码默认只有8种
     corrector_type: "{comment}"  # 换一种显示类型，比如"({comment})" 
 
 
@@ -206,9 +206,9 @@ patch:
   key_binder/bindings/+:             # 也可以再增加方案专有的
     - { when: always, toggle: chinese_english, accept: Control+Shift+f }       # 切换翻译功能
     - { when: always, toggle: moqi_chaifen, accept: Control+Shift+m }       # 切换墨奇音形拆分功能
-    # 翻页 , .
-    - { when: has_menu, accept: comma, send: Page_Up }
-    - { when: has_menu, accept: period, send: Page_Down }
+    # 自定义翻页，避免输入问题
+    - { when: has_menu, accept: Control+Shift+Up, send: Page_Up }
+    - { when: has_menu, accept: Control+Shift+Down, send: Page_Down }
     - { when: always, toggle: traditionalization, accept: Control+Shift+t }       # 切换简繁
 
 
@@ -225,41 +225,78 @@ patch:
     initials: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA
     delimiter: " '"  # 第一位<空格>是拼音之间的分隔符；第二位<'>表示可以手动输入单引号来分割拼音。
     algebra:
+# 开启下面是全拼双拼同时可以输入，但是输入一些英文的时候会有一些问题，建议不要开启
+#      - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/
+#      # - abbrev/^(.).+$/$1/ # 单字母简拼 手机端hamster使用会造成卡顿
+#      - derive/ń|ň|ǹ/en/ 
+#      - derive/^ng(;.*)/eng$1/
+#      - derive/ńg|ňg|ǹg/eng/
+#      - derive/^([jqxy])u(;.*)$/$1v$2/
+#      - derive/^([aoe])([ioun])(;.*)$/$1$1$2$3/
+#      - derive/^([aoe])(ng)?(;.*)$/$1$1$2$3/
+#      - derive/^(\w+?)iu(;.*)/$1Ⓠ$2/
+#      - derive/^(\w+?)ei(;.*)/$1Ⓦ$2/
+#      - derive/^(\w+?)uan(;.*)/$1Ⓡ$2/
+#      - derive/^(\w+?)[uv]e(;.*)/$1Ⓣ$2/
+#      - derive/^(\w+?)un(;.*)/$1Ⓨ$2/
+#      - derive/^(\w+?)uo(;.*)/$1Ⓞ$2/
+#      - derive/^(\w+?)ie(;.*)/$1Ⓟ$2/
+#      - derive/^(\w+?)i?ong(;.*)/$1Ⓢ$2/
+#      - derive/^(\w+?)ing(;.*)/$1Ⓚ$2/
+#      - derive/^(\w+?)uai(;.*)/$1Ⓚ$2/
+#      - derive/^(\w+?)ai(;.*)/$1Ⓓ$2/
+#      - derive/^(\w+?)eng(;.*)/$1Ⓖ$2/
+#      - derive/^(\w+?)en(;.*)/$1Ⓕ$2/
+#      - derive/^(\w+?)[iu]ang(;.*)/$1Ⓛ$2/
+#      - derive/^(\w+?)ang(;.*)/$1Ⓗ$2/
+#      - derive/^(\w+?)ian(;.*)/$1Ⓜ$2/
+#      - derive/^(\w+?)an(;.*)/$1Ⓙ$2/
+#      - derive/^(\w+?)ou(;.*)/$1Ⓩ$2/
+#      - derive/^(\w+?)iao(;.*)/$1Ⓝ$2/
+#      - derive/^(\w+?)[iu]a(;.*)/$1Ⓧ$2/
+#      - derive/^(\w+?)ao(;.*)/$1Ⓒ$2/
+#      - derive/^(\w+?)ui(;.*)/$1Ⓥ$2/
+#      - derive/^(\w+?)in(;.*)/$1Ⓑ$2/
+#      - derive/^sh/Ⓤ/
+#      - derive/^ch/Ⓘ/
+#      - derive/^zh/Ⓥ/
+#      - xlit/ⓆⓌⓇⓉⓎⓊⒾⓄⓅⓈⒹⒻⒼⒽⒿⓀⓁⓏⓍⒸⓋⒷⓃⓂ/qwrtyuiopsdfghjklzxcvbnm/
+      
       - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/
-      # - abbrev/^(.).+$/$1/ # 单字母简拼 手机端hamster使用会造成卡顿
-      - derive/ń|ň|ǹ/en/ 
-      - derive/^ng(;.*)/eng$1/
-      - derive/ńg|ňg|ǹg/eng/
+      - xform/ń|ň|ǹ/en/ 
+      - xform/^ng(;.*)/eng$1/
+      - xform/ńg|ňg|ǹg/eng/
       - derive/^([jqxy])u(;.*)$/$1v$2/
       - derive/^([aoe])([ioun])(;.*)$/$1$1$2$3/
-      - derive/^([aoe])(ng)?(;.*)$/$1$1$2$3/
-      - derive/^(\w+?)iu(;.*)/$1Ⓠ$2/
-      - derive/^(\w+?)ei(;.*)/$1Ⓦ$2/
-      - derive/^(\w+?)uan(;.*)/$1Ⓡ$2/
-      - derive/^(\w+?)[uv]e(;.*)/$1Ⓣ$2/
-      - derive/^(\w+?)un(;.*)/$1Ⓨ$2/
-      - derive/^(\w+?)uo(;.*)/$1Ⓞ$2/
-      - derive/^(\w+?)ie(;.*)/$1Ⓟ$2/
-      - derive/^(\w+?)i?ong(;.*)/$1Ⓢ$2/
-      - derive/^(\w+?)ing(;.*)/$1Ⓚ$2/
-      - derive/^(\w+?)uai(;.*)/$1Ⓚ$2/
-      - derive/^(\w+?)ai(;.*)/$1Ⓓ$2/
-      - derive/^(\w+?)eng(;.*)/$1Ⓖ$2/
-      - derive/^(\w+?)en(;.*)/$1Ⓕ$2/
-      - derive/^(\w+?)[iu]ang(;.*)/$1Ⓛ$2/
-      - derive/^(\w+?)ang(;.*)/$1Ⓗ$2/
-      - derive/^(\w+?)ian(;.*)/$1Ⓜ$2/
-      - derive/^(\w+?)an(;.*)/$1Ⓙ$2/
-      - derive/^(\w+?)ou(;.*)/$1Ⓩ$2/
-      - derive/^(\w+?)iao(;.*)/$1Ⓝ$2/
-      - derive/^(\w+?)[iu]a(;.*)/$1Ⓧ$2/
-      - derive/^(\w+?)ao(;.*)/$1Ⓒ$2/
-      - derive/^(\w+?)ui(;.*)/$1Ⓥ$2/
-      - derive/^(\w+?)in(;.*)/$1Ⓑ$2/
-      - derive/^sh/Ⓤ/
-      - derive/^ch/Ⓘ/
-      - derive/^zh/Ⓥ/
+      - xform/^([aoe])(ng)?(;.*)$/$1$1$2$3/
+      - xform/^(\w+?)iu(;.*)/$1Ⓠ$2/
+      - xform/^(\w+?)ei(;.*)/$1Ⓦ$2/
+      - xform/^(\w+?)uan(;.*)/$1Ⓡ$2/
+      - xform/^(\w+?)[uv]e(;.*)/$1Ⓣ$2/
+      - xform/^(\w+?)un(;.*)/$1Ⓨ$2/
+      - xform/^(\w+?)uo(;.*)/$1Ⓞ$2/
+      - xform/^(\w+?)ie(;.*)/$1Ⓟ$2/
+      - xform/^(\w+?)i?ong(;.*)/$1Ⓢ$2/
+      - xform/^(\w+?)ing(;.*)/$1Ⓚ$2/
+      - xform/^(\w+?)uai(;.*)/$1Ⓚ$2/
+      - xform/^(\w+?)ai(;.*)/$1Ⓓ$2/
+      - xform/^(\w+?)eng(;.*)/$1Ⓖ$2/
+      - xform/^(\w+?)en(;.*)/$1Ⓕ$2/
+      - xform/^(\w+?)[iu]ang(;.*)/$1Ⓛ$2/
+      - xform/^(\w+?)ang(;.*)/$1Ⓗ$2/
+      - xform/^(\w+?)ian(;.*)/$1Ⓜ$2/
+      - xform/^(\w+?)an(;.*)/$1Ⓙ$2/
+      - xform/^(\w+?)ou(;.*)/$1Ⓩ$2/
+      - xform/^(\w+?)iao(;.*)/$1Ⓝ$2/
+      - xform/^(\w+?)[iu]a(;.*)/$1Ⓧ$2/
+      - xform/^(\w+?)ao(;.*)/$1Ⓒ$2/
+      - xform/^(\w+?)ui(;.*)/$1Ⓥ$2/
+      - xform/^(\w+?)in(;.*)/$1Ⓑ$2/
+      - xform/^sh/Ⓤ/
+      - xform/^ch/Ⓘ/
+      - xform/^zh/Ⓥ/
       - xlit/ⓆⓌⓇⓉⓎⓊⒾⓄⓅⓈⒹⒻⒼⒽⒿⓀⓁⓏⓍⒸⓋⒷⓃⓂ/qwrtyuiopsdfghjklzxcvbnm/
+      
       
       # 墨奇辅助码
       - xform|^(.*?);(.*?);.*$|$1;$2|         #匹配当前方案，转换为 双拼；辅助码（当前方案）的形式
@@ -299,6 +336,17 @@ patch:
     enable_user_dict: true
     user_dict: zyan
 
+
+  # 中英混合词汇
+  cn_en:
+    dictionary: ""
+    user_dict: en_dicts/flypy  #可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou， en_dicts/pinyin
+    db_class: stabledb
+    enable_completion: true
+    enable_sentence: false
+    initial_quality: 0.5
+    comment_format:
+      - xform/^.+$//
 
 
   # 自定义词典加词(/ac引导)
