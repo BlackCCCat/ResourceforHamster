@@ -1,13 +1,13 @@
 # 使用说明
 ## 雾凇拼音
 - ~~`26_Normal_New.hskin`可用于关闭app中的划动分页功能，且中英切换键为键盘按键并非功能区按键（推荐）~~
-- `26_Normal_Final.hskin`在`New`基础上更新，增加app搜索功能，调整键盘高度更适合关闭内嵌模式使用（推荐）
+- ~~`26_Normal_Final.hskin`在`New`基础上更新，增加app搜索功能，调整键盘高度更适合关闭内嵌模式使用（推荐）~~
 - `26_Normal.hskin`与`Final`基本一致，调整空格等按键宽度（推荐）
 - ~~`26_Normal_Default.hskin`或`26_Normal.hskin`可用于关闭app中的划动分页功能（推荐）~~
 - ~~`26_Normal_Default下划分页.hskin`或`26_Normal下划分页.hskin`可用于开启app的划动分页功能（停止更新，暂不推荐使用）~~
 
 ## 万象拼音PRO
-- `26_Normal_WX.hskin`
+- `26_Normal_wwxx.hskin`
 
 
 ## 输入法案

@@ -176,7 +176,7 @@ patch:
     enable_completion: true  # 启用候选词补全
     # user_dict: flypy.userdb  # 用户词典的文件名称
     # db_class: tabledb  #开启后就不会产生zrm.userdb这样的文件夹，会直接输出文本zrm.txt同时无法使用同步能力
-    enable_user_dict: true # 是否开启自动调频
+    enable_user_dict: false # 是否开启自动调频，建议关闭
     disable_user_dict_for_patterns:
       - "^[a-z]{1,6}"    #基本的6码3字不调频
     enable_correction: false #是否开启自动纠错
