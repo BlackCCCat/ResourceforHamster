@@ -36,6 +36,12 @@ patch:
     - name: moqi_chaifen
       states: [ 奇, 墨 ]
       reset: 1
+    - name: super_tips
+      states: [关, 提]
+      reset: 1
+    - name: prediction
+      states: [ 测, 预 ]
+      reset: 1
     - name: search_single_char  # search.lua 的功能开关，辅码查词时是否单字优先
       abbrev: [词, 单]
       states: [正常, 单字]
@@ -46,9 +52,12 @@ patch:
   # 输入引擎
   engine:
     processors:
+      - predictor
       - lua_processor@*select_character          # 以词定字，有了辅助码了，想开启可以注释掉
       - lua_processor@*cold_word_drop.processor
       - lua_processor@*quick_symbol_text    #快符引导以及重复上屏
+      - lua_processor@*super_tips_phone*S  # 手机端配合- lua_filter@*super_tips_phone*M使用
+      # - lua_processor@*super_tips           #超级提示模块：表情、简码、翻译、化学式、等等靠你想象，用于电脑端
       - lua_processor@*userdb_sync_delete   #通过输入 /del 触发,用于清理自定义同步目录下txt用户词典里被标记c<0的词条
       - ascii_composer
       - recognizer
@@ -69,6 +78,7 @@ patch:
       - punct_segmentor
       - fallback_segmentor
     translators:
+      - predict_translator
       - punct_translator
       - script_translator
       - lua_translator@*shijian            # 时间、日期、星期、农历、节气、时辰等等
@@ -85,6 +95,7 @@ patch:
       - script_translator@add_user_dict
       - lua_translator@*force_gc          # 暴力 GC 降低内存
     filters:
+      - lua_filter@*super_tips_phone*M #手机端配合- lua_processor@*super_tips_phone*S使用
       - lua_filter@*chars_filter                      #字符集过滤
       - lua_filter@*cold_word_drop.filter
       - lua_filter@*assist_sort                       #配合abbrev辅助码派生配合辅助码逻辑四码时候词组优先、匹配四码的单字紧随其后，并且肩负着中文、英文、数字候选之间的排序关系
@@ -202,14 +213,21 @@ patch:
 
 
 
-# 从 default 继承快捷键
-  key_binder/bindings/+:             # 也可以再增加方案专有的
+  key_binder/tips_key: "Break" # "backslash" # Lua 配置: 超级tips上屏按键
+  key_binder/bindings:             # 也可以再增加方案专有的
     - { when: always, toggle: chinese_english, accept: Control+Shift+f }       # 切换翻译功能
     - { when: always, toggle: moqi_chaifen, accept: Control+Shift+m }       # 切换墨奇音形拆分功能
+    - { when: always, toggle: traditionalization, accept: Control+Shift+t }       # 切换简繁
+    - { when: always, toggle: super_tips, accept: Control+Shift+s }       # 切换超级提示
+    - { when: always, toggle: prediction, accept: Control+Shift+p }       # 切换预测
+    - { when: composing, accept: Control+w, send: Control+BackSpace }
+    - { when: has_menu, accept: "Tab", send: "Control+Right" }
+    - { when: composing, accept: "Tab", send: "Control+Right" }
+
     # 自定义翻页，避免输入问题
     - { when: has_menu, accept: Control+Shift+Up, send: Page_Up }
     - { when: has_menu, accept: Control+Shift+Down, send: Page_Down }
-    - { when: always, toggle: traditionalization, accept: Control+Shift+t }       # 切换简繁
+
 
 
 
@@ -367,4 +385,12 @@ patch:
     tips: "〔自造词〕"
 
 
-
+  predictor:
+    db: wanxiang-lts-zh-predict.db
+  # 每次最大预测候选数
+  # 默认为 0，表示显示所有候选数
+  # 您可以将其设置为与 page_size 相同，这样 period 就不会触发下一页
+    max_candidates: 0
+  # 最大连续预测次数
+  # 默认为 0，表示无限制
+    max_iterations: 0
