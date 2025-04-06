@@ -1,10 +1,11 @@
 patch:
   page_size: 10  # 候选词个数
 
-  pro_comment_format:           # 超级注释模块，子项配置 true 开启，false 关闭
+  super_comment:           # 超级注释模块，子项配置 true 开启，false 关闭
     candidate_length: 50         # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理    
-    fuzhu_type: moqi             # 用于匹配对应的辅助码注释显示，基于默认词典的可选注释类型有：( moqi, flypy, zrm, jdh, cj, tiger, wubi, hanxin) tone (这个参数特殊，在注释里显示声调，不算辅助码，也填入此处)选择一个填入，之所以单独列出是因为这里有更多的可配置性，而真正的辅助码默认只有8种
     corrector_type: "{comment}"  # 换一种显示类型，比如"({comment})" 
+    comment_type: fuzhu          # 可以选择注释里显示辅助码或者是声调全拼：fuzhu , tone
+
 
 
 
@@ -31,9 +32,7 @@ patch:
     - name: charset_filter
       states: [ 小, 大 ]
       reset: 1
-  #  - name: zrm_chaifen
-  #    states: [ 然, 自 ]
-    - name: moqi_chaifen
+    - name: chaifen_switch
       states: [ 奇, 墨 ]
       reset: 1
     - name: super_tips
@@ -41,6 +40,7 @@ patch:
       reset: 1
     - name: prediction
       states: [ 测, 预 ]
+      reset: 1
     - name: search_single_char  # search.lua 的功能开关，辅码查词时是否单字优先
       abbrev: [词, 单]
       states: [正常, 单字]
@@ -49,68 +49,15 @@ patch:
 
 
   # 输入引擎
-  engine:
-    processors:
-      - predictor
-      - lua_processor@*select_character          # 以词定字，有了辅助码了，想开启可以注释掉
-      - lua_processor@*cold_word_drop.processor
-      - lua_processor@*quick_symbol_text    #快符引导以及重复上屏
-      - lua_processor@*super_tips_phone*S  # 手机端配合- lua_filter@*super_tips_phone*M使用
-      # - lua_processor@*super_tips           #超级提示模块：表情、简码、翻译、化学式、等等靠你想象，用于电脑端
-      - lua_processor@*userdb_sync_delete   #通过输入 /del 触发,用于清理自定义同步目录下txt用户词典里被标记c<0的词条
-      - ascii_composer
-      - recognizer
-      - key_binder
-      - lua_processor@*key_binder # 绑定按键扩展能力
-      - speller
-      - punctuator
-      - selector
-      - navigator
-      - express_editor
-    segmentors:
-      - ascii_segmentor
-      - matcher
-      - abc_segmentor
-      - affix_segmentor@radical_lookup  # 部件拆字自定义 tag
-      - affix_segmentor@reverse_stroke  #笔画反查
-      - affix_segmentor@add_user_dict
-      - punct_segmentor
-      - fallback_segmentor
-    translators:
-      - predict_translator
-      - punct_translator
-      - script_translator
-      - lua_translator@*shijian            # 时间、日期、星期、农历、节气、时辰等等
-      - lua_translator@*unicode            # Unicode
-      - lua_translator@*number_translator  # 数字、金额大写
-      - lua_translator@*calculator         # 计算器
-      - table_translator@custom_phrase     # 自定义短语 custom_phrase.txt
-      - table_translator@melt_eng          # 英文输入
-      - table_translator@cn_en             # 中英混合词汇
-      - table_translator@chengyu           # 简码成语
-      - table_translator@radical_lookup    # 部件拆字反查
-      - table_translator@reverse_stroke    #笔画反查
-      - script_translator@user_dict_set
-      - script_translator@add_user_dict
-      - lua_translator@*force_gc          # 暴力 GC 降低内存
-    filters:
-      - lua_filter@*super_tips_phone*M #手机端配合- lua_processor@*super_tips_phone*S使用
-      - lua_filter@*chars_filter                      #字符集过滤
-      - lua_filter@*cold_word_drop.filter
-      - lua_filter@*assist_sort                       #配合abbrev辅助码派生配合辅助码逻辑四码时候词组优先、匹配四码的单字紧随其后，并且肩负着中文、英文、数字候选之间的排序关系
-      - lua_filter@*autocap_filter                    # 英文自动大写
-      - reverse_lookup_filter@radical_reverse_lookup  # 部件拆字滤镜，放在pro_comment_format前面，进一步被超级注释处理以获得拼音编码+辅助码的提示
-      - lua_filter@*pro_preedit_format                #输入码显示全拼并带上音调
-      - simplifier@emoji                              # Emoji
-      - simplifier@traditionalize                     # 简繁切换
-      - simplifier@mars                               #火星文
-      - simplifier@chinese_english                    #中英翻译
-      - lua_filter@*search@radical_pinyin             # 部件拆字辅码放在简繁转换之后
-      - lua_filter@*pro_comment_format                #超级注释模块，支持错词提示、辅助码显示，部件组字读音注释，支持个性化配置和关闭相应的功能，详情搜索pro_comment_format进行详细配置
-      # - lua_filter@*en_spacer # 启用中文状态下输入英文单词后面自动加入空格
-      - simplifier@moqi_chaifen                       #墨奇拆分型辅助码查询，放在超级注释后面
-      #- simplifier@zrm_chaifen                        #自然码拆分型辅助码查询，放在超级注释后面
-      - uniquifier                                    # 去重
+  engine/processors/@before 0:
+    lua_processor@*super_tips_phone*S  # 手机端配合- lua_filter@*super_tips_phone*M使用
+  engine/processors/@before 1:
+    lua_processor@*select_character          # 以词定字，有了辅助码了，想开启可以注释掉
+
+
+  engine/filters/@before 0:
+    lua_filter@*super_tips_phone*M #手机端配合- lua_processor@*super_tips_phone*S使用
+
 
 
 
@@ -196,26 +143,17 @@ patch:
     comment_format: {comment}  #将注释以词典字符串形式完全暴露，通过pro_comment_format.lua完全接管，灵活配置。
     preedit_format:               # preedit_format 影响到输入框的显示和“Shift+回车”上屏的字符
 
-# 处理符合特定规则的输入码，如网址、反查
-  recognizer:
-    patterns:  # 再增加方案专有的：
-      punct: "^/([0-9]|10|[A-Za-z]+)$"    # 响应 symbols.yaml 的 symbols
-      radical_lookup: "^`[A-Za-z]*$"        # 响应部件拆字的反查，与 radical_lookup/prefix 匹配
-      reverse_stroke: "^``[A-Za-z]*$"     #响应笔画反查，与reverse_stroke/prefix 匹配
-      add_user_dict: "^/ac[A-Za-z/`']*$"      #自造词
-      unicode: "^U[a-f0-9]+"              # 脚本将自动获取第 2 个字符 U 作为触发前缀，响应 lua_translator@unicode，输出 Unicode 字符
-      number: "^R[0-9]+[.]?[0-9]*"        # 脚本将自动获取第 2 个字符 R 作为触发前缀，响应 lua_translator@number_translator，数字金额大写
-      gregorian_to_lunar: "^N[0-9]{1,8}"  # 脚本将自动获取第 2 个字符 N 作为触发前缀，响应 lua_translator@lunar，公历转农历，输入 N20240115 得到「二〇二三年腊月初五」
-      calculator: "^=.*$"                 #计算器功能引导，，，，
-      # quick_symbol: "^'.*$"  # 快符引导，例如输入'q 后自动上屏快速符号，双击''重复上屏符号，单次输入
-      quick_text: "^/.*$"  # 双击//重复上屏汉字和字母
+  recognizer/patterns/add_user_dict: "^/ac[A-Za-z/`']*$"      #自造词
+  recognizer/patterns/calculator: "^=.*$"                 #计算器功能引导，，，，
+  recognizer/patterns/quick_text: "^/.*$"  # 双击//重复上屏汉字和字母
 
-
+  cn_en/user_dict: en_dicts/flypy           # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
+  
 
   key_binder/tips_key: "Break" # "backslash" # Lua 配置: 超级tips上屏按键
   key_binder/bindings:             # 也可以再增加方案专有的
     - { when: always, toggle: chinese_english, accept: Control+Shift+f }       # 切换翻译功能
-    - { when: always, toggle: moqi_chaifen, accept: Control+Shift+m }       # 切换墨奇音形拆分功能
+    - { when: always, toggle: chaifen_switch, accept: Control+Shift+m }       # 切换墨奇音形拆分功能
     - { when: always, toggle: traditionalization, accept: Control+Shift+t }       # 切换简繁
     - { when: always, toggle: super_tips, accept: Control+Shift+s }       # 切换超级提示
     - { when: always, toggle: prediction, accept: Control+Shift+p }       # 切换预测
@@ -226,7 +164,6 @@ patch:
     # 自定义翻页，避免输入问题
     - { when: has_menu, accept: Control+Shift+Up, send: Page_Up }
     - { when: has_menu, accept: Control+Shift+Down, send: Page_Down }
-
 
 
 
@@ -242,146 +179,17 @@ patch:
     initials: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA
     delimiter: " '"  # 第一位<空格>是拼音之间的分隔符；第二位<'>表示可以手动输入单引号来分割拼音。
     algebra:
-# 开启下面是全拼双拼同时可以输入，但是输入一些英文的时候会有一些问题，建议不要开启
-#      - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/
-#      # - abbrev/^(.).+$/$1/ # 单字母简拼 手机端hamster使用会造成卡顿
-#      - derive/ń|ň|ǹ/en/ 
-#      - derive/^ng(;.*)/eng$1/
-#      - derive/ńg|ňg|ǹg/eng/
-#      - derive/^([jqxy])u(;.*)$/$1v$2/
-#      - derive/^([aoe])([ioun])(;.*)$/$1$1$2$3/
-#      - derive/^([aoe])(ng)?(;.*)$/$1$1$2$3/
-#      - derive/^(\w+?)iu(;.*)/$1Ⓠ$2/
-#      - derive/^(\w+?)ei(;.*)/$1Ⓦ$2/
-#      - derive/^(\w+?)uan(;.*)/$1Ⓡ$2/
-#      - derive/^(\w+?)[uv]e(;.*)/$1Ⓣ$2/
-#      - derive/^(\w+?)un(;.*)/$1Ⓨ$2/
-#      - derive/^(\w+?)uo(;.*)/$1Ⓞ$2/
-#      - derive/^(\w+?)ie(;.*)/$1Ⓟ$2/
-#      - derive/^(\w+?)i?ong(;.*)/$1Ⓢ$2/
-#      - derive/^(\w+?)ing(;.*)/$1Ⓚ$2/
-#      - derive/^(\w+?)uai(;.*)/$1Ⓚ$2/
-#      - derive/^(\w+?)ai(;.*)/$1Ⓓ$2/
-#      - derive/^(\w+?)eng(;.*)/$1Ⓖ$2/
-#      - derive/^(\w+?)en(;.*)/$1Ⓕ$2/
-#      - derive/^(\w+?)[iu]ang(;.*)/$1Ⓛ$2/
-#      - derive/^(\w+?)ang(;.*)/$1Ⓗ$2/
-#      - derive/^(\w+?)ian(;.*)/$1Ⓜ$2/
-#      - derive/^(\w+?)an(;.*)/$1Ⓙ$2/
-#      - derive/^(\w+?)ou(;.*)/$1Ⓩ$2/
-#      - derive/^(\w+?)iao(;.*)/$1Ⓝ$2/
-#      - derive/^(\w+?)[iu]a(;.*)/$1Ⓧ$2/
-#      - derive/^(\w+?)ao(;.*)/$1Ⓒ$2/
-#      - derive/^(\w+?)ui(;.*)/$1Ⓥ$2/
-#      - derive/^(\w+?)in(;.*)/$1Ⓑ$2/
-#      - derive/^sh/Ⓤ/
-#      - derive/^ch/Ⓘ/
-#      - derive/^zh/Ⓥ/
-#      - xlit/ⓆⓌⓇⓉⓎⓊⒾⓄⓅⓈⒹⒻⒼⒽⒿⓀⓁⓏⓍⒸⓋⒷⓃⓂ/qwrtyuiopsdfghjklzxcvbnm/
-      
-      - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/
-      - xform/ń|ň|ǹ/en/ 
-      - xform/^ng(;.*)/eng$1/
-      - xform/ńg|ňg|ǹg/eng/
-      - derive/^([jqxy])u(;.*)$/$1v$2/
-      - derive/^([aoe])([ioun])(;.*)$/$1$1$2$3/
-      - xform/^([aoe])(ng)?(;.*)$/$1$1$2$3/
-      - xform/^(\w+?)iu(;.*)/$1Ⓠ$2/
-      - xform/^(\w+?)ei(;.*)/$1Ⓦ$2/
-      - xform/^(\w+?)uan(;.*)/$1Ⓡ$2/
-      - xform/^(\w+?)[uv]e(;.*)/$1Ⓣ$2/
-      - xform/^(\w+?)un(;.*)/$1Ⓨ$2/
-      - xform/^(\w+?)uo(;.*)/$1Ⓞ$2/
-      - xform/^(\w+?)ie(;.*)/$1Ⓟ$2/
-      - xform/^(\w+?)i?ong(;.*)/$1Ⓢ$2/
-      - xform/^(\w+?)ing(;.*)/$1Ⓚ$2/
-      - xform/^(\w+?)uai(;.*)/$1Ⓚ$2/
-      - xform/^(\w+?)ai(;.*)/$1Ⓓ$2/
-      - xform/^(\w+?)eng(;.*)/$1Ⓖ$2/
-      - xform/^(\w+?)en(;.*)/$1Ⓕ$2/
-      - xform/^(\w+?)[iu]ang(;.*)/$1Ⓛ$2/
-      - xform/^(\w+?)ang(;.*)/$1Ⓗ$2/
-      - xform/^(\w+?)ian(;.*)/$1Ⓜ$2/
-      - xform/^(\w+?)an(;.*)/$1Ⓙ$2/
-      - xform/^(\w+?)ou(;.*)/$1Ⓩ$2/
-      - xform/^(\w+?)iao(;.*)/$1Ⓝ$2/
-      - xform/^(\w+?)[iu]a(;.*)/$1Ⓧ$2/
-      - xform/^(\w+?)ao(;.*)/$1Ⓒ$2/
-      - xform/^(\w+?)ui(;.*)/$1Ⓥ$2/
-      - xform/^(\w+?)in(;.*)/$1Ⓑ$2/
-      - xform/^sh/Ⓤ/
-      - xform/^ch/Ⓘ/
-      - xform/^zh/Ⓥ/
-      - xlit/ⓆⓌⓇⓉⓎⓊⒾⓄⓅⓈⒹⒻⒼⒽⒿⓀⓁⓏⓍⒸⓋⒷⓃⓂ/qwrtyuiopsdfghjklzxcvbnm/
-      
-      
-      # 墨奇辅助码
-      - xform|^(.*?);(.*?);.*$|$1;$2|         #匹配当前方案，转换为 双拼；辅助码（当前方案）的形式
-      - derive|^(.+);.*$|$1| # 纯双拼的情况
-      - abbrev|^(.+);(\w)(\w).*$|$1$2| # 双拼+一位辅助码的情况
-      - derive|^(.+);(\w)(\w).*$|$1[$2| # 双拼+[一位辅助码的情况
-      - abbrev|^(.+);(\w)(\w).*$|$1$2$3| # 双拼+2位辅助码的情况
-      - derive|^(.+);(\w)(\w).*$|$1$2$3/| # 双拼+2位辅助码+/
-      #- derive|^(.+);(\w)(\w).*$|$1$2$3o| # 双拼\+2位辅助码\+o，主要用来应对小企鹅这类输入法没法使用符号的场景，但同时有些辅助码会出现异常，如：ui uio>uiuio，手机小企鹅使用时开启
-      - xform/◯/;/  #对于微软双拼、搜狗双拼，前面将分号保护了起来，现在放出来让其发挥作用
-      - erase/^(.+);(.+)$/    # 删除原始编码加速检索
+      __patch:
+      - wanxiang.schema:/小鹤双拼            # 可选输入方案名称：全拼, 自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
+      - wanxiang.schema:/fuzhu_moqi        #辅助码已经固定不需要修改
 
-      # 小鹤音形辅助码（和墨奇拆分不能100%适配）
-#       - xform|^(.*?);.*?;(.*?);.*$|$1;$2|  #匹配当前方案，转换为 双拼；辅助码（当前方案）的形式
-#       - derive|^(.+);.*$|$1| # 纯双拼的情况
-#       - abbrev|^(.+);(\w)(\w).*$|$1$2| # 双拼+一位辅助码的情况
-#       - derive|^(.+);(\w)(\w).*$|$1[$2| # 双拼+[一位辅助码的情况
-#       - abbrev|^(.+);(\w)(\w).*$|$1$2$3| # 双拼+2位辅助码的情况
-#       - derive|^(.+);(\w)(\w).*$|$1$2$3/| # 双拼+2位辅助码+/
-#      #- derive|^(.+);(\w)(\w).*$|$1$2$3o| # 双拼\+2位辅助码\+o，主要用来应对小企鹅这类输入法没法使用符号的场景，但同时有些辅助码会出现异常，如：ui uio>uiuio，手机小企鹅使用时开启
-#       #分号后面第二组辅助码
-#       - abbrev/^(.+);.*?,(\w\w).*$/$1$2/
-#       - derive/^(.+);.*?,(\w)(\w).*$/$1[$2/
-#       - abbrev/^(.+);.*?,(\w)(\w).*$/$1$2$3/
-#       - derive|^(.+);.*?,(\w)(\w).*$|$1$2$3/|
-#       #- derive/^(.+);.*?,(\w)(\w).*$/$1$2$3o/
-#       - xform/◯/;/  #对于微软双拼、搜狗双拼，前面将分号保护了起来，现在放出来让其发挥作用
-#       - erase/^(.+);(.+)$/    # 删除原始编码加速检索
-
-  user_dict_set:
-    dictionary: wanxiang
-    initial_quality: 20
-    enable_completion: false
-    enable_sentence: false
-    spelling_hints: 100
-    comment_format:
-    enable_user_dict: true
-    user_dict: zyan
-
-
-  # 中英混合词汇
-  cn_en:
-    dictionary: ""
-    user_dict: en_dicts/flypy  #可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou， en_dicts/pinyin
-    db_class: stabledb
-    enable_completion: true
-    enable_sentence: false
-    initial_quality: 0.5
-    comment_format:
-      - xform/^.+$//
 
 
   # 自定义词典加词(/ac引导)
-  add_user_dict:
-    tag: add_user_dict
-    dictionary: wanxiang
-    initial_quality: -1
-    user_dict: zyan
-    enable_charset_filter: false # 是否开启字符集过滤
-    enable_completion: true # 提前显示尚未输入完整码的字〔仅 table_translator 有效〕
-    enable_encoder: true # 是否开启自动造词〔仅 table_translator 有效〕
-    enable_sentence: true #  是否开启自动造句
-    enable_user_dict: true
-    encode_commit_history: false # 是否对已上屛词自动成词〔仅 table_translator 有效〕
-    preedit_format:   
-    comment_format:
-    prefix: "/ac"
-    tips: "〔自造词〕"
+  add_user_dict/prefix: "/ac"
+  user_dict_set/initial_quality: 100
+
+
 
 
   predictor:
@@ -393,3 +201,4 @@ patch:
   # 最大连续预测次数
   # 默认为 0，表示无限制
     max_iterations: 0
+
