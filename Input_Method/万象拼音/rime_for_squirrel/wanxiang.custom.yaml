@@ -1,0 +1,176 @@
+  # Rime schema
+  # encoding: utf-8
+  #本方案匹配词库解码顺序为：全拼拼音；墨奇;鹤形;自然码;简单鹤;仓颉首末;虎码首末;五笔前2;汉心码；
+  #############DIY你想要的方案组合,试试搭配一个自然码+墨奇辅助的方案吧！###########################
+
+
+patch:
+
+  menu:
+  page_size: 7  # 候选词个数
+
+
+  super_comment:                 # 超级注释模块，子项配置 true 开启，false 关闭
+    candidate_length: 50          # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理
+    corrector_type: "{comment}"  # 换一种显示类型，比如"({comment})" 
+    comment_type: fuzhu          # 可以选择注释里显示辅助码或者是声调全拼：fuzhu , tone
+
+  
+  # 开关
+  # reset: 默认状态。注释掉后，切换窗口时不会重置到默认状态。
+  # states: 方案选单显示的名称。可以注释掉，仍可以通过快捷键切换。
+  # abbrev: 默认的缩写取 states 的第一个字符，abbrev 可自定义一个字符
+  switches:
+    - name: ascii_mode
+      states: [ 中, 英 ]
+    - name: ascii_punct  # 中英标点
+      states: [ ¥, $ ]
+    - name: traditionalization
+      states: [ 简, 繁 ]
+    - name: full_shape
+      states: [ 半, 全 ]
+    - name: emoji
+      states: [ 💀, 😄 ]
+      reset: 1
+    - name: chinese_english
+      states: [ 译, 翻 ]
+    - name: tone_display
+      states: [ 调, 音 ]
+      reset: 1
+    - name: fuzhu_switch
+      states: [ 助, 辅 ]
+      reset: 1
+    - name: charset_filter
+      states: [ 小, 大 ]
+      reset: 1
+    - name: chaifen_switch
+      states: [ 奇, 墨 ]
+      reset: 1
+    - name: super_tips
+      states: [ off, tips ]
+      reset: 1
+    - name: prediction
+      states: [ 测, 预 ]
+    - name: search_single_char  # search.lua 的功能开关，辅码查词时是否单字优先
+      abbrev: [词, 单]
+      states: [正常, 单字]
+  
+  
+  # 输入引擎
+  engine/processors/@before 0:
+    lua_processor@*super_tips_phone*S  # 手机端配合- lua_filter@*super_tips_phone*M使用
+  engine/processors/@before 1:
+    lua_processor@*select_character          # 以词定字，有了辅助码了，想开启可以注释掉
+
+
+  engine/filters/@before 0:
+    lua_filter@*super_tips_phone*M #手机端配合- lua_processor@*super_tips_phone*S使用
+
+
+  ########################以下是方案配置######################################################
+  
+
+  # Lua 配置：计算器触发关键字
+  calculator/trigger: "=" 
+
+  #快符lua，lua中有预设，26个字母、10个数字，你可以在这里配置替换默认的值，键可以是一个或多个，值可以是任意字符这里不齐全默认配置将生效
+  quick_symbol_text:
+    q: "欢迎使用万象拼音"
+    w: "噢我的天哪！"
+    e: "（"
+    r: "）"
+    t: "~"
+    y: "·"
+    u: "『"
+    i: "』"
+    o: "〖"
+    p: "〗"
+    a: "！"
+    s: "……"
+    d: "、"
+    f: "“"
+    g: "”"
+    h: "‘"
+    j: "’"
+    k: "——"
+    l: "%"
+    z: "。”"
+    x: "？”"
+    c: "！”"
+    v: "【"
+    b: "】"
+    n: "《"
+    m: "》"
+    "1": "①"
+    "2": "②"
+    "3": "③"
+    "4": "④"
+    "5": "⑤"
+    "6": "⑥"
+    "7": "⑦"
+    "8": "⑧"
+    "9": "⑨"
+    "0": "⓪"
+
+  # 主翻译器，拼音
+  translator:
+    dictionary: wanxiang          # 挂载词库 wanxiang.dict.yaml
+  #  prism: double_pinyin          # 多方案共用一个词库时，为避免冲突，需要用 prism 指定一个名字。
+    enable_completion: true  # 启用候选词补全
+  #  user_dict: zrm.userdb  # 用户词典的文件名称
+  #  db_class: tabledb  #开启后就不会产生zrm.userdb这样的文件夹，会直接输出文本zrm.txt同时无法使用同步能力
+    enable_user_dict: false # 是否开启自动调频
+    disable_user_dict_for_patterns:
+      - "^[a-z]{1,6}"    #基本的6码3字不调频
+    enable_correction: false #是否开启自动纠错
+    initial_quality: 3       # 初始质量拼音的权重应该比英文大
+    spelling_hints: 50             # 将注释以词典字符串形式完全暴露，通过pro_comment_format.lua完全接管，灵活配置。
+    always_show_comments: true    # Rime 默认在 preedit 等于 comment 时取消显示 comment，这里强制一直显示，供pro_comment_format.lua做判断用。
+    comment_format: {comment}  #将注释以词典字符串形式完全暴露，通过pro_comment_format.lua完全接管，灵活配置。
+    preedit_format:               # preedit_format 影响到输入框的显示和“Shift+回车”上屏的字符
+
+
+  predictor:
+    db: wanxiang-lts-zh-predict.db
+  # 每次最大预测候选数
+  # 默认为 0，表示显示所有候选数
+  # 您可以将其设置为与 page_size 相同，这样 period 就不会触发下一页
+    max_candidates: 0
+  # 最大连续预测次数
+  # 默认为 0，表示无限制
+    max_iterations: 0
+
+
+  
+  recognizer/patterns/add_user_dict: "^/ac[A-Za-z/`']*$"      #自造词
+  recognizer/patterns/calculator: "^=.*$"                 #计算器功能引导，，，，
+  recognizer/patterns/quick_text: "^/.*$"  # 双击//重复上屏汉字和字母
+
+  # 从 default 继承快捷键
+  key_binder/tips_key: backslash
+  key_binder/search: "`"             # 辅码引导符，要添加到 speller/alphabet
+
+  
+  # 拼写设定
+  speller:
+  # table_translator翻译器，支持自动上屏。例如 “zmhu”可以自动上屏“怎么回事”
+  #  auto_select: true
+  #  auto_select_pattern: ^[a-z]+/|^[a-df-zA-DF-Z]\w{3}|^e\w{4}
+    # 如果不想让什么标点直接上屏，可以加在 alphabet，或者编辑标点符号为两个及以上的映射
+    alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA`/@
+    # initials 定义仅作为始码的按键，排除 ` 让单个的 ` 可以直接上屏
+    initials: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA
+    delimiter: " '"  # 第一位<空格>是拼音之间的分隔符；第二位<'>表示可以手动输入单引号来分割拼音。
+    algebra:
+      __patch:
+      - wanxiang.schema:/小鹤双拼            # 可选输入方案名称：全拼, 自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
+      - wanxiang.schema:/fuzhu_moqi        #辅助码已经固定不需要修改
+
+  cn_en/user_dict: en_dicts/flypy           # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
+  
+    # 自定义词典加词(ac引导)
+  add_user_dict/prefix: "/ac"
+  user_dict_set/initial_quality: 100
+
+
+  

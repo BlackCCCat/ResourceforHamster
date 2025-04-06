@@ -3,3 +3,4 @@
 - URL编码：`encode_url.js`
 - 去除空格：`remove_space.js`
 - 提取App Store兑换码：`redeem_code.js`
+- 小鹤音形辅助码查询：`xh_lookup.js`
