@@ -1,0 +1,62 @@
+# weasel.custom.yaml
+patch:
+
+  style/+:
+    label_format: "%s"
+    inline_preedit: false
+    font_point: 15
+    label_font_point: 15
+    comment_font_point: 15
+    horizontal: false                           # 候选项横排：true；false
+    color_scheme: win11light
+    color_scheme_dark: win11dark
+    layout:
+      min_width: 10
+      margin_x: 16
+      margin_y: 8
+      border: 2
+      candidate_spacing: 22
+      hilite_spacing: 6
+      hilite_padding: 2
+      hilite_padding_x: 8
+      corner_radius: 10
+      round_corner: 8
+      shadow_radius: 8
+  preset_color_schemes/+:
+    win11light:
+      name: " Win11浅色 / Win11light"
+      text_color: 0x191919
+      label_color: 0x191919
+      hilited_label_color: 0x191919
+      back_color: 0xf9f9f9
+      border_color: 0x009e5a00
+      hilited_mark_color: 0xc06700
+      hilited_candidate_back_color: 0xf0f0f0
+      shadow_color: 0x20000000
+    win11dark:
+      name: "Win11暗色 / Win11Dark"
+      text_color: 0xf9f9f9
+      label_color: 0xf9f9f9
+      back_color: 0x2C2C2C
+      hilited_label_color: 0xf9f9f9
+      border_color: 0x002C2C2C
+      hilited_mark_color: 0xFFC24C
+      hilited_candidate_back_color: 0x383838
+      shadow_color: 0x20000000
+
+
+  app_options:
+    cmd.exe:               # 带 .exe 的进程名：Weasel 15.0 及之前版本须小写
+      ascii_mode: true     # 英文模式
+    conhost.exe:
+      ascii_mode: true
+    windowsterminal.exe:
+      ascii_mode: true
+    wt.exe:
+      ascii_mode: true
+    pwsh.exe:
+      ascii_mode: true
+    powershell.exe:
+      ascii_mode: true
+    notepad++.exe:
+      ascii_mode: true
