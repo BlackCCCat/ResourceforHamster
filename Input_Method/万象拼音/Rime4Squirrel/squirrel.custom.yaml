@@ -40,7 +40,7 @@ patch:
       label_font_face: "PingFangSC"    # 序号字体及大小
       label_font_point: 12
       comment_font_face: "PingFangSC"  # 注字体及大小
-      comment_font_point: 16
+      comment_font_point: 14
       candidate_format: "%c\u2005%@\u2005" # 编号 %c 和候选词 %@ 前后的空间
       # candidate_list_layout: linear   # 候选排布：层叠 stacked | 行 linear
       # text_orientation: horizontal    # 行文向： 横 horizontal | 纵 vertical
@@ -81,7 +81,7 @@ patch:
       label_font_face: "PingFangSC"    # 序号字体及大小
       label_font_point: 12
       comment_font_face: "PingFangSC"  # 注字体及大小
-      comment_font_point: 16
+      comment_font_point: 14
       candidate_format: "%c\u2005%@\u2005" # 编号 %c 和候选词 %@ 前后的空间
       # candidate_list_layout: linear   # 候选排布：层叠 stacked | 行 linear
       # text_orientation: horizontal    # 行文向： 横 horizontal | 纵 vertical
