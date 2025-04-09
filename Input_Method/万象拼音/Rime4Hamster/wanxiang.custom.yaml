@@ -202,3 +202,5 @@ patch:
   # 默认为 0，表示无限制
     max_iterations: 0
 
+  # 自定义短语
+  custom_phrase/user_dict: custom_phrase_double  # 需要手动创建 custom_phrase_double.txt 文件
