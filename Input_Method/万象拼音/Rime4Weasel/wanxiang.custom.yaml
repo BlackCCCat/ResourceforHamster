@@ -172,5 +172,8 @@ patch:
   add_user_dict/prefix: "/ac"
   user_dict_set/initial_quality: 100
 
+    # 自定义短语
+  custom_phrase/user_dict: custom_phrase_double  # 需要手动创建 custom_phrase_double.txt 文件
+
 
   
