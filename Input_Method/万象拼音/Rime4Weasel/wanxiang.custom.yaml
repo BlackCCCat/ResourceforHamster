@@ -57,14 +57,14 @@ patch:
   
   
   # 输入引擎
-  engine/processors/@before 0:
-    lua_processor@*super_tips_phone*S  # 手机端配合- lua_filter@*super_tips_phone*M使用
+  # engine/processors/@before 0:
+    # lua_processor@*super_tips_phone*S  # 手机端配合- lua_filter@*super_tips_phone*M使用
   engine/processors/@before 1:
     lua_processor@*select_character          # 以词定字，有了辅助码了，想开启可以注释掉
 
 
-  engine/filters/@before 0:
-    lua_filter@*super_tips_phone*M #手机端配合- lua_processor@*super_tips_phone*S使用
+  # engine/filters/@before 0:
+    # lua_filter@*super_tips_phone*M #手机端配合- lua_processor@*super_tips_phone*S使用
 
 
   ########################以下是方案配置######################################################
@@ -171,6 +171,9 @@ patch:
     # 自定义词典加词(ac引导)
   add_user_dict/prefix: "/ac"
   user_dict_set/initial_quality: 100
+
+    # 自定义短语
+  custom_phrase/user_dict: custom_phrase_double  # 需要手动创建 custom_phrase_double.txt 文件
 
 
   
