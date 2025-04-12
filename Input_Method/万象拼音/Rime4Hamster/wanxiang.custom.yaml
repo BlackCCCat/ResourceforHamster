@@ -49,17 +49,8 @@ patch:
 
 
   # 输入引擎
-  engine/processors/@before 0:
-    lua_processor@*super_tips_phone*S  # 手机端配合- lua_filter@*super_tips_phone*M使用
   engine/processors/@before 1:
     lua_processor@*select_character          # 以词定字，有了辅助码了，想开启可以注释掉
-
-
-  engine/filters/@before 0:
-    lua_filter@*super_tips_phone*M #手机端配合- lua_processor@*super_tips_phone*S使用
-
-
-
 
 
   # @符号增加邮箱后缀
