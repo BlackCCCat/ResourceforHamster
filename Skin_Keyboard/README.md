@@ -7,7 +7,8 @@
 - ~~`26_Normal_Default下划分页.hskin`或`26_Normal下划分页.hskin`可用于开启app的划动分页功能（停止更新，暂不推荐使用）~~
 
 ## 万象拼音PRO
-- `26_Normal_wwxx.hskin`
+- ~~`26_Normal_wwxx.hskin`~~
+- `26键-万象`
 
 
 ## 输入法案
