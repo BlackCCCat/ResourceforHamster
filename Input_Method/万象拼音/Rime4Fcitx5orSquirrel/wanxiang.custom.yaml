@@ -105,23 +105,6 @@ patch:
     "9": "⑨"
     "0": "⓪"
 
-  # 主翻译器，拼音
-  translator:
-    dictionary: wanxiang          # 挂载词库 wanxiang.dict.yaml
-  #  prism: double_pinyin          # 多方案共用一个词库时，为避免冲突，需要用 prism 指定一个名字。
-    enable_completion: true  # 启用候选词补全
-  #  user_dict: zrm.userdb  # 用户词典的文件名称
-  #  db_class: tabledb  #开启后就不会产生zrm.userdb这样的文件夹，会直接输出文本zrm.txt同时无法使用同步能力
-    enable_user_dict: false # 是否开启自动调频
-    disable_user_dict_for_patterns:
-      - "^[a-z]{1,6}"    #基本的6码3字不调频
-    enable_correction: false #是否开启自动纠错
-    initial_quality: 3       # 初始质量拼音的权重应该比英文大
-    spelling_hints: 50             # 将注释以词典字符串形式完全暴露，通过pro_comment_format.lua完全接管，灵活配置。
-    always_show_comments: true    # Rime 默认在 preedit 等于 comment 时取消显示 comment，这里强制一直显示，供pro_comment_format.lua做判断用。
-    comment_format: {comment}  #将注释以词典字符串形式完全暴露，通过pro_comment_format.lua完全接管，灵活配置。
-    preedit_format:               # preedit_format 影响到输入框的显示和“Shift+回车”上屏的字符
-
 
   predictor:
     db: wanxiang-lts-zh-predict.db
