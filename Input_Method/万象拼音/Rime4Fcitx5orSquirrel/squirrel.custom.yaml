@@ -2,8 +2,8 @@ patch:
   show_notifications_when: appropriate     # 状态通知，可设为全开（always）全关（never）  
   style:
     # 选择皮肤，亮色与暗色主题
-    color_scheme: macos_light
-    color_scheme_dark: macos_dark
+    color_scheme: hertz-leopard-light # macos_light
+    color_scheme_dark: hertz-leopard-dark # macos_dark
     text_orientation: horizontal  # horizontal | vertical
     candidate_list_layout: linear # 候选排布：层叠(竖) stacked | 行(横) linear
     inline_preedit: false            # 拼音位于： 候选框 false | 行内 true
@@ -197,6 +197,111 @@ patch:
       border_color: 0x292929                  # 外边框颜色
 
 
+    hertz-leopard-light:
+      name: "赫兹定制·leopard·light"
+      # #候选字体
+      #font_face: "Segoe UI Emoji, 98WB-0, 98WB-1, 98WB-2, 98WB-3, 98WB-U, 98WB-V"
+      font_point: 16 #主字体字号
+      # #滤镜内容字体
+      #comment_font_face: "Segoe UI Emoji, 98WB-0, 98WB-1, 98WB-2, 98WB-3, 98WB-U, 98WB-V"
+      comment_font_point: 14 # 滤镜内容字号
+      # #候选前编号标志字体
+      #label_font_face: "Segoe UI Emoji, 98WB-0, 98WB-1, 98WB-2, 98WB-3, 98WB-U, 98WB-V"
+      label_font_point: 16 #候选前编号标志字号
+      # candidate_list_layout: stacked
+      candidate_format: '%c %@ '
+      text_orientation: horizontal
+      inline_preedit: false
+      inline_candidate: false
+      translucency: true
+      mutual_exclusive: true
+      show_paging: true
+      corner_radius: 8.0
+      hilited_corner_radius: 6.0
+      border_height: -1
+      border_width: -1
+      spacing: 15
+      line_spacing: 8
+      alpha: 1
+      base_offset: 1
+      shadow_size: 2.0
+      color_space: display_p3
+      text_color: 0xff000000 # 0xf2747474
+      back_color: 0xdaf4f4f4
+      label_color: 0xff5a5a5a
+      comment_text_color: 0xff494949
+      border_color: 0xdaf4f4f4
+      shadow_color: 0xf2747474
+      candidate_text_color: 0xff000000
+      candidate_back_color: 0xdaf4f4f4
+      candidate_border_color: 0x00494949
+      candidate_shadow_color: 0xf2747474
+      hilited_comment_text_color: 0xfff7f7f7
+      hilited_candidate_text_color: 0xffffffff
+      hilited_candidate_back_color: 0xfff67339   # 0xee83b942
+      hilited_candidate_border_color: 0x00ffffff
+      hilited_candidate_shadow_color: 0xf2747474
+      hilited_candidate_label_color: 0xffffffff
+      hilited_text_color: 0xff262626
+      hilited_back_color: 0x1a000000
+      hilited_border_color: 0x00ffffff
+      hilited_shadow_color: 0xf2747474
+      hilited_label_color: 0xffffffff
+      preedit_back_color: 0x1a000000
+  
+  
+    hertz-leopard-dark:
+      name: "赫兹定制·leopard·dark"
+      # #候选字体
+      #font_face: "Segoe UI Emoji, 98WB-0, 98WB-1, 98WB-2, 98WB-3, 98WB-U, 98WB-V"
+      font_point: 18 #主字体字号
+      # #滤镜内容字体
+      #comment_font_face: "Segoe UI Emoji, 98WB-0, 98WB-1, 98WB-2, 98WB-3, 98WB-U, 98WB-V"
+      comment_font_point: 14 # 滤镜内容字号
+      # #候选前编号标志字体
+      #label_font_face: "Segoe UI Emoji, 98WB-0, 98WB-1, 98WB-2, 98WB-3, 98WB-U, 98WB-V"
+      label_font_point: 16 #候选前编号标志字号
+      # candidate_list_layout: stacked
+      candidate_format: '%c %@ '
+      text_orientation: horizontal
+      inline_preedit: false
+      inline_candidate: false
+      translucency: true
+      mutual_exclusive: true
+      show_paging: true
+      corner_radius: 8.0
+      hilited_corner_radius: 0.0
+      border_height: -1
+      border_width: -1
+      spacing: 15
+      line_spacing: 8
+      alpha: 1
+      base_offset: 1
+      shadow_size: 3.0
+      color_space: display_p3
+      text_color: 0xff000000 # 0xffb8a9a1
+      back_color: 0xda000000
+      label_color: 0xffb8a9a1
+      comment_text_color: 0xffb8a9a1
+      border_color: 0x00000000
+      shadow_color: 0xf2bae5eb
+      candidate_text_color: 0xffb8a9a1
+      candidate_back_color: 0xda000000
+      candidate_border_color: 0x00000000
+      candidate_shadow_color: 0x00bae5eb
+      hilited_comment_text_color: 0xfff7f7f7
+      hilited_candidate_text_color: 0xfff7f7f7
+      hilited_candidate_back_color: 0xda000000
+      hilited_candidate_border_color: 0x00000000
+      hilited_candidate_shadow_color: 0x00bae5eb
+      hilited_candidate_label_color: 0xfff7f7f7
+      hilited_text_color: 0xff000000
+      hilited_back_color: 0xaabae5eb
+      hilited_border_color: 0x00000000
+      hilited_shadow_color: 0x00bae5eb
+      hilited_label_color: 0xff8C7F77
+      preedit_back_color: 0xaabae5eb
+  
 
     flat_light:
       name: "扁平明／Flat Light"
