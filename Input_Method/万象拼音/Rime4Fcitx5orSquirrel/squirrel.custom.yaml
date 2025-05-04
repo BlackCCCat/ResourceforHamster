@@ -757,4 +757,6 @@ patch:
         ascii_mode: true             # Dataflare
     com.todesktop.230313mzl4w4u92:
         ascii_mode: true             # Cursor
+    com.sublimetext.4:               
+        ascii_mode: true             # Sublime Text
 
