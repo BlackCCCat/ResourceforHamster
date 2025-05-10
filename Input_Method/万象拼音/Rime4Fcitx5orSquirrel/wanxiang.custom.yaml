@@ -7,7 +7,7 @@
 patch:
 
   menu:
-  page_size: 7  # 候选词个数
+  page_size: 6  # 候选词个数
 
 
   super_comment:                 # 超级注释模块，子项配置 true 开启，false 关闭
@@ -23,10 +23,12 @@ patch:
   switches:
     - name: ascii_mode
       states: [ 中, 英 ]
+      reset: 0
     - name: ascii_punct  # 中英标点
       states: [ ¥, $ ]
-    - name: traditionalization
-      states: [ 简, 繁 ]
+    - options: [ s2s, s2t, s2hk, s2tw ]
+      reset: 0
+      states: [ 简, 繁, 港, 臺 ]
     - name: full_shape
       states: [ 半, 全 ]
     - name: emoji
@@ -59,6 +61,8 @@ patch:
   # 输入引擎
   engine/processors/@before 1:
     lua_processor@*select_character          # 以词定字，有了辅助码了，想开启可以注释掉
+
+
 
   ########################以下是方案配置######################################################
   
@@ -120,7 +124,7 @@ patch:
   
   recognizer/patterns/add_user_dict: "^/ac[A-Za-z/`']*$"      #自造词
   recognizer/patterns/calculator: "^=.*$"                 #计算器功能引导，，，，
-  recognizer/patterns/quick_text: "^/.*$"  # 双击//重复上屏汉字和字母
+  # recognizer/patterns/quick_symbol: "^/.*$"  # 双击//重复上屏汉字和字母
 
   # 从 default 继承快捷键
   key_binder/tips_key: backslash
@@ -133,14 +137,14 @@ patch:
   #  auto_select: true
   #  auto_select_pattern: ^[a-z]+/|^[a-df-zA-DF-Z]\w{3}|^e\w{4}
     # 如果不想让什么标点直接上屏，可以加在 alphabet，或者编辑标点符号为两个及以上的映射
-    alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA`/@
+    alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA7890`/@
     # initials 定义仅作为始码的按键，排除 ` 让单个的 ` 可以直接上屏
     initials: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA
     delimiter: " '"  # 第一位<空格>是拼音之间的分隔符；第二位<'>表示可以手动输入单引号来分割拼音。
     algebra:
       __patch:
       - wanxiang.schema:/小鹤双拼            # 可选输入方案名称：全拼, 自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
-      - wanxiang.schema:/fuzhu_moqi        #辅助码已经固定不需要修改
+      - wanxiang.schema:/直接辅助        #辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
 
   cn_en/user_dict: en_dicts/flypy           # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
   
@@ -148,6 +152,10 @@ patch:
   add_user_dict/prefix: "/ac"
   user_dict_set/initial_quality: 100
 
+
   # 自定义短语
   custom_phrase/user_dict: custom_phrase_double  # 需要手动创建 custom_phrase_double.txt 文件
+  
+  
+  
   
