@@ -116,12 +116,9 @@ patch:
     "9": "⑨"
     "0": "⓪"
 
-  # Lua 配置：计算器触发关键字
-  calculator/trigger: "="
 
 
   recognizer/patterns/add_user_dict: "^/ac[A-Za-z/`']*$"      #自造词
-  recognizer/patterns/calculator: "^=.*$"                 #计算器功能引导，，，，
   # recognizer/patterns/quick_symbol: "^/.*$"  # 双击//重复上屏汉字和字母
 
   cn_en/user_dict: en_dicts/flypy           # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou

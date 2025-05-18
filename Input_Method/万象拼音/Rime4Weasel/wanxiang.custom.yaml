@@ -67,9 +67,6 @@ patch:
   ########################以下是方案配置######################################################
   
 
-  # Lua 配置：计算器触发关键字
-  calculator/trigger: "=" 
-
   #快符lua，lua中有预设，26个字母、10个数字，你可以在这里配置替换默认的值，键可以是一个或多个，值可以是任意字符这里不齐全默认配置将生效
   quick_symbol_text:
     q: "欢迎使用万象拼音"
@@ -123,7 +120,6 @@ patch:
 
   
   recognizer/patterns/add_user_dict: "^/ac[A-Za-z/`']*$"      #自造词
-  recognizer/patterns/calculator: "^=.*$"                 #计算器功能引导，，，，
   # recognizer/patterns/quick_symbol: "^/.*$"  # 双击//重复上屏汉字和字母
 
   # 从 default 继承快捷键
