@@ -118,8 +118,6 @@ patch:
 
 
 
-  recognizer/patterns/add_user_dict: "^/ac[A-Za-z/`']*$"      #自造词
-  # recognizer/patterns/quick_symbol: "^/.*$"  # 双击//重复上屏汉字和字母
 
   cn_en/user_dict: en_dicts/flypy           # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
   
@@ -159,11 +157,6 @@ patch:
     - wanxiang.schema:/小鹤双拼            # 可选输入方案名称：自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
     - wanxiang.schema:/直接辅助            #辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
 
-
-
-  # 自定义词典加词(/ac引导)
-  add_user_dict/prefix: "/ac"
-  user_dict_set/initial_quality: 100
 
 
 

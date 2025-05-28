@@ -119,8 +119,6 @@ patch:
 
 
   
-  recognizer/patterns/add_user_dict: "^/ac[A-Za-z/`']*$"      #自造词
-  # recognizer/patterns/quick_symbol: "^/.*$"  # 双击//重复上屏汉字和字母
 
   # 从 default 继承快捷键
   key_binder/tips_key: backslash
@@ -144,9 +142,6 @@ patch:
 
   cn_en/user_dict: en_dicts/flypy           # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
   
-    # 自定义词典加词(ac引导)
-  add_user_dict/prefix: "/ac"
-  user_dict_set/initial_quality: 100
 
 
   # 自定义短语
