@@ -174,3 +174,13 @@ patch:
 
 # 自定义短语
   custom_phrase/user_dict: custom_phrase_double  # 需要手动创建 custom_phrase_double.txt 文件
+
+
+  #生日信息：/sr或者osr，在这里定义全局替换构建你的生日查询数据库
+  birthday_reminder:  #日期格式：必须是4位数字，格式为MMDD（月份和日期），例如：1月27日 → 0127 ，#备注格式：在日期后添加逗号，然后添加任意文本作为备注，例如："0501,我的好朋友"，也可以无备注
+    solar_birthdays:  # 公历生日, 姓名: "日期,备注" or 姓名: "日期"
+      小明: "0501,准备礼物"
+      大明: "0405"
+    lunar_birthdays:  # 农历生日, 姓名: "日期,备注" or 姓名: "日期"
+      小明: "0114"
+      小红: "0815,农历中秋"
