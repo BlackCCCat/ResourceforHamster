@@ -759,4 +759,5 @@ patch:
         ascii_mode: true             # Cursor
     com.sublimetext.4:               
         ascii_mode: true             # Sublime Text
-
+    dev.zed.Zed:
+        ascii_mode: true             # Zed
