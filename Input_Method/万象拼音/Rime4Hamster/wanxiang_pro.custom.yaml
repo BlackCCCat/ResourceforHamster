@@ -1,31 +1,21 @@
-  # Rime schema
-  # encoding: utf-8
-  #本方案匹配词库解码顺序为：全拼拼音；墨奇;鹤形;自然码;简单鹤;仓颉首末;虎码首末;五笔前2;汉心码；
-  #############DIY你想要的方案组合,试试搭配一个自然码+墨奇辅助的方案吧！###########################
-
-
 patch:
-
-  menu:
   page_size: 6  # 候选词个数
 
-
-  super_comment:                 # 超级注释模块，子项配置 true 开启，false 关闭
-    candidate_length: 50          # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理
+  super_comment:           # 超级注释模块，子项配置 true 开启，false 关闭
+    candidate_length: 50         # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理    
     corrector_type: "{comment}"  # 换一种显示类型，比如"({comment})" 
     comment_type: fuzhu          # 可以选择注释里显示辅助码或者是声调全拼：fuzhu , tone
 
-  
-  # 开关
-  # reset: 默认状态。注释掉后，切换窗口时不会重置到默认状态。
-  # states: 方案选单显示的名称。可以注释掉，仍可以通过快捷键切换。
-  # abbrev: 默认的缩写取 states 的第一个字符，abbrev 可自定义一个字符
+
+
+
   switches:
     - name: ascii_mode
       states: [ 中, 英 ]
-      reset: 0
     - name: ascii_punct  # 中英标点
       states: [ ¥, $ ]
+    # - name: traditionalization
+      # states: [ 简, 繁 ]
     - options: [ s2s, s2t, s2hk, s2tw ]
       reset: 0
       states: [ 简, 繁, 港, 臺 ]
@@ -37,7 +27,7 @@ patch:
     - name: chinese_english
       states: [ 译, 翻 ]
     - name: tone_display
-      states: [ 调, 音 ]
+      states: [ 调, 声 ]
       reset: 1
     - name: fuzhu_switch
       states: [ 助, 辅 ]
@@ -49,23 +39,43 @@ patch:
       states: [ 奇, 墨 ]
       reset: 1
     - name: super_tips
-      states: [ off, tips ]
+      states: [关, 提]
       reset: 1
     - name: prediction
       states: [ 测, 预 ]
+      reset: 1
     - name: search_single_char  # search.lua 的功能开关，辅码查词时是否单字优先
       abbrev: [词, 单]
       states: [正常, 单字]
-  
-  
+
+
+
+
   # 输入引擎
-  engine/processors/@before 1:
+  engine/processors/@before 3:
     lua_processor@*select_character          # 以词定字，有了辅助码了，想开启可以注释掉
 
 
+  # @符号增加邮箱后缀
+  punctuator/half_shape/+:
+    '@':
+     - '@'
+     - '@gmail.com'
+     - '@outlook.com'
+     - '@qq.com'
+     - '@163.com'
+    '[':
+     - '〔'
+     - '｛'
+     - '〖'
+     - '『'
+    ']':
+     - '〕'
+     - '｝'
+     - '〗'
+     - '』'
 
-  ########################以下是方案配置######################################################
-  
+
 
   #快符lua，lua中有预设，26个字母、10个数字，你可以在这里配置替换默认的值，键可以是一个或多个，值可以是任意字符这里不齐全默认配置将生效
   quick_symbol_text:
@@ -107,28 +117,32 @@ patch:
     "0": "⓪"
 
 
-  predictor:
-    db: wanxiang-lts-zh-predict.db
-  # 每次最大预测候选数
-  # 默认为 0，表示显示所有候选数
-  # 您可以将其设置为与 page_size 相同，这样 period 就不会触发下一页
-    max_candidates: 0
-  # 最大连续预测次数
-  # 默认为 0，表示无限制
-    max_iterations: 0
 
 
+  cn_en/user_dict: en_dicts/flypy           # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
   
 
-  # 从 default 继承快捷键
-  key_binder/tips_key: backslash
-  key_binder/search: "`"             # 辅码引导符，要添加到 speller/alphabet
+  key_binder/tips_key: "Break" # "backslash" # Lua 配置: 超级tips上屏按键
+  key_binder/bindings:             # 也可以再增加方案专有的
+    - { when: always, toggle: chinese_english, accept: Control+Shift+f }       # 切换翻译功能
+    - { when: always, toggle: chaifen_switch, accept: Control+Shift+m }       # 切换墨奇音形拆分功能
+    - { when: always, toggle: s2s, accept: Control+Shift+t }       # 切换简繁
+    - { when: always, toggle: super_tips, accept: Control+Shift+s }       # 切换超级提示
+    - { when: always, toggle: prediction, accept: Control+Shift+p }       # 切换预测
+    - { when: composing, accept: Control+w, send: Control+BackSpace }
+    - { when: has_menu, accept: "Tab", send: "Control+Right" }
+    - { when: composing, accept: "Tab", send: "Control+Right" }
 
-  key_binder/bindings/+:
+    # 自定义翻页，避免输入问题
+    - { when: has_menu, accept: Control+Shift+Up, send: Page_Up }
+    - { when: has_menu, accept: Control+Shift+Down, send: Page_Down }
+    
     #当输入编码后发现没有词，则通过双击``进入造词模式而且不需要删除编码，这个功能与``直接引导相呼应相配合
     - { match: "^.*`$", accept: "`", send_sequence: '{BackSpace}{Home}{`}{`}{End}' }
   
-  
+
+
+
   # 拼写设定
   speller:
   # table_translator翻译器，支持自动上屏。例如 “zmhu”可以自动上屏“怎么回事”
@@ -141,17 +155,29 @@ patch:
     delimiter: " '"  # 第一位<空格>是拼音之间的分隔符；第二位<'>表示可以手动输入单引号来分割拼音。
     algebra:
       __patch:
-      - wanxiang.schema:/小鹤双拼            # 可选输入方案名称：全拼, 自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
-      - wanxiang.schema:/直接辅助        #辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
-
-  cn_en/user_dict: en_dicts/flypy           # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
-  
+        - wanxiang_pro.schema:/小鹤双拼            # 可选输入方案名称：自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
+        - wanxiang_pro.schema:/直接辅助            #辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
+  # 中英混合词汇，要与你的双拼类型一样
 
 
-  # 自定义短语
+
+
+
+  predictor:
+    db: wanxiang-lts-zh-predict.db
+  # 每次最大预测候选数
+  # 默认为 0，表示显示所有候选数
+  # 您可以将其设置为与 page_size 相同，这样 period 就不会触发下一页
+    max_candidates: 0
+  # 最大连续预测次数
+  # 默认为 0，表示无限制
+    max_iterations: 0
+
+
+# 自定义短语
   custom_phrase/user_dict: custom_phrase_double  # 需要手动创建 custom_phrase_double.txt 文件
-  
-  
+
+
   #生日信息：/sr或者osr，在这里定义全局替换构建你的生日查询数据库
   birthday_reminder:  #日期格式：必须是4位数字，格式为MMDD（月份和日期），例如：1月27日 → 0127 ，#备注格式：在日期后添加逗号，然后添加任意文本作为备注，例如："0501,我的好朋友"，也可以无备注
     solar_birthdays:  # 公历生日, 姓名: "日期,备注" or 姓名: "日期"
@@ -160,4 +186,3 @@ patch:
     lunar_birthdays:  # 农历生日, 姓名: "日期,备注" or 姓名: "日期"
       小明: "0114"
       小红: "0815,农历中秋"
-  
