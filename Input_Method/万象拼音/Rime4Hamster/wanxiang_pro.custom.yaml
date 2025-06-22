@@ -29,7 +29,7 @@ patch:
     - name: tone_display
       states: [ 调, 声 ]
       reset: 1
-    - name: fuzhu_switch
+    - name: comment_hint
       states: [ 助, 辅 ]
       reset: 1
     - name: charset_filter
@@ -123,7 +123,7 @@ patch:
   
 
   key_binder/tips_key: "Break" # "backslash" # Lua 配置: 超级tips上屏按键
-  key_binder/bindings:             # 也可以再增加方案专有的
+  key_binder/bindings/+:             # 也可以再增加方案专有的
     - { when: always, toggle: chinese_english, accept: Control+Shift+f }       # 切换翻译功能
     - { when: always, toggle: chaifen_switch, accept: Control+Shift+m }       # 切换墨奇音形拆分功能
     - { when: always, toggle: s2s, accept: Control+Shift+t }       # 切换简繁
@@ -137,9 +137,6 @@ patch:
     - { when: has_menu, accept: Control+Shift+Up, send: Page_Up }
     - { when: has_menu, accept: Control+Shift+Down, send: Page_Down }
     
-    #当输入编码后发现没有词，则通过双击``进入造词模式而且不需要删除编码，这个功能与``直接引导相呼应相配合
-    - { match: "^.*`$", accept: "`", send_sequence: '{BackSpace}{Home}{`}{`}{End}' }
-  
 
 
 

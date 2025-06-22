@@ -39,7 +39,7 @@ patch:
     - name: tone_display
       states: [ 调, 音 ]
       reset: 1
-    - name: fuzhu_switch
+    - name: comment_hint
       states: [ 助, 辅 ]
       reset: 1
     - name: charset_filter
@@ -124,10 +124,7 @@ patch:
   key_binder/tips_key: backslash
   key_binder/search: "`"             # 辅码引导符，要添加到 speller/alphabet
 
-  key_binder/bindings/+:
-    #当输入编码后发现没有词，则通过双击``进入造词模式而且不需要删除编码，这个功能与``直接引导相呼应相配合
-    - { match: "^.*`$", accept: "`", send_sequence: '{BackSpace}{Home}{`}{`}{End}' }
-  
+
   
   # 拼写设定
   speller:
