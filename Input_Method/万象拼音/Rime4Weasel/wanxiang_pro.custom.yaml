@@ -39,8 +39,8 @@ patch:
     - name: tone_display
       states: [ 调, 音 ]
       reset: 1
-    - name: comment_hint
-      states: [ 助, 辅 ]
+    - options: [ comment_off, fuzhu_hint, tone_hint ]  #开启后在候选的注释里面实时显示辅助码或者全拼声调，不开启则采用系统配置，影响的是comment_format，快捷键配套ctrl+a,归属：super_comment.lua
+      states: [ 注关, 辅开, 调开 ]
       reset: 1
     - name: charset_filter
       states: [ 小, 大 ]
