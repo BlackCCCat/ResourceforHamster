@@ -11,39 +11,37 @@ patch:
 
   switches:
     - name: ascii_mode
-      states: [ 中, 英 ]
+      states: [ 中文, 英文 ]
+      reset: 0
     - name: ascii_punct  # 中英标点
-      states: [ ¥, $ ]
-    # - name: traditionalization
-      # states: [ 简, 繁 ]
+      states: [ 中标, 英标 ]
     - options: [ s2s, s2t, s2hk, s2tw ]
       reset: 0
-      states: [ 简, 繁, 港, 臺 ]
+      states: [ 简体, 通繁, 港繁, 臺繁 ]
     - name: full_shape
-      states: [ 半, 全 ]
+      states: [ 半角, 全角 ]
     - name: emoji
-      states: [ 💀, 😄 ]
+      states: [ 表情关, 表情开 ]
       reset: 1
     - name: chinese_english
-      states: [ 译, 翻 ]
+      states: [ 翻译关, 翻译开 ]
     - name: tone_display
-      states: [ 调, 声 ]
+      states: [ 声调关, 声调开 ]
       reset: 1
     - options: [ comment_off, fuzhu_hint, tone_hint ]  #开启后在候选的注释里面实时显示辅助码或者全拼声调，不开启则采用系统配置，影响的是comment_format，快捷键配套ctrl+a,归属：super_comment.lua
-      states: [ 注关, 辅开, 调开 ]
+      states: [ 注释关, 辅助开, 读音开 ]
       reset: 1
     - name: charset_filter
-      states: [ 小, 大 ]
+      states: [ 小字集, 大字集 ]
       reset: 1
     - name: chaifen_switch
-      states: [ 奇, 墨 ]
+      states: [ 拆分关, 拆分开 ]
       reset: 1
     - name: super_tips
-      states: [关, 提]
+      states: [ 提示关, 提示开 ]
       reset: 1
     - name: prediction
-      states: [ 测, 预 ]
-      reset: 1
+      states: [ 预测关, 预测开 ]
     - name: search_single_char  # search.lua 的功能开关，辅码查词时是否单字优先
       abbrev: [词, 单]
       states: [正常, 单字]
