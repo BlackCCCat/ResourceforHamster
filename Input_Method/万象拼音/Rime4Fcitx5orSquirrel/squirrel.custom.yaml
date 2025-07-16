@@ -737,6 +737,7 @@ patch:
         ascii_mode: true             # warp
     com.barebones.bbedit:
         ascii_mode: true             # BBedit
+        inline_preedit: false        
     com.jetbrains.pycharm.ce:
         ascii_mode: true             # pycharm
     com.googlecode.iterm2:
