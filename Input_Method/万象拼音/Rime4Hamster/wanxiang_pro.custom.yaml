@@ -1,10 +1,9 @@
 patch:
   page_size: 6  # 候选词个数
 
-  super_comment:           # 超级注释模块，子项配置 true 开启，false 关闭
-    candidate_length: 50         # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理    
-    corrector_type: "{comment}"  # 换一种显示类型，比如"({comment})" 
-    comment_type: fuzhu          # 可以选择注释里显示辅助码或者是声调全拼：fuzhu , tone
+  super_comment/candidate_length: 50         # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理    
+
+
 
 
 
