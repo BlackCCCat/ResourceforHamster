@@ -5,15 +5,8 @@
 
 
 patch:
-
-  menu:
-  page_size: 6  # 候选词个数
-
-
-  super_comment:                 # 超级注释模块，子项配置 true 开启，false 关闭
-    candidate_length: 50          # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理
-    corrector_type: "{comment}"  # 换一种显示类型，比如"({comment})" 
-    comment_type: fuzhu          # 可以选择注释里显示辅助码或者是声调全拼：fuzhu , tone
+  menu/page_size: 6  # 候选词个数
+  super_comment/candidate_length: 50          # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理
 
   
   # 开关
@@ -63,62 +56,6 @@ patch:
     lua_processor@*select_character          # 以词定字，有了辅助码了，想开启可以注释掉
 
 
-
-  ########################以下是方案配置######################################################
-  
-
-  #快符lua，lua中有预设，26个字母、10个数字，你可以在这里配置替换默认的值，键可以是一个或多个，值可以是任意字符这里不齐全默认配置将生效
-  quick_symbol_text:
-    q: "欢迎使用万象拼音"
-    w: "噢我的天哪！"
-    e: "（"
-    r: "）"
-    t: "~"
-    y: "·"
-    u: "『"
-    i: "』"
-    o: "〖"
-    p: "〗"
-    a: "！"
-    s: "……"
-    d: "、"
-    f: "“"
-    g: "”"
-    h: "‘"
-    j: "’"
-    k: "——"
-    l: "%"
-    z: "。”"
-    x: "？”"
-    c: "！”"
-    v: "【"
-    b: "】"
-    n: "《"
-    m: "》"
-    "1": "①"
-    "2": "②"
-    "3": "③"
-    "4": "④"
-    "5": "⑤"
-    "6": "⑥"
-    "7": "⑦"
-    "8": "⑧"
-    "9": "⑨"
-    "0": "⓪"
-
-
-  predictor:
-    db: wanxiang-lts-zh-predict.db
-  # 每次最大预测候选数
-  # 默认为 0，表示显示所有候选数
-  # 您可以将其设置为与 page_size 相同，这样 period 就不会触发下一页
-    max_candidates: 0
-  # 最大连续预测次数
-  # 默认为 0，表示无限制
-    max_iterations: 0
-
-
-
   # 从 default 继承快捷键
   key_binder/tips_key: backslash
   key_binder/search: "`"             # 辅码引导符，要添加到 speller/alphabet
@@ -126,25 +63,13 @@ patch:
 
   
   # 拼写设定
-  speller:
-  # table_translator翻译器，支持自动上屏。例如 “zmhu”可以自动上屏“怎么回事”
-  #  auto_select: true
-  #  auto_select_pattern: ^[a-z]+/|^[a-df-zA-DF-Z]\w{3}|^e\w{4}
-    # 如果不想让什么标点直接上屏，可以加在 alphabet，或者编辑标点符号为两个及以上的映射
-    alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA7890`/@
-    # initials 定义仅作为始码的按键，排除 ` 让单个的 ` 可以直接上屏
-    initials: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA
-    delimiter: " '"  # 第一位<空格>是拼音之间的分隔符；第二位<'>表示可以手动输入单引号来分割拼音。
-    algebra:
+  speller/algebra:
       __patch:
         - wanxiang_pro.schema:/小鹤双拼            # 可选输入方案名称：自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
         - wanxiang_pro.schema:/直接辅助            #辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
   # 中英混合词汇，要与你的双拼类型一样
-
   cn_en/user_dict: en_dicts/flypy           # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
   
-
-
   # 自定义短语
   custom_phrase/user_dict: custom_phrase_double  # 需要手动创建 custom_phrase_double.txt 文件
   
