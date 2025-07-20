@@ -1,5 +1,5 @@
 patch:
-  menu/page_size: 7  # 默认候选词显示个数
+  menu/page_size: 6  # 默认候选词显示个数
 
   # 方案列表
   schema_list:
