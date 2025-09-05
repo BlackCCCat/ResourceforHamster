@@ -1,0 +1,32 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Rename files
+        run: |
+          mv Skin_Keyboard/万象/26键-万象.hskin Skin_Keyboard/万象/26-wanxiang.hskin
+
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          body: |
+            Changes since ${{ steps.commits.outputs.prev_tag }}:
+            ${{ steps.commits.outputs.commits }}
+          prerelease: ${{ contains(github.ref_name, '-rc') }}
+          files: |
+            Skin_Keyboard/万象/26-wanxiang.hskin
