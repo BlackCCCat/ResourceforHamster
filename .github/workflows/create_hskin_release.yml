@@ -40,3 +40,5 @@ jobs:
           prerelease: ${{ contains(github.ref_name, '-rc') }}
           files: |
             Skin_Keyboard/万象/26-wanxiang.hskin
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}  # 使用存储的 PAT 作为令牌
