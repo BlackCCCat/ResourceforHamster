@@ -6,8 +6,8 @@ patch:
     inline_preedit: false
     font_point: 15
     label_font_point: 15
-    comment_font_point: 15
-    horizontal: false                           # 候选项横排：true；false
+    comment_font_point: 10
+    horizontal: true                           # 候选项横排：true；false
     color_scheme: win11light
     color_scheme_dark: win11dark
     layout:
@@ -59,4 +59,5 @@ patch:
     powershell.exe:
       ascii_mode: true
     notepad++.exe:
+
       ascii_mode: true
