@@ -69,7 +69,9 @@ patch:
         - wanxiang_pro.schema:/直接辅助            #辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
   # 中英混合词汇，要与你的双拼类型一样
   cn_en/user_dict: en_dicts/flypy           # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
-  
+
+  # 取消注释以开启自动无词频造词
+  add_user_dict/enable_auto_phrase: true
   # 自定义短语
   custom_phrase/user_dict: custom_phrase_double  # 需要手动创建 custom_phrase_double.txt 文件
   
@@ -83,3 +85,4 @@ patch:
       小明: "0114"
       小红: "0815,农历中秋"
   
+
