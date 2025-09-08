@@ -66,6 +66,8 @@ patch:
   # 中英混合词汇，要与你的双拼类型一样
   cn_en/user_dict: en_dicts/flypy           # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
 
+  # 取消注释以开启自动无词频造词
+  add_user_dict/enable_auto_phrase: true
   # 自定义短语
   custom_phrase/user_dict: custom_phrase_double  # 需要手动创建 custom_phrase_double.txt 文件
   
