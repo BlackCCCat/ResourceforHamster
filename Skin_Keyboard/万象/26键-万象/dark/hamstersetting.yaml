@@ -1,0 +1,367 @@
+keyboardLayout:
+    - HStack:
+        subviews:
+          # - Cell: 按键-上传方案
+          - Cell: 按键-iCloud
+          - Cell: 按键-皮肤界面
+          - Cell: 按键-重新部署
+          - Cell: 按键-声音震动
+          - Cell: 按键-切换内嵌模式
+    - HStack:
+        subviews:
+          - Cell: 按键-文件管理
+          - Cell: 按键-备份页面
+          - Cell: 按键-脚本管理
+          - Cell: 按键-键盘设置
+          - Cell: 按键-启动Hamster
+
+floatTargetScale: 0.75          
+
+keyboardStyle:
+  insets: { top: 40, left: 32, bottom: 40, right: 32 }
+  # backgroundStyle: keyboardBackgroundStyle
+
+keyboardBackgroundStyle:
+  type: original
+  insets: { top: 50, left: 50, bottom: 50, right: 50 }
+  normalColor: 00323232
+  cornerRadius: 10
+
+# 字母按键背景样式
+numberButtonBackgroundStyle:
+  type: original
+  insets: { top: 6, left: 6, bottom: 6, right: 6 }
+  normalColor: 707070  # 按键背景图片
+  #normalColor: 7CA07B  # 按键背景图片
+  #normalColor: 000000  # 按键背景图片
+  highlightColor: 000000
+  cornerRadius: 5
+  normalLowerEdgeColor: 89898B
+  highlightLowerEdgeColor: 88898D
+  targetScale: 
+    x: 1
+    y: 1  
+
+# 字符-前景样式
+abc-FStyle: &abc-FStyle
+  normalColor: 000000
+  highlightColor: 000000
+  fontSize: 1.25em
+  fontWeight: regular
+  center:
+    y: 0.7
+
+# 图标-前景样式
+sf-FStyle: &sf-FStyle
+  normalColor: FFFFFF
+  highlightColor: FFFFFF
+  fontSize: 1em
+  fontWeight: regular
+  center:
+    y: 0.4
+
+
+# 字符下标提示-前景样式
+abc-DownFStyle: &abc-DownFStyle
+  normalColor: FFFFFF
+  highlightColor: FFFFFF
+  fontSize: 0.5em
+  center:
+    y: 1.15
+
+
+
+按键-上传方案:
+  size:
+    height: 1/4
+  backgroundStyle: numberButtonBackgroundStyle
+  foregroundStyle: 
+    - 按键-上传方案-样式
+    - 按键-上传方案-下标提示
+  action: { openURL: "hamster://dev.fuxiao.app.hamster/uploadInputSchema" }
+
+按键-上传方案-样式:
+  systemImageName: "wifi"
+  <<: *sf-FStyle
+  # normalColor: 0181D0  #天蓝色
+  # highlightColor: 0181D0 
+按键-上传方案-下标提示:
+  text: "上传方案"
+  <<: *abc-DownFStyle
+
+# 分隔
+按键-iCloud:
+  size:
+    height: 1/4
+  backgroundStyle: numberButtonBackgroundStyle
+  foregroundStyle: 
+    - 按键-iCloud-样式
+    - 按键-iCloud-下标提示
+  action: { openURL: "hamster://dev.fuxiao.app.hamster/iCloud" }
+
+按键-iCloud-样式:
+  systemImageName: "icloud.fill"
+  <<: *sf-FStyle
+  # normalColor: 2E7D32 
+  # highlightColor: 2E7D32 
+按键-iCloud-下标提示:
+  text: "iCloud"
+  <<: *abc-DownFStyle
+
+
+# 分隔
+按键-皮肤界面:
+  size:
+    height: 1/4
+  backgroundStyle: numberButtonBackgroundStyle
+  foregroundStyle: 
+    - 按键-皮肤界面-样式
+    - 按键-皮肤界面-下标提示
+  action: { openURL: "hamster://dev.fuxiao.app.hamster/keyboardSkins" }
+
+按键-皮肤界面-样式:
+  systemImageName: "tshirt.fill"
+  <<: *sf-FStyle
+  # normalColor: DC3004  # 红色
+  # highlightColor: DC3004
+按键-皮肤界面-下标提示:
+  text: "皮肤界面"
+  <<: *abc-DownFStyle
+
+
+
+按键-重新部署:
+  size:
+    height: 1/4
+  backgroundStyle: numberButtonBackgroundStyle
+  foregroundStyle: 
+    - 按键-重新部署-样式
+    - 按键-重新部署-下标提示
+  action: { openURL: "hamster://dev.fuxiao.app.hamster/rime?deploy" }
+
+按键-重新部署-样式:
+  systemImageName: "command"
+  <<: *sf-FStyle
+  # normalColor: F9A825  # 黄色
+  # highlightColor: F9A825
+
+按键-重新部署-下标提示:
+  text: "重新部署"
+  <<: *abc-DownFStyle
+
+
+按键-声音震动:
+  size:
+    height: 1/4
+  backgroundStyle: numberButtonBackgroundStyle
+  foregroundStyle: 
+    - 按键-声音震动-样式
+    - 按键-声音震动-下标提示
+  action: { openURL: "hamster://dev.fuxiao.app.hamster/feedback" }
+
+按键-声音震动-样式:
+  systemImageName: "speaker.wave.3"
+  <<: *sf-FStyle
+  # normalColor: 0516FF  # 紫色
+  # highlightColor: 0516FF
+按键-声音震动-下标提示:
+  text: "声音震动"
+  <<: *abc-DownFStyle
+
+
+按键-切换内嵌模式:
+  size:
+    height: 1/4
+  backgroundStyle: numberButtonBackgroundStyle
+  foregroundStyle: 
+    - 按键-切换内嵌模式-样式
+    - 按键-切换内嵌模式-下标提示
+  action: {shortcutCommand: "#toggleEmbeddedInputMode"}
+
+按键-切换内嵌模式-样式:
+  systemImageName: "dots.and.line.vertical.and.cursorarrow.rectangle"
+  <<: *sf-FStyle
+  # normalColor: 0516FF  # 紫色
+  # highlightColor: 0516FF
+按键-切换内嵌模式-下标提示:
+  text: "切换内嵌"
+  <<: *abc-DownFStyle
+
+
+按键-繁简切换:
+  size:
+    height: 1/4
+  backgroundStyle: numberButtonBackgroundStyle
+  foregroundStyle: 
+    - 按键-繁简切换-样式
+    - 按键-繁简切换-下标提示
+  action: { shortcutCommand: "#繁简切换" }
+
+按键-繁简切换-样式:
+  text: |-
+    // JavaScript
+    function getText() {
+      return $getRimeOptionState("traditionalization") ? "繁" : "简";
+    }
+  <<: *abc-FStyle
+  normalColor: FFFFFF
+  highlightColor: FFFFFF
+
+按键-繁简切换-下标提示:
+  text: "繁简切换"
+  <<: *abc-DownFStyle
+
+按键-文件管理:
+  size:
+    height: 1/4
+  backgroundStyle: numberButtonBackgroundStyle
+  foregroundStyle: 
+    - 按键-文件管理-样式
+    - 按键-文件管理-下标提示
+  action: { openURL: "hamster://dev.fuxiao.app.hamster/finder"}
+
+按键-文件管理-样式:
+  systemImageName: "filemenu.and.selection"
+  <<: *sf-FStyle
+
+按键-文件管理-下标提示:
+  text: "文件管理"
+  <<: *abc-DownFStyle
+
+
+按键-备份页面:
+  size:
+    height: 1/4
+  backgroundStyle: numberButtonBackgroundStyle
+  foregroundStyle: 
+    - 按键-备份页面-样式
+    - 按键-备份页面-下标提示
+  action: { openURL: "hamster://dev.fuxiao.app.hamster/backup"}
+
+按键-备份页面-样式:
+  systemImageName: "person.icloud"
+  <<: *sf-FStyle
+
+按键-备份页面-下标提示:
+  text: "备份页面"
+  <<: *abc-DownFStyle
+
+
+
+#按键-半角全角:
+#  size:
+#    height: 1/4
+ # backgroundStyle: numberButtonBackgroundStyle
+ # foregroundStyle: 
+#    - 按键-半角全角-样式
+ #   - 按键-半角全角-下标提示
+ # action: { sendKeys: "Shift+space" }
+
+#按键-半角全角-样式:
+#  text: |-
+#    // JavaScript
+#    function getText() {
+ #     return $getRimeOptionState("full_shape") ? "全" : "半";
+ #   }
+ # <<: *abc-FStyle
+
+#按键-半角全角-下标提示:
+ # text: "半全角切换"
+#  <<: *abc-DownFStyle
+
+
+
+
+
+#按键-中英标点:
+#  size:
+#    height: 1/4
+#  backgroundStyle: numberButtonBackgroundStyle
+#  foregroundStyle: 
+#    - 按键-中英标点-样式
+#    - 按键-中英标点-下标提示
+#  action: { sendKeys: "Control+Shift+3" }
+
+#按键-中英标点-样式:
+#  text: |-
+#    // JavaScript
+#    function getText() {
+#     return $getRimeOptionState("ascii_punct") ? "$" : "¥";
+#    }
+#  <<: *abc-FStyle
+
+#按键-中英标点-下标提示:
+#  text: "中英标点切换"
+ # <<: *abc-DownFStyle
+
+
+
+按键-脚本管理:
+  size:
+    height: 1/4
+  backgroundStyle: numberButtonBackgroundStyle
+  foregroundStyle: 
+    - 按键-脚本管理-样式
+    - 按键-脚本管理-下标提示
+  action: { openURL: "hamster://dev.fuxiao.app.hamster/clipboard?type=script" }
+
+按键-脚本管理-样式:
+  systemImageName: "greaterthanorequalto.square"
+  <<: *sf-FStyle
+
+按键-脚本管理-下标提示:
+  text: "脚本管理"
+  <<: *abc-DownFStyle
+
+##
+
+按键-重置设置:
+  size:
+    height: 1/4
+  backgroundStyle: numberButtonBackgroundStyle
+  foregroundStyle: 
+    - 按键-重置设置-样式
+    - 按键-重置设置-下标提示
+  action: { openURL: "hamster://dev.fuxiao.app.hamster/rime" }
+
+按键-重置设置-样式:
+  systemImageName: "gear.badge"
+  <<: *sf-FStyle
+
+按键-重置设置-下标提示:
+  text: "重置设置"
+  <<: *abc-DownFStyle
+
+按键-键盘设置:
+  size:
+    height: 1/4
+  backgroundStyle: numberButtonBackgroundStyle
+  foregroundStyle: 
+    - 按键-键盘设置-样式
+    - 按键-键盘设置-下标提示
+  action: { openURL: "hamster://dev.fuxiao.app.hamster/keyboardSettings" }
+
+按键-键盘设置-样式:
+  systemImageName: "keyboard"
+  <<: *sf-FStyle
+
+按键-键盘设置-下标提示:
+  text: "键盘设置"
+  <<: *abc-DownFStyle
+
+按键-启动Hamster:
+  size:
+    height: 1/4
+  backgroundStyle: numberButtonBackgroundStyle
+  foregroundStyle: 
+    - 按键-启动Hamster-样式
+    - 按键-启动Hamster-下标提示
+  action: { openURL: "hamster://dev.fuxiao.app.hamster" }
+
+按键-启动Hamster-样式:
+  systemImageName: "r.square.on.square.fill"
+  <<: *sf-FStyle
+
+按键-启动Hamster-下标提示:
+  text: "打开App"
+  <<: *abc-DownFStyle

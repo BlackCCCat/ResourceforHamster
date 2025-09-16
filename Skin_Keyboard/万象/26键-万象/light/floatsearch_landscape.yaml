@@ -1,0 +1,277 @@
+按键底图样式: &ub
+  targetScale: 0.6
+  offset:
+    x: 0
+    y: -10
+
+按键文字前景样式: &py
+  normalColor: 2A2A2A
+  highlightColor: 2A2A2A
+  fontSize: 0.625em
+  offset:
+    x: 0
+    y: 53
+
+keyboardLayout:
+  - HStack:
+      subviews:
+      # - Cell: 1_Button
+      # - Cell: 2_Button
+      - Cell: 3_Button
+      - Cell: 4_Button
+      # - Cell: 5_Button
+      - Cell: 6_Button
+      # - Cell: 7_Button
+      - Cell: 8_Button
+      - Cell: 9_Button
+      - Cell: 10_Button
+
+floatTargetScale:
+  x: 1
+  y: 0.6
+
+keyboardStyle:
+  insets: {top: 15, left: 10, bottom: 15, right: 10}
+  backgroundStyle: keyboardBackgroundStyle
+
+keyboardBackgroundStyle:
+  type: original
+  normalColor: e8ebea00
+  cornerRadius: 15
+
+1_Button:
+  size:
+    width: 1/6
+  backgroundStyle: 1_ButtonBackgroundStyle
+  # foregroundStyle: 1_ButtonForegroundStyle
+  action: {openURL: https://cn.bing.com/search?q=#pasteboardContent}
+
+1_ButtonBackgroundStyle:
+  animation: BackgroundAnimation
+  normalImage:
+    file: bing
+    image: IMG1
+  highlightImage:
+    file: bing
+    image: IMG1
+  <<: *ub
+
+1_ButtonForegroundStyle:
+  text: 必应
+  <<: *py
+
+2_Button:
+  size:
+    width: 1/6
+  backgroundStyle: 2_ButtonBackgroundStyle
+  # foregroundStyle: 2_ButtonForegroundStyle
+  action: {openURL: https://www.google.com/search?q=#pasteboardContent}
+
+2_ButtonBackgroundStyle:
+  animation: BackgroundAnimation
+  normalImage:
+    file: gg
+    image: IMG1
+  highlightImage:
+    file: gg
+    image: IMG1
+  <<: *ub
+
+2_ButtonForegroundStyle:
+  text: 谷歌
+  <<: *py
+
+3_Button:
+  size:
+    width: 1/6
+  backgroundStyle: 3_ButtonBackgroundStyle
+  # foregroundStyle: 3_ButtonForegroundStyle
+  action: {openURL: taobao://s.taobao.com?q=#pasteboardContent}
+
+3_ButtonBackgroundStyle:
+  animation: BackgroundAnimation
+  normalImage:
+    file: tb
+    image: IMG1
+  highlightImage:
+    file: tb
+    image: IMG1
+  <<: *ub
+
+3_ButtonForegroundStyle:
+  text: 淘宝
+  <<: *py
+
+4_Button:
+  size:
+    width: 1/6
+  backgroundStyle: 4_ButtonBackgroundStyle
+  # foregroundStyle: 4_ButtonForegroundStyle
+  action: {openURL: 'openapp.jdmobile://virtual?params={"des":"productList", "keyWord":"#pasteboardContent",
+      "from":"search", "category":"jump"}'}
+
+4_ButtonBackgroundStyle:
+  animation: BackgroundAnimation
+  normalImage:
+    file: jd
+    image: IMG1
+  highlightImage:
+    file: jd
+    image: IMG1
+  <<: *ub
+
+4_ButtonForegroundStyle:
+  text: 京东
+  <<: *py
+
+5_Button:
+  size:
+    width: 1/6
+  backgroundStyle: 5_ButtonBackgroundStyle
+  # foregroundStyle: 5_ButtonForegroundStyle
+  action: {openURL: snssdk1128://search?keyword=#pasteboardContent}
+
+5_ButtonBackgroundStyle:
+  animation: BackgroundAnimation
+  normalImage:
+    file: dy
+    image: IMG1
+  highlightImage:
+    file: dy
+    image: IMG1
+  <<: *ub
+
+5_ButtonForegroundStyle:
+  text: 抖音
+  <<: *py
+
+6_Button:
+  size:
+    width: 1/6
+  backgroundStyle: 6_ButtonBackgroundStyle
+  # foregroundStyle: 6_ButtonForegroundStyle
+  action: {openURL: xhsdiscover://search/result?keyword=#pasteboardContent}
+
+6_ButtonBackgroundStyle:
+  animation: BackgroundAnimation
+  normalImage:
+    file: xhs
+    image: IMG1
+  highlightImage:
+    file: xhs
+    image: IMG1
+  <<: *ub
+
+6_ButtonForegroundStyle:
+  text: 小红书
+  <<: *py
+
+7_Button:
+  size:
+    width: 1/6
+  backgroundStyle: 7_ButtonBackgroundStyle
+  # foregroundStyle: 7_ButtonForegroundStyle
+  action: {openURL: zhihu://search?q=#pasteboardContent}
+
+7_ButtonBackgroundStyle:
+  animation: BackgroundAnimation
+  normalImage:
+    file: zh
+    image: IMG1
+  highlightImage:
+    file: zh
+    image: IMG1
+  <<: *ub
+
+7_ButtonForegroundStyle:
+  text: 知乎
+  <<: *py
+
+8_Button:
+  size:
+    width: 1/6
+  backgroundStyle: 8_ButtonBackgroundStyle
+  # foregroundStyle: 8_ButtonForegroundStyle
+  action: {openURL: bilibili://search?keyword=#pasteboardContent}
+
+8_ButtonBackgroundStyle:
+  animation: BackgroundAnimation
+  normalImage:
+    file: bili
+    image: IMG1
+  highlightImage:
+    file: bili
+    image: IMG1
+  <<: *ub
+
+8_ButtonForegroundStyle:
+  text: B站
+  <<: *py
+
+9_Button:
+  size:
+    width: 1/6
+  backgroundStyle: 9_ButtonBackgroundStyle
+  # foregroundStyle: 9_ButtonForegroundStyle
+  action: {openURL: iosamap://poi?sourceApplication=applicationName&name=#pasteboardContent}
+
+9_ButtonBackgroundStyle:
+  animation: BackgroundAnimation
+  normalImage:
+    file: gd
+    image: IMG1
+  highlightImage:
+    file: gd
+    image: IMG1
+  <<: *ub
+
+9_ButtonForegroundStyle:
+  text: 高德
+  <<: *py
+
+10_Button:
+  size:
+    width: 1/6
+  backgroundStyle: 10_ButtonBackgroundStyle
+  # foregroundStyle: 10_ButtonForegroundStyle
+  action: {openURL: baidumap://map/place/search?query=#pasteboardContent}
+
+10_ButtonBackgroundStyle:
+  animation: BackgroundAnimation
+  normalImage:
+    file: bddt
+    image: IMG1
+  highlightImage:
+    file: bddt
+    image: IMG1
+  <<: *ub
+
+10_ButtonForegroundStyle:
+  text: 百度
+  <<: *py
+
+# 按键背景动画
+ButtonBackgroundAnimation:
+- type: bounds
+  duration: 60   # 动画时长，单位毫秒
+  repeatCount: 1
+  fromScale: 1
+  toScale: 0.87
+- type: bounds
+  duration: 80
+  repeatCount: 1
+  fromScale: 0.87
+  toScale: 1
+
+# 按键前景动画
+ButtonForegroundAnimation:
+- type: bounds
+  duration: 60   # 动画时长，单位毫秒
+  repeatCount: 1
+  fromScale: 1
+  toScale: 0.87
+- type: bounds
+  duration: 80
+  repeatCount: 1
+  fromScale: 0.87
+  toScale: 1
