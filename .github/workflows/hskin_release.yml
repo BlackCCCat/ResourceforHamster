@@ -33,7 +33,7 @@ jobs:
 
       - name: Rename files
         run: |
-          tar -czf Skin_Keyboard/万象/26-wanxiang.hskin -C Skin_Keyboard/万象/26键-万象
+          tar -czf Skin_Keyboard/万象/26-wanxiang.hskin -C Skin_Keyboard/万象/26键-万象 .
           
       - name: Create Release
         uses: softprops/action-gh-release@v1
