@@ -31,9 +31,10 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
 
 
-      - name: Rename files
+      - name: Zip and Rename files
         run: |
-          tar -czf Skin_Keyboard/万象/26-wanxiang.hskin -C Skin_Keyboard/万象/26键-万象 .
+          zip -r - Skin_Keyboard/万象/26键-万象 > Skin_Keyboard/万象/26-wanxiang.hskin
+
           
       - name: Create Release
         uses: softprops/action-gh-release@v1
