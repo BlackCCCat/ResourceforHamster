@@ -33,8 +33,8 @@ jobs:
 
       - name: Zip and Rename files
         run: |
-          cd Skin_Keyboard/万象/
-          zip -j -r - 26键-万象/* > 26-wanxiang.hskin
+          cd Skin_Keyboard/万象/26键-万象
+          zip -r ../26-wanxiang.hskin .
 
           
       - name: Create Release
