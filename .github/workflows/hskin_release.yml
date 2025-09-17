@@ -47,7 +47,7 @@ jobs:
             ${{ steps.commits.outputs.commits }}
           prerelease: ${{ contains(github.ref_name, '-rc') }}
           files: |
-            Skin_Keyboard/万象/26-wanxiang.hskin
+            Skin_Keyboard/万象/26-wanxiang.zip
           token: ${{ secrets.AUTO_RELEASE }} 
         env:
           GH_TOKEN: ${{ secrets.AUTO_RELEASE }}  # 使用 PAT 来执行发布
