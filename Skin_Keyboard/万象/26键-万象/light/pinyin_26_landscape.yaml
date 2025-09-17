@@ -18,7 +18,7 @@ alphabeticButtonBackgroundStyle:
   insets: {top: 3, left: 3, bottom: 3, right: 3}
   normalColor: FFFFFFE6
   highlightColor: ABB0BA
-  cornerRadius: 5
+  cornerRadius: 7
   normalLowerEdgeColor: 88898D
   highlightLowerEdgeColor: 89898B
   animation: alphabeticBackgroundAnimation
@@ -99,7 +99,7 @@ alphabeticHintBackgroundStyle:
   borderColor: 69686A
   borderSize: 1
   topCornerRadius: 10
-  bottomCornerRadius: 5
+  bottomcornerRadius: 7
   # shadowColor: 797B7E
   # shadowOffset: { x: 0, y: 5 }
 
@@ -110,13 +110,13 @@ alphabeticHoldSymbolsBackgroundStyle:
   borderColor: 69686A
   borderSize: 1
   topCornerRadius: 10
-  bottomCornerRadius: 5
+  bottomcornerRadius: 7
 
 # 字母按键长按选中状态背景样式
 alphabeticHoldSymbolsSelectedStyle:
   type: original
   normalColor: 0279FE
-  cornerRadius: 5
+  cornerRadius: 7
 
 # 功能按键背景样式
 systemButtonBackgroundStyle: &systemButtonBackgroundStyle
@@ -124,7 +124,7 @@ systemButtonBackgroundStyle: &systemButtonBackgroundStyle
   insets: {top: 3, left: 3, bottom: 3, right: 3}
   normalColor: ABB0BAD9
   highlightColor: FFFFFF
-  cornerRadius: 5
+  cornerRadius: 7
   normalLowerEdgeColor: 89898B
   highlightLowerEdgeColor: 88898D
   animation: alphabeticBackgroundAnimation
@@ -135,7 +135,7 @@ blueSystemButtonBackgroundStyle:
   insets: {top: 3, left: 3, bottom: 3, right: 3}
   normalColor: 0279FE
   highlightColor: FFFFFF
-  cornerRadius: 5
+  cornerRadius: 7
   normalLowerEdgeColor: 696967
   highlightLowerEdgeColor: 88898D
   animation: alphabeticBackgroundAnimation

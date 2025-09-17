@@ -35,7 +35,7 @@ numberButtonBackgroundStyle:
   #normalColor: 7CA07B  # 按键背景图片
   #normalColor: 000000  # 按键背景图片
   highlightColor: 000000
-  cornerRadius: 5
+  cornerRadius: 7
   normalLowerEdgeColor: 89898B
   highlightLowerEdgeColor: 88898D
   targetScale: 
