@@ -31,10 +31,9 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
 
 
-      - name: Zip and Rename files
+      - name: Rename files
         run: |
-          cd Skin_Keyboard/万象/26键-万象
-          zip -r ../26-wanxiang.zip .
+          mv Skin_Keyboard/万象/26键-万象.hskin Skin_Keyboard/万象/26-wanxiang.hskin 
 
           
       - name: Create Release
@@ -47,7 +46,7 @@ jobs:
             ${{ steps.commits.outputs.commits }}
           prerelease: ${{ contains(github.ref_name, '-rc') }}
           files: |
-            Skin_Keyboard/万象/26-wanxiang.zip
+            Skin_Keyboard/万象/26-wanxiang.hskin
           token: ${{ secrets.AUTO_RELEASE }} 
         env:
           GH_TOKEN: ${{ secrets.AUTO_RELEASE }}  # 使用 PAT 来执行发布
