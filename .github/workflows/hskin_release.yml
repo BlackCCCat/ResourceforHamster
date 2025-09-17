@@ -34,7 +34,7 @@ jobs:
       - name: Zip and Rename files
         run: |
           cd Skin_Keyboard/万象/26键-万象
-          zip -r ../26-wanxiang.hskin .
+          zip -r ../26-wanxiang.zip .
 
           
       - name: Create Release
