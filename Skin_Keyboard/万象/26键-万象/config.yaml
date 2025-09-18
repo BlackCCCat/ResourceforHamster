@@ -2,6 +2,7 @@ name: 26键-万象
 author: BlackCat
 
 
+
 # 中文键盘
 pinyin:
   iPhone:
@@ -59,3 +60,21 @@ float_panel:
   iPhone:
     portrait: hamstersetting
     landscape: hamstersetting
+
+# 单手键盘
+righthand:
+  iPhone:
+    portrait: pinyin_26_portrait_right
+
+lefthand:
+  iPhone:
+    portrait: pinyin_26_portrait_left
+    
+# 单手英文键盘
+righthand_alphabetic:
+  iPhone:
+    portrait: alphabetic_26_portrait_right
+
+lefthand_alphabetic:
+  iPhone:
+    portrait: alphabetic_26_portrait_left

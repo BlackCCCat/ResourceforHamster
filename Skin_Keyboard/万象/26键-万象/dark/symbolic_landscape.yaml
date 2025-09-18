@@ -63,7 +63,7 @@ alphabeticHintBackgroundStyle:
   borderColor: 6E6E6E
   borderSize: 1
   topCornerRadius: 10
-  bottomcornerRadius: 7
+  bottomCornerRadius: 5
   # shadowColor: 797B7E
   # shadowOffset: { x: 0, y: 5 }
 
@@ -74,7 +74,7 @@ alphabeticHoldSymbolsBackgroundStyle:
   borderColor: 6E6E6E
   borderSize: 1
   topCornerRadius: 10
-  bottomcornerRadius: 7
+  bottomCornerRadius: 5
 
 # 字母按键长按选中状态背景样式
 alphabeticHoldSymbolsSelectedStyle:
@@ -138,6 +138,8 @@ alphabeticBackgroundAnimation:
   repeatCount: 1
   fromScale: 0.8
   toScale: 1
+- type: apng
+  file: animation
 
 ### 通用样式声明 end ###
 

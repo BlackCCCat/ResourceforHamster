@@ -100,7 +100,7 @@ alphabeticHintBackgroundStyle:
   borderColor: 69686A
   borderSize: 1
   topCornerRadius: 10
-  bottomcornerRadius: 7
+  bottomCornerRadius: 5
   # shadowColor: 797B7E
   # shadowOffset: { x: 0, y: 5 }
 
@@ -111,7 +111,7 @@ alphabeticHoldSymbolsBackgroundStyle:
   borderColor: 69686A
   borderSize: 1
   topCornerRadius: 10
-  bottomcornerRadius: 7
+  bottomCornerRadius: 5
 
 # 字母按键长按选中状态背景样式
 alphabeticHoldSymbolsSelectedStyle:
@@ -169,6 +169,8 @@ alphabeticBackgroundAnimation:
   repeatCount: 1
   fromScale: 0.8
   toScale: 1
+- type: apng
+  file: animation
 
 
 ### 通用样式声明 end ###
@@ -202,10 +204,11 @@ toolbar:
   - toolbarButton1Style
   - toolbarButton7Style
 #  - toolbarButton6Style
-#  - toolbarButton2Style
 #     - toolbarButton3Style
   - toolbarButton4Style
   - toolbarButton5Style
+  - toolbarButton2Style
+  - toolbarButton8Style
 
   horizontalCandidateStyle: horizontalCandidateStyle
   verticalCandidateStyle: verticalCandidateStyle
@@ -255,30 +258,24 @@ toolbarButton1ForegroundStyle:
 toolbarButton2Style:
   backgroundStyle: toolbarButtonBackgroundStyle
   foregroundStyle: toolbarButton2ForegroundStyle
-  action: {keyboardType: alphabetic}
+  action: {keyboardType: righthand}
 
 toolbarButton2ForegroundStyle:
-  assetImageName: chineseState
+  systemImageName: "keyboard.onehanded.right"
   normalColor: 575757
   highlightColor: 575757
   fontSize: 1.125em
-#  fontWeight: regular
 
-# toolbarButton2Style:
-#   backgroundStyle: toolbarButtonBackgroundStyle
-#   foregroundStyle: toolbarButton2ForegroundStyle
-#   action: { shortcutCommand: "#中英切换" }
-# 
-# toolbarButton2ForegroundStyle:
-#   text: |-
-#     // JavaScript
-#     function getText() {
-#       return $getRimeOptionState("ascii_mode") ? "英" : "中";
-#     }
-#   normalColor: 575757
-#   highlightColor: 575757
-#   fontSize: 1em
-#  fontWeight: regular
+toolbarButton8Style:
+  backgroundStyle: toolbarButtonBackgroundStyle
+  foregroundStyle: toolbarButton8ForegroundStyle
+  action: {keyboardType: lefthand}
+
+toolbarButton8ForegroundStyle:
+  systemImageName: "keyboard.onehanded.left"
+  normalColor: 575757
+  highlightColor: 575757
+  fontSize: 1.125em
 
 toolbarButton3Style:
   backgroundStyle: toolbarButtonBackgroundStyle
