@@ -2466,7 +2466,7 @@ shiftButton:
   action: shift
   swipeDownAction: {sendKeys: "Break"}
   swipeUpAction: {character: "'"}
-  swipeRightAction: tab
+  swipeRightAction: {character: \}
 
 
 shiftpreeditStateForegroundStyle-old:
