@@ -3068,8 +3068,8 @@ spacepreeditStateForegroundStyle:
       // 判断 candidate 是否存在
       if (candidate && candidate.length > 0) {
         const result = candidate.map(c => c.text).join(" ");
-        if (result.length > 11) {
-          return result.slice(0,8) + "...";
+        if (result.length > 9) {
+          return result.slice(0,6) + "...";
         }
         return result;
       }
