@@ -56,11 +56,6 @@ patch:
     lua_processor@*select_character          # 以词定字，有了辅助码了，想开启可以注释掉
 
 
-  # 从 default 继承快捷键
-  key_binder/tips_key: backslash
-  key_binder/search: "`"             # 辅码引导符，要添加到 speller/alphabet
-
-
   
   # 拼写设定
   speller/algebra:
