@@ -34,6 +34,8 @@ jobs:
       - name: Rename files
         run: |
           mv Skin_Keyboard/万象/26键-万象.hskin Skin_Keyboard/万象/26-wanxiang.hskin 
+          mv Skin_Keyboard/万象/26键-万象-动画.hskin Skin_Keyboard/万象/26-wanxiang-animation.hskin
+          mv Skin_Keyboard/万象/26键-万象-声音​.hskin Skin_Keyboard/万象/26-wanxiang-sound.hskin
 
           
       - name: Create Release
@@ -47,6 +49,8 @@ jobs:
           prerelease: ${{ contains(github.ref_name, '-rc') }}
           files: |
             Skin_Keyboard/万象/26-wanxiang.hskin
+            Skin_Keyboard/万象/26-wanxiang-animation.hskin
+            Skin_Keyboard/万象/26-wanxiang-sound.hskin
           token: ${{ secrets.AUTO_RELEASE }} 
         env:
           GH_TOKEN: ${{ secrets.AUTO_RELEASE }}  # 使用 PAT 来执行发布
