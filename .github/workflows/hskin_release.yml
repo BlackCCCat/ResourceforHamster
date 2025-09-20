@@ -35,7 +35,7 @@ jobs:
         run: |
           mv Skin_Keyboard/万象/26键-万象.hskin Skin_Keyboard/万象/26-wanxiang.hskin 
           mv Skin_Keyboard/万象/26键-万象-动画.hskin Skin_Keyboard/万象/26-wanxiang-animation.hskin
-          mv Skin_Keyboard/万象/26键-万象-声音​.hskin Skin_Keyboard/万象/26-wanxiang-sound.hskin
+          mv Skin_Keyboard/万象/26键-万象-声音.hskin Skin_Keyboard/万象/26-wanxiang-sound.hskin
 
           
       - name: Create Release
