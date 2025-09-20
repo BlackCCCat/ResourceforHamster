@@ -3311,9 +3311,12 @@ dotpreeditStateForegroundStyle:
       const preedit = $getRimePreedit();
       
       const start = preedit.indexOf("〔");
-      const end = preedit.indexOf("〔", start);
+      const end = preedit.indexOf("〕", start);
       if (start !== -1 && end !== -1) {
         const inside = preedit.slice(start + 1, start + 2);
+        if (!isNaN(Number(inside))) {
+            return "年";
+          }
         return inside;
       }
       return "空";
