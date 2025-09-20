@@ -187,8 +187,7 @@ preedit:
   foregroundStyle: preeditForegroundStyle
 
 preeditBackgroundStyle:
-  type: original
-  normalColor: D1D2D9FC
+  <<: *backgroundOriginalStyle
 
 preeditForegroundStyle:
   textColor: 000000
@@ -3171,10 +3170,21 @@ commaButton:
   foregroundStyle:
   - commaButtonPinyinForegroundStyle
   - commaButtonUpForegroundStyle
+  preeditStateForegroundStyle: commapreeditStateForegroundStyle
   action: {character: ","}
   swipeUpAction: {symbol: ","}
   repeatAction: {character: ","}
+  preeditStateAction: {character: \}
 
+
+commapreeditStateForegroundStyle:
+  systemImageName: "ellipsis.viewfinder"
+  normalColor: 000000
+  highlightColor: 000000
+  fontSize: 0.95em
+  center:
+    y: 0.5
+    
 commaButtonUpForegroundStyle:
   text: ","
   <<: *alphabeticSwipeUpBadgeStyle
@@ -3295,10 +3305,31 @@ dotButton:
   foregroundStyle:
   - dotButtonPinyinForegroundStyle
   - dotButtonUpForegroundStyle
+  preeditStateForegroundStyle: dotpreeditStateForegroundStyle
   action: {character: "."}
   swipeUpAction: {symbol: "."}
   repeatAction: {character: "."}
+  preeditStateAction: {sendKeys: "Break" }
 
+dotpreeditStateForegroundStyle:
+  text: |-
+    // JavaScript
+    function getText() {
+      const preedit = $getRimePreedit();
+      
+      const start = preedit.indexOf("〔");
+      const end = preedit.indexOf("〔", start);
+      if (start !== -1 && end !== -1) {
+        const inside = preedit.slice(start + 1, start + 2);
+        return inside;
+      }
+      return "空";
+    }
+  normalColor: 000000
+  highlightColor: 000000
+  fontSize: 1em
+  center:
+    y: 0.7
 
 dotButtonUpForegroundStyle:
   text: .
