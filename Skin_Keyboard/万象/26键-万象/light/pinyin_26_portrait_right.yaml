@@ -2925,7 +2925,7 @@ zh-enButton:
   backgroundStyle: systemButtonBackgroundStyle
   foregroundStyle:
   - zh-enButtonForegroundStyle
-  action: {keyboardType: alphabetic}
+  action: {keyboardType: righthand_alphabetic}
   holdSymbolsStyle: zh-enButtonHoldSymbolsStyle
 
 

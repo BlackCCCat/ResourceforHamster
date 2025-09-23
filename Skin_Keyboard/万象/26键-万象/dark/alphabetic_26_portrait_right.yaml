@@ -2850,7 +2850,7 @@ zh-enButton:
   backgroundStyle: systemButtonBackgroundStyle
   foregroundStyle:
   - zh-enButtonForegroundStyle
-  action: {keyboardType: pinyin}
+  action: {keyboardType: righthand}
 
 zh-enButtonForegroundStyle:
   assetImageName: englishState
