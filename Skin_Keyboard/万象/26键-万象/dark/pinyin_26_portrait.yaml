@@ -2981,11 +2981,11 @@ commaButton:
   foregroundStyle:
   - commaButtonPinyinForegroundStyle
   - commaButtonUpForegroundStyle
-  preeditStateForegroundStyle: commapreeditStateForegroundStyle
+  # preeditStateForegroundStyle: commapreeditStateForegroundStyle
   action: {character: ","}
   swipeUpAction: {symbol: ","}
   repeatAction: {character: ","}
-  preeditStateAction: {character: \}
+  # preeditStateAction: {character: \}
 
 
 commapreeditStateForegroundStyle:
