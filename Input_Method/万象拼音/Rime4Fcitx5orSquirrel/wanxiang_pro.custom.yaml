@@ -1,79 +1,123 @@
-  # Rime schema
-  # encoding: utf-8
-  #本方案匹配词库解码顺序为：全拼拼音；墨奇;鹤形;自然码;简单鹤;仓颉首末;虎码首末;五笔前2;汉心码；
-  #############DIY你想要的方案组合,试试搭配一个自然码+墨奇辅助的方案吧！###########################
-
-
 patch:
-  menu/page_size: 6  # 候选词个数
-  super_comment/candidate_length: 30          # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理
+  super_comment/candidate_length: 50 # 超级注释模块，子项配置 true 开启，false 关闭
 
-  
+  speller/algebra:
+    __patch:
+      #- 模糊音                                  # 这里启用后，本文件末尾可配置具体条目
+      - wanxiang_algebra:/pro/小鹤双拼 # 可选输入方案名称：自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
+      - wanxiang_algebra:/pro/直接辅助 #辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
+      #- 自然码提权                               #本文件末尾，有自然码和小鹤的可以用
+  cn_en/user_dict: en_dicts/flypy # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
+  #通过下面的设置可以让你自己的文件引入而与仓库custom_phrase.txt不同，防止更新时被仓库文件覆盖
+  custom_phrase/user_dict: custom_phrase_double # 这里改成什么就需要手动创建同名的 custom_phrasexx.txt 文件在用户目录，这个文件主要用于置顶，编码为自定义编码的词汇
+  translator/packs/+:
+    - userxx #导入根目录下名称为userxx.dict.yaml的自定义固定词典，编码要与固定词库一致（或者不写编码），形如姓名、专有名词公司名称等等
+    #下面是候选数量，未来7890分别代表1234声，请候选长度不要大于6避免冲突
+  menu/page_size: 5
+  #生日信息：/sr或者osr，在这里定义全局替换构建你的生日查询数据库
+  birthday_reminder: #日期格式：必须是4位数字，格式为MMDD（月份和日期），例如：1月27日 → 0127 ，#备注格式：在日期后添加逗号，然后添加任意文本作为备注，例如："0501,我的好朋友"，也可以无备注
+    solar_birthdays: # 公历生日, 姓名: "日期,备注" or 姓名: "日期"
+      张三: "0110"
+    lunar_birthdays: # 农历生日, 姓名: "日期,备注" or 姓名: "日期"
+      李思: "0220"
+  #下面用来改变你的windows小狼毫右下角软件图标
+  #schema/+:
+  #  icon: "icons/zhong.ico"
+  #  ascii_icon: "icons/ying.ico"
+
   # 开关
   # reset: 默认状态。注释掉后，切换窗口时不会重置到默认状态。
   # states: 方案选单显示的名称。可以注释掉，仍可以通过快捷键切换。
   # abbrev: 默认的缩写取 states 的第一个字符，abbrev 可自定义一个字符
   switches:
-    - name: ascii_mode
-      states: [ 中文, 英文 ]
+    - name: ascii_mode # 中英输入状态
+      states: [中文, 英文]
+    - name: ascii_punct # 中英标点
+      states: [中标, 英标]
+    - name: full_shape #全角、半角字符输出
+      states: [半角, 全角]
+    - name: emoji #候选出现emoji滤镜，会显示在相应的候选后面，万象侧重于tips提示，避免候选被占用，因此默认为reset: 0，归属opencc emoji滤镜
+      states: [表情关, 表情开]
+      reset: 1
+    - name: chinese_english #候选进入翻译模式滤镜，会显示在相应的候选后面，万象侧重于tips提示，避免候选被占用，快捷键配套ctrl+e,归属opencc 翻译滤镜
+      states: [翻译关, 翻译开]
+    - name: tone_display #开启后在输入编码的位置实时转换为带声调全拼，不开启则采用系统配置，快捷键配套ctrl+s,影响的是preedit_format,归属：super_preedit.lua
+      states: [声调关, 声调开]
+      reset: 1
+    - name: chaifen_switch #开启后在候选的注释里面实时显示辅助码的拆分提醒优先级高于普通辅助提醒，不开启则采用系统配置，快捷键配套ctrl+c,影响的是comment_format，归属：super_comment.lua
+      states: [拆分关, 拆分开]
+      reset: 1
+    - name: charset_filter #字符集过滤，默认开启8105通规显示，即小字集，可通过开关实时开启全字集，快捷键配套ctrl+g,归属：chars_filter.lua
+      states: [小字集, 大字集]
+      reset: 1
+    - name: super_tips #开启后在输入编码后面的提示区显示实时的提示数据，受tips数据库影响，表情、翻译、车牌、符号等对应关系数据，并可实现句号上屏，不开启则默认，影响的是segment.prompt参数，归属：super_tips.lua
+      states: [提示关, 提示开]
+      reset: 1
+    - options: [comment_off, fuzhu_hint, tone_hint] #开启后在候选的注释里面实时显示辅助码或者全拼声调，不开启则采用系统配置，影响的是comment_format，快捷键配套ctrl+a,归属：super_comment.lua
+      states: [注释关, 辅助开, 读音开]
+      reset: 1
+    - options: [s2s, s2t, s2hk, s2tw] # 简繁转换开关组，可以在一个空选项和多个实际“- simplifier@s2hk”引入的项目之前切换，这是一个开关组，你可以将其中任意一个s2s等设置为toggle快捷键，多次按下将轮询
+      states: [简体, 通繁, 港繁, 臺繁]
       reset: 0
-    - name: ascii_punct  # 中英标点
-      states: [ 中标, 英标 ]
-    - options: [ s2s, s2t, s2hk, s2tw ]
-      reset: 0
-      states: [ 简体, 通繁, 港繁, 臺繁 ]
-    - name: full_shape
-      states: [ 半角, 全角 ]
-    - name: emoji
-      states: [ 表情关, 表情开 ]
-      reset: 1
-    - name: chinese_english
-      states: [ 翻译关, 翻译开 ]
-    - name: tone_display
-      states: [ 声调关, 声调开 ]
-      reset: 1
-    - options: [ comment_off, fuzhu_hint, tone_hint ]  #开启后在候选的注释里面实时显示辅助码或者全拼声调，不开启则采用系统配置，影响的是comment_format，快捷键配套ctrl+a,归属：super_comment.lua
-      states: [ 注释关, 辅助开, 读音开 ]
-      reset: 1
-    - name: charset_filter
-      states: [ 小字集, 大字集 ]
-      reset: 1
-    - name: chaifen_switch
-      states: [ 拆分关, 拆分开 ]
-      reset: 1
-    - name: super_tips
-      states: [ 提示关, 提示开 ]
-      reset: 1
-    - name: prediction
-      states: [ 预测关, 预测开 ]
-    - name: search_single_char  # search.lua 的功能开关，辅码查词时是否单字优先
-      abbrev: [词, 单]
+    - name: prediction #开启后输入上屏后继续弹出预测数据候选展示例如输入：你在 ，预测候选： 哪里 干嘛 吗 做等等，predictor配置区可设置详细参数，归属：predict内置插件
+      states: [预测关, 预测开]
+    - name: search_single_char #多体现在编码重合但候选有单字或者多字的情况`引导的辅码查词时是否单字优先，全拼常见，类似于特定编码情况下、反查状态下的调序能力。归属：search.lua
       states: [正常, 单字]
-  
-  
+      reset: 0
+
   # 输入引擎
-  engine/processors/@before 1:
-    lua_processor@*select_character          # 以词定字，有了辅助码了，想开启可以注释掉
-
-
-  speller/algebra:
-    __patch:
-      - wanxiang_pro.schema:/小鹤双拼            # 可选输入方案名称：自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
-      - wanxiang_pro.schema:/直接辅助            #辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
-  # 中英混合词汇，要与你的双拼类型一样
-  cn_en/user_dict: en_dicts/flypy           # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
+  engine/processors/@before 1: lua_processor@*select_character # 以词定字，有了辅助码了，想开启可以注释掉
 
   # 取消注释以开启自动无词频造词
   add_user_dict/enable_auto_phrase: true
-  # 自定义短语
-  custom_phrase/user_dict: custom_phrase_double  # 需要手动创建 custom_phrase_double.txt 文件
-  
-  #生日信息：/sr或者osr，在这里定义全局替换构建你的生日查询数据库
-  birthday_reminder:  #日期格式：必须是4位数字，格式为MMDD（月份和日期），例如：1月27日 → 0127 ，#备注格式：在日期后添加逗号，然后添加任意文本作为备注，例如："0501,我的好朋友"，也可以无备注
-    solar_birthdays:  # 公历生日, 姓名: "日期,备注" or 姓名: "日期"
-      小明: "0501,准备礼物"
-      大明: "0405"
-    lunar_birthdays:  # 农历生日, 姓名: "日期,备注" or 姓名: "日期"
-      小明: "0114"
-      小红: "0815,农历中秋"
-  
+
+#下面的数据有需要的可以patch引用
+#特殊优化：部分音节字极少，几乎不参与构词，则提升对应四码字的优先级，仅对小鹤双拼有效，其他双拼方案需作对应修改）
+小鹤双拼提权:
+  __append:
+    - derive/^(.*?)(\d?);(bl|dx|df|eg|fn|kw|ny|tw|vw|yd|rx|fs|ix)$/$1$3/
+    - derive/^(.*?)(\d?);.*?,(bl|dx|df|eg|fn|kw|ny|tw|vw|yd|rx|fs|ix)$/$1$3/
+    - derive/^(.*?)(\d?);.*?,.*?,(bl|dx|df|eg|fn|kw|ny|tw|vw|yd|rx|fs|ix)$/$1$3/
+    - derive/^(.*?)(\d?);.*?,.*?,.*?,(bl|dx|df|eg|fn|kw|ny|tw|vw|yd|rx|fs|ix)$/$1$3/
+#特殊优化：部分音节字极少，几乎不参与构词，则提升对应四码字的优先级，仅对自然码有效，其他双拼方案需作对应修改）
+自然码提权:
+  __append:
+    - derive/^(.*?)(\d?);(bd|dw|df|dw|yl|rw|fs|iw)$/$1$3/
+    - derive/^(.*?)(\d?);.*?,(bd|dw|df|dw|yl|rw|fs|iw)$/$1$3/
+    - derive/^(.*?)(\d?);.*?,.*?,(bd|dw|df|dw|yl|rw|fs|iw)$/$1$3/
+    - derive/^(.*?)(\d?);.*?,.*?,.*?,(bd|dw|df|dw|yl|rw|fs|iw)$/$1$3/
+模糊音:
+  __append:
+    # n - l
+    - derive/^l/n
+    - derive/^n/l
+    # r - y     开头
+    - derive/^y/r
+    - derive/^r/y
+    # h - f     开头
+    - derive/^h/f
+    - derive/^f/h
+    # r - l     开头
+    - derive/^r/l
+    - derive/^l/r
+    # k - g     开头
+    - derive/^k/g
+    - derive/^g/k
+    # an - ang
+    - derive/([ui]?)([āáǎàa])ng(.*)$/$1$2n$3
+    - derive/([ui]?)([āáǎàa])n(.*)$/$1$2ng$3
+    # en - eng
+    - derive/([ēéěèe])ng(.*)$/$1n$2
+    - derive/([ēéěèe])n(.*)$/$1ng$2
+    # in - ing
+    - derive/([īíǐìi])ng(.*)$/$1n$2
+    - derive/([īíǐìi])n(.*)$/$1ng$2
+    # c - ch
+    - derive/^c([^h]*)/ch$1
+    - derive/^ch/c
+    # z - zh
+    - derive/^z([^h]*)/zh$1
+    - derive/^zh/z
+    # s - sh
+    - derive/^s([^h]*)/sh$1
+    - derive/^sh/s
