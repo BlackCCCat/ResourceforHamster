@@ -65,6 +65,11 @@ patch:
       states: [正常, 单字]
       reset: 0
 
+  # 以下两个bool防止表情和翻译下面出现辅助码
+  emoji/+:
+    inherit_comment: false
+  chinese_english/+:
+    inherit_comment: false
   # 输入引擎
   engine/processors/@before 1: lua_processor@*select_character # 以词定字，有了辅助码了，想开启可以注释掉
 

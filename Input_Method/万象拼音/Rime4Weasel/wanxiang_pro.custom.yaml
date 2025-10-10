@@ -1,22 +1,15 @@
-  # Rime schema
-  # encoding: utf-8
-  #本方案匹配词库解码顺序为：全拼拼音；墨奇;鹤形;自然码;简单鹤;仓颉首末;虎码首末;五笔前2;汉心码；
-  #############DIY你想要的方案组合,试试搭配一个自然码+墨奇辅助的方案吧！###########################
-
+# Rime schema
+# encoding: utf-8
+#本方案匹配词库解码顺序为：全拼拼音；墨奇;鹤形;自然码;简单鹤;仓颉首末;虎码首末;五笔前2;汉心码；
+#############DIY你想要的方案组合,试试搭配一个自然码+墨奇辅助的方案吧！###########################
 
 patch:
+  menu/page_size: 5 # 候选词个数
 
-  menu/page_size: 5  # 候选词个数
+  super_comment/candidate_length: 30 # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理
 
-
-  super_comment/candidate_length: 30          # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理
-
-
-  
-  
   # 输入引擎
-  engine/processors/@before 1:
-    lua_processor@*select_character          # 以词定字，有了辅助码了，想开启可以注释掉
+  engine/processors/@before 1: lua_processor@*select_character # 以词定字，有了辅助码了，想开启可以注释掉
 
   # 开关
   # reset: 默认状态。注释掉后，切换窗口时不会重置到默认状态。
@@ -24,55 +17,57 @@ patch:
   # abbrev: 默认的缩写取 states 的第一个字符，abbrev 可自定义一个字符
   switches:
     - name: ascii_mode
-      states: [ 中文, 英文 ]
+      states: [中文, 英文]
       reset: 0
-    - name: ascii_punct  # 中英标点
-      states: [ 中标, 英标 ]
-    - options: [ s2s, s2t, s2hk, s2tw ]
+    - name: ascii_punct # 中英标点
+      states: [中标, 英标]
+    - options: [s2s, s2t, s2hk, s2tw]
       reset: 0
-      states: [ 简体, 通繁, 港繁, 臺繁 ]
+      states: [简体, 通繁, 港繁, 臺繁]
     - name: full_shape
-      states: [ 半角, 全角 ]
+      states: [半角, 全角]
     - name: emoji
-      states: [ 表情关, 表情开 ]
+      states: [表情关, 表情开]
     - name: chinese_english
-      states: [ 翻译关, 翻译开 ]
+      states: [翻译关, 翻译开]
     - name: tone_display
-      states: [ 声调关, 声调开 ]
+      states: [声调关, 声调开]
       reset: 1
-    - options: [ comment_off, fuzhu_hint, tone_hint ]  #开启后在候选的注释里面实时显示辅助码或者全拼声调，不开启则采用系统配置，影响的是comment_format，快捷键配套ctrl+a,归属：super_comment.lua
-      states: [ 注释关, 辅助开, 读音开 ]
+    - options: [comment_off, fuzhu_hint, tone_hint] #开启后在候选的注释里面实时显示辅助码或者全拼声调，不开启则采用系统配置，影响的是comment_format，快捷键配套ctrl+a,归属：super_comment.lua
+      states: [注释关, 辅助开, 读音开]
       reset: 1
     - name: charset_filter
-      states: [ 小字集, 大字集 ]
+      states: [小字集, 大字集]
       reset: 1
     - name: chaifen_switch
-      states: [ 拆分关, 拆分开 ]
+      states: [拆分关, 拆分开]
       reset: 1
     - name: super_tips
-      states: [ 提示关, 提示开 ]
+      states: [提示关, 提示开]
       reset: 1
     - name: prediction
-      states: [ 预测关, 预测开 ]
-    - name: search_single_char  # search.lua 的功能开关，辅码查词时是否单字优先
+      states: [预测关, 预测开]
+    - name: search_single_char # search.lua 的功能开关，辅码查词时是否单字优先
       abbrev: [词, 单]
       states: [正常, 单字]
 
+  # 以下两个bool防止表情和翻译下面出现辅助码
+  emoji/+:
+    inherit_comment: false
+  chinese_english/+:
+    inherit_comment: false
 
   # 从 default 继承快捷键
   # key_binder/tips_key: backslash
   # key_binder/search: "`"             # 辅码引导符，要添加到 speller/alphabet
 
-  
   # 拼写设定
   speller/algebra:
     __patch:
       #- 模糊音                                  # 这里启用后，本文件末尾可配置具体条目
-      - wanxiang_algebra:/pro/小鹤双拼             # 可选输入方案名称：自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
-      - wanxiang_algebra:/pro/直接辅助            #辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
+      - wanxiang_algebra:/pro/小鹤双拼 # 可选输入方案名称：自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
+      - wanxiang_algebra:/pro/直接辅助 #辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
       #- 自然码提权                               #本文件末尾，有自然码和小鹤的可以用
-
-
 
 #下面的数据有需要的可以patch引用
 #特殊优化：部分音节字极少，几乎不参与构词，则提升对应四码字的优先级，仅对小鹤双拼有效，其他双拼方案需作对应修改）
@@ -89,7 +84,7 @@ patch:
     - derive/^(.*?)(\d?);.*?,(bd|dw|df|dw|yl|rw|fs|iw)$/$1$3/
     - derive/^(.*?)(\d?);.*?,.*?,(bd|dw|df|dw|yl|rw|fs|iw)$/$1$3/
     - derive/^(.*?)(\d?);.*?,.*?,.*?,(bd|dw|df|dw|yl|rw|fs|iw)$/$1$3/
-模糊音: 
+模糊音:
   __append:
     # n - l
     - derive/^l/n
@@ -125,20 +120,10 @@ patch:
     - derive/^s([^h]*)/sh$1
     - derive/^sh/s
 
-
-
-
-
-
-
-
-  cn_en/user_dict: en_dicts/flypy           # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
-  
-
+  cn_en/user_dict: en_dicts/flypy # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
 
   # 自定义短语
-  custom_phrase/user_dict: custom_phrase_double  # 需要手动创建 custom_phrase_double.txt 文件
-  
-  
+  custom_phrase/user_dict: custom_phrase_double # 需要手动创建 custom_phrase_double.txt 文件
+
   # 取消注释以开启自动无词频造词
   add_user_dict/enable_auto_phrase: true
