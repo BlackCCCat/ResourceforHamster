@@ -69,6 +69,14 @@ patch:
       - wanxiang_algebra:/pro/直接辅助 #辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
       #- 自然码提权                               #本文件末尾，有自然码和小鹤的可以用
 
+  cn_en/user_dict: en_dicts/flypy # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
+
+  # 自定义短语
+  custom_phrase/user_dict: custom_phrase_double # 需要手动创建 custom_phrase_double.txt 文件
+
+  # 取消注释以开启自动无词频造词
+  add_user_dict/enable_auto_phrase: true
+
 #下面的数据有需要的可以patch引用
 #特殊优化：部分音节字极少，几乎不参与构词，则提升对应四码字的优先级，仅对小鹤双拼有效，其他双拼方案需作对应修改）
 小鹤双拼提权:
@@ -120,10 +128,4 @@ patch:
     - derive/^s([^h]*)/sh$1
     - derive/^sh/s
 
-  cn_en/user_dict: en_dicts/flypy # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
 
-  # 自定义短语
-  custom_phrase/user_dict: custom_phrase_double # 需要手动创建 custom_phrase_double.txt 文件
-
-  # 取消注释以开启自动无词频造词
-  add_user_dict/enable_auto_phrase: true
