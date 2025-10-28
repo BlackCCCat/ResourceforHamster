@@ -124,5 +124,3 @@ patch:
     # s - sh
     - derive/^s([^h]*)/sh$1
     - derive/^sh/s
-
-
