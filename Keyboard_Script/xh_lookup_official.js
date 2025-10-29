@@ -58,7 +58,7 @@ async function output() {
     }
 
     // 获取查询结果
-		const json_res = JSON.parse(json_str)
+	const json_res = JSON.parse(json_str)
     const result = json_res[word];
 
     // 提取相关信息并组装输出
