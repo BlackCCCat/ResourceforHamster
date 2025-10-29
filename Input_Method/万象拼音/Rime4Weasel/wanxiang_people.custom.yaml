@@ -1,0 +1,3 @@
+patch:
+  speller/algebra:
+    __include: wanxiang_algebra:/people/小鹤双拼   #可选的选项有（全拼, 自然码, 小鹤双拼, 微软双拼, 搜狗双拼, 智能ABC, 紫光双拼, 拼音加加, 自然龙, 汉心龙）
