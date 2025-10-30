@@ -37,7 +37,7 @@ local sumHeights(arr) = (
   '横屏': {
     'preedit高度': 15,
     'toolbar高度': 50,
-    'keyboard高度': 200,
+    'keyboard高度': 205,
     '键盘总高度': sumHeights([
       self['preedit高度'],
       self['toolbar高度'],

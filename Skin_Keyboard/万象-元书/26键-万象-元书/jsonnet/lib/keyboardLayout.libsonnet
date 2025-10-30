@@ -271,7 +271,7 @@ local color = import 'color.libsonnet';
         ],
         rowofFunctionStyle: {
           size: {
-            height: 30,
+            height: 35,
           },
           backgroundStyle: 'keyboardBackgroundStyle',
         },
@@ -574,7 +574,7 @@ local color = import 'color.libsonnet';
         ],
         rowofFunctionStyle: {
           size: {
-            height: 30,
+            height: 35,
           },
           backgroundStyle: 'keyboardBackgroundStyle',
         },
