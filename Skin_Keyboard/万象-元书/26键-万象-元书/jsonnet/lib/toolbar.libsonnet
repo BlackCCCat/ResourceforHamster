@@ -24,7 +24,7 @@ local getToolBar(theme) =
         HStack: {
           subviews: [
             // { Cell: 'toolbarButtonOpenAppStyle' },
-            { Cell: 'toolbarSlideButtons2'},  // 滑动工具栏 包含 app相关内容
+            { Cell: 'toolbarSlideButtons2' },  // 滑动工具栏 包含 app相关内容
             { Cell: 'toolbarSlideButtons' },  // 滑动工具栏 包含 谷歌搜索、浏览器打开、App Store搜索
             // { Cell: 'toolbarButtonKeyboardSettingsStyle' },  //键盘设置
             // { Cell: 'toolbarButtonRimeSwitcherStyle' },  // 方案
@@ -41,7 +41,7 @@ local getToolBar(theme) =
             { Cell: 'toolbarButtonScriptStyle' },  // 脚本
             { Cell: 'toolbarButtonNoteStyle' },  // 常用语
             { Cell: 'toolbarButtonClipboardStyle' },  // 剪切板
-            { Cell: 'toolbarButtonKeyboardSelectionStyle' }, // 键盘相关功能，包括收起键盘，切换单手键盘
+            { Cell: 'toolbarButtonKeyboardSelectionStyle' },  // 键盘相关功能，包括收起键盘，切换单手键盘
             { Cell: 'toolbarButtonHideStyle' },  // 收起键盘
           ],
         },
@@ -59,10 +59,10 @@ local getToolBar(theme) =
       cellStyle: 'toolbarcollectionCellStyle',
     },
     horizontalSymbolsDataSource2: [
-      { label: '0', action: { openURL: 'hamster3://', }, styleName: 'toolbarButtonOpenAppStyle' },
+      { label: '0', action: { openURL: 'hamster3://' }, styleName: 'toolbarButtonOpenAppStyle' },
       { label: '1', action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSettings' }, styleName: 'toolbarButtonKeyboardSettingsStyle' },
-      { label: '2', action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSkins'}, styleName: 'toolbarButtonKeyboardSkinsStyle' },
-      { label: '5', action: { shortcut: '#keyboardPerformance'}, styleName: 'toolbarButtonKeyboardPerfomanceStyle' },
+      { label: '2', action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSkins' }, styleName: 'toolbarButtonKeyboardSkinsStyle' },
+      { label: '5', action: { shortcut: '#keyboardPerformance' }, styleName: 'toolbarButtonKeyboardPerfomanceStyle' },
       { label: '3', action: { shortcut: '#toggleEmbeddedInputMode' }, styleName: 'toolbarButtonEmbeddingToggleStyle' },
       { label: '4', action: { shortcut: '#RimeSwitcher' }, styleName: 'toolbarButtonRimeSwitcherStyle' },
     ],
@@ -80,7 +80,7 @@ local getToolBar(theme) =
     },
     horizontalSymbolsDataSource3: [
       { label: '1', action: { shortcut: '#右手模式' }, styleName: 'toolbarButtonRighthandKeyboardStyle' },
-      { label: '0', action: { shortcut: '#左手模式', }, styleName: 'toolbarButtonLefthandKeyboardStyle' },
+      { label: '0', action: { shortcut: '#左手模式' }, styleName: 'toolbarButtonLefthandKeyboardStyle' },
     ],
 
     toolbarSlideButtons: {
@@ -546,7 +546,7 @@ local getToolBar(theme) =
       backgroundStyle: 'toolbarButtonBackgroundStyle',
       foregroundStyle: 'toolbarButtonKeyboardPerformanceForegroundStyle',
     },
-    toolbarButtonKeyboardPerformanceForegroundStyle:{
+    toolbarButtonKeyboardPerformanceForegroundStyle: {
       buttonStyleType: 'systemImage',
       systemImageName: 'gauge.with.dots.needle.bottom.50percent',
       normalColor: color[theme]['toolbar按键颜色'],
@@ -570,7 +570,7 @@ local getToolBar(theme) =
       indexColor: color[theme]['候选字体未选中字体颜色'],
       textColor: color[theme]['候选字体未选中字体颜色'],
       commentColor: color[theme]['候选字体未选中字体颜色'],
-      indexFontSize: fontSize['未展开候选字体选中字体大小'],
+      indexFontSize: fontSize['未展开comment字体大小'],
       textFontSize: fontSize['未展开候选字体选中字体大小'],
       commentFontSize: fontSize['未展开comment字体大小'],
     },
@@ -611,9 +611,9 @@ local getToolBar(theme) =
       indexColor: color[theme]['长按非选中字体颜色'],
       textColor: color[theme]['长按非选中字体颜色'],
       commentColor: color[theme]['长按非选中字体颜色'],
-      indexFontSize: fontSize['展开候选字体选中字体大小'],
+      indexFontSize: fontSize['未展开comment字体大小'],
       textFontSize: fontSize['展开候选字体选中字体大小'],
-      commentFontSize: fontSize['未展开候选字体选中字体大小'],
+      commentFontSize: fontSize['未展开comment字体大小'],
     },
 
     verticalCandidatePageUpButtonForegroundStyle: {
