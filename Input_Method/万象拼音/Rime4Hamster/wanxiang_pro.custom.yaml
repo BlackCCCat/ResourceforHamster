@@ -85,8 +85,6 @@ patch:
       - wanxiang_algebra:/pro/小鹤双拼 # 可选输入方案名称：自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
       - wanxiang_algebra:/pro/直接辅助 #辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
       #- 自然码提权
-  # 中英混合词汇，要与你的双拼类型一样
-  cn_en/user_dict: en_dicts/flypy # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
 
   # 取消注释以开启自动无词频造词
   add_user_dict/enable_auto_phrase: true
@@ -94,14 +92,17 @@ patch:
   # 自定义短语
   custom_phrase/user_dict: custom_phrase_double # 需要手动创建 custom_phrase_double.txt 文件
 
-  #生日信息：/sr或者osr，在这里定义全局替换构建你的生日查询数据库
-  birthday_reminder: #日期格式：必须是4位数字，格式为MMDD（月份和日期），例如：1月27日 → 0127 ，#备注格式：在日期后添加逗号，然后添加任意文本作为备注，例如："0501,我的好朋友"，也可以无备注
-    solar_birthdays: # 公历生日, 姓名: "日期,备注" or 姓名: "日期"
-      小明: "0501,准备礼物"
-      大明: "0405"
-    lunar_birthdays: # 农历生日, 姓名: "日期,备注" or 姓名: "日期"
-      小明: "0114"
-      小红: "0815,农历中秋"
+  #下面用于对/rq和N20250101这样的日期候选自定义（顺序、类型、候选个数）由你完全掌控，前面是对于公历后面默认携带农历
+  #Y=年，m=月，d=日，数字前面带0如02月09日；y代表后两位年如15年，nj代表不带0的 如2月9日
+  date_formats:
+    - "Y年m月d日"
+    - "Y-m-d"
+    - "Y/m/d"
+    - "Y.m.d"
+    - "Ymd"
+    - "Y年n月j日"
+    - "y年n月j日"
+    - "n月j日"
 
 #下面的数据有需要的可以patch引用
 #特殊优化：部分音节字极少，几乎不参与构词，则提升对应四码字的优先级，仅对小鹤双拼有效，其他双拼方案需作对应修改）

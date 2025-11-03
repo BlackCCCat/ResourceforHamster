@@ -66,8 +66,17 @@ patch:
       - wanxiang_algebra:/pro/直接辅助 #辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
       #- 自然码提权                               #本文件末尾，有自然码和小鹤的可以用
 
-  cn_en/user_dict: en_dicts/flypy # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
-
+  #下面用于对/rq和N20250101这样的日期候选自定义（顺序、类型、候选个数）由你完全掌控，前面是对于公历后面默认携带农历
+  #Y=年，m=月，d=日，数字前面带0如02月09日；y代表后两位年如15年，nj代表不带0的 如2月9日
+  date_formats:
+    - "Y年m月d日"
+    - "Y-m-d"
+    - "Y/m/d"
+    - "Y.m.d"
+    - "Ymd"
+    - "Y年n月j日"
+    - "y年n月j日"
+    - "n月j日"
   # 自定义短语
   custom_phrase/user_dict: custom_phrase_double # 需要手动创建 custom_phrase_double.txt 文件
 
