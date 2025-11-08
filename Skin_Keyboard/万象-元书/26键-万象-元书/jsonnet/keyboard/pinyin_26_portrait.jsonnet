@@ -71,7 +71,6 @@ local createBackslashNotification(key, bounds={}) = {
   notificationKeyboardAction: { sendKeys: 'backslash' },
 };
 
-
 // 26个按键前景批量生成
 
 
@@ -192,6 +191,8 @@ local keyboard(theme, orientation, keyboardLayout) =
       backgroundStyle: 'alphabeticBackgroundStyle',
       foregroundStyle: 'selectButtonPreeditForegroundStyle',
       action: { character: '7' },
+      swipeDownAction: { sendKeys: 'control+1' },
+      swipeUpAction: { sendKeys: 'control+1' },
     },
     cutButton: createButton(
       'cut',
@@ -213,6 +214,8 @@ local keyboard(theme, orientation, keyboardLayout) =
       backgroundStyle: 'alphabeticBackgroundStyle',
       foregroundStyle: 'cutButtonPreeditForegroundStyle',
       action: { character: '8' },
+      swipeDownAction: { sendKeys: 'control+2' },
+      swipeUpAction: { sendKeys: 'control+2' },
     },
 
 
@@ -236,6 +239,8 @@ local keyboard(theme, orientation, keyboardLayout) =
       backgroundStyle: 'alphabeticBackgroundStyle',
       foregroundStyle: 'copyButtonPreeditForegroundStyle',
       action: { character: '9' },
+      swipeDownAction: { sendKeys: 'control+3' },
+      swipeUpAction: { sendKeys: 'control+3' },
     },
 
     pasteButton: createButton(
@@ -258,6 +263,8 @@ local keyboard(theme, orientation, keyboardLayout) =
       backgroundStyle: 'alphabeticBackgroundStyle',
       foregroundStyle: 'pasteButtonPreeditForegroundStyle',
       action: { character: '0' },
+      swipeDownAction: { sendKeys: 'control+4' },
+      swipeUpAction: { sendKeys: 'control+4' },
     },
 
     tailButton: createButton(
@@ -974,7 +981,7 @@ local keyboard(theme, orientation, keyboardLayout) =
       { label: '1', action: { keyboardType: 'numeric' }, styleName: 'numericStyle' },
       { label: '2', action: { keyboardType: 'symbolic' }, styleName: 'symbolicStyle' },
       { label: '3', action: { keyboardType: 'emoji' }, styleName: 'emojiStyle' },
-      { label: '4', action: { keyboardType: 'emojis' }, styleName: 'emojisStyle' }, // 内置键盘
+      { label: '4', action: { keyboardType: 'emojis' }, styleName: 'emojisStyle' },  // 内置键盘
     ],
 
     spaceButton: createButton(

@@ -11,7 +11,6 @@
       list: [
         { action: { character: 'q' }, label: { text: 'q' } },  // action同仓皮肤定义，label可选text/systemImageName, 具体见仓皮肤文档
         { action: { character: 'Q' }, label: { text: 'Q' } },
-        { action: { sendKeys: 'control+1' }, label: { text: ':1' } },  // 万象的control+数字筛选句子中的内容
       ],
     },
     w: {
@@ -19,7 +18,6 @@
       list: [
         { action: { character: 'w' }, label: { text: 'w' } },
         { action: { character: 'W' }, label: { text: 'W' } },
-        { action: { sendKeys: 'control+2' }, label: { text: ':2' } },
       ],
     },
     e: {
@@ -27,7 +25,6 @@
       list: [
         { action: { character: 'e' }, label: { text: 'e' } },
         { action: { character: 'E' }, label: { text: 'E' } },
-        { action: { sendKeys: 'control+3' }, label: { text: ':3' } },
       ],
     },
     r: {
@@ -35,7 +32,6 @@
       list: [
         { action: { character: 'r' }, label: { text: 'r' } },
         { action: { character: 'R' }, label: { text: 'R' } },
-        { action: { sendKeys: 'control+4' }, label: { text: ':4' } },
       ],
     },
     t: {
@@ -43,7 +39,6 @@
       list: [
         { action: { character: 't' }, label: { text: 't' } },
         { action: { character: 'T' }, label: { text: 'T' } },
-        { action: { sendKeys: 'control+5' }, label: { text: ':5' } },
       ],
     },
     y: {
@@ -51,7 +46,6 @@
       list: [
         { action: { character: 'y' }, label: { text: 'y' } },
         { action: { character: 'Y' }, label: { text: 'Y' } },
-        { action: { sendKeys: 'control+6' }, label: { text: ':6' } },
       ],
     },
     u: {
@@ -59,7 +53,6 @@
       list: [
         { action: { character: 'u' }, label: { text: 'u' } },
         { action: { character: 'U' }, label: { text: 'U' } },
-        { action: { sendKeys: 'control+7' }, label: { text: ':7' } },
       ],
     },
     i: {
@@ -67,7 +60,6 @@
       list: [
         { action: { character: 'i' }, label: { text: 'i' } },
         { action: { character: 'I' }, label: { text: 'I' } },
-        { action: { sendKeys: 'control+8' }, label: { text: ':8' } },
       ],
     },
     o: {
@@ -75,7 +67,6 @@
       list: [
         { action: { character: 'o' }, label: { text: 'o' } },
         { action: { character: 'O' }, label: { text: 'O' } },
-        { action: { sendKeys: 'control+9' }, label: { text: ':9' } },
       ],
     },
     p: {
@@ -83,7 +74,6 @@
       list: [
         { action: { character: 'p' }, label: { text: 'p' } },
         { action: { character: 'P' }, label: { text: 'P' } },
-        { action: { sendKeys: 'control+10' }, label: { text: ':10' } },
       ],
     },
 

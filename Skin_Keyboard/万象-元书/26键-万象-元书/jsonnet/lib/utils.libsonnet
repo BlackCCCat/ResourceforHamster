@@ -64,10 +64,10 @@ local funcKeysystemImageNameMap = {
 local funcKeyPreeditsystemImageNameMap = {
   left: 'square.filled.and.line.vertical.and.square',
   head: 'button.vertical.right.press.fill',
-  select: 'arrow.right',
-  cut: 'arrow.up.right',
-  copy: 'arrow.uturn.up',
-  paste: 'arrow.down.right',
+  select: '1.circle',  // 'arrow.right',
+  cut: '2.circle',  // 'arrow.up.right',
+  copy: '3.circle',  // 'arrow.uturn.up',
+  paste: '4.circle',  // 'arrow.down.right',
   tail: 'ellipsis.viewfinder',
   right: 'square.and.line.vertical.and.square.filled',
 };
@@ -164,33 +164,33 @@ local CapkeyMap = {
 };
 
 local symbolKeyMap = {
-    // ===== 基本括号与引号 =====
-    a: '[a]'   ,     // 方括号
-    b: '【b】'   ,    // 黑方头括号
-    c: '❲c❳'    ,    // 双大括号 / 装饰括号
-    d: '〔d〕'   ,    // 方头括号
-    e: '⟮e⟯'    ,    // 小圆括号 / 装饰括号
-    f: '⟦f⟧'   ,     // 双方括号 / 数学集群括号
-    g: '「g」'   ,    // 直角引号
-    h: '#'     ,    //预留用于 Markdown 一级标题
-    i: '『i』'   ,    // 双直角引号
-    j: '<j>'   ,     // 尖括号
-    k: '《k》'   ,    // 书名号（双）
-    l: '〈l〉'   ,    // 书名号（单）
-    m: '‹m›'   ,     // 法文单书名号
-    n: '«n»'   ,     // 法文双书名号
-    o: '⦅o⦆'    ,    // 白圆括号
-    p: '⦇p⦈'    ,    // 白方括号
-    q: '(q)'   ,     // 圆括号
-    r: '儿' ,      // 儿化候选 
-    s: '［s］' ,      // 全角方括号
-    t: '⟨t⟩'    ,    // 数学角括号
-    u: '〈u〉'    ,    // 数学尖括号
-    v: '❰v❱'   ,     // 装饰角括号
-    w: '（w）' ,      // 全角圆括号
-    x: '｛x｝' ,      // 全角花括号
-    y: '⟪y⟫'   ,    // 双角括号
-    z: '{z}'   ,     // 花括号
+  // ===== 基本括号与引号 =====
+  a: '[a]',  // 方括号
+  b: '【b】',  // 黑方头括号
+  c: '❲c❳',  // 双大括号 / 装饰括号
+  d: '〔d〕',  // 方头括号
+  e: '⟮e⟯',  // 小圆括号 / 装饰括号
+  f: '⟦f⟧',  // 双方括号 / 数学集群括号
+  g: '「g」',  // 直角引号
+  h: '#',  //预留用于 Markdown 一级标题
+  i: '『i』',  // 双直角引号
+  j: '<j>',  // 尖括号
+  k: '《k》',  // 书名号（双）
+  l: '〈l〉',  // 书名号（单）
+  m: '‹m›',  // 法文单书名号
+  n: '«n»',  // 法文双书名号
+  o: '⦅o⦆',  // 白圆括号
+  p: '⦇p⦈',  // 白方括号
+  q: '(q)',  // 圆括号
+  r: '儿',  // 儿化候选
+  s: '［s］',  // 全角方括号
+  t: '⟨t⟩',  // 数学角括号
+  u: '〈u〉',  // 数学尖括号
+  v: '❰v❱',  // 装饰角括号
+  w: '（w）',  // 全角圆括号
+  x: '｛x｝',  // 全角花括号
+  y: '⟪y⟫',  // 双角括号
+  z: '{z}',  // 花括号
 };
 
 // 生成26字母键前景
