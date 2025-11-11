@@ -1,5 +1,3 @@
-// 要查询的字，只能查询单个汉字
-const word = $searchText || $pasteboardContent;
 
 /**
  * 校验输入参数，确保只支持单个汉字
@@ -44,6 +42,8 @@ async function getJSON() {
  * @returns {Promise<string>} 输出查询结果或相关提示
  */
 async function output() {
+  // 要查询的字，只能查询单个汉字
+  const word = $searchText || $pasteboardContent;
   // 校验输入
   const validationResult = validateWord(word);
   if (validationResult !== true) {

@@ -1,6 +1,3 @@
-// 要查询的字，只能查询单个汉字
-const word = $searchText || $pasteboardContent;
-
 /**
  * 校验输入参数，确保只支持单个汉字
  * @param {string} text - 查询输入的文本
@@ -23,7 +20,7 @@ function validateWord(text) {
  * 发起 GET 请求获取 MD5 签名
  * @returns {Promise<string>} 返回 MD5 哈希值
  */
-async function getMD5() {
+async function getMD5(word) {
   const url = `https://itho.cn/tool/api/encode/index.php?md5_encode=fjc_xhup${word}`;
   try {
     const response = await $http({ url });
@@ -43,7 +40,7 @@ async function getMD5() {
  * @param {string} md5 - MD5 签名
  * @returns {Promise<string>} 解析后的结果
  */
-async function queryResult(md5) {
+async function queryResult(md5, word) {
   const url = "http://www.xhup.club/Xhup/Search/searchCode";
   const headers = {
     "Content-Type": "application/x-www-form-urlencoded",
@@ -99,6 +96,8 @@ async function queryResult(md5) {
  * @returns {Promise<string>} 输出查询结果或相关提示
  */
 async function output() {
+  // 要查询的字，只能查询单个汉字
+  const word = $searchText || $pasteboardContent;
   // 校验输入
   const validationResult = validateWord(word);
   if (validationResult !== true) {
@@ -107,13 +106,13 @@ async function output() {
 
   try {
     // 获取 MD5 签名
-    const md5 = await getMD5();
+    const md5 = await getMD5(word);
     if (!md5) {
       return "无法生成 MD5 签名";
     }
 
     // 获取查询结果
-    const result = await queryResult(md5);
+    const result = await queryResult(md5, word);
     return result;
   } catch (error) {
     // 捕获和返回错误信息
