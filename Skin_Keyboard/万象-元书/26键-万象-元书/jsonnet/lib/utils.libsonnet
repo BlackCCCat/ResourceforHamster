@@ -63,7 +63,7 @@ local funcKeysystemImageNameMap = {
 
 local funcKeyPreeditsystemImageNameMap = {
   left: 'square.filled.and.line.vertical.and.square',
-  head: 'button.vertical.right.press.fill',
+  head: 'chevron.compact.up.chevron.compact.down',
   select: '1.circle',  // 'arrow.right',
   cut: '2.circle',  // 'arrow.up.right',
   copy: '3.circle',  // 'arrow.uturn.up',

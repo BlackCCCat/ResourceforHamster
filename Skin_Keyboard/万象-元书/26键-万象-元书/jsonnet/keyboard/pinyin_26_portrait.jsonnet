@@ -149,26 +149,10 @@ local keyboard(theme, orientation, keyboardLayout) =
       notificationType: 'preeditChanged',
       backgroundStyle: 'alphabeticBackgroundStyle',
       // 下面的前景样式重写以覆盖utils中生成的前景
-      foregroundStyle: ['headButtonPreeditForegroundStyle', 'headButtonPreeditForegroundStyle1'],
+      foregroundStyle: 'headButtonPreeditForegroundStyle',
       action: { shortcut: '#rimeNextPage' },
       swipeUpAction: { shortcut: '#rimePreviousPage' },
       swipeDownAction: { shortcut: '#rimeNextPage' },
-    },
-    headButtonPreeditForegroundStyle: {
-      buttonStyleType: 'systemImage',
-      systemImageName: 'chevron.compact.up',
-      fontSize: fontSize['按键前景文字大小'] - 3,
-      normalColor: color[theme]['按键前景颜色'],
-      highlightColor: color[theme]['按键前景颜色'],
-      center: { y: 0.4 },
-    },
-    headButtonPreeditForegroundStyle1: {
-      buttonStyleType: 'systemImage',
-      systemImageName: 'chevron.compact.down',
-      fontSize: fontSize['按键前景文字大小'] - 3,
-      normalColor: color[theme]['按键前景颜色'],
-      highlightColor: color[theme]['按键前景颜色'],
-      center: { y: 0.6 },
     },
 
     selectButton: createButton(

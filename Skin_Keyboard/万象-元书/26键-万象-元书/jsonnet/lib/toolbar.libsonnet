@@ -535,7 +535,7 @@ local getToolBar(theme) =
     },
     toolbarButtonKeyboardSkinsForegroundStyle: {
       buttonStyleType: 'systemImage',
-      systemImageName: 'keyboard.badge.eye.fill',
+      systemImageName: 'paintpalette.fill',
       normalColor: color[theme]['toolbar按键颜色'],
       highlightColor: color[theme]['toolbar按键颜色'],
       fontSize: fontSize['toolbar按键前景sf符号大小'],
