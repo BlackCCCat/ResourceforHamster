@@ -262,7 +262,7 @@ local keyboard(theme) =
     collectionCellBackgroundStyle: {
       buttonStyleType: 'geometry',
       insets: { top: 3, left: 2, bottom: 3, right: 2 },  //{ top: 6, left: 3, bottom: 6, right: 3 },
-      highlightColor: 'ffffff',
+      highlightColor: color[theme]['字母键背景颜色-普通'],
       normalColor: 'ffffff00',
       cornerRadius: 7,
     },
@@ -488,8 +488,17 @@ local keyboard(theme) =
     ) + {
       backgroundStyle: 'systemButtonBackgroundStyle',
       action: {
-        character: '.',
+        symbol: '.',
       },
+      notification: [
+        'spaceRightButtonPreeditNotification',
+      ],
+    },
+    spaceRightButtonPreeditNotification: {
+      notificationType: 'preeditChanged',
+      backgroundStyle: 'systemButtonBackgroundStyle',
+      foregroundStyle: 'spaceRightButtonForegroundStyle',
+      action: { character: '.' },
     },
 
     spaceRightButtonForegroundStyle: {
