@@ -83,8 +83,8 @@
       // center: { x: 0.5, y: 0.8 },
     },
     v: {
-      action: { sendKeys: 'ors' },
-      label: { systemImageName: 'calendar.badge.clock' },
+      action: { sendKeys: 'osj' },
+      label: { systemImageName: 'clock.circle' },
       // center: { x: 0.5, y: 0.8 },
     },
     b: {

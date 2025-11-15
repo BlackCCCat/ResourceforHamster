@@ -2505,7 +2505,7 @@ vButton:
   swipeUpAction:
     symbol: <
   swipeDownAction:
-    sendKeys: ors
+    sendKeys: osj
 vButtonForegroundStyle:
   text: "v"
   <<: *alphabeticButtonForegroundStyle
@@ -2519,7 +2519,7 @@ vButtonUpForegroundStyle:
   <<: *alphabeticSwipeUpBadgeStyle
 vButtonDownForegroundStyle:
   <<: *sfsymbolSwipeDownBadgeStyle
-  systemImageName: calendar.badge.clock
+  systemImageName: clock.circle
 vButtonHintStyle:
   backgroundStyle: alphabeticHintBackgroundStyle
   foregroundStyle: vButtonHintForegroundStyle
@@ -2535,7 +2535,7 @@ vButtonSwipeUpHintForegroundStyle:
   text: <
 vButtonSwipeDownHintForegroundStyle:
   <<: *sfsymbolHintStyle
-  systemImageName: calendar.badge.clock
+  systemImageName: clock.circle
 vButtonHoldSymbolsStyle:
   insets: *id001
   backgroundStyle: alphabeticHoldSymbolsBackgroundStyle
