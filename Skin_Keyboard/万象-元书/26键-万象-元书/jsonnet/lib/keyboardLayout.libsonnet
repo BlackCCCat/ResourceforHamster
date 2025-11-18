@@ -89,11 +89,14 @@ local color = import 'color.libsonnet';
         ],
         rowofFunctionStyle: {
           size: {
-            height: 45,
+            height: {percentage: 0.17},
           },
           backgroundStyle: 'keyboardBackgroundStyle',
         },
         keyboardStyle: {
+          size: {
+            height: {percentage: 0.73},
+          },
           insets: {
             top: 3,
             bottom: 3,
@@ -271,11 +274,14 @@ local color = import 'color.libsonnet';
         ],
         rowofFunctionStyle: {
           size: {
-            height: 35,
+            height: {percentage: 0.17},
           },
           backgroundStyle: 'keyboardBackgroundStyle',
         },
         keyboardStyle: {
+          size: {
+            height: {percentage: 0.73},
+          },
           insets: {
             top: 3,
             bottom: 3,
@@ -391,11 +397,14 @@ local color = import 'color.libsonnet';
         ],
         rowofFunctionStyle: {
           size: {
-            height: 45,
+            height: {percentage: 0.17},
           },
           backgroundStyle: 'keyboardBackgroundStyle',
         },
         keyboardStyle: {
+          size: {
+            height: {percentage: 0.73},
+          },
           insets: {
             top: 3,
             bottom: 3,
@@ -574,11 +583,14 @@ local color = import 'color.libsonnet';
         ],
         rowofFunctionStyle: {
           size: {
-            height: 35,
+            height: {percentage: 0.17},
           },
           backgroundStyle: 'keyboardBackgroundStyle',
         },
         keyboardStyle: {
+          size: {
+            height: {percentage: 0.73},
+          },
           insets: {
             top: 3,
             bottom: 3,
