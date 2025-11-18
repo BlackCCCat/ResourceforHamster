@@ -8,7 +8,7 @@ local getToolBar(theme) =
   {
     preeditStyle: {
       insets: { left: 8 },
-      backgroundStyle: 'toolbarBackgroundStyle',
+      // backgroundStyle: 'toolbarBackgroundStyle',
       foregroundStyle: 'preeditForegroundStyle',
     },
     preeditForegroundStyle: {
@@ -17,7 +17,7 @@ local getToolBar(theme) =
     // 工具栏样式
     toolbarStyle: {
       insets: { left: 10, right: 10 },
-      backgroundStyle: 'toolbarBackgroundStyle',
+      // backgroundStyle: 'toolbarBackgroundStyle',
     },
     toolbarLayout: [
       {
