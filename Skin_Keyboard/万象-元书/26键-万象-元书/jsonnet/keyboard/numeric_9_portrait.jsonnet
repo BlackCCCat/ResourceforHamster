@@ -151,7 +151,7 @@ local keyboard(theme) =
     },
     keyboardStyle: {
       size: {
-            height: {percentage: 0.17},
+            height: {percentage: 0.73},
           },
       insets: {
         top: 3,
