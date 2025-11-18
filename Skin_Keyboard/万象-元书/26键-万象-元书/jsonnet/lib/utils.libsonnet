@@ -77,7 +77,7 @@ local genFuncKeyStyles(fontSize, color, theme, center) =
   {
     [keyName + 'ButtonForegroundStyle']: makesystemImageStyle(
       funcKeysystemImageNameMap[keyName],
-      fontSize['按键前景文字大小'] - 3,
+      fontSize['功能按键sf符号大小'],
       color[theme]['按键前景颜色'],
       color[theme]['按键前景颜色'],
       center['功能键前景文字偏移']
@@ -86,7 +86,7 @@ local genFuncKeyStyles(fontSize, color, theme, center) =
   } + {
     [keyName + 'ButtonPreeditForegroundStyle']: makesystemImageStyle(
       funcKeyPreeditsystemImageNameMap[keyName],
-      fontSize['按键前景文字大小'] - 3,
+      fontSize['功能按键sf符号大小'],
       color[theme]['按键前景颜色'],
       color[theme]['按键前景颜色'],
       center['功能键前景文字偏移']
@@ -95,7 +95,7 @@ local genFuncKeyStyles(fontSize, color, theme, center) =
   } + {
     [keyName + 'ButtonUppercasedStateForegroundStyle']: makesystemImageStyle(
       funcKeysystemImageNameMap[keyName],
-      fontSize['按键前景文字大小'] - 3,
+      fontSize['功能按键sf符号大小'],
       color[theme]['按键前景颜色'],
       color[theme]['按键前景颜色'],
       center['功能键前景文字偏移']
