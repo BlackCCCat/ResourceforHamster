@@ -127,6 +127,7 @@ local keyboard(theme, orientation, keyboardLayout) =
       foregroundStyle: 'leftButtonPreeditForegroundStyle',
       action: { sendKeys: 'Up' },
       swipeDownAction: { character: '[' },
+      repeatAction: { sendKeys: 'Up' },
 
     },
 
@@ -295,6 +296,7 @@ local keyboard(theme, orientation, keyboardLayout) =
       foregroundStyle: 'rightButtonPreeditForegroundStyle',
       action: { sendKeys: 'Down' },
       swipeDownAction: { character: ']' },
+      repeatAction:  { sendKeys: 'Down' },
     },
 
     qButton: createButton(

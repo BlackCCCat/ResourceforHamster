@@ -64,7 +64,7 @@
     f: { action: { character: '{' }, label: { text: '{' } },
     g: { action: { character: '}' }, label: { text: '}' } },
     h: { action: { character: '|' }, label: { text: '|' } },
-    j: { action: { character: '.' }, label: { text: '.' } },
+    j: { action: { symbol: '.' }, label: { text: '.' } },
     k: { action: { character: ';' }, label: { text: ';' } },
     l: { action: { character: "'" }, label: { text: "'" } },
     z: {
