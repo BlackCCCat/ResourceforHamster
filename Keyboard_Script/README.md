@@ -5,3 +5,4 @@
 - 提取App Store兑换码：`redeem_code.js`
 - 小鹤音形辅助码查询：`xh_lookup.js`
 - 小鹤音形官方辅助码查询：`xh_lookup_official.js`
+- 生成密码：`pass_gen.js`
