@@ -2,7 +2,7 @@ local LayoutType = import '../lib/funcButtonRowSelector.libsonnet';
 local keyboardLayout_ = import '../lib/numericLayout.libsonnet';
 
 local chooseLayout(selector) = 
-  if selector == 1 then keyboardLayout_.portraitLayoutWithFunc
+  if selector then keyboardLayout_.portraitLayoutWithFunc
   else keyboardLayout_.portraitLayoutWithoutFunc;
 
 
@@ -71,7 +71,7 @@ local keyboard(theme) =
       fontWeight: 0,
     },
 
-    keyboardLayout: chooseLayout(LayoutType.keyboardLayoutSelector),
+    keyboardLayout: chooseLayout(LayoutType.with_functions_row),
     rowofFunctionStyle: {
       size: {
         height: {percentage: 0.17},

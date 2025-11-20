@@ -2,7 +2,7 @@ local LayoutType = import '../lib/funcButtonRowSelector.libsonnet';
 local keyboardLayout_ = import '../lib/numericLayout.libsonnet';
 
 local chooseLayout(selector) = 
-  if selector == 1 then keyboardLayout_.landscapeLayoutWithFunc
+  if selector then keyboardLayout_.landscapeLayoutWithFunc
   else keyboardLayout_.landscapeLayoutWithoutFunc;
 
 local animation = import '../lib/animation.libsonnet';
@@ -73,7 +73,7 @@ local keyboard(theme) =
       fontSize: fontSize['preedit区字体大小'],
       fontWeight: 0,
     },
-    keyboardLayout: chooseLayout(LayoutType.keyboardLayoutSelector),
+    keyboardLayout: chooseLayout(LayoutType.with_functions_row),
     rowofFunctionStyle: {
       size: {
             height: {percentage: 0.17},

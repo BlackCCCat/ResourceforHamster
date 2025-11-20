@@ -1,2 +1,2 @@
- // 1为有功能按键，0为无功能按键
-{keyboardLayoutSelector :1}
+ // true为有功能按键，false为无功能按键
+{with_functions_row :true}
