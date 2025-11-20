@@ -1,9 +1,11 @@
+local LayoutType = import '../lib/funcButtonRowSelector.libsonnet';
+local keyboardLayout_ = if LayoutType.keyboardLayoutSelector ==1 then  import '../lib/keyboardLayout.libsonnet' else import '../lib/keyboardLayoutWithoutFuncrow.libsonnet';
+
 local animation = import '../lib/animation.libsonnet';
 local center = import '../lib/center.libsonnet';
 local color = import '../lib/color.libsonnet';
 local fontSize = import '../lib/fontSize.libsonnet';
 local hintSymbolsData = import '../lib/hintSymbolsData.libsonnet';
-local keyboardLayout_ = import '../lib/keyboardLayout.libsonnet';
 local others = import '../lib/others.libsonnet';
 local swipeData = import '../lib/swipeData.libsonnet';
 local toolbar = import '../lib/toolbar.libsonnet';

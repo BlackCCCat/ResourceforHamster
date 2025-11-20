@@ -1,10 +1,17 @@
+local LayoutType = import '../lib/funcButtonRowSelector.libsonnet';
+local keyboardLayout_ = import '../lib/numericLayout.libsonnet';
+
+local chooseLayout(selector) = 
+  if selector == 1 then keyboardLayout_.portraitLayoutWithFunc
+  else keyboardLayout_.portraitLayoutWithoutFunc;
+
+
 local animation = import '../lib/animation.libsonnet';
 local center = import '../lib/center.libsonnet';
 local collectionData = import '../lib/collectionData.libsonnet';
 local color = import '../lib/color.libsonnet';
 local fontSize = import '../lib/fontSize.libsonnet';
 local hintSymbolsData = import '../lib/hintSymbolsData.libsonnet';
-local keyboardLayout = import '../lib/keyboardLayout.libsonnet';
 local others = import '../lib/others.libsonnet';
 local swipeData = import '../lib/swipeData.libsonnet';
 local toolbar = import '../lib/toolbar-numeric.libsonnet';
@@ -64,85 +71,7 @@ local keyboard(theme) =
       fontWeight: 0,
     },
 
-    keyboardLayout: [
-      {
-        HStack: {
-          style: 'rowofFunctionStyle',
-          subviews: [
-            { Cell: 'leftButton' },
-            { Cell: 'headButton' },
-            { Cell: 'selectButton' },
-            { Cell: 'cutButton' },
-            { Cell: 'copyButton' },
-            { Cell: 'pasteButton' },
-            { Cell: 'tailButton' },
-            { Cell: 'rightButton' },
-          ],
-        },
-      },
-      {
-        HStack: {
-          style: 'keyboardStyle',
-          subviews: [
-            {
-              VStack: {
-                style: 'VStackStyle1',
-                subviews: [
-                  {
-                    Cell: 'collection',
-                  },
-                  { Cell: 'returnButton' },
-                ],
-              },
-            },
-            {
-              VStack: {
-                style: 'VStackStyle2',
-                subviews: [
-                  { Cell: 'number1Button' },
-                  { Cell: 'number4Button' },
-                  { Cell: 'number7Button' },
-                  { Cell: 'symbolButton' },
-                ],
-              },
-            },
-            {
-              VStack: {
-                style: 'VStackStyle2',
-                subviews: [
-                  { Cell: 'number2Button' },
-                  { Cell: 'number5Button' },
-                  { Cell: 'number8Button' },
-                  { Cell: 'number0Button' },
-                ],
-              },
-            },
-            {
-              VStack: {
-                style: 'VStackStyle2',
-                subviews: [
-                  { Cell: 'number3Button' },
-                  { Cell: 'number6Button' },
-                  { Cell: 'number9Button' },
-                  { Cell: 'spaceButton' },
-                ],
-              },
-            },
-            {
-              VStack: {
-                style: 'VStackStyle1',
-                subviews: [
-                  { Cell: 'backspaceButton' },
-                  { Cell: 'spaceRightButton' },
-                  { Cell: 'atButton' },
-                  { Cell: 'enterButton' },
-                ],
-              },
-            },
-          ],
-        },
-      },
-    ],
+    keyboardLayout: chooseLayout(LayoutType.keyboardLayoutSelector),
     rowofFunctionStyle: {
       size: {
         height: {percentage: 0.17},
