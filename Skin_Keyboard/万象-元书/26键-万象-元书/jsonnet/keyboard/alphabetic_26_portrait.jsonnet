@@ -737,7 +737,7 @@ local keyboard(theme, orientation, keyboardLayout) =
     '123ButtonSymbolsDataSource': [
       { label: '1', action: { keyboardType: 'numeric' }, styleName: 'numericStyle' },
       { label: '2', action: { keyboardType: 'symbolic' }, styleName: 'symbolicStyle' },
-      { label: '3', action: { keyboardType: 'emoji' }, styleName: 'emojiStyle' },
+      // { label: '3', action: { keyboardType: 'emoji' }, styleName: 'emojiStyle' },
       { label: '4', action: { keyboardType: 'emojis' }, styleName: 'emojisStyle' },
     ],
 

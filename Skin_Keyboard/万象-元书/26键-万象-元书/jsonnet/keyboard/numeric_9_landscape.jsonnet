@@ -431,9 +431,9 @@ local keyboard(theme) =
     },
 
     symbolButtonSymbolsDataSource: [
-      { label: '2', action: { keyboardType: 'emoji' }, styleName: 'emojiStyle' },
-      { label: '1', action: { keyboardType: 'symbolic' }, styleName: 'symbolicStyle' },
+      // { label: '2', action: { keyboardType: 'emoji' }, styleName: 'emojiStyle' },
       { label: '3', action: { keyboardType: 'emojis' }, styleName: 'emojisStyle' },
+      { label: '1', action: { keyboardType: 'symbolic' }, styleName: 'symbolicStyle' },
     ],
 
     number2Button: createButton('2', {}, {}, $),
