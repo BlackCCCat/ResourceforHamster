@@ -299,7 +299,7 @@ local getToolBar(theme) =
 
     toolbarButtonOpenAppForegroundStyle: {
       buttonStyleType: 'systemImage',
-      systemImageName: 'bubbles.and.sparkles.fill',
+      systemImageName: 'swirl.circle.righthalf.filled',
       normalColor: color[theme]['toolbar按键颜色'],
       highlightColor: color[theme]['toolbar按键颜色'],
       fontSize: fontSize['toolbar按键前景sf符号大小'],
