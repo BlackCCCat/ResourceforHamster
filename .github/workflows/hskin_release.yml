@@ -33,7 +33,6 @@ jobs:
 
       - name: Rename files
         run: |
-          mv Skin_Keyboard/万象-仓/26键-万象.hskin Skin_Keyboard/万象-仓/26-wanxiang.hskin 
           mv Skin_Keyboard/万象-元书/26键-万象-元书.cskin Skin_Keyboard/万象-元书/26-wanxiang.cskin 
 
           
@@ -47,7 +46,6 @@ jobs:
             ${{ steps.commits.outputs.commits }}
           prerelease: ${{ contains(github.ref_name, '-rc') }}
           files: |
-            Skin_Keyboard/万象-仓/26-wanxiang.hskin
             Skin_Keyboard/万象-元书/26-wanxiang.cskin
           token: ${{ secrets.AUTO_RELEASE }} 
         env:
