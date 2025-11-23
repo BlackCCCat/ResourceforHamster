@@ -1,7 +1,7 @@
 local LayoutType = import '../lib/funcButtonRowSelector.libsonnet';
 local keyboardLayout_ = import '../lib/numericLayout.libsonnet';
 
-local chooseLayout(selector) = 
+local chooseLayout(selector) =
   if selector then keyboardLayout_.landscapeLayoutWithFunc
   else keyboardLayout_.landscapeLayoutWithoutFunc;
 
@@ -13,7 +13,7 @@ local fontSize = import '../lib/fontSize.libsonnet';
 local hintSymbolsData = import '../lib/hintSymbolsData.libsonnet';
 local others = import '../lib/others.libsonnet';
 local swipeData = import '../lib/swipeData.libsonnet';
-local toolbar = import '../lib/toolbar-symbol.libsonnet';
+local toolbar = import '../lib/toolbar.libsonnet';
 local utils = import '../lib/utils.libsonnet';
 
 local hintSymbolsStyles = import '../lib/hintSymbolsStyles.libsonnet';
@@ -76,14 +76,14 @@ local keyboard(theme) =
     keyboardLayout: chooseLayout(LayoutType.with_functions_row),
     rowofFunctionStyle: {
       size: {
-            height: {percentage: 0.17},
-          },
+        height: { percentage: 0.17 },
+      },
       backgroundStyle: 'keyboardBackgroundStyle',
     },
     keyboardStyle: {
       size: {
-            height: {percentage: 0.73},
-          },
+        height: { percentage: 0.73 },
+      },
       insets: {
         top: 3,
         bottom: 3,

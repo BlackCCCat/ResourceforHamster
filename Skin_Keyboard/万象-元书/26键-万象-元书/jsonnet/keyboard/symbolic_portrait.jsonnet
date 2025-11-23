@@ -6,7 +6,7 @@ local fontSize = import '../lib/fontSize.libsonnet';
 local others = import '../lib/others.libsonnet';
 local swipeData = import '../lib/swipeData.libsonnet';
 local swipeStyles = import '../lib/swipeStyle.libsonnet';
-local toolbar = import '../lib/toolbar-symbol.libsonnet';
+local toolbar = import '../lib/toolbar.libsonnet';
 local utils = import '../lib/utils.libsonnet';
 // 上下和下划的数据
 local swipe_up = if std.objectHas(swipeData, 'number_swipe_up') then swipeData.number_swipe_up else {};
@@ -430,6 +430,6 @@ local keyboard(theme) =
     },
   };
 {
-  new(theme): keyboard(theme) + collectionData.symbolicDataSource,   // 符号数据源
-  getKeyboard(theme): keyboard(theme), // 给emoji键盘使用，提供无符号数据源的键盘配置
+  new(theme): keyboard(theme) + collectionData.symbolicDataSource,  // 符号数据源
+  getKeyboard(theme): keyboard(theme),  // 给emoji键盘使用，提供无符号数据源的键盘配置
 }

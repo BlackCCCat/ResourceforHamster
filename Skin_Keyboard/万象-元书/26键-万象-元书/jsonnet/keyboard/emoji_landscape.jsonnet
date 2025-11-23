@@ -6,7 +6,7 @@ local fontSize = import '../lib/fontSize.libsonnet';
 local hintSymbolsData = import '../lib/hintSymbolsData.libsonnet';
 local others = import '../lib/others.libsonnet';
 local swipeData = import '../lib/swipeData.libsonnet';
-local toolbar = import '../lib/toolbar-emoji.libsonnet';
+local toolbar = import '../lib/toolbar.libsonnet';
 local utils = import '../lib/utils.libsonnet';
 
 local hintSymbolsStyles = import '../lib/hintSymbolsStyles.libsonnet';
