@@ -1,3 +1,5 @@
+local LayoutType = import '../lib/funcButtonRowSelector.libsonnet';
+
 {
   /*
   说明:
@@ -72,34 +74,58 @@
       label: { systemImageName: 'av.remote.fill' },
       // center: { x: 0.5, y: 0.8 },  // 不同于其他按键的偏移，可这样设置，例如这里zxcvbnm的下划都在按键正下方
     },
-    x: {
+    x: if LayoutType.with_functions_row then {
       action: { sendKeys: 'onl' },
       label: { systemImageName: 'clock.arrow.circlepath' },
       // center: { x: 0.5, y: 0.8 },
+    } else {
+      action: { shortcut: '#cut' },
+      label: { systemImageName: 'scissors' },
+      // center: { x: 0.5, y: 0.8 },
     },
-    c: {
+    c: if LayoutType.with_functions_row then {
       action: { sendKeys: 'orq' },
       label: { systemImageName: 'calendar' },
       // center: { x: 0.5, y: 0.8 },
+    } else {
+      action: { shortcut: '#copy' },
+      label: { systemImageName: 'arrow.up.doc.on.clipboard' },
+      // center: { x: 0.5, y: 0.8 },
     },
-    v: {
+    v: if LayoutType.with_functions_row then {
       action: { sendKeys: 'osj' },
       label: { systemImageName: 'clock.circle' },
       // center: { x: 0.5, y: 0.8 },
+    } else {
+      action: { shortcut: '#paste' },
+      label: { systemImageName: 'doc.on.clipboard.fill' },
+      // center: { x: 0.5, y: 0.8 },
     },
-    b: {
+    b: if LayoutType.with_functions_row then {
       action: { sendKeys: 'R' },
       label: { systemImageName: 'chineseyuanrenminbisign.square.fill' },
       // center: { x: 0.5, y: 0.8 },
+    } else {
+      action: { shortcut: '#selectText' },
+      label: { systemImageName: 'selection.pin.in.out' },
+      // center: { x: 0.5, y: 0.8 },
     },
-    n: {
+    n:  if LayoutType.with_functions_row then {
       action: { sendKeys: 'N' },
       label: { systemImageName: 'calendar.badge.exclamationmark' },
       // center: { x: 0.5, y: 0.8 },
+    } else {
+      action: { shortcut: '#rimePreviousPage' },
+      label: { systemImageName: 'chevron.up' },
+      // center: { x: 0.5, y: 0.8 },
     },
-    m: {
+    m:  if LayoutType.with_functions_row then {
       action: { character: '`' },
       label: { systemImageName: 'rectangle.3.group.fill' },
+      // center: { x: 0.5, y: 0.8 },
+    } else {
+      action: { shortcut: '#rimeNextPage' },
+      label: { systemImageName: 'chevron.down' },
       // center: { x: 0.5, y: 0.8 },
     },
     // '123': { action: { shortcut: '#方案切换' } },

@@ -1,4 +1,5 @@
 local swipeData = import 'swipeData.libsonnet';
+local LayoutType = import '../lib/funcButtonRowSelector.libsonnet';
 
 local custom = {  // 同字母但是不同设置的，在这里加上，会覆盖掉swipeData.libsonnet中对应的按键设置以供英文键盘使用。
   swipe_up: {
@@ -52,6 +53,11 @@ local custom = {  // 同字母但是不同设置的，在这里加上，会覆�
     k: { action: { symbol: ';' }, label: { text: ';' } },
     l: { action: { symbol: "'" }, label: { text: "'" } },
     z: { action: { symbol: "" }, label: { text: "" } },
+    n:  if LayoutType.with_functions_row then {
+      action: { sendKeys: 'N' },
+      label: { systemImageName: 'calendar.badge.exclamationmark' },
+      // center: { x: 0.5, y: 0.8 },
+    } else { action: { symbol: "" }, label: { text: "" } },
     m: { action: { symbol: "" }, label: { text: "" } },
 
   },
