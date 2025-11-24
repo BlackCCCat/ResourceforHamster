@@ -42,9 +42,21 @@ local swipe_style(center, theme, fs=null) = {
     // center: center,
     normalColor: color[theme]['按下气泡文字颜色'],
   },
+  '上划气泡sf符号前景样式': {
+    buttonStyleType: 'systemImage',
+    fontSize: fontSize['划动气泡前景sf符号大小'],
+    // center: center,
+    normalColor: color[theme]['按下气泡文字颜色'],
+  },
   '下划气泡前景样式': {
     buttonStyleType: 'text',
     fontSize: fontSize['划动气泡前景文字大小'],
+    // center: center,
+    normalColor: color[theme]['按下气泡文字颜色'],
+  },
+  '下划气泡sf符号前景样式': {
+    buttonStyleType: 'systemImage',
+    fontSize: fontSize['划动气泡前景sf符号大小'],
     // center: center,
     normalColor: color[theme]['按下气泡文字颜色'],
   },
@@ -112,7 +124,7 @@ local ButtonSwipeUpHintForegroundStyle(key, o, theme, type) =
       if std.objectHas(o.label, 'text') then
         swipe_style(center['划动气泡文字偏移'], theme)['上划气泡前景样式']
       else
-        swipe_style(center['划动气泡sf符号偏移'], theme)['上划气泡前景样式'],
+        swipe_style(center['划动气泡sf符号偏移'], theme)['上划气泡sf符号前景样式'],
   };
 // 下划提示气泡
 local ButtonSwipeDownHintForegroundStyle(key, o, theme, type) =
@@ -123,7 +135,7 @@ local ButtonSwipeDownHintForegroundStyle(key, o, theme, type) =
       if std.objectHas(o.label, 'text') then
         swipe_style(center['划动气泡文字偏移'], theme)['下划气泡前景样式']
       else
-        swipe_style(center['划动气泡sf符号偏移'], theme)['下划气泡前景样式'],
+        swipe_style(center['划动气泡sf符号偏移'], theme)['下划气泡sf符号前景样式'],
   };
 
 // 按下气泡
