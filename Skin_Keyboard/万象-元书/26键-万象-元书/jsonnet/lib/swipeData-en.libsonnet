@@ -1,5 +1,5 @@
 local swipeData = import 'swipeData.libsonnet';
-local LayoutType = import '../lib/funcButtonRowSelector.libsonnet';
+local LayoutType = import '../custom/Custom.libsonnet';
 
 local custom = {  // 同字母但是不同设置的，在这里加上，会覆盖掉swipeData.libsonnet中对应的按键设置以供英文键盘使用。
   swipe_up: {

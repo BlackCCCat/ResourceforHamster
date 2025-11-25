@@ -9,7 +9,7 @@
 
 2. 打开元书输入法键盘皮肤中的“启动皮肤开发者模式”，导入后点击皮肤，或者在导入皮肤后长按手动运行`main.jsonnet`，两种方式来生成皮肤配置文件
 
-3. 关于功能按键：如果不需要，可在`lib/funcButtonRowSelector.libsonnet`中将`with_functions_row`值改为false
+3. 关于功能按键：如果不需要，可在`custom/Custom.libsonnet`中将`with_functions_row`值改为`false`
 
 # 获取更新
 请到ResourceforHamster(`https://github.com/BlackCCCat/ResourceforHamster`)获取可能的更新

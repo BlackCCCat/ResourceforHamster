@@ -1,4 +1,4 @@
-local LayoutType = import '../lib/funcButtonRowSelector.libsonnet';
+local LayoutType = import '../custom/Custom.libsonnet';
 local keyboardLayout_ = if LayoutType.with_functions_row then import '../lib/keyboardLayout.libsonnet' else import '../lib/keyboardLayoutWithoutFuncrow.libsonnet';
 
 
