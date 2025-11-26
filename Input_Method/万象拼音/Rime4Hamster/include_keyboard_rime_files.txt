@@ -1,3 +1,4 @@
 ^.*[.]userdb.*$
-^.*[.]txt$
+^(?!.*include_keyboard_rime_files\.txt$)(?!.*custom_phrase_double\.txt$).+\.txt$
 ^.*[.]custom.*$
+[\/]lua[\/].*userdb.*$
