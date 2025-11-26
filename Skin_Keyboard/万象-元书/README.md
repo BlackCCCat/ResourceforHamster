@@ -2,6 +2,9 @@
 
 1. 请和[自定义配置](../../Input_Method/万象拼音/Rime4Hamster/)一起使用，尤其是自定义按键部分
 2. 打开元书输入法键盘皮肤中的“启动皮肤开发者模式”，导入后点击皮肤，或者在导入皮肤后长按手动运行`main.jsonnet`，两种方式来生成皮肤配置文件
+3. 支持一些简单的自定义配置：
+    - 支持取消工具栏下的功能按键：解压皮肤文件后，在`jsonnet/custom/Custom.libsonnet`中将`with_functions_row`设置为`false`
+    - 支持键盘字母正常状态下显示为大写：解压皮肤文件后，在`jsonnet/custom/Custom.libsonnet`中将`is_letter_capital`设置为`true`
 
 ## 万象拼音PRO
 - `26键-万象-元书.cskin`（对应release中`26-wanxiang.cskin`）
