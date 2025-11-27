@@ -128,7 +128,8 @@ local keyboard(theme, orientation, keyboardLayout) =
       backgroundStyle: 'alphabeticBackgroundStyle',
       foregroundStyle: 'leftButtonPreeditForegroundStyle',
       action: { sendKeys: 'Up' },
-      swipeDownAction: { character: '[' },
+      swipeUpAction: { character: '[' },
+      swipeDownAction: { sendKeys: 'Left' },
       repeatAction: { sendKeys: 'Up' },
 
     },
@@ -297,7 +298,8 @@ local keyboard(theme, orientation, keyboardLayout) =
       backgroundStyle: 'alphabeticBackgroundStyle',
       foregroundStyle: 'rightButtonPreeditForegroundStyle',
       action: { sendKeys: 'Down' },
-      swipeDownAction: { character: ']' },
+      swipeUpAction: { character: ']' },
+      swipeDownAction: { sendKeys: 'Right' },
       repeatAction: { sendKeys: 'Down' },
     },
 
