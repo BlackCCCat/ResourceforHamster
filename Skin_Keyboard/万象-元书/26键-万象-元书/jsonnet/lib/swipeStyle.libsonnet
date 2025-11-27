@@ -1,3 +1,5 @@
+local is_cap = import '../custom/Custom.libsonnet';
+
 local center = import 'center.libsonnet';
 local color = import 'color.libsonnet';
 local fontSize = import 'fontSize.libsonnet';
@@ -141,7 +143,8 @@ local ButtonSwipeDownHintForegroundStyle(key, o, theme, type) =
 // 按下气泡
 local ButtonHintForegroundStyle(key, o, theme, type) = {
   [key + 'ButtonHintForegroundStyle']:
-    { text: if type == 'cn' then std.asciiUpper(key) else key } +  // 英文使用小写字母
+    // { text: if type == 'cn' then std.asciiUpper(key) else key } +  // 英文使用小写字母
+    { text: if is_cap.is_letter_capital then std.asciiUpper(key) else key} + // 根据选择的大小写显示气泡的大小写
     swipe_style(center['划动气泡文字偏移'], theme)['按下气泡样式'],
 };
 
