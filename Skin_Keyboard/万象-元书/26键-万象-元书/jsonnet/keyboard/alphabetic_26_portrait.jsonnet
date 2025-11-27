@@ -18,6 +18,9 @@ local swipeStyles = import '../lib/swipeStyle.libsonnet';
 // 123Button的划动前景
 local slideForeground = import '../lib/slideForeground.libsonnet';
 
+// 功能按键引入
+local functions = import '../lib/functionButton.libsonnet';
+
 // 上下和下划的数据
 local swipe_up = if std.objectHas(swipeData, 'swipe_up') then swipeData.swipe_up else {};
 local swipe_down = if std.objectHas(swipeData, 'swipe_down') then swipeData.swipe_down else {};
@@ -67,6 +70,7 @@ local keyboard(theme, orientation, keyboardLayout) =
   utils.genAlphabeticStyles(fontSize, color, theme, center) +
   utils.genFuncKeyStyles(fontSize, color, theme, center) +
   slideForeground.slideForeground(theme) +
+  functions.makeFunctionButtons(orientation, keyboardLayout, 'alphabetic') +
   {
     [if std.objectHas(others, '英文键盘方案') then 'rimeSchema']: others['英文键盘方案'],
     preeditHeight: others[if orientation == 'portrait' then '竖屏' else '横屏']['preedit高度'],
@@ -88,122 +92,6 @@ local keyboard(theme, orientation, keyboardLayout) =
       textColor: color[theme]['候选字体未选中字体颜色'],
       fontSize: fontSize['preedit区字体大小'],
       fontWeight: 0,
-    },
-
-    leftButton: createButton(
-      'left',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['自定义键size']
-      else
-        keyboardLayout['横屏按键尺寸']['自定义键size'],
-      {},
-      $
-    ) + {
-      action: 'moveCursorBackward',
-      repeatAction: 'moveCursorBackward',
-      swipeDownAction: { character: '[' },
-      preeditStateAction: { sendKeys: 'Up' },
-      backgroundStyle: 'alphabeticBackgroundStyle',
-    },
-
-
-    headButton: createButton(
-      'head',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['自定义键size']
-      else
-        keyboardLayout['横屏按键尺寸']['自定义键size'],
-      {},
-      $
-    ) + {
-      action: { shortcut: '#行首' },
-      preeditStateAction: { sendKeys: 'Control+Shift+Up' },
-      backgroundStyle: 'alphabeticBackgroundStyle',
-    },
-
-
-    cutButton: createButton(
-      'cut',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['自定义键size']
-      else
-        keyboardLayout['横屏按键尺寸']['自定义键size'],
-      {},
-      $
-    ) + {
-      action: { shortcut: '#cut' },
-      backgroundStyle: 'alphabeticBackgroundStyle',
-    },
-
-
-    copyButton: createButton(
-      'copy',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['自定义键size']
-      else
-        keyboardLayout['横屏按键尺寸']['自定义键size'],
-      {},
-      $
-    ) + {
-      action: { shortcut: '#copy' },
-      backgroundStyle: 'alphabeticBackgroundStyle',
-    },
-
-    pasteButton: createButton(
-      'paste',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['自定义键size']
-      else
-        keyboardLayout['横屏按键尺寸']['自定义键size'],
-      {},
-      $
-    ) + {
-      action: { shortcut: '#paste' },
-      backgroundStyle: 'alphabeticBackgroundStyle',
-    },
-
-    selectButton: createButton(
-      'select',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['自定义键size']
-      else
-        keyboardLayout['横屏按键尺寸']['自定义键size'],
-      {},
-      $
-    ) + {
-      action: { shortcut: '#selectText' },
-      backgroundStyle: 'alphabeticBackgroundStyle',
-    },
-
-
-    tailButton: createButton(
-      'tail',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['自定义键size']
-      else
-        keyboardLayout['横屏按键尺寸']['自定义键size'],
-      {},
-      $
-    ) + {
-      action: { shortcut: '#行尾' },
-      preeditStateAction: { sendKeys: 'Control+Shift+Down' },
-      backgroundStyle: 'alphabeticBackgroundStyle',
-    },
-
-    rightButton: createButton(
-      'right',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['自定义键size']
-      else
-        keyboardLayout['横屏按键尺寸']['自定义键size'],
-      {},
-      $
-    ) + {
-      action: 'moveCursorForward',
-      repeatAction: 'moveCursorForward',
-      swipeDownAction: { character: ']' },
-      preeditStateAction: { sendKeys: 'Down' },
-      backgroundStyle: 'alphabeticBackgroundStyle',
     },
 
     qButton: createButton(

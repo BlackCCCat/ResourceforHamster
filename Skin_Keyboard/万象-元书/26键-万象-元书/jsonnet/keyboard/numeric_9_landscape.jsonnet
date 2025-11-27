@@ -25,6 +25,9 @@ local symbolic_portrait = import 'symbolic_portrait.jsonnet';
 // 123Button的划动前景
 local slideForeground = import '../lib/slideForeground.libsonnet';
 
+// 功能按键引入
+local functions = import '../lib/functionButton.libsonnet';
+
 // 上下和下划的数据
 local swipe_up = if std.objectHas(swipeData, 'number_swipe_up') then swipeData.number_swipe_up else {};
 local swipe_down = if std.objectHas(swipeData, 'number_swipe_up') then swipeData.number_swipe_down else {};
@@ -181,112 +184,6 @@ local keyboard(theme) =
       highlightColor: color[theme]['按键前景颜色'],
       fontSize: fontSize['按键前景文字大小'] - 3,
       // center: center['26键中文前景偏移'],
-    },
-
-
-    leftButton: createButton(
-      'left',
-      {},
-      {},
-      $
-    ) + {
-      action: 'moveCursorBackward',
-      repeatAction: 'moveCursorBackward',
-      swipeDownAction: { character: '[' },
-      backgroundStyle: 'functionBackgroundStyle',
-      notification: [
-        'leftButtonPreeditNotification',
-      ],
-    },
-    leftButtonPreeditNotification: {
-      notificationType: 'preeditChanged',
-      backgroundStyle: 'functionBackgroundStyle',
-      foregroundStyle: 'leftButtonPreeditForegroundStyle',
-      action: { sendKeys: 'Up' },
-    },
-
-    headButton: createButton(
-      'head',
-      {},
-      {},
-      $
-    ) + {
-      action: { shortcut: '#行首' },
-      backgroundStyle: 'functionBackgroundStyle',
-    },
-
-
-    cutButton: createButton(
-      'cut',
-      {},
-      {},
-      $
-    ) + {
-      action: { shortcut: '#cut' },
-      backgroundStyle: 'functionBackgroundStyle',
-    },
-
-
-    copyButton: createButton(
-      'copy',
-      {},
-      {},
-      $
-    ) + {
-      action: { shortcut: '#copy' },
-      backgroundStyle: 'functionBackgroundStyle',
-    },
-
-    pasteButton: createButton(
-      'paste',
-      {},
-      {},
-      $
-    ) + {
-      action: { shortcut: '#paste' },
-      backgroundStyle: 'functionBackgroundStyle',
-    },
-
-    selectButton: createButton(
-      'select',
-      {},
-      {},
-      $
-    ) + {
-      action: { shortcut: '#selectText' },
-      backgroundStyle: 'functionBackgroundStyle',
-    },
-
-
-    tailButton: createButton(
-      'tail',
-      {},
-      {},
-      $
-    ) + {
-      action: { shortcut: '#行尾' },
-      backgroundStyle: 'functionBackgroundStyle',
-    },
-
-    rightButton: createButton(
-      'right',
-      {},
-      {},
-      $
-    ) + {
-      action: 'moveCursorForward',
-      repeatAction: 'moveCursorForward',
-      swipeDownAction: { character: ']' },
-      backgroundStyle: 'functionBackgroundStyle',
-      notification: [
-        'rightButtonPreeditNotification',
-      ],
-    },
-    rightButtonPreeditNotification: {
-      notificationType: 'preeditChanged',
-      backgroundStyle: 'functionBackgroundStyle',
-      foregroundStyle: 'rightButtonPreeditForegroundStyle',
-      action: { sendKeys: 'Down' },
     },
 
     number1Button: createButton(
@@ -751,5 +648,6 @@ local keyboard(theme) =
     hintSymbolsStyles.getStyle(theme, hintSymbolsData.number) +
     toolbar.getToolBar(theme) +
     utils.genNumberStyles(fontSize, color, theme, center) +
-    utils.genFuncKeyStyles(fontSize, color, theme, center),
+    utils.genFuncKeyStyles(fontSize, color, theme, center) +
+    functions.makeFunctionButtons('', {}, 'numeric'),
 }
