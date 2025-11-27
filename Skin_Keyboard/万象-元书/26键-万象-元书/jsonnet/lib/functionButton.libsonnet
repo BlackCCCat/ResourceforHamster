@@ -177,7 +177,7 @@ local makeFunctionButtons(orientation, keyboardLayout, keyboard_type) =
     repeat_map,
     getSafeSize,
     true,
-    if keyboard_type == 'alphabetic' then false else true
+    true
     ),
     leftButtonPreeditNotification: createNotification(
         'left', 
@@ -194,7 +194,7 @@ local makeFunctionButtons(orientation, keyboardLayout, keyboard_type) =
     repeat_map,
     getSafeSize,
     true,
-    if keyboard_type == 'alphabetic'  || keyboard_type =='numeric' then false else true
+    if keyboard_type =='numeric' then false else true
     ),
     headButtonPreeditNotification: createNotification(
         'head', 
@@ -296,7 +296,7 @@ local makeFunctionButtons(orientation, keyboardLayout, keyboard_type) =
     repeat_map,
     getSafeSize,
     true,
-    if keyboard_type == 'alphabetic' then false else true
+    true
     ),
     rightButtonPreeditNotification: createNotification(
         'right', 
