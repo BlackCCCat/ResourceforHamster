@@ -1,5 +1,5 @@
 local LayoutType = import '../custom/Custom.libsonnet';
-local keyboardLayout_ = if LayoutType.with_functions_row then import '../lib/keyboardLayout.libsonnet' else import '../lib/keyboardLayoutWithoutFuncrow.libsonnet';
+local keyboardLayout_ = if LayoutType.with_functions_row then import '../lib/keyboardLayout.libsonnet' else import '../lib/keyboardLayoutWithoutFuncRow.libsonnet';
 
 
 local animation = import '../lib/animation.libsonnet';
