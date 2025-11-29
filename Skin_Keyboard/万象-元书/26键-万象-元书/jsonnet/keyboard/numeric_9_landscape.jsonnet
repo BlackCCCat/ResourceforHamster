@@ -265,6 +265,7 @@ local keyboard(theme) =
       action: 'backspace',
       repeatAction: 'backspace',
       swipeUpAction: { shortcut: '#deleteText' },
+      swipeDownAction: { shortcut: '#undo' },
     },
 
     backspaceButtonForegroundStyle: {

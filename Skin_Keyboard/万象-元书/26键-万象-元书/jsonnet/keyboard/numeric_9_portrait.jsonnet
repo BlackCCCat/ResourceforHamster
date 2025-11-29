@@ -237,6 +237,7 @@ local keyboard(theme) =
       action: 'backspace',
       repeatAction: 'backspace',
       swipeUpAction: { shortcut: '#deleteText' },
+      swipeDownAction: { shortcut: '#undo' },
     },
 
     backspaceButtonForegroundStyle: {
@@ -452,7 +453,7 @@ local keyboard(theme) =
     toolbar.getToolBar(theme) +
     utils.genNumberStyles(fontSize, color, theme, center) +
     utils.genFuncKeyStyles(fontSize, color, theme, center) +
-    functions.makeFunctionButtons('', {}, 'numeric') 
+    functions.makeFunctionButtons('', {}, 'numeric')
   ,
   // 导出keyboard给横屏用
   keyboard: keyboard,

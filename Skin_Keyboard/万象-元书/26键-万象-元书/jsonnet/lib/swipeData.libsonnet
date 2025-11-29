@@ -110,7 +110,7 @@ local LayoutType = import '../custom/Custom.libsonnet';
       label: { systemImageName: 'selection.pin.in.out' },
       // center: { x: 0.5, y: 0.8 },
     },
-    n:  if LayoutType.with_functions_row then {
+    n: if LayoutType.with_functions_row then {
       action: { sendKeys: 'N' },
       label: { systemImageName: 'calendar.badge.exclamationmark' },
       // center: { x: 0.5, y: 0.8 },
@@ -119,7 +119,7 @@ local LayoutType = import '../custom/Custom.libsonnet';
       label: { systemImageName: 'chevron.up' },
       // center: { x: 0.5, y: 0.8 },
     },
-    m:  if LayoutType.with_functions_row then {
+    m: if LayoutType.with_functions_row then {
       action: { character: '`' },
       label: { systemImageName: 'rectangle.3.group.fill' },
       // center: { x: 0.5, y: 0.8 },
@@ -131,6 +131,7 @@ local LayoutType = import '../custom/Custom.libsonnet';
     // '123': { action: { shortcut: '#方案切换' } },
     // space: { action: { shortcut: '#三选上屏' } },
     // spaceSecond: { action: { shortcut: '#三选上屏' } },
+    backspace: { action: { shortcut: '#undo' } },
   },
 
   // 中文九键划动
