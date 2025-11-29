@@ -59,8 +59,8 @@ local config = {
   },
 };
 
-local pinyin = import 'keyboard/pinyin_26_portrait.jsonnet';
-local alphabetic = import 'keyboard/alphabetic_26_portrait.jsonnet';
+local pinyin = import 'keyboard/pinyin_26.jsonnet';
+local alphabetic = import 'keyboard/alphabetic_26.jsonnet';
 local numericPortrait = import 'keyboard/numeric_9_portrait.jsonnet';
 local numericLandscape = import 'keyboard/numeric_9_landscape.jsonnet';
 local symbolic = import 'keyboard/symbolic_portrait.jsonnet';
