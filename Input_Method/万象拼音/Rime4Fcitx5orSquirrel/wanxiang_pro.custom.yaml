@@ -36,36 +36,38 @@ patch:
   # abbrev: 默认的缩写取 states 的第一个字符，abbrev 可自定义一个字符
   switches:
     - name: ascii_mode
-      states: [ 中文, 英文 ]
+      states: [中文, 英文]
       reset: 0
-    - name: ascii_punct  # 中英标点
-      states: [ 中标, 英标 ]
+    - name: ascii_punct # 中英标点
+      states: [中标, 英标]
     - name: full_shape
-      states: [ 半角, 全角 ]
+      states: [半角, 全角]
     - name: emoji
-      states: [ 表情关, 表情开 ]
+      states: [表情关, 表情开]
     - name: chinese_english
-      states: [ 翻译关, 翻译开 ]
+      states: [翻译关, 翻译开]
     - name: charset_filter
-      states: [ 小字集, 大字集 ]
+      states: [小字集, 大字集]
       reset: 1
     - name: chaifen_switch
-      states: [ 拆分关, 拆分开 ]
+      states: [拆分关, 拆分开]
       reset: 1
     - name: super_tips
-      states: [ 提示关, 提示开 ]
+      states: [提示关, 提示开]
       reset: 1
-    - options: [ raw_input, tone_display, full_pinyin ]   #开启后在输入编码的位置实时转换为带声调全拼或者不带声调全拼，不开启则采用系统配置原始编码，影响的是preedit_format,归属：super_preedit.lua
-      states: [ 原编码, 有声调, 无声调 ]
-      reset: 1     #对于开关组从0开始数，第几个就reset几可设为默认
-    - options: [ s2s, s2t, s2hk, s2tw ]
+    - options: [raw_input, tone_display, full_pinyin] #开启后在输入编码的位置实时转换为带声调全拼或者不带声调全拼，不开启则采用系统配置原始编码，影响的是preedit_format,归属：super_preedit.lua
+      states: [原编码, 有声调, 无声调]
+      reset: 1 #对于开关组从0开始数，第几个就reset几可设为默认
+    - options: [s2s, s2t, s2hk, s2tw]
       reset: 0
-      states: [ 简体, 通繁, 港繁, 臺繁 ]
-    - options: [ comment_off, fuzhu_hint, tone_hint ]  #开启后在候选的注释里面实时显示辅助码或者全拼声调，不开启则采用系统配置，影响的是comment_format，快捷键配套ctrl+a,归属：super_comment.lua
-      states: [ 注释关, 辅助开, 读音开 ]
+      states: [简体, 通繁, 港繁, 臺繁]
+    - options: [comment_off, fuzhu_hint, tone_hint] #开启后在候选的注释里面实时显示辅助码或者全拼声调，不开启则采用系统配置，影响的是comment_format，快捷键配套ctrl+a,归属：super_comment.lua
+      states: [注释关, 辅助开, 读音开]
       reset: 1
-    - name: char_priority                #多体现在编码重合但候选有单字或者多字的情况`引导的辅码查词时是否单字优先，全拼常见，类似于特定编码情况下、反查状态下的调序能力。归属：super_lookup.lua
+    - name: char_priority #多体现在编码重合但候选有单字或者多字的情况`引导的辅码查词时是否单字优先，全拼常见，类似于特定编码情况下、反查状态下的调序能力。归属：super_lookup.lua
       states: [词组先, 单字先]
+    - options: [mixed, zh_only, en_only]
+      states: [混合输入, 仅中文, 仅英文]
 
   # 以下两个bool防止表情和翻译下面出现辅助码
   emoji/+:
