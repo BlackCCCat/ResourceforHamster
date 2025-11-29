@@ -223,16 +223,19 @@
       selectedIndex: 1,
       size: { width: 50, height: 53 },
       list: [
-        { action: { sendKeys: 'Control+Shift+t' }, label: { text: '简中' } },  //0*
-        { action: { sendKeys: 'Control+Shift+t' }, label: { text: '繁中' } },  //1
-        { action: { sendKeys: 'Control+Shift+t' }, label: { text: '港中' } },  //2
-        { action: { sendKeys: 'Control+Shift+t' }, label: { text: '台中' } },  //3
-        { action: { sendKeys: 'Control+Shift+f' }, label: { text: '翻译' } },  //4
-        { action: { sendKeys: 'Control+Shift+f' }, label: { text: '原文' } },  //5
-        { action: { sendKeys: 'Control+Shift+m' }, label: { text: '拆分' } },  //6*
-        { action: { sendKeys: 'Control+Shift+m' }, label: { text: '拆关' } },  //7
-        { action: { sendKeys: 'Control+Shift+s' }, label: { text: '提示' } },  //8*
-        { action: { sendKeys: 'Control+Shift+s' }, label: { text: '提关' } },  //9
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '简中' } },  //0*
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '繁中' } },  //1
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '港中' } },  //2
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '台中' } },  //3
+        { action: { sendKeys: 'Control+e' }, label: { text: '翻译' } },  //4*
+        { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },  //5
+        { action: { sendKeys: 'Control+c' }, label: { text: '拆分' } },  //6*
+        { action: { sendKeys: 'Control+c' }, label: { text: '拆关' } },  //7
+        { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },  //8*
+        { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },  //9
+        { action: { sendKeys: 'Control+q' }, label: { text: '混合' } },  //10*
+        { action: { sendKeys: 'Control+q' }, label: { text: '中文' } },  //11
+        { action: { sendKeys: 'Control+q' }, label: { text: '英文' } },  //12
       ],
     },
     enter: {

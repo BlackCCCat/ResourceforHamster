@@ -774,12 +774,32 @@ local keyboard(theme, orientation, keyboardLayout) =
         },
       ],
     },
+    cn2enButtonHintSymbolsStyleOf10: super['cn2enButtonHintSymbolsStyleOf10'] + {
+      foregroundStyle: [
+        {
+          styleName: 'cn2enButtonHintSymbolsForegroundStyleOf10',
+          conditionKey: 'rime$mixed',
+          conditionValue: 'true',
+        },
+        {
+          styleName: 'cn2enButtonHintSymbolsForegroundStyleOf11',
+          conditionKey: 'rime$zh_only',
+          conditionValue: 'true',
+        },
+        {
+          styleName: 'cn2enButtonHintSymbolsForegroundStyleOf12',
+          conditionKey: 'rime$en_only',
+          conditionValue: 'true',
+        },
+      ],
+    },
     cn2enButtonHintSymbolsStyle: super['cn2enButtonHintSymbolsStyle'] + {
       symbolStyles: [
         'cn2enButtonHintSymbolsStyleOf0',
         'cn2enButtonHintSymbolsStyleOf4',
         'cn2enButtonHintSymbolsStyleOf6',
         'cn2enButtonHintSymbolsStyleOf8',
+        'cn2enButtonHintSymbolsStyleOf10',
       ],
     },
 
@@ -976,6 +996,7 @@ local keyboard(theme, orientation, keyboardLayout) =
       backgroundStyle: 'alphabeticBackgroundStyle',
       foregroundStyle: 'spaceRightButtonPreeditForegroundStyle',
       action: { sendKeys: 'Break' },
+      hintSymbolsStyle: 'cn2enButtonHintSymbolsStyle',  // 预编辑通知的长按菜单复用普通状态的长按菜单
     },
     spaceRightButtonPreeditForegroundStyle: {
       buttonStyleType: 'systemImage',
