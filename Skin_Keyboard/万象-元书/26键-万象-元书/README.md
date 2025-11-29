@@ -12,6 +12,6 @@
 3. 关于功能按键：如果不需要，可在`custom/Custom.libsonnet`中将`with_functions_row`值改为`false`
 
 # 获取更新
-请到ResourceforHamster(`https://github.com/BlackCCCat/ResourceforHamster`)获取可能的更新
+请到ResourceforHamster(`https://github.com/BlackCCCat/ResourceforHamster`)获取可能的更新，或者通过[该快捷指令](https://www.icloud.com/shortcuts/c541ddb2a1614732b2c9fde38bb89be6)自动下载最新版本并导入到元书输入法中
 
 - `26键-万象-元书.cskin`（对应release中`26-wanxiang.cskin`）
