@@ -36,6 +36,7 @@ patch:
       states: [词组先, 单字先]
     - options: [mixed, zh_only, en_only]
       states: [混合输入, 仅中文, 仅英文]
+      reset: 0
 
   # 输入引擎
   engine/processors/@before 3: lua_processor@*select_character # 以词定字，有了辅助码了，想开启可以注释掉
