@@ -1,4 +1,4 @@
-local is_cap = import '../custom/Custom.libsonnet';
+local is_cap = import '../custom/Custom.libsonnet';
 
 
 // 图片型
@@ -275,4 +275,5 @@ local genNumberStyles(fontSize, color, theme, center) = {
     genNumberStyles(fontSize, color, theme, center),
   genFuncKeyStyles(fontSize, color, theme, center):
     genFuncKeyStyles(fontSize, color, theme, center),
+
 }
