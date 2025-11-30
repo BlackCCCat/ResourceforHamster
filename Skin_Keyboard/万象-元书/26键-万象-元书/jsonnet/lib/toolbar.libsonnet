@@ -1,3 +1,4 @@
+local fixSymbol = import '../custom/Custom.libsonnet';
 local center = import 'center.libsonnet';
 local color = import 'color.libsonnet';
 local fontSize = import 'fontSize.libsonnet';
@@ -299,7 +300,7 @@ local getToolBar(theme) =
 
     toolbarButtonOpenAppForegroundStyle: {
       buttonStyleType: 'systemImage',
-      systemImageName: 'swirl.circle.righthalf.filled',
+      systemImageName: if fixSymbol.fix_sf_symbol then 'bubbles.and.sparkles.fill' else 'swirl.circle.righthalf.filled',
       normalColor: color[theme]['toolbar按键颜色'],
       highlightColor: color[theme]['toolbar按键颜色'],
       fontSize: fontSize['toolbar按键前景sf符号大小'],

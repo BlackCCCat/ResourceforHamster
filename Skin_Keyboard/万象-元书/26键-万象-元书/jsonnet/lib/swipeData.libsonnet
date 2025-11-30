@@ -103,7 +103,7 @@ local LayoutType = import '../custom/Custom.libsonnet';
     },
     b: if LayoutType.with_functions_row then {
       action: { sendKeys: 'R' },
-      label: { systemImageName: 'chineseyuanrenminbisign.square.fill' },
+      label: { systemImageName: if LayoutType.fix_sf_symbol then 'dollarsign.square.fill' else 'chineseyuanrenminbisign.square.fill' },
       // center: { x: 0.5, y: 0.8 },
     } else {
       action: { shortcut: '#selectText' },

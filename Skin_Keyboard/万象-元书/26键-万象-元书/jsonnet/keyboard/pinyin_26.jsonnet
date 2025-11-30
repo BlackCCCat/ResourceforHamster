@@ -487,7 +487,7 @@ local keyboard(theme, orientation, keyboardLayout) =
     },
     shiftButtonPreeditForegroundStyle: {
       buttonStyleType: 'systemImage',
-      systemImageName: 'inset.filled.lefthalf.arrow.left.rectangle',
+      systemImageName: if LayoutType.fix_sf_symbol then 'paragraphsign' else 'inset.filled.lefthalf.arrow.left.rectangle',
       normalColor: color[theme]['按键前景颜色'],
       highlightColor: color[theme]['按键前景颜色'],
       fontSize: fontSize['按键前景文字大小'],

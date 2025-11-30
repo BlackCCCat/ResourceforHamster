@@ -1,8 +1,6 @@
 local is_cap = import '../custom/Custom.libsonnet';
 
 
-// 图片型
-
 // key: 按键名, a-z, shift, space....
 // contentMode: center, scaleAspectFill 更多类型见文档
 // normalFile、highlightFile
@@ -66,7 +64,7 @@ local funcKeysystemImageNameMap = {
 
 local funcKeyPreeditsystemImageNameMap = {
   left: 'square.filled.and.line.vertical.and.square',
-  head: 'chevron.compact.up.chevron.compact.down',
+  head: if is_cap.fix_sf_symbol then 'arrow.up.arrow.down' else 'chevron.compact.up.chevron.compact.down',
   select: '1.circle',  // 'arrow.right',
   cut: '2.circle',  // 'arrow.up.right',
   copy: '3.circle',  // 'arrow.uturn.up',
