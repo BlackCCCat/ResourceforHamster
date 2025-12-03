@@ -72,7 +72,6 @@ local keyboard(theme, orientation, keyboardLayout) =
   slideForeground.slideForeground(theme) +
   functions.makeFunctionButtons(orientation, keyboardLayout, 'alphabetic') +
   {
-    [if std.objectHas(others, '英文键盘方案') then 'rimeSchema']: others['英文键盘方案'],
     preeditHeight: others[if orientation == 'portrait' then '竖屏' else '横屏']['preedit高度'],
     toolbarHeight: others[if orientation == 'portrait' then '竖屏' else '横屏']['toolbar高度'],
     keyboardHeight: others[if orientation == 'portrait' then '竖屏' else '横屏']['keyboard高度'],

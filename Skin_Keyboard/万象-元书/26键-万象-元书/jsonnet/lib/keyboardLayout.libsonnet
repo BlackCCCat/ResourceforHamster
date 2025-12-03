@@ -789,5 +789,5 @@ local color = import 'color.libsonnet';
           width: '273/784',
         },
       },
-    },
+    },    
 }

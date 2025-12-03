@@ -34,23 +34,7 @@ local config = {
       floating: 'numeric_9_portrait',
     },
   },
-  symbolic: {
-    iPhone: {
-      portrait: 'symbolic_portrait',
-      landscape: 'numeric_9_landscape',
-    },
-    iPad: {
-      portrait: 'symbolic_portrait',
-      landscape: 'numeric_9_landscape',
-      floating: 'symbolic_portrait',
-    },
-  },
-  emoji: {
-    iPhone: {
-      portrait: 'emoji_portrait',
-      landscape: 'emoji_landscape',
-    },
-  },
+
   panel: {
     iPhone: {
       portrait: 'panel_portrait',
@@ -61,11 +45,7 @@ local config = {
 
 local pinyin = import 'keyboard/pinyin_26.jsonnet';
 local alphabetic = import 'keyboard/alphabetic_26.jsonnet';
-local numericPortrait = import 'keyboard/numeric_9_portrait.jsonnet';
-local numericLandscape = import 'keyboard/numeric_9_landscape.jsonnet';
-local symbolic = import 'keyboard/symbolic_portrait.jsonnet';
-local emoji = import 'keyboard/emoji_portrait.jsonnet';
-local emojiLandscape = import 'keyboard/emoji_landscape.jsonnet';
+local numeric = import 'keyboard/numeric_9.jsonnet';
 local panel = import 'keyboard/panel.jsonnet';
 
 // 拼音
@@ -81,20 +61,11 @@ local lightAlphabeticLandscape = alphabetic.new('light', 'landscape');
 local darkAlphabeticLandscape = alphabetic.new('dark', 'landscape');
 
 // 数字
-local lightNumericPortrait = numericPortrait.new('light');
-local darkNumericPortrait = numericPortrait.new('dark');
-local lightNumericLandscape = numericLandscape.new('light');
-local darkNumericLandscape = numericLandscape.new('dark');
+local lightNumericPortrait = numeric.new('light', 'portrait');
+local darkNumericPortrait = numeric.new('dark', 'portrait');
+local lightNumericLandscape = numeric.new('light', 'landscape');
+local darkNumericLandscape = numeric.new('dark', 'landscape');
 
-// 符号
-local lightSymbolicPortrait = symbolic.new('light');
-local darkSymbolicPortrait = symbolic.new('dark');
-
-// emoji
-local lightEmojiPortrait = emoji.new('light');
-local darkEmojiPortrait = emoji.new('dark');
-local lightEmojiLandscape = emojiLandscape.new('light');
-local darkEmojiLandscape = emojiLandscape.new('dark');
 
 // 面板
 local lightPanelPortrait = panel.new('light', 'portrait');
@@ -121,16 +92,6 @@ local darkPanelLandscape = panel.new('dark', 'landscape');
   'dark/numeric_9_portrait.yaml': std.toString(darkNumericPortrait),
   'light/numeric_9_landscape.yaml': std.toString(lightNumericLandscape),
   'dark/numeric_9_landscape.yaml': std.toString(darkNumericLandscape),
-
-  // 符号
-  'light/symbolic_portrait.yaml': std.toString(lightSymbolicPortrait),
-  'dark/symbolic_portrait.yaml': std.toString(darkSymbolicPortrait),
-
-  // emoji
-  'light/emoji_portrait.yaml': std.toString(lightEmojiPortrait),
-  'dark/emoji_portrait.yaml': std.toString(darkEmojiPortrait),
-  'light/emoji_landscape.yaml': std.toString(lightEmojiLandscape),
-  'dark/emoji_landscape.yaml': std.toString(darkEmojiLandscape),
 
   // 面板
   'light/panel_portrait.yaml': std.toString(lightPanelPortrait),
