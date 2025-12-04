@@ -18,7 +18,7 @@ local config = {
       landscape: 'alphabetic_26_landscape',
     },
     iPad: {
-      portrait: 'alphabetic_26_landscape',
+      portrait: 'alphabetic_26_portrait',
       landscape: 'alphabetic_26_landscape',
       floating: 'alphabetic_26_portrait',
     },
