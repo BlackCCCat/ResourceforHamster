@@ -558,9 +558,10 @@ local getToolBar(theme) =
     },
     horizontalCandidateStyle: {
       insets: {
-        top: 8,
+        top: 3,
         bottom: 3,
         left: 5,
+        right: 5,
       },
       candidateStateButtonStyle: 'candidateStateButtonStyle',
       highlightBackgroundColor: 0,
