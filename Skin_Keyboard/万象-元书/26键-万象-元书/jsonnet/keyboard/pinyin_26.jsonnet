@@ -1,5 +1,5 @@
-local LayoutType = import '../custom/Custom.libsonnet';
-local keyboardLayout_ = if LayoutType.with_functions_row then import '../lib/keyboardLayout.libsonnet' else import '../lib/keyboardLayoutWithoutFuncRow.libsonnet';
+local Settings = import '../custom/Custom.libsonnet';
+local keyboardLayout_ = if Settings.with_functions_row then import '../lib/keyboardLayout.libsonnet' else import '../lib/keyboardLayoutWithoutFuncRow.libsonnet';
 
 local animation = import '../lib/animation.libsonnet';
 local center = import '../lib/center.libsonnet';
@@ -34,10 +34,10 @@ local createButton(key, size, bounds, root, isUpper=true) = {
     function(x) x != null,
     [
       key + 'ButtonForegroundStyle',
-      if LayoutType.show_swipe then
+      if Settings.show_swipe then
         if std.objectHas(swipe_up, key) then key + 'ButtonUpForegroundStyle' else null
       else null,
-      if LayoutType.show_swipe then
+      if Settings.show_swipe then
         if std.objectHas(swipe_down, key) then key + 'ButtonDownForegroundStyle' else null
       else null,
     ]
@@ -490,7 +490,7 @@ local keyboard(theme, orientation, keyboardLayout) =
     },
     shiftButtonPreeditForegroundStyle: {
       buttonStyleType: 'systemImage',
-      systemImageName: if LayoutType.fix_sf_symbol then 'paragraphsign' else 'inset.filled.lefthalf.arrow.left.rectangle',
+      systemImageName: if Settings.fix_sf_symbol then 'paragraphsign' else 'inset.filled.lefthalf.arrow.left.rectangle',
       normalColor: color[theme]['按键前景颜色'],
       highlightColor: color[theme]['按键前景颜色'],
       fontSize: fontSize['按键前景文字大小'],
@@ -983,7 +983,7 @@ local keyboard(theme, orientation, keyboardLayout) =
       notificationType: 'preeditChanged',
       backgroundStyle: 'alphabeticBackgroundStyle',
       foregroundStyle: 'spaceRightButtonPreeditForegroundStyle',
-      action: { sendKeys: 'Break' },
+      action: Settings.tips_button_action,
       hintSymbolsStyle: 'cn2enButtonHintSymbolsStyle',  // 预编辑通知的长按菜单复用普通状态的长按菜单
     },
     spaceRightButtonPreeditForegroundStyle: {

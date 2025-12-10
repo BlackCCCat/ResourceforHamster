@@ -3,4 +3,5 @@
   is_letter_capital: false,  // 26个字母按键大小写显示，false为显示小写
   fix_sf_symbol: false,  // 是否修复部分sf_symbol不显示的情况，false为不修复
   show_swipe: true, // 是否显示上下划前景
+  tips_button_action: { sendKeys: 'Break' }, // 根据自己方案中tips上屏的按键进行调整，万象方案默认为 { character: ',' }
 }

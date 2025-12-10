@@ -1,4 +1,4 @@
-local LayoutType = import '../custom/Custom.libsonnet';
+local Settings = import '../custom/Custom.libsonnet';
 local keyboardLayout_ = import '../lib/numericLayout.libsonnet';
 
 local chooseLayout(selector) =
@@ -57,7 +57,7 @@ local keyboard(theme, orientation) =
     keyboardHeight: others[if orientation == 'portrait' then '竖屏' else '横屏']['keyboard高度'],
 
 
-    keyboardLayout: chooseLayout(LayoutType.with_functions_row),
+    keyboardLayout: chooseLayout(Settings.with_functions_row),
     rowofFunctionStyle: {
       size: {
         height: { percentage: if orientation == 'portrait' then 0.17 else 0.185 },
