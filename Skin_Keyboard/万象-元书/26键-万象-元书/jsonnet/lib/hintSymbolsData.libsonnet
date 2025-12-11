@@ -219,6 +219,13 @@
         { action: { character: 'M' }, label: { text: 'M' } },
       ],
     },
+    spaceLeft: {
+      selectedIndex: 1,
+      list: [
+        { action: { symbol: ',' }, label: { text: ',' } },
+        { action: { symbol: '.' }, label: { text: '.' } },
+      ],
+    },
     cn2en: {
       selectedIndex: 1,
       size: { width: 50, height: 53 },
