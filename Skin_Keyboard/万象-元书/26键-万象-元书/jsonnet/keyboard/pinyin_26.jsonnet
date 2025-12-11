@@ -829,7 +829,7 @@ local keyboard(theme, orientation, keyboardLayout) =
       backgroundStyle: 'alphabeticBackgroundStyle',
       foregroundStyle: [
         'spaceButtonForegroundStyle',
-        'spaceButtonForegroundStyle1',
+        if Settings.show_wanxiang then 'spaceButtonForegroundStyle1' else null,
       ],
       action: 'space',
       notification: [
@@ -841,7 +841,7 @@ local keyboard(theme, orientation, keyboardLayout) =
       backgroundStyle: 'alphabeticBackgroundStyle',
       foregroundStyle: [
         'spaceButtonForegroundStyle',
-        'spaceButtonForegroundStyle1',
+        if Settings.show_wanxiang then 'spaceButtonForegroundStyle1' else null,
       ],
       swipeUpAction: { shortcut: '#次选上屏' },
       swipeDownAction: { shortcut: '#三选上屏' },
@@ -910,7 +910,7 @@ local keyboard(theme, orientation, keyboardLayout) =
       backgroundStyle: 'alphabeticBackgroundStyle',
       foregroundStyle: [
         'spaceSecondButtonForegroundStyle',
-        'spaceSecondButtonForegroundStyle1',
+        if Settings.show_wanxiang then 'spaceSecondButtonForegroundStyle1' else null,
       ],
       action: 'space',
       notification: [
@@ -922,7 +922,7 @@ local keyboard(theme, orientation, keyboardLayout) =
       backgroundStyle: 'alphabeticBackgroundStyle',
       foregroundStyle: [
         'spaceSecondButtonForegroundStyle',
-        'spaceSecondButtonForegroundStyle1',
+        if Settings.show_wanxiang then 'spaceSecondButtonForegroundStyle1' else null,
       ],
       swipeUpAction: { shortcut: '#次选上屏' },
       swipeDownAction: { shortcut: '#三选上屏' },

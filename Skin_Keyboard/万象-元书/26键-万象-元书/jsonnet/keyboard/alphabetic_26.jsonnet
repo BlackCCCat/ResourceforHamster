@@ -658,7 +658,7 @@ local keyboard(theme, orientation, keyboardLayout) =
       backgroundStyle: 'alphabeticBackgroundStyle',
       foregroundStyle: [
         'spaceButtonForegroundStyle',
-        'spaceButtonForegroundStyle1',
+        if Settings.show_wanxiang then 'spaceButtonForegroundStyle1' else null,
       ],
       action: 'space',
     },
@@ -719,7 +719,7 @@ local keyboard(theme, orientation, keyboardLayout) =
       backgroundStyle: 'alphabeticBackgroundStyle',
       foregroundStyle: [
         'spaceSecondButtonForegroundStyle',
-        'spaceSecondButtonForegroundStyle1',
+        if Settings.show_wanxiang then 'spaceSecondButtonForegroundStyle1' else null,
       ],
       action: 'space',
     },
