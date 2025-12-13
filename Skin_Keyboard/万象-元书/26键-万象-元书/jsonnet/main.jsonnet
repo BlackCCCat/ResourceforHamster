@@ -7,8 +7,8 @@ local config = {
       landscape: 'pinyin_26_landscape',
     },
     iPad: {
-      portrait: 'pinyin_26_landscape',
-      landscape: 'pinyin_26_landscape',
+      portrait: 'pinyin_26_portrait',
+      landscape: 'pinyin_26_portrait',
       floating: 'pinyin_26_portrait',
     },
   },
@@ -19,7 +19,7 @@ local config = {
     },
     iPad: {
       portrait: 'alphabetic_26_portrait',
-      landscape: 'alphabetic_26_landscape',
+      landscape: 'alphabetic_26_portrait',
       floating: 'alphabetic_26_portrait',
     },
   },
