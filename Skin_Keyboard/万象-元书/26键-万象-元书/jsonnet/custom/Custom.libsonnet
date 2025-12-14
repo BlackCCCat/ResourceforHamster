@@ -1,8 +1,9 @@
 {
-  with_functions_row: true,  // true为有功能按键，false为无功能按键
+  with_functions_row: true,  // 手机键盘：true为有功能按键，false为无功能按键
+  ipad_with_functions_row: false,  // iPad键盘默认不带功能按键
   is_letter_capital: false,  // 26个字母按键大小写显示，false为显示小写
   fix_sf_symbol: false,  // 是否修复部分sf_symbol不显示的情况，false为不修复
-  show_swipe: true, // 是否显示上下划前景
-  tips_button_action: { sendKeys: 'Break' }, // 根据自己方案中tips上屏的按键进行调整，万象方案默认为 { character: ',' }
-  show_wanxiang: true, // 空格按键上是否显示“万象”标识
+  show_swipe: true,  // 是否显示上下划前景
+  tips_button_action: { sendKeys: 'Break' },  // 根据自己方案中tips上屏的按键进行调整，万象方案默认为 { character: ',' }
+  show_wanxiang: true,  // 空格按键上是否显示“万象”标识
 }

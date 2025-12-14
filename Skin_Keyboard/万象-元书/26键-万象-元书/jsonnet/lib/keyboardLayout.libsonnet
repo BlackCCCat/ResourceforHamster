@@ -89,13 +89,121 @@ local color = import 'color.libsonnet';
         ],
         rowofFunctionStyle: {
           size: {
-            height: {percentage: 0.17},
+            height: { percentage: 0.17 },
           },
           backgroundStyle: 'keyboardBackgroundStyle',
         },
         keyboardStyle: {
           size: {
-            height: {percentage: 0.73},
+            height: { percentage: 0.73 },
+          },
+          insets: {
+            top: 3,
+            bottom: 3,
+            left: 4,
+            right: 4,
+          },
+          backgroundStyle: 'keyboardBackgroundStyle',
+        },
+        keyboardBackgroundStyle: {
+          buttonStyleType: 'geometry',
+          normalColor: color[theme]['键盘背景颜色'],
+        },
+      },
+      'ipad中文26键': {
+        keyboardLayout: [
+          {
+            HStack: {
+              style: 'rowofFunctionStyle',
+              subviews: [
+                { Cell: 'leftButton' },
+                { Cell: 'headButton' },
+                { Cell: 'selectButton' },
+                { Cell: 'cutButton' },
+                { Cell: 'copyButton' },
+                { Cell: 'pasteButton' },
+                { Cell: 'tailButton' },
+                { Cell: 'rightButton' },
+              ],
+            },
+          },
+          {
+            HStack: {
+              style: 'keyboardStyle',
+              subviews: [
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'qButton' },
+                      { Cell: 'wButton' },
+                      { Cell: 'eButton' },
+                      { Cell: 'rButton' },
+                      { Cell: 'tButton' },
+                      { Cell: 'yButton' },
+                      { Cell: 'uButton' },
+                      { Cell: 'iButton' },
+                      { Cell: 'oButton' },
+                      { Cell: 'pButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'aButton' },
+                      { Cell: 'sButton' },
+                      { Cell: 'dButton' },
+                      { Cell: 'fButton' },
+                      { Cell: 'gButton' },
+                      { Cell: 'hButton' },
+                      { Cell: 'jButton' },
+                      { Cell: 'kButton' },
+                      { Cell: 'lButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'shiftButton' },
+                      { Cell: 'zButton' },
+                      { Cell: 'xButton' },
+                      { Cell: 'cButton' },
+                      { Cell: 'vButton' },
+                      { Cell: 'bButton' },
+                      { Cell: 'nButton' },
+                      { Cell: 'mButton' },
+                      { Cell: 'backspaceButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'nextButton' },
+                      { Cell: 'ipad123Button' },
+                      // { Cell: 'cn2enButton' },
+                      { Cell: 'spaceLeftButton' },
+                      { Cell: 'spaceButton' },
+                      { Cell: 'cn2enButton' },
+                      // { Cell: 'spaceRightButton' },
+                      { Cell: 'enterButton' },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+        rowofFunctionStyle: {
+          size: {
+            height: { percentage: 0.17 },
+          },
+          backgroundStyle: 'keyboardBackgroundStyle',
+        },
+        keyboardStyle: {
+          size: {
+            height: { percentage: 0.73 },
           },
           insets: {
             top: 3,
@@ -274,13 +382,13 @@ local color = import 'color.libsonnet';
         ],
         rowofFunctionStyle: {
           size: {
-            height: {percentage: 0.17},
+            height: { percentage: 0.17 },
           },
           backgroundStyle: 'keyboardBackgroundStyle',
         },
         keyboardStyle: {
           size: {
-            height: {percentage: 0.73},
+            height: { percentage: 0.73 },
           },
           insets: {
             top: 3,
@@ -397,13 +505,13 @@ local color = import 'color.libsonnet';
         ],
         rowofFunctionStyle: {
           size: {
-            height: {percentage: 0.17},
+            height: { percentage: 0.17 },
           },
           backgroundStyle: 'keyboardBackgroundStyle',
         },
         keyboardStyle: {
           size: {
-            height: {percentage: 0.73},
+            height: { percentage: 0.73 },
           },
           insets: {
             top: 3,
@@ -418,7 +526,114 @@ local color = import 'color.libsonnet';
           normalColor: color[theme]['键盘背景颜色'],
         },
       },
-
+      'ipad英文26键': {
+        keyboardLayout: [
+          {
+            HStack: {
+              style: 'rowofFunctionStyle',
+              subviews: [
+                { Cell: 'leftButton' },
+                { Cell: 'headButton' },
+                { Cell: 'selectButton' },
+                { Cell: 'cutButton' },
+                { Cell: 'copyButton' },
+                { Cell: 'pasteButton' },
+                { Cell: 'tailButton' },
+                { Cell: 'rightButton' },
+              ],
+            },
+          },
+          {
+            HStack: {
+              style: 'keyboardStyle',
+              subviews: [
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'qButton' },
+                      { Cell: 'wButton' },
+                      { Cell: 'eButton' },
+                      { Cell: 'rButton' },
+                      { Cell: 'tButton' },
+                      { Cell: 'yButton' },
+                      { Cell: 'uButton' },
+                      { Cell: 'iButton' },
+                      { Cell: 'oButton' },
+                      { Cell: 'pButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'aButton' },
+                      { Cell: 'sButton' },
+                      { Cell: 'dButton' },
+                      { Cell: 'fButton' },
+                      { Cell: 'gButton' },
+                      { Cell: 'hButton' },
+                      { Cell: 'jButton' },
+                      { Cell: 'kButton' },
+                      { Cell: 'lButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'shiftButton' },
+                      { Cell: 'zButton' },
+                      { Cell: 'xButton' },
+                      { Cell: 'cButton' },
+                      { Cell: 'vButton' },
+                      { Cell: 'bButton' },
+                      { Cell: 'nButton' },
+                      { Cell: 'mButton' },
+                      { Cell: 'backspaceButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'nextButton' },
+                      { Cell: 'ipad123Button' },
+                      // { Cell: 'en2cnButton' },
+                      { Cell: 'spaceLeftButton' },
+                      { Cell: 'spaceButton' },
+                      { Cell: 'en2cnButton' },
+                      // { Cell: 'spaceRightButton' },
+                      { Cell: 'enterButton' },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+        rowofFunctionStyle: {
+          size: {
+            height: { percentage: 0.17 },
+          },
+          backgroundStyle: 'keyboardBackgroundStyle',
+        },
+        keyboardStyle: {
+          size: {
+            height: { percentage: 0.73 },
+          },
+          insets: {
+            top: 3,
+            bottom: 3,
+            left: 4,
+            right: 4,
+          },
+          backgroundStyle: 'keyboardBackgroundStyle',
+        },
+        keyboardBackgroundStyle: {
+          buttonStyleType: 'geometry',
+          normalColor: color[theme]['键盘背景颜色'],
+        },
+      },
 
       '横屏英文26键': {
         keyboardLayout: [
@@ -583,13 +798,13 @@ local color = import 'color.libsonnet';
         ],
         rowofFunctionStyle: {
           size: {
-            height: {percentage: 0.17},
+            height: { percentage: 0.17 },
           },
           backgroundStyle: 'keyboardBackgroundStyle',
         },
         keyboardStyle: {
           size: {
-            height: {percentage: 0.73},
+            height: { percentage: 0.73 },
           },
           insets: {
             top: 3,
@@ -680,6 +895,16 @@ local color = import 'color.libsonnet';
         '123键size': {
           width: {
             percentage: 0.2,  // 0.12,
+          },
+        },
+        'ipad123键size': {
+          width: {
+            percentage: 0.1,
+          },
+        },
+        'next键size': {
+          width: {
+            percentage: 0.1,
           },
         },
         'space键size': {
@@ -789,5 +1014,5 @@ local color = import 'color.libsonnet';
           width: '273/784',
         },
       },
-    },    
+    },
 }
