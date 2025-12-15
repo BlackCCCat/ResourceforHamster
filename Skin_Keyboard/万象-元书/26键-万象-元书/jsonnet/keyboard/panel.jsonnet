@@ -1,7 +1,7 @@
 local center = import '../lib/center.libsonnet';
 local color = import '../lib/color.libsonnet';
 local fontSize = import '../lib/fontSize.libsonnet';
-
+// local Settings = import '../custom/Custom.libsonnet';
 local theme = std.extVar('theme');
 
 // key: 按键名称
@@ -38,7 +38,7 @@ local keyboard(theme, orientation) =
   createButton(
     'KeyboardSettings',
     { openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSettings' },
-    'keyboard',
+    'gearshape.fill',
     '键盘设置',
     theme
   ) +
@@ -46,15 +46,15 @@ local keyboard(theme, orientation) =
   createButton(
     'Switcher',
     { shortcutCommand: '#RimeSwitcher' },
-    'switch.2',
+    'filemenu.and.selection',
     '方案开关',
     theme
   ) +
   createButton(
-    'Deploy',
-    { openURL: 'hamster3://com.ihsiao.apps.hamster3/rime?action=deploy' },
-    'command.circle',
-    '重新部署',
+    'Skin',
+    { openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSkins' },
+    'paintpalette.fill',
+    '皮肤管理',
     theme
   ) +
   createButton(
@@ -72,10 +72,10 @@ local keyboard(theme, orientation) =
     theme
   ) +
   createButton(
-    'Sync',
-    { openURL: 'hamster3://com.ihsiao.apps.hamster3/rime?action=sync' },
-    'arrow.trianglehead.2.clockwise.rotate.90',
-    '同步方案',
+    'Performance',
+    { shortcut: '#keyboardPerformance' },
+    'gauge.with.dots.needle.bottom.50percent',
+    '内存占用',
     theme
   ) +
   createButton(
@@ -107,10 +107,10 @@ local keyboard(theme, orientation) =
       {
         HStack: {
           subviews: [
-            { Cell: 'DeployButton' },
-            { Cell: 'SyncButton' },
+            { Cell: 'SkinButton' },
             { Cell: 'ScriptButton' },
             { Cell: 'InputSchemaButton' },
+            { Cell: 'PerformanceButton' },
           ],
         },
       },
