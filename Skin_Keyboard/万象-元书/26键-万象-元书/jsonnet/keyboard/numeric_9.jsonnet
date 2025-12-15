@@ -1,3 +1,5 @@
+local deviceType = 'iPhone';
+
 local Settings = import '../custom/Custom.libsonnet';
 local keyboardLayout_ = import '../lib/numericLayout.libsonnet';
 
@@ -27,8 +29,8 @@ local slideForeground = import '../lib/slideForeground.libsonnet';
 local functions = import '../lib/functionButton.libsonnet';
 
 // 上下和下划的数据
-local swipe_up = if std.objectHas(swipeData, 'number_swipe_up') then swipeData.number_swipe_up else {};
-local swipe_down = if std.objectHas(swipeData, 'number_swipe_up') then swipeData.number_swipe_down else {};
+local swipe_up = if std.objectHas(swipeData.genSwipeData(deviceType), 'number_swipe_up') then swipeData.genSwipeData(deviceType).number_swipe_up else {};
+local swipe_down = if std.objectHas(swipeData.genSwipeData(deviceType), 'number_swipe_up') then swipeData.genSwipeData(deviceType).number_swipe_down else {};
 
 local createButton(key, size, bounds, root) = {
   [if size != {} then 'size']: size,
@@ -57,7 +59,7 @@ local keyboard(theme, orientation) =
     keyboardHeight: others[if orientation == 'portrait' then '竖屏' else '横屏']['keyboard高度'],
 
 
-    keyboardLayout: chooseLayout(Settings.with_functions_row),
+    keyboardLayout: chooseLayout(Settings.with_functions_row[deviceType]),
     rowofFunctionStyle: {
       size: {
         height: { percentage: if orientation == 'portrait' then 0.17 else 0.185 },

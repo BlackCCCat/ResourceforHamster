@@ -1,8 +1,10 @@
+local deviceType = 'iPhone';
+
 local swipeData = import '../lib/swipeData.libsonnet';
 
 // 上下和下划的数据
-local swipe_up = if std.objectHas(swipeData, 'swipe_up') then swipeData.swipe_up else {};
-local swipe_down = if std.objectHas(swipeData, 'swipe_down') then swipeData.swipe_down else {};
+local swipe_up = if std.objectHas(swipeData.genSwipeData(deviceType), 'swipe_up') then swipeData.genSwipeData(deviceType).swipe_up else {};
+local swipe_down = if std.objectHas(swipeData.genSwipeData(deviceType), 'swipe_down') then swipeData.genSwipeData(deviceType).swipe_down else {};
 
 local createFunctionButton(key, bg, action_map, swipe_up_map, swipe_down_map, repeat_map, size, isUpper=true, is_notification=true) = {
   size: size,

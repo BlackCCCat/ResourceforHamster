@@ -1,5 +1,7 @@
 local Settings = import '../custom/Custom.libsonnet';
 
+
+local genSwipeData(deviceType) = 
 {
   /*
   说明:
@@ -74,7 +76,7 @@ local Settings = import '../custom/Custom.libsonnet';
       label: { systemImageName: 'av.remote.fill' },
       // center: { x: 0.5, y: 0.8 },  // 不同于其他按键的偏移，可这样设置，例如这里zxcvbnm的下划都在按键正下方
     },
-    x: if Settings.with_functions_row then {
+    x: if Settings.with_functions_row[deviceType] then {
       action: { sendKeys: 'onl' },
       label: { systemImageName: 'clock.arrow.circlepath' },
       // center: { x: 0.5, y: 0.8 },
@@ -83,7 +85,7 @@ local Settings = import '../custom/Custom.libsonnet';
       label: { systemImageName: 'scissors' },
       // center: { x: 0.5, y: 0.8 },
     },
-    c: if Settings.with_functions_row then {
+    c: if Settings.with_functions_row[deviceType] then {
       action: { sendKeys: 'orq' },
       label: { systemImageName: 'calendar' },
       // center: { x: 0.5, y: 0.8 },
@@ -92,7 +94,7 @@ local Settings = import '../custom/Custom.libsonnet';
       label: { systemImageName: 'arrow.up.doc.on.clipboard' },
       // center: { x: 0.5, y: 0.8 },
     },
-    v: if Settings.with_functions_row then {
+    v: if Settings.with_functions_row[deviceType] then {
       action: { sendKeys: 'osj' },
       label: { systemImageName: 'clock.circle' },
       // center: { x: 0.5, y: 0.8 },
@@ -101,7 +103,7 @@ local Settings = import '../custom/Custom.libsonnet';
       label: { systemImageName: 'doc.on.clipboard.fill' },
       // center: { x: 0.5, y: 0.8 },
     },
-    b: if Settings.with_functions_row then {
+    b: if Settings.with_functions_row[deviceType] then {
       action: { sendKeys: 'R' },
       label: { systemImageName: if Settings.fix_sf_symbol then 'dollarsign.square.fill' else 'chineseyuanrenminbisign.square.fill' },
       // center: { x: 0.5, y: 0.8 },
@@ -110,7 +112,7 @@ local Settings = import '../custom/Custom.libsonnet';
       label: { systemImageName: 'selection.pin.in.out' },
       // center: { x: 0.5, y: 0.8 },
     },
-    n: if Settings.with_functions_row then {
+    n: if Settings.with_functions_row[deviceType] then {
       action: { sendKeys: 'N' },
       label: { systemImageName: 'calendar.badge.exclamationmark' },
       // center: { x: 0.5, y: 0.8 },
@@ -119,7 +121,7 @@ local Settings = import '../custom/Custom.libsonnet';
       label: { systemImageName: 'chevron.up' },
       // center: { x: 0.5, y: 0.8 },
     },
-    m: if Settings.with_functions_row then {
+    m: if Settings.with_functions_row[deviceType] then {
       action: { character: '`' },
       label: { systemImageName: 'rectangle.3.group.fill' },
       // center: { x: 0.5, y: 0.8 },
@@ -135,26 +137,32 @@ local Settings = import '../custom/Custom.libsonnet';
   },
 
   // 中文九键划动
-  pinyin9_swipe_up: {
-    '1': { action: { symbol: '1' }, label: { text: '1' } },
-    '2': { action: { symbol: '2' }, label: { text: '2' } },
-    '3': { action: { symbol: '3' }, label: { text: '3' } },
-    '4': { action: { symbol: '4' }, label: { text: '4' } },
-    '5': { action: { symbol: '5' }, label: { text: '5' } },
-    '6': { action: { symbol: '6' }, label: { text: '6' } },
-    '7': { action: { symbol: '7' }, label: { text: '7' } },
-    '8': { action: { symbol: '8' }, label: { text: '8' } },
-    '9': { action: { symbol: '9' }, label: { text: '9' } },
-    space: { action: { symbol: '0' }, label: { text: '0' } },
+  number_swipe_up: {
+    // '1': { action: { symbol: '1' }, label: { text: '1' } },
+    // '2': { action: { symbol: '2' }, label: { text: '2' } },
+    // '3': { action: { symbol: '3' }, label: { text: '3' } },
+    // '4': { action: { symbol: '4' }, label: { text: '4' } },
+    // '5': { action: { symbol: '5' }, label: { text: '5' } },
+    // '6': { action: { symbol: '6' }, label: { text: '6' } },
+    // '7': { action: { symbol: '7' }, label: { text: '7' } },
+    // '8': { action: { symbol: '8' }, label: { text: '8' } },
+    // '9': { action: { symbol: '9' }, label: { text: '9' } },
+    space:{ action: { shortcut: '#次选上屏' } },
   },
-  pinyin9_swipe_down: {
-    '3': { action: { sendKeys: 'dt' }, label: { text: '时间' } },
-    '4': { action: { shortcut: '#行首' }, label: { text: '行首' } },
-    '5': { action: { shortcut: '#selectText' }, label: { text: '全选' } },
-    '6': { action: { shortcut: '#行尾' }, label: { text: '行尾' } },
-    '7': { action: { shortcut: '#cut' }, label: { text: '剪切' } },
-    '8': { action: { shortcut: '#copy' }, label: { text: '复制' } },
-    '9': { action: { shortcut: '#paste' }, label: { text: '粘贴' } },
+  number_swipe_down: {
+    // '3': { action: { sendKeys: 'dt' }, label: { text: '时间' } },
+    // '4': { action: { shortcut: '#行首' }, label: { text: '行首' } },
+    // '5': { action: { shortcut: '#selectText' }, label: { text: '全选' } },
+    // '6': { action: { shortcut: '#行尾' }, label: { text: '行尾' } },
+    // '7': { action: { shortcut: '#cut' }, label: { text: '剪切' } },
+    // '8': { action: { shortcut: '#copy' }, label: { text: '复制' } },
+    // '9': { action: { shortcut: '#paste' }, label: { text: '粘贴' } },
+    space: { action: { shortcut: '#三选上屏' } },
 
   },
+};
+
+
+{
+  genSwipeData(deviceType): genSwipeData(deviceType)
 }

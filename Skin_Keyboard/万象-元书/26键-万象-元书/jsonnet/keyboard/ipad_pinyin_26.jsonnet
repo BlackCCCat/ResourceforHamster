@@ -1,5 +1,7 @@
+local deviceType = 'iPad';
+
 local Settings = import '../custom/Custom.libsonnet';
-local keyboardLayout_ = if Settings.ipad_with_functions_row then import '../lib/keyboardLayout.libsonnet' else import '../lib/keyboardLayoutWithoutFuncRow.libsonnet';
+local keyboardLayout_ = if Settings.with_functions_row[deviceType] then import '../lib/keyboardLayout.libsonnet' else import '../lib/keyboardLayoutWithoutFuncRow.libsonnet';
 
 local animation = import '../lib/animation.libsonnet';
 local center = import '../lib/center.libsonnet';
@@ -21,8 +23,8 @@ local slideForeground = import '../lib/slideForeground.libsonnet';
 local functions = import '../lib/functionButton.libsonnet';
 
 // 上下和下划的数据
-local swipe_up = if std.objectHas(swipeData, 'swipe_up') then swipeData.swipe_up else {};
-local swipe_down = if std.objectHas(swipeData, 'swipe_down') then swipeData.swipe_down else {};
+local swipe_up = if std.objectHas(swipeData.genSwipeData(deviceType), 'swipe_up') then swipeData.genSwipeData(deviceType).swipe_up else {};
+local swipe_down = if std.objectHas(swipeData.genSwipeData(deviceType), 'swipe_down') then swipeData.genSwipeData(deviceType).swipe_down else {};
 
 local letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
