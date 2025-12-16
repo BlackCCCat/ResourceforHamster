@@ -87,9 +87,10 @@ local genStandardKey(key, orientation, keyboardLayout, root) = {
 };
 
 local keyboard(theme, orientation, keyboardLayout) =
+  local hintStyles = hintSymbolsStyles.getStyle(theme, hintSymbolsData.alphabetic);
   keyboardLayout[if orientation == 'portrait' then '竖屏英文26键' else '横屏英文26键'] +
   swipeStyles.getStyle('en', theme, swipe_up, swipe_down) +
-  hintSymbolsStyles.getStyle(theme, hintSymbolsData.alphabetic) +
+  hintStyles +
   toolbar.getToolBar(theme) +
   utils.genAlphabeticStyles(fontSize, color, theme, center) +
   utils.genFuncKeyStyles(fontSize, color, theme, center) +
@@ -101,7 +102,7 @@ local keyboard(theme, orientation, keyboardLayout) =
     keyboardHeight: others[if orientation == 'portrait' then '竖屏' else '横屏']['keyboard高度'],
   } +
   // 批量生成标准按键
-  std.foldl(function(acc, key) acc + genStandardKey(key, orientation, keyboardLayout, $), standardKeys, {}) +
+  std.foldl(function(acc, key) acc + genStandardKey(key, orientation, keyboardLayout, hintStyles), standardKeys, {}) +
   {
     tButton: createButton(
       't',

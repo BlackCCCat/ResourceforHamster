@@ -5,4 +5,5 @@
   show_swipe: true,  // 是否显示上下划前景
   tips_button_action: { sendKeys: 'Break' },  // 根据自己方案中tips上屏的按键进行调整，万象方案默认为 { character: ',' }
   show_wanxiang: true,  // 空格按键上是否显示“万象”标识
+  ios26_style: true,  // 是否启用iOS26风格（统一按键颜色，Light模式下调整高亮）
 }

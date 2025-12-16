@@ -1,11 +1,19 @@
 local pinyin_base = import 'pinyin_26.jsonnet';
 local toolbar_ipad = import '../lib/toolbar-ipad.libsonnet';
 local ipad_common = import '../lib/ipad_common.libsonnet';
+local utils = import '../lib/utils.libsonnet';
+local color = import '../lib/color.libsonnet';
+local center = import '../lib/center.libsonnet';
+local fontSize = import '../lib/fontSize.libsonnet';
 
 // iPad 使用的 deviceType 和相关的库
 local deviceType = 'iPad';
 local Settings = import '../custom/Custom.libsonnet';
 local keyboardLayout_ = if Settings.with_functions_row[deviceType] then import '../lib/keyboardLayout.libsonnet' else import '../lib/keyboardLayoutWithoutFuncRow.libsonnet';
+
+local ipad_fontSize = fontSize + {
+  '按键前景文字大小': 24,
+};
 
 // 定义一个专门用于生成 iPad 键盘的函数
 local ipad_keyboard(theme, orientation, keyboardLayout) =
@@ -17,7 +25,8 @@ local ipad_keyboard(theme, orientation, keyboardLayout) =
     // 2.1. 使用 iPad 的专属布局
     keyboardLayout['ipad中文26键'] +
     toolbar_ipad.getToolBar(theme) +
-    ipad_common.getOverrides(theme, keyboardLayout, pinyin_base.createButton, $);
+    ipad_common.getOverrides(theme, keyboardLayout, pinyin_base.createButton, base_def) +
+    utils.genPinyinStyles(ipad_fontSize, color, theme, center);
 
   // 3. 最后，将 iPad 的 "补丁" 合并到 iPhone 的基础定义上，同名字段会被覆盖
   base_def + ipad_overrides;
