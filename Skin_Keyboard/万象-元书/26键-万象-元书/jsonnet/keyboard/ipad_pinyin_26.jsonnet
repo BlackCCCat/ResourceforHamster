@@ -1,4 +1,5 @@
 local pinyin_base = import 'pinyin_26.jsonnet';
+local toolbar_ipad = import '../lib/toolbar-ipad.libsonnet';
 
 // iPad 使用的 deviceType 和相关的库
 local deviceType = 'iPad';
@@ -17,6 +18,7 @@ local ipad_keyboard(theme, orientation, keyboardLayout) =
   local ipad_overrides =
     // 2.1. 使用 iPad 的专属布局
     keyboardLayout['ipad中文26键'] +
+    toolbar_ipad.getToolBar(theme) +
     {
       // 2.2. 通过 ::: 将 iPhone 的 123Button 设置为 null，从最终结果中移除它
       '123Button':: null,

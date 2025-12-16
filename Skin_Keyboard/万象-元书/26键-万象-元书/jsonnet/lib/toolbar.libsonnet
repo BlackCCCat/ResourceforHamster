@@ -65,7 +65,7 @@ local getToolBar(theme) =
       { label: '0', action: { openURL: 'hamster3://' }, styleName: 'toolbarButtonOpenAppStyle' },
       { label: '1', action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSettings' }, styleName: 'toolbarButtonKeyboardSettingsStyle' },
       { label: '2', action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSkins' }, styleName: 'toolbarButtonKeyboardSkinsStyle' },
-      { label: '5', action: { shortcut: '#keyboardPerformance' }, styleName: 'toolbarButtonKeyboardPerfomanceStyle' },
+      { label: '5', action: { shortcut: '#keyboardPerformance' }, styleName: 'toolbarButtonKeyboardPerformanceStyle' },
       { label: '3', action: { shortcut: '#toggleEmbeddedInputMode' }, styleName: 'toolbarButtonEmbeddingToggleStyle' },
       { label: '4', action: { shortcut: '#RimeSwitcher' }, styleName: 'toolbarButtonRimeSwitcherStyle' },
     ],
@@ -107,7 +107,7 @@ local getToolBar(theme) =
     },
     toolbarcollectionCellForegroundStyle: {
       buttonStyleType: 'geometry',
-      normalColor: color[theme]['键盘背景颜色'],
+      normalColor: color[theme]['按键前景颜色'],
     },
     horizontalSymbolsDataSource: [
       { label: '6', action: { openURL: 'https://www.google.com/search?q=#pasteboardContent' }, styleName: 'toolbarButtonGoogleStyle' },
@@ -408,9 +408,9 @@ local getToolBar(theme) =
     toolbarButtonSafariStyle: {
       backgroundStyle: 'toolbarButtonBackgroundStyle',
       foregroundStyle: 'toolbarButton5ForegroundStyle',
-      action: {
-        openURL: '#pasteboardContent',
-      },
+      // action: {
+      //   openURL: '#pasteboardContent',
+      // },
     },
     toolbarButton5ForegroundStyle: {
       buttonStyleType: 'systemImage',
@@ -547,7 +547,7 @@ local getToolBar(theme) =
       // center: center['toolbar按键文字偏移'],
       fontWeight: 'medium',
     },
-    toolbarButtonKeyboardPerfomanceStyle: {
+    toolbarButtonKeyboardPerformanceStyle: {
       backgroundStyle: 'toolbarButtonBackgroundStyle',
       foregroundStyle: 'toolbarButtonKeyboardPerformanceForegroundStyle',
     },
