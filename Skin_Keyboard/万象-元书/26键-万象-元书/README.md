@@ -21,6 +21,8 @@
 
 8. 字母按键和系统按键颜色统一（iOS26风格）默认开启，可以在`custom/Custom.libsonnet`中将`ios26_style`值改为`false`
 
+9. 按键间距，可在`custom/Custom.libsonnet`中修改`button_insets`
+
 # 获取更新
 请到ResourceforHamster(`https://github.com/BlackCCCat/ResourceforHamster`)获取可能的更新，或者通过快捷指令(https://www.icloud.com/shortcuts/c541ddb2a1614732b2c9fde38bb89be6)自动下载最新版本并导入到元书输入法中
 
