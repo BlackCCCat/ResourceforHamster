@@ -1,5 +1,3 @@
-local deviceType = 'iPhone';
-
 local Settings = import '../custom/Custom.libsonnet';
 local keyboardLayout_ = import '../lib/numericLayout.libsonnet';
 
@@ -28,6 +26,7 @@ local slideForeground = import '../lib/slideForeground.libsonnet';
 // 功能按键引入
 local functions = import '../lib/functionButton.libsonnet';
 
+local layout(deviceType) =
 // 上下和下划的数据
 local swipe_up = if std.objectHas(swipeData.genSwipeData(deviceType), 'number_swipe_up') then swipeData.genSwipeData(deviceType).number_swipe_up else {};
 local swipe_down = if std.objectHas(swipeData.genSwipeData(deviceType), 'number_swipe_up') then swipeData.genSwipeData(deviceType).number_swipe_down else {};
@@ -441,4 +440,6 @@ local keyboard(theme, orientation) =
   ,
   // 导出keyboard给横屏用
   keyboard: keyboard,
-}
+};
+
+layout('iPhone') + { layout: layout }

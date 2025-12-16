@@ -1013,6 +1013,8 @@ local keyboard(theme, orientation, keyboardLayout) =
     },
   };
 {
+  keyboard: keyboard,
+  createButton: createButton,
   new(theme, orientation):
     keyboard(theme, orientation, keyboardLayout_.getKeyboardLayout(theme)),
 }
