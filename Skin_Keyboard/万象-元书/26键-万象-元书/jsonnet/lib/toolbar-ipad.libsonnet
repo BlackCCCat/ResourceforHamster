@@ -7,7 +7,6 @@ local toolbar = import 'toolbar.libsonnet';
       {
         HStack: {
           subviews: [
-            { Cell: 'toolbarButtonPanelStyle' },
             { Cell: 'toolbarButtonOpenAppStyle' },
             { Cell: 'toolbarButtonKeyboardSettingsStyle' },
             { Cell: 'toolbarButtonKeyboardSkinsStyle' },

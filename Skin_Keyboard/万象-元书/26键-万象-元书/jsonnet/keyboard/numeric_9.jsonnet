@@ -117,7 +117,7 @@ local keyboard(theme, orientation) =
     },
     collectionCellBackgroundStyle: {
       buttonStyleType: 'geometry',
-      insets: { top: 5, left: 3, bottom: 5, right: 3 },
+      insets: if orientation == 'portrait' then Settings.button_insets.portrait else Settings.button_insets.landscape,
       highlightColor: color[theme]['字母键背景颜色-普通'],
       normalColor: 'ffffff00',
       cornerRadius: 7,
@@ -172,7 +172,7 @@ local keyboard(theme, orientation) =
       backgroundStyle: 'systemButtonBackgroundStyle',
       type: 'horizontalSymbols',
       maxColumns: 1,
-      insets: { left: 3, right: 3 },
+      // insets: { left: 3, right: 3 },
       contentRightToLeft: false,
       dataSource: 'symbolButtonSymbolsDataSource',
     },
@@ -384,7 +384,7 @@ local keyboard(theme, orientation) =
 
     enterButtonBlueBackgroundStyle: {
       buttonStyleType: 'geometry',
-      insets: { top: 4, left: 3, bottom: 4, right: 3 },
+      insets: if orientation == 'portrait' then Settings.button_insets.portrait else Settings.button_insets.landscape, // { top: 4, left: 3, bottom: 4, right: 3 },
       normalColor: color[theme]['enter键背景(蓝色)'],
       highlightColor: color[theme]['功能键背景颜色-高亮'],
       cornerRadius: 7,
@@ -392,19 +392,21 @@ local keyboard(theme, orientation) =
       highlightLowerEdgeColor: color[theme]['底边缘颜色-高亮'],
     },
 
-
+    // 以下为数字键盘整个背景的样式，insets控制按钮之间的距离
     numberButtonBackgroundStyle: {
       buttonStyleType: 'geometry',
-      insets: { top: 4, left: 3, bottom: 4, right: 3 },
+      insets: if orientation == 'portrait' then Settings.button_insets.portrait else Settings.button_insets.landscape, // { top: 4, left: 3, bottom: 4, right: 3 },
       normalColor: color[theme]['字母键背景颜色-普通'],
       highlightColor: color[theme]['字母键背景颜色-高亮'],
       cornerRadius: 7,
       normalLowerEdgeColor: color[theme]['底边缘颜色-普通'],
       highlightLowerEdgeColor: color[theme]['底边缘颜色-高亮'],
     },
+
+    // 由于functionButton.libsonnet中写了如果是数字键盘，则由functionBackgroundStyle控制功能按键，因此单独写出来
     functionBackgroundStyle: {
       buttonStyleType: 'geometry',
-      insets: { top: 5, left: 3, bottom: 5, right: 3 },
+      insets: if orientation == 'portrait' then Settings.button_insets.portrait else Settings.button_insets.landscape, // { top: 5, left: 3, bottom: 5, right: 3 },
       normalColor: color[theme]['字母键背景颜色-普通'],
       highlightColor: color[theme]['字母键背景颜色-高亮'],
       cornerRadius: 7,
@@ -413,7 +415,7 @@ local keyboard(theme, orientation) =
     },
     systemButtonBackgroundStyle: {
       buttonStyleType: 'geometry',
-      insets: { top: 4, left: 3, bottom: 4, right: 3 },
+      insets: if orientation == 'portrait' then Settings.button_insets.portrait else Settings.button_insets.landscape, // { top: 4, left: 3, bottom: 4, right: 3 },
       normalColor: color[theme]['功能键背景颜色-普通'],
       highlightColor: color[theme]['功能键背景颜色-高亮'],
       cornerRadius: 7,

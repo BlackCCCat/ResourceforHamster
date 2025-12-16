@@ -282,7 +282,7 @@ local keyboard(theme, orientation, keyboardLayout) =
       type: 'horizontalSymbols',
       maxColumns: 1,
       contentRightToLeft: false,
-      insets: { left: 3, right: 3 },
+      // insets: { left: 3, right: 3 },
       backgroundStyle: 'systemButtonBackgroundStyle',
       dataSource: '123ButtonSymbolsDataSource',
     },
@@ -584,18 +584,18 @@ local keyboard(theme, orientation, keyboardLayout) =
     },
     enterButtonBlueBackgroundStyle: {
       buttonStyleType: 'geometry',
-      insets: if orientation == 'portrait' then { top: 5, left: 3, bottom: 5, right: 3 } else { top: 3, left: 2, bottom: 3, right: 2 },
+      insets: if orientation == 'portrait' then Settings.button_insets.portrait else Settings.button_insets.landscape,
       normalColor: color[theme]['enter键背景(蓝色)'],
       highlightColor: color[theme]['功能键背景颜色-高亮'],
       cornerRadius: 7,
       normalLowerEdgeColor: color[theme]['底边缘颜色-普通'],
       highlightLowerEdgeColor: color[theme]['底边缘颜色-高亮'],
     },
-
+    // 以下为26按键键盘整个背景的样式，insets控制按钮之间的距离，功能按键也用的这个样式
     alphabeticBackgroundStyle: {
       // animation: 'ButtonScaleAnimation',
       buttonStyleType: 'geometry',
-      insets: if orientation == 'portrait' then { top: 5, left: 3, bottom: 5, right: 3 } else { top: 3, left: 2, bottom: 3, right: 2 },
+      insets: if orientation == 'portrait' then Settings.button_insets.portrait else Settings.button_insets.landscape,
       normalColor: color[theme]['字母键背景颜色-普通'],
       highlightColor: color[theme]['字母键背景颜色-高亮'],
       cornerRadius: 7,
@@ -605,7 +605,7 @@ local keyboard(theme, orientation, keyboardLayout) =
     systemButtonBackgroundStyle: {
       // animation: 'ButtonScaleAnimation',
       buttonStyleType: 'geometry',
-      insets: if orientation == 'portrait' then { top: 5, left: 3, bottom: 5, right: 3 } else { top: 3, left: 2, bottom: 3, right: 2 },
+      insets: if orientation == 'portrait' then Settings.button_insets.portrait else Settings.button_insets.landscape,
       normalColor: color[theme]['功能键背景颜色-普通'],
       highlightColor: color[theme]['功能键背景颜色-高亮'],
       cornerRadius: 7,

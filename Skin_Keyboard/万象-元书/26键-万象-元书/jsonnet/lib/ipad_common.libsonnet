@@ -40,7 +40,7 @@ local fontSize = import 'fontSize.libsonnet';
       type: 'horizontalSymbols',
       maxColumns: 1,
       contentRightToLeft: false,
-      insets: { left: 3, right: 3 },
+    //   insets: { left: 3, right: 3 },
       backgroundStyle: 'systemButtonBackgroundStyle',
       dataSource: [
         { label: '1', action: { keyboardType: 'numeric' }, styleName: 'numericStyle' },

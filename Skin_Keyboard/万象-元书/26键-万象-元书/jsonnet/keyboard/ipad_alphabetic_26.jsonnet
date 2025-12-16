@@ -10,9 +10,13 @@ local fontSize = import '../lib/fontSize.libsonnet';
 local deviceType = 'iPad';
 local Settings = import '../custom/Custom.libsonnet';
 local keyboardLayout_ = if Settings.with_functions_row[deviceType] then import '../lib/keyboardLayout.libsonnet' else import '../lib/keyboardLayoutWithoutFuncRow.libsonnet';
+// 123Button的划动前景
+local slideForeground = import '../lib/slideForeground.libsonnet';
 
 local ipad_fontSize = fontSize + {
   '按键前景文字大小': 24,
+  '上划文字大小': 12,
+  '下划文字大小': 12,
 };
 
 // 定义一个专门用于生成 iPad 英文键盘的函数
@@ -26,7 +30,8 @@ local ipad_keyboard(theme, orientation, keyboardLayout) =
     keyboardLayout['ipad英文26键'] +
     toolbar_ipad.getToolBar(theme) +
     ipad_common.getOverrides(theme, keyboardLayout, alphabetic_base.createButton, base_def) +
-    utils.genAlphabeticStyles(ipad_fontSize, color, theme, center);
+    utils.genAlphabeticStyles(ipad_fontSize, color, theme, center) +
+    slideForeground.slideForeground(theme);
 
   // 3. 最后，将 iPad 的 "补丁" 合并到 iPhone 的基础定义上，同名字段会被覆盖
   base_def + ipad_overrides;
