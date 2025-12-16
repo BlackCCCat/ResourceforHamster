@@ -68,6 +68,24 @@ local createButton(key, size, bounds, root, isUpper=true) = {
   ],
 };
 
+// 定义标准按键列表（这些按键在横竖屏下都使用 '普通键size' 且无特殊 bounds）
+local standardKeys = ['q', 'w', 'e', 'r', 'u', 'i', 'o', 'p', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
+
+local genStandardKey(key, orientation, keyboardLayout, root) = {
+  [key + 'Button']: createButton(
+    key,
+    if orientation == 'portrait' then keyboardLayout['竖屏按键尺寸']['普通键size'] else keyboardLayout['横屏按键尺寸']['普通键size'],
+    {},
+    root
+  ),
+  [key + 'ButtonHintStyle']: {
+    backgroundStyle: 'alphabeticHintBackgroundStyle',
+    foregroundStyle: key + 'ButtonHintForegroundStyle',
+    swipeUpForegroundStyle: key + 'ButtonSwipeUpHintForegroundStyle',
+    swipeDownForegroundStyle: key + 'ButtonSwipeDownHintForegroundStyle',
+  },
+};
+
 local keyboard(theme, orientation, keyboardLayout) =
   keyboardLayout[if orientation == 'portrait' then '竖屏英文26键' else '横屏英文26键'] +
   swipeStyles.getStyle('en', theme, swipe_up, swipe_down) +
@@ -81,76 +99,10 @@ local keyboard(theme, orientation, keyboardLayout) =
     preeditHeight: others[if orientation == 'portrait' then '竖屏' else '横屏']['preedit高度'],
     toolbarHeight: others[if orientation == 'portrait' then '竖屏' else '横屏']['toolbar高度'],
     keyboardHeight: others[if orientation == 'portrait' then '竖屏' else '横屏']['keyboard高度'],
-
-
-    qButton: createButton(
-      'q',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-
-    qButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'qButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'qButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'qButtonSwipeDownHintForegroundStyle',
-    },
-
-    wButton: createButton(
-      'w',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-    wButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'wButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'wButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'wButtonSwipeDownHintForegroundStyle',
-    },
-    eButton: createButton(
-      'e',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-    eButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'eButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'eButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'eButtonSwipeDownHintForegroundStyle',
-    },
-
-    rButton: createButton(
-      'r',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-    rButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'rButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'rButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'rButtonSwipeDownHintForegroundStyle',
-    },
-
+  } +
+  // 批量生成标准按键
+  std.foldl(function(acc, key) acc + genStandardKey(key, orientation, keyboardLayout, $), standardKeys, {}) +
+  {
     tButton: createButton(
       't',
       if orientation == 'portrait' then
@@ -162,7 +114,6 @@ local keyboard(theme, orientation, keyboardLayout) =
         keyboardLayout['横屏按键尺寸']['t键size和bounds'].bounds,
       $
     ),
-
 
     tButtonHintStyle: {
       backgroundStyle: 'alphabeticHintBackgroundStyle',
@@ -190,75 +141,6 @@ local keyboard(theme, orientation, keyboardLayout) =
       swipeDownForegroundStyle: 'yButtonSwipeDownHintForegroundStyle',
     },
 
-    uButton: createButton(
-      'u',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-    uButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'uButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'uButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'uButtonSwipeDownHintForegroundStyle',
-    },
-
-    iButton: createButton(
-      'i',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-    iButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'iButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'iButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'iButtonSwipeDownHintForegroundStyle',
-    },
-
-
-    oButton: createButton(
-      'o',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-    oButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'oButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'oButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'oButtonSwipeDownHintForegroundStyle',
-    },
-
-    pButton: createButton(
-      'p',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-    pButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'pButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'pButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'pButtonSwipeDownHintForegroundStyle',
-    },
-
     aButton: createButton(
       'a',
       if orientation == 'portrait' then
@@ -277,125 +159,6 @@ local keyboard(theme, orientation, keyboardLayout) =
       foregroundStyle: 'aButtonHintForegroundStyle',
       swipeUpForegroundStyle: 'aButtonSwipeUpHintForegroundStyle',
       swipeDownForegroundStyle: 'aButtonSwipeDownHintForegroundStyle',
-    },
-
-    sButton: createButton(
-      's',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-
-    sButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'sButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'sButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'sButtonSwipeDownHintForegroundStyle',
-    },
-    dButton: createButton(
-      'd',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-    dButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'dButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'dButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'dButtonSwipeDownHintForegroundStyle',
-    },
-
-    fButton: createButton(
-      'f',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-    fButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'fButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'fButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'fButtonSwipeDownHintForegroundStyle',
-    },
-
-    gButton: createButton(
-      'g',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-    gButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'gButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'gButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'gButtonSwipeDownHintForegroundStyle',
-    },
-
-    hButton: createButton(
-      'h',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-    hButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'hButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'hButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'hButtonSwipeDownHintForegroundStyle',
-    },
-
-    jButton: createButton(
-      'j',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-    jButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'jButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'jButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'jButtonSwipeDownHintForegroundStyle',
-    },
-
-    kButton: createButton(
-      'k',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-    kButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'kButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'kButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'kButtonSwipeDownHintForegroundStyle',
     },
 
     lButton: createButton(
@@ -457,124 +220,6 @@ local keyboard(theme, orientation, keyboardLayout) =
       highlightColor: color[theme]['按键前景颜色'],
       fontSize: fontSize['按键前景文字大小'],
       // center: { y: 0.53 },
-    },
-    zButton: createButton(
-      'z',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-    zButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'zButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'zButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'zButtonSwipeDownHintForegroundStyle',
-    },
-
-    xButton: createButton(
-      'x',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-    xButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'xButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'xButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'xButtonSwipeDownHintForegroundStyle',
-    },
-
-    cButton: createButton(
-      'c',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-    cButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'cButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'cButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'cButtonSwipeDownHintForegroundStyle',
-    },
-
-    vButton: createButton(
-      'v',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-    vButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'vButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'vButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'vButtonSwipeDownHintForegroundStyle',
-    },
-
-    bButton: createButton(
-      'b',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-    bButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'bButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'bButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'bButtonSwipeDownHintForegroundStyle',
-    },
-
-    nButton: createButton(
-      'n',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-    nButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'nButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'nButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'nButtonSwipeDownHintForegroundStyle',
-    },
-
-    mButton: createButton(
-      'm',
-      if orientation == 'portrait' then
-        keyboardLayout['竖屏按键尺寸']['普通键size']
-      else
-        keyboardLayout['横屏按键尺寸']['普通键size'],
-      {},
-      $
-    ),
-
-    mButtonHintStyle: {
-      backgroundStyle: 'alphabeticHintBackgroundStyle',
-      foregroundStyle: 'mButtonHintForegroundStyle',
-      swipeUpForegroundStyle: 'mButtonSwipeUpHintForegroundStyle',
-      swipeDownForegroundStyle: 'mButtonSwipeDownHintForegroundStyle',
     },
     backspaceButton: createButton(
       'backspace',
