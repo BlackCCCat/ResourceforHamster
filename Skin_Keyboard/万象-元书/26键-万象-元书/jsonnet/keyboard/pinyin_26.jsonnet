@@ -481,7 +481,7 @@ local keyboard(theme, orientation, keyboardLayout) =
       uppercasedStateAction: 'shift',
       capsLockedStateForegroundStyle: 'shiftButtonCapsLockedForegroundStyle',
       uppercasedStateForegroundStyle: 'shiftButtonUppercasedForegroundStyle',
-      notification: [
+      [if Settings.schema_type == 'pro' then 'notification' else null]: [
         'shiftButtonPreeditNotification',
       ],
     },

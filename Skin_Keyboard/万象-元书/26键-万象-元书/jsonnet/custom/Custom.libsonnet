@@ -10,5 +10,5 @@
     portrait: {top: 3.8, left: 2, right: 2, bottom: 3.8}, // 若需要间隔大稍大，可使用：{ top: 5, left: 3, bottom: 5, right: 3 }
     landscape: {top: 2.2, left: 1.8, bottom: 2.2, right: 1.8}, // 若需要间隔大稍大，可按需调整:{top: 3, left: 2, bottom: 3, right: 2}
   },
-
+  schema_type: 'pro', // 万象方案的类型，pro or base，如果使用base，则shift按键不会有合并辅助码的功能
 }
