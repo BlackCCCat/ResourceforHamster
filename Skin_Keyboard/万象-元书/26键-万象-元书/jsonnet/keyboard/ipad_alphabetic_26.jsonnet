@@ -5,6 +5,7 @@ local utils = import '../lib/utils.libsonnet';
 local color = import '../lib/color.libsonnet';
 local center = import '../lib/center.libsonnet';
 local fontSize = import '../lib/fontSize.libsonnet';
+local others = import '../lib/others.libsonnet';
 local swipeData = import '../lib/swipeData-en.libsonnet';
 local swipeStyles = import '../lib/swipeStyle.libsonnet';
 
@@ -18,6 +19,11 @@ local ipad_fontSize = fontSize + {
   '按键前景文字大小': 24,
   '上划文字大小': 12,
   '下划文字大小': 12,
+  'toolbar按键前景sf符号大小': 20,
+};
+local ipad_others = others + {
+  '竖屏': others['竖屏'] + { 'preedit高度': 20, 'toolbar高度': 57 },
+  '横屏': others['横屏'] + { 'preedit高度': 20, 'toolbar高度': 57 },
 };
 // 上下和下划的数据
 local swipe_up = if std.objectHas(swipeData.genSwipeenData(deviceType), 'swipe_up') then swipeData.genSwipeenData(deviceType).swipe_up else {};
@@ -27,16 +33,26 @@ local swipe_down = if std.objectHas(swipeData.genSwipeenData(deviceType), 'swipe
 local ipad_keyboard(theme, orientation, keyboardLayout) =
   // 1. 首先，调用 alphabetic_base 的 keyboard 函数，生成一个完整的 iPhone 英文键盘定义
   local base_def = alphabetic_base.keyboard(theme, orientation, keyboardLayout);
+  local toolbar_def = toolbar_ipad.getToolBar(theme);
 
   // 2. 然后，定义一个 "补丁"，包含所有 iPad 与 iPhone 的差异点
   local ipad_overrides =
     // 2.1. 使用 iPad 的专属布局
     keyboardLayout['ipad英文26键'] +
-    toolbar_ipad.getToolBar(theme) +
+    toolbar_def +
     swipeStyles.getStyle('en', theme, swipe_up, swipe_down, ipad_fontSize) +
     ipad_common.getOverrides(theme, keyboardLayout, alphabetic_base.createButton, base_def) +
     utils.genAlphabeticStyles(ipad_fontSize, color, theme, center) +
 
+    {
+      preeditHeight: ipad_others[if orientation == 'portrait' then '竖屏' else '横屏']['preedit高度'],
+      toolbarHeight: ipad_others[if orientation == 'portrait' then '竖屏' else '横屏']['toolbar高度'],
+    } +
+    {
+      [key]+: { fontSize: ipad_fontSize['toolbar按键前景sf符号大小'] }
+      for key in std.objectFields(toolbar_def)
+      if std.startsWith(key, 'toolbarButton')
+    } +
     // 遍历 iPad 的下划数据，强制更新所有按键的 swipeDownAction
     {
       [key + 'Button']+: {
