@@ -5,6 +5,8 @@ local utils = import '../lib/utils.libsonnet';
 local color = import '../lib/color.libsonnet';
 local center = import '../lib/center.libsonnet';
 local fontSize = import '../lib/fontSize.libsonnet';
+local swipeData = import '../lib/swipeData.libsonnet';
+local swipeStyles = import '../lib/swipeStyle.libsonnet';
 
 // iPad 使用的 deviceType 和相关的库
 local deviceType = 'iPad';
@@ -19,6 +21,11 @@ local ipad_fontSize = fontSize + {
   '下划文字大小': 12,
 };
 
+// 上下和下划的数据
+local swipe_up = if std.objectHas(swipeData.genSwipeData(deviceType), 'swipe_up') then swipeData.genSwipeData(deviceType).swipe_up else {};
+local swipe_down = if std.objectHas(swipeData.genSwipeData(deviceType), 'swipe_down') then swipeData.genSwipeData(deviceType).swipe_down else {};
+
+
 // 定义一个专门用于生成 iPad 键盘的函数
 local ipad_keyboard(theme, orientation, keyboardLayout) =
   // 1. 首先，调用 pinyin_base 的 keyboard 函数，生成一个完整的 iPhone 键盘定义
@@ -29,9 +36,23 @@ local ipad_keyboard(theme, orientation, keyboardLayout) =
     // 2.1. 使用 iPad 的专属布局
     keyboardLayout['ipad中文26键'] +
     toolbar_ipad.getToolBar(theme) +
+    swipeStyles.getStyle('cn', theme, swipe_up, swipe_down) +
     ipad_common.getOverrides(theme, keyboardLayout, pinyin_base.createButton, base_def) +
     utils.genPinyinStyles(ipad_fontSize, color, theme, center) +
-    slideForeground.slideForeground(theme);
+    // slideForeground.slideForeground(theme) + 
+
+    // 遍历 iPad 的下划数据，强制更新所有按键的 swipeDownAction
+    {
+      [key + 'Button']+: {
+        swipeDownAction: swipe_down[key].action
+      } for key in std.objectFields(swipe_down)
+    } +
+    // 同理上划 (如果 iPad 上划也有不同)
+    {
+      [key + 'Button']+: {
+        swipeUpAction: swipe_up[key].action
+      } for key in std.objectFields(swipe_up)
+    };
 
   // 3. 最后，将 iPad 的 "补丁" 合并到 iPhone 的基础定义上，同名字段会被覆盖
   base_def + ipad_overrides;

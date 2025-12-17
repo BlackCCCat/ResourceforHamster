@@ -3,7 +3,6 @@ local color = import 'color.libsonnet';
 local fontSize = import 'fontSize.libsonnet';
 
 {
-  // 生成 iPad 专属的覆盖配置
   getOverrides(theme, keyboardLayout, createButtonFunc, root):: {
     // 移除 iPhone 的 123Button
     '123Button':: null,
@@ -29,10 +28,10 @@ local fontSize = import 'fontSize.libsonnet';
       center: center['功能键前景文字偏移'] { y: 0.5 },
     },
 
-    // iPad 专属的 ipad123Button
+    // 修改 ipad123Button 定义
     ipad123Button: createButtonFunc(
-      'ipad123',
-      keyboardLayout['竖屏按键尺寸']['ipad123键size'], // iPad 横竖屏尺寸一致
+      'ipad123', // 注意：这里 key 叫 ipad123
+      keyboardLayout['竖屏按键尺寸']['ipad123键size'],
       {},
       root,
       false
@@ -40,13 +39,16 @@ local fontSize = import 'fontSize.libsonnet';
       type: 'horizontalSymbols',
       maxColumns: 1,
       contentRightToLeft: false,
-    //   insets: { left: 3, right: 3 },
       backgroundStyle: 'systemButtonBackgroundStyle',
-      dataSource: [
+      
+      // 关键：确保这里引用的 styleName (如 numericStyle) 在 root 中是存在的
+      // 它们通常由 slideForeground.libsonnet 生成并被导入到 root
+      dataSource: 'ipad123ButtonSymbolsDataSource',
+    },
+    ipad123ButtonSymbolsDataSource: [
         { label: '1', action: { keyboardType: 'numeric' }, styleName: 'numericStyle' },
         { label: '2', action: { keyboardType: 'symbolic' }, styleName: 'symbolicStyle' },
         { label: '4', action: { keyboardType: 'emojis' }, styleName: 'emojisStyle' },
       ],
-    },
   },
 }
