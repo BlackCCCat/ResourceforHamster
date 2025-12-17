@@ -12,8 +12,7 @@ local swipeStyles = import '../lib/swipeStyle.libsonnet';
 local deviceType = 'iPad';
 local Settings = import '../custom/Custom.libsonnet';
 local keyboardLayout_ = if Settings.with_functions_row[deviceType] then import '../lib/keyboardLayout.libsonnet' else import '../lib/keyboardLayoutWithoutFuncRow.libsonnet';
-// 123Button的划动前景
-local slideForeground = import '../lib/slideForeground.libsonnet';
+
 
 local ipad_fontSize = fontSize + {
   '按键前景文字大小': 24,
@@ -36,10 +35,9 @@ local ipad_keyboard(theme, orientation, keyboardLayout) =
     // 2.1. 使用 iPad 的专属布局
     keyboardLayout['ipad中文26键'] +
     toolbar_ipad.getToolBar(theme) +
-    swipeStyles.getStyle('cn', theme, swipe_up, swipe_down) +
+    swipeStyles.getStyle('cn', theme, swipe_up, swipe_down, ipad_fontSize) +
     ipad_common.getOverrides(theme, keyboardLayout, pinyin_base.createButton, base_def) +
     utils.genPinyinStyles(ipad_fontSize, color, theme, center) +
-    // slideForeground.slideForeground(theme) + 
 
     // 遍历 iPad 的下划数据，强制更新所有按键的 swipeDownAction
     {
