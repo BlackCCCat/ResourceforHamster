@@ -105,7 +105,7 @@ local keyboard(theme, orientation) =
     },
     collectionBackgroundStyle: {
       buttonStyleType: 'geometry',
-      insets: { top: 5, left: 3, bottom: 5, right: 3 },
+      insets: if orientation == 'portrait' then Settings.button_insets.portrait else Settings.button_insets.landscape, // { top: 5, left: 3, bottom: 5, right: 3 },
       normalColor: color[theme]['符号键盘左侧collection背景颜色'],
       cornerRadius: 7,
       normalLowerEdgeColor: color[theme]['符号键盘左侧collection背景下边缘颜色'],

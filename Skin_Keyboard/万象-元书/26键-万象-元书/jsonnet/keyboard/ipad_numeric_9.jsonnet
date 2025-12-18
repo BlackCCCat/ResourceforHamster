@@ -12,8 +12,8 @@ local ipad_fontSize = fontSize + {
 };
 
 local ipad_others = others + {
-  '竖屏': others['竖屏'] + { 'preedit高度': 20, 'toolbar高度': 57 },
-  '横屏': others['横屏'] + { 'preedit高度': 20, 'toolbar高度': 57 },
+  '竖屏': others['竖屏'] + { 'preedit高度': 20, 'toolbar高度': 57, 'keyboard高度': 240 },
+  '横屏': others['横屏'] + { 'preedit高度': 20, 'toolbar高度': 57, 'keyboard高度': 240 },
 };
 
 local base = numeric9.layout('iPad');
@@ -28,6 +28,7 @@ local ipad_keyboard(theme, orientation) =
     {
       preeditHeight: ipad_others[if orientation == 'portrait' then '竖屏' else '横屏']['preedit高度'],
       toolbarHeight: ipad_others[if orientation == 'portrait' then '竖屏' else '横屏']['toolbar高度'],
+      keyboardHeight: ipad_others[if orientation == 'portrait' then '竖屏' else '横屏']['keyboard高度'],
     } +
     {
       [key]+: { fontSize: ipad_fontSize['toolbar按键前景sf符号大小'] }

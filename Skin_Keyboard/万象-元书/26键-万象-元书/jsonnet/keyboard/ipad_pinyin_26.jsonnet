@@ -23,8 +23,8 @@ local ipad_fontSize = fontSize + {
 };
 
 local ipad_others = others + {
-  '竖屏': others['竖屏'] + { 'preedit高度': 20, 'toolbar高度': 57 },
-  '横屏': others['横屏'] + { 'preedit高度': 20, 'toolbar高度': 57 },
+  '竖屏': others['竖屏'] + { 'preedit高度': 20, 'toolbar高度': 57, 'keyboard高度': 240 },
+  '横屏': others['横屏'] + { 'preedit高度': 20, 'toolbar高度': 57, 'keyboard高度': 240 },
 };
 
 // 上下和下划的数据
@@ -50,11 +50,22 @@ local ipad_keyboard(theme, orientation, keyboardLayout) =
     {
       preeditHeight: ipad_others[if orientation == 'portrait' then '竖屏' else '横屏']['preedit高度'],
       toolbarHeight: ipad_others[if orientation == 'portrait' then '竖屏' else '横屏']['toolbar高度'],
+      keyboardHeight: ipad_others[if orientation == 'portrait' then '竖屏' else '横屏']['keyboard高度'],
     } +
     {
       [key]+: { fontSize: ipad_fontSize['toolbar按键前景sf符号大小'] }
       for key in std.objectFields(toolbar_def)
       if std.startsWith(key, 'toolbarButton')
+    } +
+    {
+      spaceLeftButtonForegroundStyle+: {
+        // 注意使用 +: 只有这样才能继承原有的 color 和 fontSize
+        // 根据 iPad 的实际显示效果调整 x 和 y
+        center: { x: 0.55, y: 0.5 }, 
+      },
+      spaceLeftButtonForegroundStyle2+: {
+        center: { x: 0.55, y: 0.3 },
+      },
     } +
     // 遍历 iPad 的下划数据，强制更新所有按键的 swipeDownAction
     {
