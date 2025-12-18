@@ -25,7 +25,11 @@
 
 10. 按键圆角，可在`custom/Custom.libsonnet`中修改`cornerRadius`的值，建议`7`、`8`、`8.5`
 
-11. `shift`按键会根据万象方案类型调整通知，默认`pro`，如果用的`base`版，请在`custom/Custom.libsonnet`中修改`schema_type`为`base`
+11. `shift`按键是否开启通知动作，默认为开启且为pro版的辅助码合，请在`custom/Custom.libsonnet`中修改`enable_preedit`为`false`
+
+12. `shift`按键通知动作自定义，默认为`/`，请在`custom/Custom.libsonnet`中修改`preedit_action`
+
+13. `shift`按键通知动作前景样式，默认为`/`对应的sf symbol，请在`custom/Custom.libsonnet`中修改`preedit_sf_symbol`
 
 # 获取更新
 请到ResourceforHamster(`https://github.com/BlackCCCat/ResourceforHamster`)获取可能的更新，或者通过快捷指令(https://www.icloud.com/shortcuts/c541ddb2a1614732b2c9fde38bb89be6)自动下载最新版本并导入到元书输入法中

@@ -481,7 +481,7 @@ local keyboard(theme, orientation, keyboardLayout) =
       uppercasedStateAction: 'shift',
       capsLockedStateForegroundStyle: 'shiftButtonCapsLockedForegroundStyle',
       uppercasedStateForegroundStyle: 'shiftButtonUppercasedForegroundStyle',
-      [if Settings.schema_type == 'pro' then 'notification' else null]: [
+      [if Settings.shift_config.enable_preedit then 'notification' else null]: [
         'shiftButtonPreeditNotification',
       ],
     },
@@ -489,12 +489,12 @@ local keyboard(theme, orientation, keyboardLayout) =
       notificationType: 'preeditChanged',
       backgroundStyle: 'systemButtonBackgroundStyle',
       foregroundStyle: 'shiftButtonPreeditForegroundStyle',
-      action: { character: '/' },
+      action: Settings.shift_config.preedit_action,
       swipeUpAction: { character: "'" },
     },
     shiftButtonPreeditForegroundStyle: {
       buttonStyleType: 'systemImage',
-      systemImageName: if Settings.fix_sf_symbol then 'paragraphsign' else 'inset.filled.lefthalf.arrow.left.rectangle',
+      systemImageName: if Settings.shift_config.preedit_sf_symbol!="" then Settings.shift_config.preedit_sf_symbol else  if Settings.fix_sf_symbol then 'paragraphsign' else 'inset.filled.lefthalf.arrow.left.rectangle',
       normalColor: color[theme]['按键前景颜色'],
       highlightColor: color[theme]['按键前景颜色'],
       fontSize: fontSize['按键前景文字大小'],
