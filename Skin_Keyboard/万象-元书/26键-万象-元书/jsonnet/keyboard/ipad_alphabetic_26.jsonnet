@@ -23,7 +23,7 @@ local ipad_fontSize = fontSize + {
 };
 local ipad_others = others + {
   '竖屏': others['竖屏'] + { 'preedit高度': 20, 'toolbar高度': 57, 'keyboard高度': 240 },
-  '横屏': others['横屏'] + { 'preedit高度': 20, 'toolbar高度': 57, 'keyboard高度': 240 },
+  '横屏': others['横屏'] + { 'preedit高度': 20, 'toolbar高度': 57, 'keyboard高度': 350 },
 };
 // 上下和下划的数据
 local swipe_up = if std.objectHas(swipeData.genSwipeenData(deviceType), 'swipe_up') then swipeData.genSwipeenData(deviceType).swipe_up else {};
@@ -32,7 +32,7 @@ local swipe_down = if std.objectHas(swipeData.genSwipeenData(deviceType), 'swipe
 // 定义一个专门用于生成 iPad 英文键盘的函数
 local ipad_keyboard(theme, orientation, keyboardLayout) =
   // 1. 首先，调用 alphabetic_base 的 keyboard 函数，生成一个完整的 iPhone 英文键盘定义
-  local base_def = alphabetic_base.keyboard(theme, orientation, keyboardLayout);
+  local base_def = alphabetic_base.keyboard(theme, 'portrait', keyboardLayout);
   local toolbar_def = toolbar_ipad.getToolBar(theme);
 
   // 2. 然后，定义一个 "补丁"，包含所有 iPad 与 iPhone 的差异点
@@ -58,10 +58,10 @@ local ipad_keyboard(theme, orientation, keyboardLayout) =
       spaceLeftButtonForegroundStyle+: {
         // 注意使用 +: 只有这样才能继承原有的 color 和 fontSize
         // 根据 iPad 的实际显示效果调整 x 和 y
-        center: { x: 0.5, y: 0.5 }, 
+        center: { y: 0.5 }, 
       },
       spaceLeftButtonForegroundStyle2+: {
-        center: { x: 0.5, y: 0.3 },
+        center: { y: 0.3 },
       },
     } +
     // 遍历 iPad 的下划数据，强制更新所有按键的 swipeDownAction

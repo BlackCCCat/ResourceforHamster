@@ -13,7 +13,7 @@ local ipad_fontSize = fontSize + {
 
 local ipad_others = others + {
   '竖屏': others['竖屏'] + { 'preedit高度': 20, 'toolbar高度': 57, 'keyboard高度': 240 },
-  '横屏': others['横屏'] + { 'preedit高度': 20, 'toolbar高度': 57, 'keyboard高度': 240 },
+  '横屏': others['横屏'] + { 'preedit高度': 20, 'toolbar高度': 57, 'keyboard高度': 350 },
 };
 
 local base = numeric9.layout('iPad');

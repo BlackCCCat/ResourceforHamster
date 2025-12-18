@@ -8,7 +8,7 @@ local config = {
     },
     iPad: {
       portrait: 'ipad_pinyin_26_portrait',
-      landscape: 'ipad_pinyin_26_portrait',
+      landscape: 'ipad_pinyin_26_landscape',
       floating: 'ipad_pinyin_26_portrait',
     },
   },
@@ -19,7 +19,7 @@ local config = {
     },
     iPad: {
       portrait: 'ipad_alphabetic_26_portrait',
-      landscape: 'ipad_alphabetic_26_portrait',
+      landscape: 'ipad_alphabetic_26_landscape',
       floating: 'ipad_alphabetic_26_portrait',
     },
   },
@@ -62,6 +62,8 @@ local darkPinyinLandscape = pinyin.new('dark', 'landscape');
 // ipad拼音
 local ipadlightPinyinPortrait = ipad_pinyin.new('light', 'portrait');
 local ipaddarkPinyinPortrait = ipad_pinyin.new('dark', 'portrait');
+local ipadlightPinyinLandscape = ipad_pinyin.new('light', 'landscape');
+local ipaddarkPinyinLandscape = ipad_pinyin.new('dark', 'landscape');
 
 
 // 字母
@@ -73,7 +75,8 @@ local darkAlphabeticLandscape = alphabetic.new('dark', 'landscape');
 // ipad字母
 local ipadlightAlphabeticPortrait = ipad_alphabetic.new('light', 'portrait');
 local ipaddarkAlphabeticPortrait = ipad_alphabetic.new('dark', 'portrait');
-
+local ipadlightAlphabeticLandscape = ipad_alphabetic.new('light', 'landscape');
+local ipaddarkAlphabeticLandscape = ipad_alphabetic.new('dark', 'landscape');
 
 // 数字
 local lightNumericPortrait = numeric.new('light', 'portrait');
@@ -105,7 +108,8 @@ local darkPanelLandscape = panel.new('dark', 'landscape');
   // ipad拼音
   'light/ipad_pinyin_26_portrait.yaml': std.toString(ipadlightPinyinPortrait),
   'dark/ipad_pinyin_26_portrait.yaml': std.toString(ipaddarkPinyinPortrait),
-
+  'light/ipad_pinyin_26_landscape.yaml': std.toString(ipadlightPinyinLandscape),
+  'dark/ipad_pinyin_26_landscape.yaml': std.toString(ipaddarkPinyinLandscape),
 
   // 字母
   'light/alphabetic_26_portrait.yaml': std.toString(lightAlphabeticPortrait),
@@ -116,7 +120,8 @@ local darkPanelLandscape = panel.new('dark', 'landscape');
   // ipad字母
   'light/ipad_alphabetic_26_portrait.yaml': std.toString(ipadlightAlphabeticPortrait),
   'dark/ipad_alphabetic_26_portrait.yaml': std.toString(ipaddarkAlphabeticPortrait),
-
+  'light/ipad_alphabetic_26_landscape.yaml': std.toString(ipadlightAlphabeticLandscape),
+  'dark/ipad_alphabetic_26_landscape.yaml': std.toString(ipaddarkAlphabeticLandscape),
 
   // 数字
   'light/numeric_9_portrait.yaml': std.toString(lightNumericPortrait),
