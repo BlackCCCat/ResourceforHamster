@@ -1,7 +1,7 @@
 local center = import '../lib/center.libsonnet';
 local color = import '../lib/color.libsonnet';
 local fontSize = import '../lib/fontSize.libsonnet';
-// local Settings = import '../custom/Custom.libsonnet';
+local Settings = import '../custom/Custom.libsonnet';
 local theme = std.extVar('theme');
 
 // key: 按键名称
@@ -139,7 +139,7 @@ local keyboard(theme, orientation) =
       // },
       type: 'original',
       normalColor: color[theme]['键盘背景颜色'],
-      cornerRadius: 7,
+      cornerRadius: Settings.cornerRadius,
       normalShadowColor: '00000000',
       shadowRadius: 7,
     },
@@ -149,7 +149,7 @@ local keyboard(theme, orientation) =
       insets: { top: 15, left: 3, bottom: 10, right: 3 },
       normalColor: color[theme]['字母键背景颜色-普通'],
       highlightColor: color[theme]['字母键背景颜色-高亮'],
-      cornerRadius: 7,
+      cornerRadius: Settings.cornerRadius,
       normalLowerEdgeColor: color[theme]['底边缘颜色-普通'],
       highlightLowerEdgeColor: color[theme]['底边缘颜色-高亮'],
     },

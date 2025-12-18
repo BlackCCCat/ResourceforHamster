@@ -23,7 +23,9 @@
 
 9. 按键间距，可在`custom/Custom.libsonnet`中修改`button_insets`
 
-10. `shift`按键会根据万象方案类型调整通知，默认`pro`，如果用的`base`版，请在`custom/Custom.libsonnet`中修改`schema_type`为`base`
+10. 按键圆角，可在`custom/Custom.libsonnet`中修改`cornerRadius`的值，建议`7`、`8`、`8.5`
+
+11. `shift`按键会根据万象方案类型调整通知，默认`pro`，如果用的`base`版，请在`custom/Custom.libsonnet`中修改`schema_type`为`base`
 
 # 获取更新
 请到ResourceforHamster(`https://github.com/BlackCCCat/ResourceforHamster`)获取可能的更新，或者通过快捷指令(https://www.icloud.com/shortcuts/c541ddb2a1614732b2c9fde38bb89be6)自动下载最新版本并导入到元书输入法中
