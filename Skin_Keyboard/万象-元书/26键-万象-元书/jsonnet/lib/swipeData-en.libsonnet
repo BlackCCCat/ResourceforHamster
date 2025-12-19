@@ -32,7 +32,7 @@ local genSwipeenData(deviceType)= {  // 同字母但是不同设置的，在这�
     // spaceRight: { action: { symbol: ',' }, },
     // space: { action: { keyboardType: 'pinyin'} , },
     '123': { action: { keyboardType: 'symbolic' } },
-    spaceLeft: { action: { character: '.' } },
+    spaceLeft: { action: { symbol: '.' } },
     spaceRight: { action: { symbol: '.' } },
     // space: { action: { shortcut: '#次选上屏' } },
     // spaceSecond: { action: { shortcut: '#次选上屏' } },
