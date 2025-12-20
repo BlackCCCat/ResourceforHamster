@@ -9,7 +9,7 @@
 
 2. 打开元书输入法键盘皮肤中的“启动皮肤开发者模式”，导入后点击皮肤，或者在导入皮肤后长按手动运行`main.jsonnet`，两种方式来生成皮肤配置文件
 
-3. 关于功能按键：如果不需要，可在`custom/Custom.libsonnet`中将`with_functions_row`值改为`false`,iPad布局默认不开启功能按键
+3. 关于功能按键：如果不需要，可在`custom/Custom.libsonnet`中将`with_functions_row`值改为`false`,iPad布局默认不开启功能按键；如果不需要通知功能，可在`custom/Custom.libsonnet`中将`enable_functions_notification`值改为`false`
 
 4. 关于某些按钮显示空白：可以在`custom/Custom.libsonnet`中将`fix_sf_symbol`值改为`true`
 
