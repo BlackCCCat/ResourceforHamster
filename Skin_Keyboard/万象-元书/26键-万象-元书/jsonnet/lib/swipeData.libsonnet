@@ -28,7 +28,7 @@ local genSwipeData(deviceType) =
     d: { action: { character: '=' }, label: { text: '=' } },
     f: { action: { symbol: '【' }, label: { text: '[' } },
     g: { action: { symbol: '】' }, label: { text: ']' } },
-    h: { action: { symbol: '\\' }, label: { text: '\\' } },
+    h: { action: { character: '\\' }, label: { text: '\\' } },
     j: { action: { character: '/' }, label: { text: '/' } },
     k: { action: { character: ':' }, label: { text: ':' } },
     l: { action: { character: '"' }, label: { text: '"' } },
