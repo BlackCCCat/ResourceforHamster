@@ -28,7 +28,7 @@ local genSwipeData(deviceType) =
     d: { action: { character: '=' }, label: { text: '=' } },
     f: { action: { symbol: '【' }, label: { text: '[' } },
     g: { action: { symbol: '】' }, label: { text: ']' } },
-    h: { action: { character: '\\' }, label: { text: '\\' } },
+    h: { action: if Settings.with_functions_row[deviceType] && Settings.enable_functions_notification then { symbol: '\\' } else { character: '\\' }, label: { text: '\\' } },
     j: { action: { character: '/' }, label: { text: '/' } },
     k: { action: { character: ':' }, label: { text: ':' } },
     l: { action: { character: '"' }, label: { text: '"' } },
