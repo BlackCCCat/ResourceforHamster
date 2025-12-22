@@ -282,7 +282,7 @@ local keyboard(theme, orientation, keyboardLayout) =
       type: 'horizontalSymbols',
       maxColumns: 1,
       contentRightToLeft: false,
-      // insets: { left: 3, right: 3 },
+      insets: { left: 3, right: 3 },
       backgroundStyle: 'systemButtonBackgroundStyle',
       dataSource: '123ButtonSymbolsDataSource',
     },

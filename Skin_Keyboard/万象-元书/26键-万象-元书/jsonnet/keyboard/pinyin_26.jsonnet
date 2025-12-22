@@ -808,7 +808,7 @@ local keyboard(theme, orientation, keyboardLayout) =
     ) + {
       type: 'horizontalSymbols',
       maxColumns: 1,
-      // insets: { left: 3, right: 3 },
+      insets: { left: 3, right: 3 },
       contentRightToLeft: false,
       backgroundStyle: 'systemButtonBackgroundStyle',
       dataSource: '123ButtonSymbolsDataSource',
