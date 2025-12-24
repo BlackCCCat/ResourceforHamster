@@ -126,6 +126,7 @@ local no_swipe_up_map = {
   cut: { action: { sendKeys: 'control+2' } },
   copy: { action: { sendKeys: 'control+3' } },
   paste: { action: { sendKeys: 'control+4' } },
+  tail: { action: { character: '\\' } },
   right: { action: { character: ']' } },
 };
 
@@ -137,6 +138,7 @@ local no_swipe_down_map = {
   cut: { action: { sendKeys: 'control+2' } },
   copy: { action: { sendKeys: 'control+3' } },
   paste: { action: { sendKeys: 'control+4' } },
+  tail: { action: { character: '\\' } },
   right: { action: { sendKeys: 'Right' } },
 };
 
