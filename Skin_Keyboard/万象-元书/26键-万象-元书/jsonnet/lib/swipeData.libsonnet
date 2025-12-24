@@ -86,7 +86,7 @@ local genSwipeData(deviceType) =
       // center: { x: 0.5, y: 0.8 },
     },
     c: if Settings.with_functions_row[deviceType] then {
-      action: { sendKeys: 'orq' },
+      action: { sendKeys: 'orc' },
       label: { systemImageName: 'calendar' },
       // center: { x: 0.5, y: 0.8 },
     } else {
