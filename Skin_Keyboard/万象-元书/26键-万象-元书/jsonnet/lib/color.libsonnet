@@ -99,18 +99,23 @@ local base_dark = {
 
 // iOS26 风格覆盖：Light 模式统一为白色（字母键风格），Dark 模式统一为灰色（功能键风格）
 local ios26_light = base_light + {
-  '功能键背景颜色-普通': base_light['字母键背景颜色-普通'],
-  '功能键背景颜色-高亮': base_light['字母键背景颜色-高亮'],
-  '符号键盘左侧collection背景颜色': base_light['符号键盘右侧collection背景颜色'],
-  '符号键盘左侧collection背景下边缘颜色': base_light['符号键盘右侧collection背景下边缘颜色'],
+  '字母键背景颜色-普通': 'FFFFFF',
+  '字母键背景颜色-高亮': 'ABB0BA99',
+  '功能键背景颜色-普通': 'FFFFFF',
+  '功能键背景颜色-高亮': 'ABB0BA99',
+  '符号键盘左侧collection背景颜色': 'FFFFFF',
+  '符号键盘左侧collection背景下边缘颜色': '00000000',
   '气泡背景颜色': base_light['气泡背景颜色'],
+  '底边缘颜色-普通': '00000000',
+  '底边缘颜色-高亮': '00000000',
+  '键盘背景颜色': '00000000',
 };
 
 local ios26_dark = base_dark + {
   '字母键背景颜色-普通': base_dark['功能键背景颜色-普通'],
   '字母键背景颜色-高亮': base_dark['功能键背景颜色-高亮'],
-  '符号键盘右侧collection背景颜色': base_dark['符号键盘左侧collection背景颜色'],
-  '符号键盘右侧collection背景下边缘颜色': base_dark['符号键盘左侧collection背景下边缘颜色'],
+  '符号键盘左侧collection背景颜色': base_dark['功能键背景颜色-普通'],
+  '符号键盘左侧collection背景下边缘颜色': base_dark['符号键盘左侧collection背景下边缘颜色'],
   '气泡背景颜色': base_dark['气泡背景颜色'],
 };
 

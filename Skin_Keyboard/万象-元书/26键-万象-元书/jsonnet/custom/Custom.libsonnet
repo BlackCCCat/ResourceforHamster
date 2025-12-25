@@ -8,7 +8,7 @@
   show_wanxiang: true,  // 空格按键上是否显示“万象”标识
   ios26_style: true,  // 是否启用iOS26风格（统一按键颜色，Light模式下调整高亮）
   button_insets: {
-    portrait: { top: 3.8, left: 2, right: 2, bottom: 3.8 },  // 若需要间隔大稍大，可使用：{ top: 5, left: 3, bottom: 5, right: 3 }
+    portrait: { top: 3.8, left: 2.5, right: 2.5, bottom: 3.8 },  // 若需要间隔大稍大，可使用：{ top: 5, left: 3, bottom: 5, right: 3 }
     landscape: { top: 2.2, left: 1.8, bottom: 2.2, right: 1.8 },  // 若需要间隔大稍大，可按需调整:{top: 3, left: 2, bottom: 3, right: 2}
   },
   cornerRadius: 8,  // 圆角大小，建议7或者8或者8.5即可
