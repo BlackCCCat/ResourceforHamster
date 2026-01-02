@@ -183,12 +183,10 @@ local finalStyles(type, theme, swipe_up, swipe_down, fontSizeConfig) = {
            {}
          ) +
          if type != 'number' then
-           std.foldl(  // 按下气泡样式，有潜在问题，暂时放着
+           std.foldl(  // 按下气泡样式
              function(acc, key)
-               if std.length(key) == 1 then
-                 acc + ButtonHintForegroundStyle(key, swipe_up[key], theme, type, fontSizeConfig)
-               else acc,
-             std.stringChars('qwertyuiopasdfghjklzxcvbnm'),
+               acc + ButtonHintForegroundStyle(key, swipe_up[key], theme, type, fontSizeConfig),
+             std.objectFields(swipe_up),
              {}
            )
          else

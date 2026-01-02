@@ -43,7 +43,12 @@ local config = {
   },
 };
 
-local pinyin = import 'keyboard/pinyin_26.jsonnet';
+local Settings = import 'custom/Custom.libsonnet';
+
+local pinyin = 
+if Settings.keyboard_layout == 18 then import 'keyboard/pinyin_18.jsonnet' 
+else if Settings.keyboard_layout == 14 then import 'keyboard/pinyin_14.jsonnet' 
+else import 'keyboard/pinyin_26.jsonnet';
 local alphabetic = import 'keyboard/alphabetic_26.jsonnet';
 local numeric = import 'keyboard/numeric_9.jsonnet';
 local panel = import 'keyboard/panel.jsonnet';

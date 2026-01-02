@@ -136,6 +136,164 @@ local genSwipeData(deviceType) =
     backspace: { action: { shortcut: '#undo' } },
   },
 
+  swipe_up_14: {
+    qw: { action: { character: '1' }, label: { text: '1' } },
+    er: { action: { character: '2' }, label: { text: '2' } },
+    ty: { action: { character: '3' }, label: { text: '3' } },
+    ui: { action: { character: '4' }, label: { text: '4' } },
+    op: { action: { character: '5' }, label: { text: '5' } },
+    as: { action: { character: '6' }, label: { text: '6' } },
+    df: { action: { character: '7' }, label: { text: '7' } },
+    gh: { action: { character: '8' }, label: { text: '8' } },
+    jk: { action: { character: '/' }, label: { text: '/' } },
+    l:  { action: { character: ':' }, label: { text: ':' } },
+    zx: { action: { character: '9' }, label: { text: '9' } },
+    cv: { action: { character: '0' }, label: { text: '0' } },
+    bn: { action: { character: '!' }, label: { text: '!' } },
+    m:  { action: { character: '?' }, label: { text: '?' } },
+  },
+
+  swipe_down_14: {
+    qw: { action: { character: '-' }, label: { text: '-' } },
+    er: { action: { character: '+' }, label: { text: '+' } },
+    ty: { action: { character: '*' }, label: { text: '*' } },
+    ui: { action: { character: '=' }, label: { text: '=' } },
+    op: if Settings.with_functions_row[deviceType] then { 
+      action: { character: '%' }, label: { text: '%' } 
+      } else {
+        action: { shortcut: '#paste' },
+        label: { systemImageName: 'doc.on.clipboard.fill' },
+      },
+    as: if Settings.with_functions_row[deviceType] then {
+      action: { character: '^' },
+      label: { text: '^' },
+    } else {
+      action: { shortcut: '#selectText' },
+      label: { systemImageName: 'selection.pin.in.out' },
+    },
+    df: { action: { character: '_' }, label: { text: '_' } },
+    gh: { action: { character: '#' }, label: { text: '#' } },
+    jk: { action: if Settings.with_functions_row[deviceType] && Settings.enable_functions_notification then { symbol: '\\' } else { character: '\\' }, label: { text: '\\' } },
+    l:  { action: { character: ';' }, label: { text: ';' } },
+    zx: if Settings.with_functions_row[deviceType] then {
+      action: { sendKeys: 'orc' },
+      label: { systemImageName: 'calendar' },
+      // center: { x: 0.5, y: 0.8 },
+    } else {
+      action: { shortcut: '#cut' },
+      label: { systemImageName: 'scissors' },
+      // center: { x: 0.5, y: 0.8 },
+    },
+    cv: if Settings.with_functions_row[deviceType] then {
+      action: { character: 'V' },
+      label: { systemImageName: 'av.remote.fill' },
+      // center: { x: 0.5, y: 0.8 },
+    } else {
+      action: { shortcut: '#copy' },
+      label: { systemImageName: 'arrow.up.doc.on.clipboard' },
+    },
+    bn: if Settings.with_functions_row[deviceType] then {
+      action: { sendKeys: 'osj' },
+      label: { systemImageName: 'clock.circle' },
+    } else {
+      action: { shortcut: '#rimePreviousPage' },
+      label: { systemImageName: 'chevron.up' },
+    },
+    m:  if Settings.with_functions_row[deviceType] then {
+      action: { character: '`' },
+      label: { systemImageName: 'rectangle.3.group.fill' },
+    } else {
+      action: { shortcut: '#rimeNextPage' },
+      label: { systemImageName: 'chevron.down' },
+    },
+    backspace: { action: { shortcut: '#undo' } },
+  },
+
+  swipe_up_18: {
+    q:  { action: { character: '1' }, label: { text: '1' } },
+    we: { action: { character: '2' }, label: { text: '2' } },
+    rt: { action: { character: '3' }, label: { text: '3' } },
+    y:  { action: { character: '4' }, label: { text: '4' } },
+    u:  { action: { character: '5' }, label: { text: '5' } },
+    io: { action: { character: '6' }, label: { text: '6' } },
+    p:  { action: { character: '7' }, label: { text: '7' } },
+    a:  { action: { character: '8' }, label: { text: '8' } },
+    sd: { action: { character: '9' }, label: { text: '9' } },
+    fg: { action: { character: '0' }, label: { text: '0' } },
+    h:  { action: { character: '-' }, label: { text: '-' } },
+    jk: { action: { character: '/' }, label: { text: '/' } },
+    l:  { action: { character: ':' }, label: { text: ':' } },
+    z:  { action: 'tab', label: { text: '⇥' } },
+    xc: { action: { character: '<' }, label: { text: '<' } },
+    v:  { action: { character: '>' }, label: { text: '>' } },
+    bn: { action: { character: '!' }, label: { text: '!' } },
+    m:  { action: { character: '?' }, label: { text: '?' } },
+  },
+
+  swipe_down_18: {
+    q:  { action: { character: '~' }, label: { text: '~' } },
+    we: { action: { character: '@' }, label: { text: '@' } },
+    rt: { action: { character: '#' }, label: { text: '#' } },
+    y:  { action: { character: '$' }, label: { text: '$' } },
+    u:  { action: { character: '%' }, label: { text: '%' } },
+    io: { action: { character: '^' }, label: { text: '^' } },
+    p:  { action: { character: '&' }, label: { text: '&' } },
+    a:  { action: { character: '*' }, label: { text: '*' } },
+    sd: { action: { character: '(' }, label: { text: '(' } },
+    fg: { action: { character: ')' }, label: { text: ')' } },
+    h:  { action: { character: '_' }, label: { text: '_' } },
+    jk: { action: if Settings.with_functions_row[deviceType] && Settings.enable_functions_notification then { symbol: '\\' } else { character: '\\' }, label: { text: '\\' } },
+    l:  if Settings.with_functions_row[deviceType] then {
+      action: { character: ';' },
+      label: { text: ';' },
+    } else {
+      action: { shortcut: '#selectText' },
+      label: { systemImageName: 'selection.pin.in.out' },
+    },
+    z:  if Settings.with_functions_row[deviceType] then {
+      action: { character: 'V' },
+      label: { systemImageName: 'av.remote.fill' },
+    } else {
+      action: { shortcut: '#copy' },
+      label: { systemImageName: 'arrow.up.doc.on.clipboard' },
+    },
+    xc: if Settings.with_functions_row[deviceType] then {
+      action: { sendKeys: 'orc' },
+      label: { systemImageName: 'calendar' },
+    } else {
+      action: { shortcut: '#cut' },
+      label: { systemImageName: 'scissors' },
+    },
+    v:  if Settings.with_functions_row[deviceType] then {
+      action: { sendKeys: 'osj' },
+      label: { systemImageName: 'clock.circle' },
+      // center: { x: 0.5, y: 0.8 },
+    } else {
+      action: { shortcut: '#paste' },
+      label: { systemImageName: 'doc.on.clipboard.fill' },
+      // center: { x: 0.5, y: 0.8 },
+    },
+    bn: if Settings.with_functions_row[deviceType] then {
+      action: { sendKeys: 'N' },
+      label: { systemImageName: 'calendar.badge.exclamationmark' },
+      // center: { x: 0.5, y: 0.8 },
+    } else {
+      action: { shortcut: '#rimePreviousPage' },
+      label: { systemImageName: 'chevron.up' },
+      // center: { x: 0.5, y: 0.8 },
+    },
+    m:  if Settings.with_functions_row[deviceType] then {
+      action: { character: '`' },
+      label: { systemImageName: 'rectangle.3.group.fill' },
+      // center: { x: 0.5, y: 0.8 },
+    } else {
+      action: { shortcut: '#rimeNextPage' },
+      label: { systemImageName: 'chevron.down' },
+      // center: { x: 0.5, y: 0.8 },
+    },
+    backspace: { action: { shortcut: '#undo' } },
+  },
+
   // 中文九键划动
   number_swipe_up: {
     // '1': { action: { symbol: '1' }, label: { text: '1' } },

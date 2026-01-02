@@ -240,19 +240,19 @@
       selectedIndex: 1,
       size: { width: 50, height: 53 },
       list: [
-        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '简中' } },  //0*
-        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '繁中' } },  //1
-        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '港中' } },  //2
-        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '台中' } },  //3
-        { action: { sendKeys: 'Control+e' }, label: { text: '翻译' } },  //4*
-        { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },  //5
-        { action: { sendKeys: 'Control+c' }, label: { text: '拆分' } },  //6*
-        { action: { sendKeys: 'Control+c' }, label: { text: '拆关' } },  //7
-        { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },  //8*
-        { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },  //9
-        { action: { sendKeys: 'Control+q' }, label: { text: '混合' } },  //10*
-        { action: { sendKeys: 'Control+q' }, label: { text: '中文' } },  //11
-        { action: { sendKeys: 'Control+q' }, label: { text: '英文' } },  //12
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '简中' } },
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '繁中' } },
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '港中' } },
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '台中' } },
+        { action: { sendKeys: 'Control+e' }, label: { text: '翻译' } },
+        { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },
+        { action: { sendKeys: 'Control+c' }, label: { text: '拆分' } },
+        { action: { sendKeys: 'Control+c' }, label: { text: '拆关' } },
+        { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },
+        { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '混合' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '中文' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '英文' } },
       ],
     },
     enter: {
@@ -274,6 +274,395 @@
     // "symbol": 切到符号键盘的按键
     // "shift": 切到shift键盘的按键
     // "spaceRight": 空格右侧的按键,
+  },
+
+  pinyin_18: {
+    q: {
+      selectedIndex: 1,  // 默认选中的索引，具体见仓皮肤文档
+      list: [
+        { action: { character: 'q' }, label: { text: 'q' } },  // action同仓皮肤定义，label可选text/systemImageName, 具体见仓皮肤文档
+        { action: { character: 'Q' }, label: { text: 'Q' } },
+        { action: { sendKeys: 'KP_1'}, label: { text: '1' } },
+      ],
+    },
+    we: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'w' }, label: { text: 'w' } },
+        { action: { character: 'W' }, label: { text: 'W' } },
+        { action: { character: 'e' }, label: { text: 'e' } },
+        { action: { character: 'E' }, label: { text: 'E' } },
+        { action: { sendKeys: 'KP_2'}, label: { text: '2' } },
+      ],
+    },
+    rt: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'r' }, label: { text: 'r' } },
+        { action: { character: 'R' }, label: { text: 'R' } },
+        { action: { sendKeys: 'KP_3'}, label: { text: '3' } },
+        { action: { character: 't' }, label: { text: 't' } },
+        { action: { character: 'T' }, label: { text: 'T' } },
+      ],
+    },
+    y: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'y' }, label: { text: 'y' } },
+        { action: { character: 'Y' }, label: { text: 'Y' } },
+        { action: { sendKeys: 'KP_4'}, label: { text: '4' } },
+      ],
+    },
+    u: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'u' }, label: { text: 'u' } },
+        { action: { character: 'U' }, label: { text: 'U' } },
+        { action: { sendKeys: 'KP_5'}, label: { text: '5' } },
+      ],
+    },
+    io: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'i' }, label: { text: 'i' } },
+        { action: { character: 'I' }, label: { text: 'I' } },
+        { action: { character: 'o' }, label: { text: 'o' } },
+        { action: { character: 'O' }, label: { text: 'O' } },
+        { action: { sendKeys: 'KP_6'}, label: { text: '6' } },
+      ],
+    },
+
+    p: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'p' }, label: { text: 'p' } },
+        { action: { character: 'P' }, label: { text: 'P' } },
+        { action: { sendKeys: 'KP_7'}, label: { text: '7' } },
+      ],
+    },
+
+    a: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'a' }, label: { text: 'a' } },
+        { action: { character: 'A' }, label: { text: 'A' } },
+        { action: { sendKeys: 'KP_8'}, label: { text: '8' } },
+
+      ],
+    },
+
+
+    sd: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 's' }, label: { text: 's' } },
+        { action: { character: 'S' }, label: { text: 'S' } },
+        { action: { character: 'd' }, label: { text: 'd' } },
+        { action: { character: 'D' }, label: { text: 'D' } },   
+        { action: { sendKeys: 'KP_9'}, label: { text: '9' } },
+        ],
+    },
+
+    fg: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'f' }, label: { text: 'f' } },
+        { action: { character: 'F' }, label: { text: 'F' } },
+        { action: { character: 'g' }, label: { text: 'g' } },
+        { action: { character: 'G' }, label: { text: 'G' } },
+        { action: { sendKeys: 'KP_0'}, label: { text: '0' } },
+      ],
+    },
+
+    h: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'h' }, label: { text: 'h' } },
+        { action: { character: 'H' }, label: { text: 'H' } },
+      ],
+    },
+
+
+    jk: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'j' }, label: { text: 'j' } },
+        { action: { character: 'J' }, label: { text: 'J' } },
+        { action: { character: 'k' }, label: { text: 'k' } },
+        { action: { character: 'K' }, label: { text: 'K' } },
+      ],
+    },
+
+    l: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'l' }, label: { text: 'l' } },
+        { action: { character: 'L' }, label: { text: 'L' } },
+      ],
+    },
+
+
+    z: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'z' }, label: { text: 'z' } },
+        { action: { character: 'Z' }, label: { text: 'Z' } },
+      ],
+    },
+
+
+    xc: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'x' }, label: { text: 'x' } },
+        { action: { character: 'X' }, label: { text: 'X' } },
+        { action: { character: 'c' }, label: { text: 'c' } },
+        { action: { character: 'C' }, label: { text: 'C' } },
+      ],
+    },
+
+    v: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'v' }, label: { text: 'v' } },
+        { action: { character: 'V' }, label: { text: 'V' } },
+      ],
+    },
+
+
+    bn: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'b' }, label: { text: 'b' } },
+        { action: { character: 'B' }, label: { text: 'B' } },
+        { action: { character: 'n' }, label: { text: 'n' } },
+        { action: { character: 'N' }, label: { text: 'N' } },
+      ],
+    },
+
+    m: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'm' }, label: { text: 'm' } },
+        { action: { character: 'M' }, label: { text: 'M' } },
+      ],
+    },
+    spaceLeft: {
+      selectedIndex: 1,
+      list: [
+        { action: { symbol: ',' }, label: { text: ',' } },
+        { action: { symbol: '.' }, label: { text: '.' } },
+      ],
+    },
+    cn2en: {
+      selectedIndex: 1,
+      size: { width: 50, height: 53 },
+      list: [
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '简中' } },  //0*
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '繁中' } },  //1
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '港中' } },  //2
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '台中' } },  //3
+        { action: { sendKeys: 'Control+e' }, label: { text: '翻译' } },  //4*
+        { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },  //5
+        { action: { sendKeys: 'Control+c' }, label: { text: '拆分' } },  //6*
+        { action: { sendKeys: 'Control+c' }, label: { text: '拆关' } },  //7
+        { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },
+        { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '混合' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '中文' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '英文' } },
+      ],
+    },
+    enter: {
+      size: { width: 50, height: 53 },
+      selectedIndex: 0,
+      list: [
+        { action: { shortcut: '#换行' }, label: { text: '换行' }, fontSize: 16 },
+      ],
+    },
+  },
+
+  pinyin_14: {
+    qw: {
+      selectedIndex: 1,  // 默认选中的索引，具体见仓皮肤文档
+      list: [
+        { action: { character: 'q' }, label: { text: 'q' } },  // action同仓皮肤定义，label可选text/systemImageName, 具体见仓皮肤文档
+        { action: { character: 'Q' }, label: { text: 'Q' } },
+        { action: { character: 'w' }, label: { text: 'w' } },
+        { action: { character: 'W' }, label: { text: 'W' } },
+        { action: { sendKeys: 'KP_1'}, label: { text: '1' } },
+      ],
+    },
+    er: {
+      selectedIndex: 1,
+      list: [
+
+        { action: { character: 'e' }, label: { text: 'e' } },
+        { action: { character: 'E' }, label: { text: 'E' } },
+        { action: { character: 'r' }, label: { text: 'r' } },
+        { action: { character: 'R' }, label: { text: 'R' } },
+        { action: { sendKeys: 'KP_2'}, label: { text: '2' } },
+      ],
+    },
+    ty: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 't' }, label: { text: 't' } },
+        { action: { character: 'T' }, label: { text: 'T' } },
+        { action: { character: 'y' }, label: { text: 'y' } },
+        { action: { character: 'Y' }, label: { text: 'Y' } },
+        { action: { sendKeys: 'KP_3'}, label: { text: '3' } },
+
+      ],
+    },
+    ui: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'u' }, label: { text: 'u' } },
+        { action: { character: 'U' }, label: { text: 'U' } },
+        { action: { character: 'i' }, label: { text: 'i' } },
+        { action: { character: 'I' }, label: { text: 'I' } },
+        { action: { sendKeys: 'KP_4'}, label: { text: '4' } },
+      ],
+    },
+    op: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'o' }, label: { text: 'o' } },
+        { action: { character: 'O' }, label: { text: 'O' } },
+        { action: { character: 'p' }, label: { text: 'p' } },
+        { action: { character: 'P' }, label: { text: 'P' } },
+        { action: { sendKeys: 'KP_5'}, label: { text: '5' } },
+      ],
+    },
+
+
+    as: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'a' }, label: { text: 'a' } },
+        { action: { character: 'A' }, label: { text: 'A' } },
+        { action: { character: 's' }, label: { text: 's' } },
+        { action: { character: 'S' }, label: { text: 'S' } },
+        { action: { sendKeys: 'KP_6'}, label: { text: '6' } },
+      ],
+    },
+
+    df: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'd' }, label: { text: 'd' } },
+        { action: { character: 'D' }, label: { text: 'D' } }, 
+        { action: { character: 'f' }, label: { text: 'f' } },
+        { action: { character: 'F' }, label: { text: 'F' } },
+        { action: { sendKeys: 'KP_7'}, label: { text: '7' } },
+
+      ],
+    },
+
+
+    gh: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'g' }, label: { text: 'g' } },
+        { action: { character: 'G' }, label: { text: 'G' } },
+        { action: { character: 'h' }, label: { text: 'h' } },
+        { action: { character: 'H' }, label: { text: 'H' } },
+        { action: { sendKeys: 'KP_8'}, label: { text: '8' } },
+        ],
+    },
+
+    jk: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'j' }, label: { text: 'j' } },
+        { action: { character: 'J' }, label: { text: 'J' } },
+        { action: { character: 'k' }, label: { text: 'k' } },
+        { action: { character: 'K' }, label: { text: 'K' } },
+        { action: { sendKeys: 'KP_9'}, label: { text: '9' } },
+      ],
+    },
+
+    l: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'l' }, label: { text: 'l' } },
+        { action: { character: 'L' }, label: { text: 'L' } },
+        { action: { sendKeys: 'KP_0'}, label: { text: '0' } },
+      ],
+    },
+
+    zx: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'z' }, label: { text: 'z' } },
+        { action: { character: 'Z' }, label: { text: 'Z' } },
+        { action: { character: 'x' }, label: { text: 'x' } },
+        { action: { character: 'X' }, label: { text: 'X' } },
+      ],
+    },
+
+    cv: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'c' }, label: { text: 'c' } },
+        { action: { character: 'C' }, label: { text: 'C' } },
+        { action: { character: 'v' }, label: { text: 'v' } },
+        { action: { character: 'V' }, label: { text: 'V' } },
+      ],
+    },
+
+
+    bn: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'b' }, label: { text: 'b' } },
+        { action: { character: 'B' }, label: { text: 'B' } },
+        { action: { character: 'n' }, label: { text: 'n' } },
+        { action: { character: 'N' }, label: { text: 'N' } },
+      ],
+    },
+
+    m: {
+      selectedIndex: 1,
+      list: [
+        { action: { character: 'm' }, label: { text: 'm' } },
+        { action: { character: 'M' }, label: { text: 'M' } },
+      ],
+    },
+    spaceLeft: {
+      selectedIndex: 1,
+      list: [
+        { action: { symbol: ',' }, label: { text: ',' } },
+        { action: { symbol: '.' }, label: { text: '.' } },
+      ],
+    },
+    cn2en: {
+      selectedIndex: 1,
+      size: { width: 50, height: 53 },
+      list: [
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '简中' } },  //0*
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '繁中' } },  //1
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '港中' } },  //2
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '台中' } },  //3
+        { action: { sendKeys: 'Control+e' }, label: { text: '翻译' } },  //4*
+        { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },  //5
+        { action: { sendKeys: 'Control+c' }, label: { text: '拆分' } },  //6*
+        { action: { sendKeys: 'Control+c' }, label: { text: '拆关' } },  //7
+        { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },
+        { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '混合' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '中文' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '英文' } },
+      ],
+    },
+    enter: {
+      size: { width: 50, height: 53 },
+      selectedIndex: 0,
+      list: [
+        { action: { shortcut: '#换行' }, label: { text: '换行' }, fontSize: 16 },
+      ],
+    },
   },
 
   alphabetic: {

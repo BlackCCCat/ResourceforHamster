@@ -1,5 +1,13 @@
 {
-  with_functions_row: { iPhone: true, iPad: false },  // true为有功能按键，false为无功能按键, iPad键盘默认不带功能按键
+  // 键盘布局配置: 26 (全键), 18 (18键), 14 (14键)
+  layout_config:: {
+    layout: self.keyboard_layout,
+  },
+  with_functions_row: {
+    iPhone: true,
+    iPad: false,
+  },
+  keyboard_layout: 26, // 26 = Full, 18 = 18-key, 14 = 14-key键
   enable_functions_notification: true,  // 功能按键是否启用通知功能，true为启用
   is_letter_capital: false,  // 26个字母按键大小写显示，false为显示小写
   fix_sf_symbol: false,  // 是否修复部分sf_symbol不显示的情况，false为不修复
