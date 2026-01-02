@@ -7,7 +7,9 @@
     iPhone: true,
     iPad: false,
   },
-  keyboard_layout: 26, // 26 = Full, 18 = 18-key, 14 = 14-key键
+  keyboard_layout: 26, // 可选值为26、18、14, 26为全键，18为18键，14为14键
+  is_wanxiang_18: true, // 是否为万象18键，涉及到方案中的转写规则，默认万象，为大写转写
+  is_wanxiang_14: true, // 是否为万象14键，涉及到方案中的转写规则，默认万象，为大写转写
   enable_functions_notification: true,  // 功能按键是否启用通知功能，true为启用
   is_letter_capital: false,  // 26个字母按键大小写显示，false为显示小写
   fix_sf_symbol: false,  // 是否修复部分sf_symbol不显示的情况，false为不修复

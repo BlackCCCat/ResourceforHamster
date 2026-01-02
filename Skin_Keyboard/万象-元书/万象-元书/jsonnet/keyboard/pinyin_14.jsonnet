@@ -49,7 +49,7 @@ local createButton(id, actionKey, size, bounds, root, theme) = {
   [if std.objectHas(root, id + 'ButtonUppercasedStateForegroundStyle') then 'capsLockedStateForegroundStyle']: self.uppercasedStateForegroundStyle,
   hintStyle: id + 'ButtonHintStyle',
   action: {
-    character: actionKey,
+    character: if Settings.is_wanxiang_14 then std.asciiUpper(actionKey) else actionKey,
   },
   [if std.length(actionKey) == 1 then 'uppercasedStateAction']: {
     character: std.asciiUpper(actionKey),
