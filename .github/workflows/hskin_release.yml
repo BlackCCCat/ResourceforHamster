@@ -33,7 +33,7 @@ jobs:
 
       - name: Rename files
         run: |
-          mv Skin_Keyboard/万象-元书/26键-万象-元书.cskin Skin_Keyboard/万象-元书/26-wanxiang.cskin 
+          mv Skin_Keyboard/万象-元书/万象-元书.cskin Skin_Keyboard/万象-元书/wanxiang.cskin 
 
           
       - name: Create Release
@@ -46,7 +46,7 @@ jobs:
             ${{ steps.commits.outputs.commits }}
           prerelease: ${{ contains(github.ref_name, '-rc') }}
           files: |
-            Skin_Keyboard/万象-元书/26-wanxiang.cskin
+            Skin_Keyboard/万象-元书/wanxiang.cskin
           token: ${{ secrets.AUTO_RELEASE }} 
         env:
           GH_TOKEN: ${{ secrets.AUTO_RELEASE }}  # 使用 PAT 来执行发布
