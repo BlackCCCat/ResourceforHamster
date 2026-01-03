@@ -184,8 +184,6 @@ local keyboard(theme, orientation, keyboardLayout) =
     shiftButtonForegroundStyle: p26Layout.shiftButtonForegroundStyle,
     shiftButtonUppercasedForegroundStyle: p26Layout.shiftButtonUppercasedForegroundStyle,
     shiftButtonCapsLockedForegroundStyle: p26Layout.shiftButtonCapsLockedForegroundStyle,
-    shiftButtonPreeditNotification: p26Layout.shiftButtonPreeditNotification,
-    shiftButtonPreeditForegroundStyle: p26Layout.shiftButtonPreeditForegroundStyle,
 
     backspaceButton: p26Layout.backspaceButton + {
        size: { width: if isPortrait then keyboardLayout['竖屏按键尺寸']['backspace键size'].width else keyboardLayout['横屏按键尺寸']['backspace键size'].width },
