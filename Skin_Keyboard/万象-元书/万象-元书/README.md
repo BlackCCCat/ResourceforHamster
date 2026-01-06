@@ -25,7 +25,7 @@
 
 10. 按键圆角，可在`custom/Custom.libsonnet`中修改`cornerRadius`的值，建议`7`、`8`、`8.5`
 
-11. `shift`按键是否开启通知动作，默认为开启且为pro版的辅助码合，请在`custom/Custom.libsonnet`中修改`enable_preedit`为`false`
+11. `shift`按键是否开启通知动作，默认为开启且为pro版的辅助码合并，请在`custom/Custom.libsonnet`中修改`enable_preedit`为`false`
 
 12. `shift`按键通知动作自定义，默认为`/`，请在`custom/Custom.libsonnet`中修改`preedit_action`
 

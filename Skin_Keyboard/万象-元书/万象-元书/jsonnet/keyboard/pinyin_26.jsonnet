@@ -1050,19 +1050,19 @@ local keyboard(theme, orientation, keyboardLayout) =
 
     spaceLeftButtonForegroundStyle: {
       buttonStyleType: 'text',
-      text: '，',
+      text: ',',
       normalColor: color[theme]['按键前景颜色'],
       highlightColor: color[theme]['按键前景颜色'],
       fontSize: fontSize['按键前景文字大小'],
-      center: { x: 0.62, y: 0.5 },
+      center: { x: 0.5, y: 0.5 },
     },
     spaceLeftButtonForegroundStyle2: {
       buttonStyleType: 'text',
-      text: '。',
+      text: '.',
       normalColor: color[theme]['按键前景颜色'],
       highlightColor: color[theme]['按键前景颜色'],
       fontSize: fontSize['按键前景文字大小'] - 2,
-      center: { x: 0.6, y: 0.3 },
+      center: { x: 0.5, y: 0.3 },
     },
 
     enterButton: createButton(
