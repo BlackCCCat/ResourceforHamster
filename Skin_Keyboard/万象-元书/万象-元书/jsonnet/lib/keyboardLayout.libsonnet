@@ -5,13 +5,13 @@ local color = import 'color.libsonnet';
     {
       '竖屏中文9键': {
         '竖屏按键尺寸': {
-          // '123Button': { width: { percentage: 1.5/7 } },
-          'emojiButton': { width: { percentage: 1.5/7 } },
+          'symbolButton': { width: { percentage: 1.5/7 } },
           'spaceButton': { width: { percentage: 4/7 } },
           'cn2enButton': { width: { percentage: 1.5/7 } },
+          '123Button': { width: { percentage: 1/4 } },
+          'emojiButton': { width: { percentage: 1/4 } },
           'backspaceButton': { height: { percentage: 1/4 } },
           'cleanButton': { height: { percentage: 1/4 } },
-          'symbolButton': { height: { percentage: 1/4 } },
           'enterButton': { height: { percentage: 1/4 } },
 
         },
@@ -40,7 +40,8 @@ local color = import 'color.libsonnet';
                     style: 'VStackStyle1',
                     subviews: [
                       { Cell: 'collection' },
-                      { Cell: 'symbolButton' },
+                      { Cell: '123Button' },
+                      // { Cell: 'emojiButton' },
                     ],
                   },
                 },
@@ -62,8 +63,7 @@ local color = import 'color.libsonnet';
                         HStack: {
                           style: 'HStackStyle2',
                           subviews: [
-                            // { Cell: '123Button' },
-                            { Cell: 'emojiButton' },
+                            { Cell: 'symbolButton' },
                             { Cell: 'spaceButton' },
                             { Cell: 'cn2enButton' },
                           ],

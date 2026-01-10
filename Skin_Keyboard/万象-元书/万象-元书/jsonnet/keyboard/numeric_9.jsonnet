@@ -42,7 +42,11 @@ local createButton(key, size, bounds, root) = {
       if std.objectHas(swipe_down, key) then 'number' + key + 'ButtonDownForegroundStyle' else null,
     ]
   ),
-  action:
+  action: if Settings.keyboard_layout == 9 then
+  {
+    symbol: key,
+  }
+  else
   {
     character: key,
   },

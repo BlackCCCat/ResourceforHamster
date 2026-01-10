@@ -218,47 +218,45 @@ local keyboard(theme, orientation) =
     number8Button: createButton('8', {}, {}, $, false),
     number9Button: createButton('9', {}, {}, $, false),
 
-    // symbolButton: {
-    //   size: {
-    //     height: '1/4',
-    //   },
-    //   backgroundStyle: 'systemButtonBackgroundStyle',
-    //   type: 'horizontalSymbols',
-    //   maxColumns: 1,
-    //   insets: { left: 3, right: 3 },
-    //   contentRightToLeft: false,
-    //   dataSource: 'symbolButtonSymbolsDataSource',
-    // },
-    // symbolButtonSymbolsDataSource: [
-    //   { label: '1', action: { keyboardType: 'symbolic' }, styleName: 'symbolicStyle' },
-    //   { label: '3', action: { keyboardType: 'emojis' }, styleName: 'emojisStyle' },
-    // ],
-    symbolButton: createButton('symbol', chooseLayout(Settings.with_functions_row[deviceType], theme)['竖屏中文9键']['竖屏按键尺寸']['symbolButton'], {}, $, false) + {
+    symbolButton: createButton('symbol', chooseLayout(Settings.with_functions_row[deviceType], theme)['竖屏中文9键']['竖屏按键尺寸']['symbolButton'], {}, $, false) +{
       backgroundStyle: 'systemButtonBackgroundStyle',
-      foregroundStyle: 'symbolButtonForegroundStyle',
-      action: { keyboardType: 'symbolic' },
+      type: 'horizontalSymbols',
+      maxColumns: 1,
+      insets: { left: 3, right: 3 },
+      contentRightToLeft: false,
+      dataSource: 'symbolButtonSymbolsDataSource',
     },
-    symbolButtonForegroundStyle: {
+    symbolButtonSymbolsDataSource: [
+      { label: '1', action: { keyboardType: 'symbolic' }, styleName: 'symbolicStyle' },
+      { label: '3', action: { keyboardType: 'emojis' }, styleName: 'emojisStyle' },
+    ],
+    // symbolButton: createButton('symbol', chooseLayout(Settings.with_functions_row[deviceType], theme)['竖屏中文9键']['竖屏按键尺寸']['symbolButton'], {}, $, false) + {
+    //   backgroundStyle: 'systemButtonBackgroundStyle',
+    //   foregroundStyle: 'symbolButtonForegroundStyle',
+    //   action: { keyboardType: 'symbolic' },
+    // },
+    // symbolButtonForegroundStyle: {
+    //   buttonStyleType: 'systemImage',
+    //   systemImageName: 'command.circle.fill',
+    //   normalColor: color[theme]['按键前景颜色'],
+    //   highlightColor: color[theme]['按键前景颜色'],
+    //   fontSize: fontSize['按键前景文字大小'] - 3,
+    //   center: center['功能键前景文字偏移'] { y: 0.5 },
+    // },
+
+    '123Button': createButton('123', chooseLayout(Settings.with_functions_row[deviceType], theme)['竖屏中文9键']['竖屏按键尺寸']['123Button'], {}, $, false) + {
+      backgroundStyle: 'systemButtonBackgroundStyle',
+      foregroundStyle: '123ButtonForegroundStyle',
+      action: { keyboardType: 'numeric' },
+    },
+    '123ButtonForegroundStyle': {
       buttonStyleType: 'systemImage',
-      systemImageName: 'command.circle.fill',
+      systemImageName: if Settings.fix_sf_symbol then 'textformat.123' else 'numbers',
       normalColor: color[theme]['按键前景颜色'],
       highlightColor: color[theme]['按键前景颜色'],
       fontSize: fontSize['按键前景文字大小'] - 3,
       center: center['功能键前景文字偏移'] { y: 0.5 },
     },
-
-    // '123Button': createButton('123', chooseLayout(Settings.with_functions_row[deviceType], theme)['竖屏中文9键']['竖屏按键尺寸']['123Button'], {}, $, false) + {
-    //   type: 'horizontalSymbols',
-    //   maxColumns: 1,
-    //   insets: { left: 3, right: 3 },
-    //   contentRightToLeft: false,
-    //   backgroundStyle: 'systemButtonBackgroundStyle',
-    //   dataSource: '123ButtonSymbolsDataSource',
-    // },
-    // '123ButtonSymbolsDataSource': [
-    //   { label: '1', action: { keyboardType: 'numeric' }, styleName: 'numericStyle' },
-    //   { label: '4', action: { keyboardType: 'emojis' }, styleName: 'emojisStyle' },  // 内置键盘
-    // ],
     emojiButton: createButton('emoji', chooseLayout(Settings.with_functions_row[deviceType], theme)['竖屏中文9键']['竖屏按键尺寸']['emojiButton'], {}, $, false) + {
       backgroundStyle: 'systemButtonBackgroundStyle',
       foregroundStyle: 'emojiButtonForegroundStyle',
