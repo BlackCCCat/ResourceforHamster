@@ -742,12 +742,12 @@ local keyboard(theme, orientation, keyboardLayout) =
       foregroundStyle: [
         {
           styleName: 'cn2enButtonHintSymbolsForegroundStyleOf6',
-          conditionKey: 'rime$chaifen_switch',
+          conditionKey: 'rime$super_tips',
           conditionValue: 'true',
         },
         {
           styleName: 'cn2enButtonHintSymbolsForegroundStyleOf7',
-          conditionKey: 'rime$chaifen_switch',
+          conditionKey: 'rime$super_tips',
           conditionValue: 'false',
         },
       ],
@@ -756,42 +756,43 @@ local keyboard(theme, orientation, keyboardLayout) =
       foregroundStyle: [
         {
           styleName: 'cn2enButtonHintSymbolsForegroundStyleOf8',
-          conditionKey: 'rime$super_tips',
-          conditionValue: 'true',
-        },
-        {
-          styleName: 'cn2enButtonHintSymbolsForegroundStyleOf9',
-          conditionKey: 'rime$super_tips',
-          conditionValue: 'false',
-        },
-      ],
-    },
-    cn2enButtonHintSymbolsStyleOf10: super['cn2enButtonHintSymbolsStyleOf10'] + {
-      foregroundStyle: [
-        {
-          styleName: 'cn2enButtonHintSymbolsForegroundStyleOf10',
           conditionKey: 'rime$mixed',
           conditionValue: 'true',
         },
         {
-          styleName: 'cn2enButtonHintSymbolsForegroundStyleOf11',
+          styleName: 'cn2enButtonHintSymbolsForegroundStyleOf9',
           conditionKey: 'rime$zh_only',
           conditionValue: 'true',
         },
         {
-          styleName: 'cn2enButtonHintSymbolsForegroundStyleOf12',
+          styleName: 'cn2enButtonHintSymbolsForegroundStyleOf10',
           conditionKey: 'rime$en_only',
           conditionValue: 'true',
         },
       ],
     },
+    cn2enButtonHintSymbolsStyleOf11: super['cn2enButtonHintSymbolsStyleOf11'] + {
+      foregroundStyle: [
+        {
+          styleName: 'cn2enButtonHintSymbolsForegroundStyleOf11',
+          conditionKey: 'rime$chaifen_switch',
+          conditionValue: 'true',
+        },
+        {
+          styleName: 'cn2enButtonHintSymbolsForegroundStyleOf12',
+          conditionKey: 'rime$chaifen_switch',
+          conditionValue: 'false',
+        },
+      ],
+    },
+    
     cn2enButtonHintSymbolsStyle: super['cn2enButtonHintSymbolsStyle'] + {
       symbolStyles: [
         'cn2enButtonHintSymbolsStyleOf0',
         'cn2enButtonHintSymbolsStyleOf4',
         'cn2enButtonHintSymbolsStyleOf6',
         'cn2enButtonHintSymbolsStyleOf8',
-        'cn2enButtonHintSymbolsStyleOf10',
+        'cn2enButtonHintSymbolsStyleOf11',
       ],
     },
 

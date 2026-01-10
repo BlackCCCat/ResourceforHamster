@@ -1,8 +1,12 @@
 patch:
-  - t9:
+  t9:
     enable: true
 
   key_binder/tips_key: "Break"
+  key_binder/bindings/+: # 也可以再增加方案专有的
+    - { when: always, toggle: chinese_english, accept: Control+e } # 切换翻译功能
+    - { when: always, toggle: super_tips, accept: Control+t } # 切换超级提示
+    - { when: always, toggle: s2s, accept: Control+Shift+4 } #
 
   # 开关
   # reset: 默认状态。注释掉后，切换窗口时不会重置到默认状态。
