@@ -278,15 +278,13 @@ local keyboard(theme, orientation) =
     cn2enButtonHintSymbolsStyle: super['cn2enButtonHintSymbolsStyle'] + {
       symbolStyles: [
         'cn2enButtonHintSymbolsStyleOf0',
-        'cn2enButtonHintSymbolsStyleOf4',
-        'cn2enButtonHintSymbolsStyleOf6',
-        'cn2enButtonHintSymbolsStyleOf8',
+        // 'cn2enButtonHintSymbolsStyleOf4',
+        // 'cn2enButtonHintSymbolsStyleOf6',
       ],
     },
     cn2enButtonHintSymbolsStyleOf0: p26Layout.cn2enButtonHintSymbolsStyleOf0,
-    cn2enButtonHintSymbolsStyleOf4: p26Layout.cn2enButtonHintSymbolsStyleOf4,
-    cn2enButtonHintSymbolsStyleOf6: p26Layout.cn2enButtonHintSymbolsStyleOf6,
-    cn2enButtonHintSymbolsStyleOf8: p26Layout.cn2enButtonHintSymbolsStyleOf8,
+    // cn2enButtonHintSymbolsStyleOf4: p26Layout.cn2enButtonHintSymbolsStyleOf4,
+    // cn2enButtonHintSymbolsStyleOf6: p26Layout.cn2enButtonHintSymbolsStyleOf6,
 
 
 

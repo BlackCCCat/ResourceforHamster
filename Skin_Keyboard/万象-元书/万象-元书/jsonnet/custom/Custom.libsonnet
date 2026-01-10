@@ -7,7 +7,7 @@
     iPhone: true,
     iPad: false,
   },
-  keyboard_layout: 9, // 可选值为26、18、14、9, 26为全键，18为18键，14为14键，9为9键
+  keyboard_layout: 26, // 可选值为26、18、14、9, 26为全键，18为18键，14为14键，9为9键
   is_wanxiang_18: true, // 是否为万象18键，涉及到方案中的转写规则，默认万象，为大写转写
   is_wanxiang_14: true, // 是否为万象14键，涉及到方案中的转写规则，默认万象，为大写转写
   enable_functions_notification: true,  // 功能按键是否启用通知功能，true为启用

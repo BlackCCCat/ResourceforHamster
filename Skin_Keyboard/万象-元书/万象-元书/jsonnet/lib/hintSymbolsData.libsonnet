@@ -296,13 +296,10 @@
         { action: { sendKeys: 'Control+Shift+4' }, label: { text: '繁中' } },  //1
         { action: { sendKeys: 'Control+Shift+4' }, label: { text: '港中' } },  //2
         { action: { sendKeys: 'Control+Shift+4' }, label: { text: '台中' } },  //3
-        { action: { sendKeys: 'Control+e' }, label: { text: '翻译' } },  //4*
-        { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },  //5
-        { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },
-        { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '混合' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '中文' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '英文' } },
+        // { action: { sendKeys: 'Control+e' }, label: { text: '翻译' } },  //4*
+        // { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },  //5
+        // { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },
+        // { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },
       ],
     },
   },
