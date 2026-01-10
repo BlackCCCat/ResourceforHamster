@@ -293,8 +293,32 @@ local genSwipeData(deviceType) =
     },
     backspace: { action: { shortcut: '#undo' } },
   },
+  swipe_up_9: {
+    '1': { action: { symbol: '1' }, label: { text: '1' } },
+    '2': { action: { symbol: '2' }, label: { text: '2' } },
+    '3': { action: { symbol: '3' }, label: { text: '3' } },
+    '4': { action: { symbol: '4' }, label: { text: '4' } },
+    '5': { action: { symbol: '5' }, label: { text: '5' } },
+    '6': { action: { symbol: '6' }, label: { text: '6' } },
+    '7': { action: { symbol: '7' }, label: { text: '7' } },
+    '8': { action: { symbol: '8' }, label: { text: '8' } },
+    '9': { action: { symbol: '9' }, label: { text: '9' } },
+    // '0': { action: { symbol: '0' }, label: { text: '0' } },
+    space: { action: { symbol: '0' }, label: { text: '0' } },
+  },
+  swipe_down_9: {
+    '1': { action: { symbol: '!' }, label: { text: '!' } },
+    '2': { action: { symbol: '@' }, label: { text: '@' } },
+    '3': { action: { symbol: '#' }, label: { text: '#' } },
+    '4': { action: { symbol: '$' }, label: { text: '$' } },
+    '5': { action: { symbol: '%' }, label: { text: '%' } },
+    '6': { action: { symbol: '^' }, label: { text: '^' } },
+    '7': { action: { symbol: '(' }, label: { text: '(' } },
+    '8': { action: { symbol: ')' }, label: { text: ')' } },
+    '9': { action: { symbol: '*' }, label: { text: '*' } },
+    // '0': { action: { symbol: ')' }, label: { text: ')' } },
+  },
 
-  // 中文九键划动
   number_swipe_up: {
     // '1': { action: { symbol: '1' }, label: { text: '1' } },
     // '2': { action: { symbol: '2' }, label: { text: '2' } },

@@ -42,7 +42,8 @@ local createButton(key, size, bounds, root) = {
       if std.objectHas(swipe_down, key) then 'number' + key + 'ButtonDownForegroundStyle' else null,
     ]
   ),
-  action: {
+  action:
+  {
     character: key,
   },
   [if std.objectHas(swipe_up, key) then 'swipeUpAction']: swipe_up[key].action,

@@ -31,7 +31,7 @@
 
 13. `shift`按键通知动作前景样式，默认为`/`对应的sf symbol，请在`custom/Custom.libsonnet`中修改`preedit_sf_symbol`
 
-14. 关于键盘布局，iOS支持多种布局：14键、18键、26键，可在`custom/Custom.libsonnet`中修改`keyboard_layout`的值
+14. 关于键盘布局，iOS支持多种布局：9键、14键、18键、26键，可在`custom/Custom.libsonnet`中修改`keyboard_layout`的值
 
 # 获取更新
 请到ResourceforHamster(`https://github.com/BlackCCCat/ResourceforHamster`)获取可能的更新，或者通过快捷指令(https://www.icloud.com/shortcuts/c541ddb2a1614732b2c9fde38bb89be6)自动下载最新版本并导入到元书输入法中

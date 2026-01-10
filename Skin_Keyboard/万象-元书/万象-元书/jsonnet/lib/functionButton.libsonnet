@@ -201,7 +201,7 @@ local makeFunctionButtons(orientation, keyboardLayout, keyboard_type) =
       repeat_map,
       getSafeSize,
       true,
-      if keyboard_type == 'numeric' then false else Settings.enable_functions_notification
+      Settings.enable_functions_notification
     ),
     headButtonPreeditNotification: createNotification(
       'head',

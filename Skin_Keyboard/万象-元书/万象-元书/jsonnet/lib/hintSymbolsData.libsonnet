@@ -276,6 +276,37 @@
     // "spaceRight": 空格右侧的按键,
   },
 
+
+  pinyin_9: {
+    'number1': { selectedIndex: 0, list: [{ action: { character: '1' }, label: { text: '1' } }] },
+    'number2': { selectedIndex: 0, list: [{ action: { character: '2' }, label: { text: '2' } }, { action: { character: 'a' }, label: { text: 'a' } }, { action: { character: 'b' }, label: { text: 'b' } }, { action: { character: 'c' }, label: { text: 'c' } }] },
+    'number3': { selectedIndex: 0, list: [{ action: { character: '3' }, label: { text: '3' } }, { action: { character: 'd' }, label: { text: 'd' } }, { action: { character: 'e' }, label: { text: 'e' } }, { action: { character: 'f' }, label: { text: 'f' } }] },
+    'number4': { selectedIndex: 0, list: [{ action: { character: '4' }, label: { text: '4' } }, { action: { character: 'g' }, label: { text: 'g' } }, { action: { character: 'h' }, label: { text: 'h' } }, { action: { character: 'i' }, label: { text: 'i' } }] },
+    'number5': { selectedIndex: 0, list: [{ action: { character: '5' }, label: { text: '5' } }, { action: { character: 'j' }, label: { text: 'j' } }, { action: { character: 'k' }, label: { text: 'k' } }, { action: { character: 'l' }, label: { text: 'l' } }] },
+    'number6': { selectedIndex: 0, list: [{ action: { character: '6' }, label: { text: '6' } }, { action: { character: 'm' }, label: { text: 'm' } }, { action: { character: 'n' }, label: { text: 'n' } }, { action: { character: 'o' }, label: { text: 'o' } }] },
+    'number7': { selectedIndex: 0, list: [{ action: { character: '7' }, label: { text: '7' } }, { action: { character: 'p' }, label: { text: 'p' } }, { action: { character: 'q' }, label: { text: 'q' } }, { action: { character: 'r' }, label: { text: 'r' } }, { action: { character: 's' }, label: { text: 's' } }] },
+    'number8': { selectedIndex: 0, list: [{ action: { character: '8' }, label: { text: '8' } }, { action: { character: 't' }, label: { text: 't' } }, { action: { character: 'u' }, label: { text: 'u' } }, { action: { character: 'v' }, label: { text: 'v' } }] },
+    'number9': { selectedIndex: 0, list: [{ action: { character: '9' }, label: { text: '9' } }, { action: { character: 'w' }, label: { text: 'w' } }, { action: { character: 'x' }, label: { text: 'x' } }, { action: { character: 'y' }, label: { text: 'y' } }, { action: { character: 'z' }, label: { text: 'z' } }] },
+    'number0': { selectedIndex: 0, list: [{ action: { character: '0' }, label: { text: '0' } }] },
+    cn2en: {
+      selectedIndex: 1,
+      size: { width: 50, height: 53 },
+      list: [
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '简中' } },  //0*
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '繁中' } },  //1
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '港中' } },  //2
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '台中' } },  //3
+        { action: { sendKeys: 'Control+e' }, label: { text: '翻译' } },  //4*
+        { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },  //5
+        { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },
+        { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '混合' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '中文' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '英文' } },
+      ],
+    },
+  },
+
   pinyin_18: {
     q: {
       selectedIndex: 1,  // 默认选中的索引，具体见仓皮肤文档
@@ -464,8 +495,6 @@
         { action: { sendKeys: 'Control+Shift+4' }, label: { text: '台中' } },  //3
         { action: { sendKeys: 'Control+e' }, label: { text: '翻译' } },  //4*
         { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },  //5
-        { action: { sendKeys: 'Control+c' }, label: { text: '拆分' } },  //6*
-        { action: { sendKeys: 'Control+c' }, label: { text: '拆关' } },  //7
         { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },
         { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },
         { action: { sendKeys: 'Control+q' }, label: { text: '混合' } },
@@ -647,8 +676,6 @@
         { action: { sendKeys: 'Control+Shift+4' }, label: { text: '台中' } },  //3
         { action: { sendKeys: 'Control+e' }, label: { text: '翻译' } },  //4*
         { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },  //5
-        { action: { sendKeys: 'Control+c' }, label: { text: '拆分' } },  //6*
-        { action: { sendKeys: 'Control+c' }, label: { text: '拆关' } },  //7
         { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },
         { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },
         { action: { sendKeys: 'Control+q' }, label: { text: '混合' } },

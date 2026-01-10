@@ -3,6 +3,132 @@ local color = import 'color.libsonnet';
 {
   getKeyboardLayout(theme)::
     {
+      '竖屏中文9键': {
+        '竖屏按键尺寸': {
+          // '123Button': { width: { percentage: 1.5/7 } },
+          'emojiButton': { width: { percentage: 1.5/7 } },
+          'spaceButton': { width: { percentage: 4/7 } },
+          'cn2enButton': { width: { percentage: 1.5/7 } },
+          'backspaceButton': { height: { percentage: 1/4 } },
+          'cleanButton': { height: { percentage: 1/4 } },
+          'symbolButton': { height: { percentage: 1/4 } },
+          'enterButton': { height: { percentage: 1/4 } },
+
+        },
+        keyboardLayout: [
+          {
+            HStack: {
+              style: 'rowofFunctionStyle',
+              subviews: [
+                { Cell: 'leftButton' },
+                { Cell: 'headButton' },
+                { Cell: 'selectButton' },
+                { Cell: 'cutButton' },
+                { Cell: 'copyButton' },
+                { Cell: 'pasteButton' },
+                { Cell: 'tailButton' },
+                { Cell: 'rightButton' },
+              ],
+            },
+          },
+          {
+            HStack: {
+              style: 'keyboardStyle',
+              subviews: [
+                {
+                  VStack: {
+                    style: 'VStackStyle1',
+                    subviews: [
+                      { Cell: 'collection' },
+                      { Cell: 'symbolButton' },
+                    ],
+                  },
+                },
+                {
+                  VStack: {
+                    style: 'CenterStackStyle',
+                    subviews: [
+                      {
+                        HStack: {
+                          style: 'HStackStyle1',
+                          subviews: [
+                            { VStack: { subviews: [ { Cell: 'number1Button' }, { Cell: 'number4Button' }, { Cell: 'number7Button' } ] } },
+                            { VStack: { subviews: [ { Cell: 'number2Button' }, { Cell: 'number5Button' }, { Cell: 'number8Button' } ] } },
+                            { VStack: { subviews: [ { Cell: 'number3Button' }, { Cell: 'number6Button' }, { Cell: 'number9Button' } ] } },
+                          ],
+                        },
+                      },
+                      {
+                        HStack: {
+                          style: 'HStackStyle2',
+                          subviews: [
+                            // { Cell: '123Button' },
+                            { Cell: 'emojiButton' },
+                            { Cell: 'spaceButton' },
+                            { Cell: 'cn2enButton' },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  VStack: {
+                    style: 'VStackStyle1',
+                    subviews: [
+                      { Cell: 'backspaceButton' },
+                      { Cell: 'cleanButton' },
+                      { Cell: 'enterButton' },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+        rowofFunctionStyle: {
+          size: {
+            height: { percentage: 0.17 },
+          },
+          backgroundStyle: 'keyboardBackgroundStyle',
+        },
+        keyboardStyle: {
+          size: {
+            height: { percentage: 0.73 },
+          },
+          insets: {
+            top: 3,
+            bottom: 3,
+            left: 4,
+            right: 4,
+          },
+          backgroundStyle: 'keyboardBackgroundStyle',
+        },
+        keyboardBackgroundStyle: {
+          buttonStyleType: 'geometry',
+          normalColor: color[theme]['键盘背景颜色'],
+        },
+        VStackStyle1: {
+          size: {
+            width: '29/183',
+          },
+        },
+        CenterStackStyle: {
+          size: {
+            width: '375/549',
+          },
+        },
+        HStackStyle1: {
+          size: {
+            height: '3/4',
+          },
+        },
+        HStackStyle2: {
+          size: {
+            height: '1/4',
+          },
+        },
+      },
       '竖屏中文26键': {
         keyboardLayout: [
           {

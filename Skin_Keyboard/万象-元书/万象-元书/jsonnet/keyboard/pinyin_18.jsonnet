@@ -234,10 +234,19 @@ local keyboard(theme, orientation, keyboardLayout) =
     spaceSecondButton: p26Layout.spaceSecondButton,
     cn2enButton: p26Layout.cn2enButton,
     cn2enButtonForegroundStyle: p26Layout.cn2enButtonForegroundStyle,
-    cn2enButtonForegroundStyle14: if std.objectHas(p26Layout, 'cn2enButtonForegroundStyle14') then p26Layout.cn2enButtonForegroundStyle14 else {},
-
-    cn2enButtonHintSymbolsStyle: p26Layout.cn2enButtonHintSymbolsStyle,
-
+    cn2enButtonHintSymbolsStyle: super['cn2enButtonHintSymbolsStyle'] + {
+      symbolStyles: [
+        'cn2enButtonHintSymbolsStyleOf0',
+        'cn2enButtonHintSymbolsStyleOf4',
+        'cn2enButtonHintSymbolsStyleOf6',
+        'cn2enButtonHintSymbolsStyleOf8',
+      ],
+    },
+    cn2enButtonHintSymbolsStyleOf0: p26Layout.cn2enButtonHintSymbolsStyleOf0,
+    cn2enButtonHintSymbolsStyleOf4: p26Layout.cn2enButtonHintSymbolsStyleOf4,
+    cn2enButtonHintSymbolsStyleOf6: p26Layout.cn2enButtonHintSymbolsStyleOf6,
+    cn2enButtonHintSymbolsStyleOf8: p26Layout.cn2enButtonHintSymbolsStyleOf8,
+    
   } + {
     [k.id + 'ButtonHintStyle']: {
       backgroundStyle: 'alphabeticHintBackgroundStyle',
