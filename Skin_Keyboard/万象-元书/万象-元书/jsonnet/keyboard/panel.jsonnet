@@ -88,7 +88,7 @@ local keyboard(theme, orientation) =
   createButton(
     'InputSchema',
     { openURL: 'hamster3://com.ihsiao.apps.hamster3/inputSchema' },
-    'filemenu.and.selection',
+    'switch.2',
     '方案管理',
     theme
   ) +
