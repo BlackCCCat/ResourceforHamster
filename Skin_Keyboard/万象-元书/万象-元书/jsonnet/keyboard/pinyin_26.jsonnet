@@ -50,8 +50,12 @@ local createButton(key, size, bounds, root, isUpper=true) = {
     function(x) x != null,
     [
       key + 'ButtonUppercasedStateForegroundStyle',
-      if std.objectHas(swipe_up, key) then key + 'ButtonUpForegroundStyle' else null,
-      if std.objectHas(swipe_down, key) then key + 'ButtonDownForegroundStyle' else null,
+      if Settings.show_swipe then
+        if std.objectHas(swipe_up, key) then key + 'ButtonUpForegroundStyle' else null
+      else null,
+      if Settings.show_swipe then
+        if std.objectHas(swipe_down, key) then key + 'ButtonDownForegroundStyle' else null
+      else null,
     ]
   ),
   [if isUpper then 'capsLockedStateForegroundStyle']: self.uppercasedStateForegroundStyle,  // 同uppercaseStateForegroundStyle

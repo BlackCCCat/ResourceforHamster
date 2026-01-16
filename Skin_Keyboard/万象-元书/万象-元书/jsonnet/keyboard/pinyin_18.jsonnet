@@ -44,8 +44,12 @@ local createButton(id, actionKey, size, bounds, root, theme) = {
     function(x) x != null,
     [
       id + 'ButtonUppercasedStateForegroundStyle',
-      if std.objectHas(swipe_up, id) then id + 'ButtonUpForegroundStyle' else null,
-      if std.objectHas(swipe_down, id) then id + 'ButtonDownForegroundStyle' else null,
+      if Settings.show_swipe then
+        if std.objectHas(swipe_up, id) then id + 'ButtonUpForegroundStyle' else null
+      else null,
+      if Settings.show_swipe then
+        if std.objectHas(swipe_down, id) then id + 'ButtonDownForegroundStyle' else null
+      else null,
     ]
   ),
   [if std.objectHas(root, id + 'ButtonUppercasedStateForegroundStyle') then 'capsLockedStateForegroundStyle']: self.uppercasedStateForegroundStyle,
