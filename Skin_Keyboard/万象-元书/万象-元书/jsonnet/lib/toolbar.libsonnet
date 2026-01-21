@@ -353,7 +353,7 @@ local getToolBar(theme) =
     },
     toolbarButtonScriptForegroundStyle: {
       buttonStyleType: 'systemImage',
-      systemImageName: 'apple.terminal.fill',
+      systemImageName: if Settings.fix_sf_symbol then 'apple.terminal.fill' else 'terminal.fill',
       normalColor: color[theme]['toolbar按键颜色'],
       highlightColor: color[theme]['toolbar按键颜色'],
       fontSize: fontSize['toolbar按键前景sf符号大小'],
