@@ -31,6 +31,7 @@ local layout(deviceType) =
 local swipe_up = if std.objectHas(swipeData.genSwipeData(deviceType), 'number_swipe_up') then swipeData.genSwipeData(deviceType).number_swipe_up else {};
 local swipe_down = if std.objectHas(swipeData.genSwipeData(deviceType), 'number_swipe_up') then swipeData.genSwipeData(deviceType).number_swipe_down else {};
 
+
 local createButton(key, size, bounds, root) = {
   [if size != {} then 'size']: size,
   backgroundStyle: if std.length(key) == 1 then 'numberButtonBackgroundStyle' else key + 'ButtonBackgroundStyle',
@@ -53,6 +54,18 @@ local createButton(key, size, bounds, root) = {
   [if std.objectHas(swipe_up, key) then 'swipeUpAction']: swipe_up[key].action,
   [if std.objectHas(swipe_down, key) then 'swipeDownAction']: swipe_down[key].action,
   [if std.objectHas(root, 'number' + key + 'ButtonHintSymbolsStyle') then 'hintSymbolsStyle']: 'number' + key + 'ButtonHintSymbolsStyle',
+  [if Settings.keyboard_layout == 9 && std.length(key) == 1 then 'notification']: [
+    'number' + key + 'ButtonNotification',
+  ],
+};
+
+// 专门生成 <key>ButtonNotification
+local createNotification(key, bounds={}) = {
+  notificationType: 'preeditChanged',
+  [if bounds != {} then 'bounds']: bounds,
+  backgroundStyle: 'numberButtonBackgroundStyle',
+  foregroundStyle: 'number' + key + 'ButtonForegroundStyle',
+  action: { character: key },
 };
 
 local keyboard(theme, orientation) =
@@ -155,6 +168,7 @@ local keyboard(theme, orientation) =
       {},
       $
     ),
+    number1ButtonNotification: createNotification('1'),
 
     number4Button: createButton(
       '4',
@@ -162,6 +176,7 @@ local keyboard(theme, orientation) =
       {},
       $
     ),
+    number4ButtonNotification: createNotification('4'),
 
     number7Button: createButton(
       '7',
@@ -169,6 +184,7 @@ local keyboard(theme, orientation) =
       {},
       $
     ),
+    number7ButtonNotification: createNotification('7'),
 
     symbolButton: {
       size: {
@@ -186,21 +202,28 @@ local keyboard(theme, orientation) =
       { label: '3', action: { keyboardType: 'emojis' }, styleName: 'emojisStyle' },
     ],
     number2Button: createButton('2', {}, {}, $),
+    number2ButtonNotification: createNotification('2'),
 
 
     number5Button: createButton('5', {}, {}, $),
+    number5ButtonNotification: createNotification('5'),
 
     number8Button: createButton('8', {}, {}, $),
+    number8ButtonNotification: createNotification('8'),
 
 
     number0Button: createButton('0', {}, {}, $),
+    number0ButtonNotification: createNotification('0'),
 
 
     number3Button: createButton('3', {}, {}, $),
+    number3ButtonNotification: createNotification('3'),
 
     number6Button: createButton('6', {}, {}, $),
+    number6ButtonNotification: createNotification('6'),
 
     number9Button: createButton('9', {}, {}, $),
+    number9ButtonNotification: createNotification('9'),
 
     spaceButton: createButton(
       'space', {}, {}, $
