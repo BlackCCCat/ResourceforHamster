@@ -760,17 +760,17 @@ local keyboard(theme, orientation, keyboardLayout) =
       foregroundStyle: [
         {
           styleName: 'cn2enButtonHintSymbolsForegroundStyleOf8',
-          conditionKey: 'rime$mixed',
+          conditionKey: 'rime$abbrev_off',
           conditionValue: 'true',
         },
         {
           styleName: 'cn2enButtonHintSymbolsForegroundStyleOf9',
-          conditionKey: 'rime$zh_only',
+          conditionKey: 'rime$abbrev_lazy',
           conditionValue: 'true',
         },
         {
           styleName: 'cn2enButtonHintSymbolsForegroundStyleOf10',
-          conditionKey: 'rime$en_only',
+          conditionKey: 'rime$abbrev_always',
           conditionValue: 'true',
         },
       ],
@@ -789,7 +789,7 @@ local keyboard(theme, orientation, keyboardLayout) =
         },
       ],
     },
-    
+
     cn2enButtonHintSymbolsStyle: super['cn2enButtonHintSymbolsStyle'] + {
       symbolStyles: [
         'cn2enButtonHintSymbolsStyleOf0',

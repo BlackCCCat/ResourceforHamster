@@ -248,9 +248,9 @@
         { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },
         { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },
         { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '混合' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '中文' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '英文' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '简关' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '空简' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '出简' } },
         { action: { sendKeys: 'Control+c' }, label: { text: '拆分' } },
         { action: { sendKeys: 'Control+c' }, label: { text: '拆关' } },
       ],
@@ -300,6 +300,9 @@
         { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },  //5
         { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },  //6*
         { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },  //7
+        { action: { sendKeys: 'Control+q' }, label: { text: '简关' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '空简' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '出简' } },
       ],
     },
   },
@@ -386,7 +389,7 @@
         { action: { character: 's' }, label: { text: 's' } },
         { action: { character: 'S' }, label: { text: 'S' } },
         { action: { character: 'd' }, label: { text: 'd' } },
-        { action: { character: 'D' }, label: { text: 'D' } },   
+        { action: { character: 'D' }, label: { text: 'D' } },
         { action: { sendKeys: 'KP_9'}, label: { text: '9' } },
         ],
     },
@@ -494,9 +497,9 @@
         { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },  //5
         { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },
         { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '混合' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '中文' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '英文' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '简关' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '空简' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '出简' } },
       ],
     },
     enter: {
@@ -578,7 +581,7 @@
       selectedIndex: 1,
       list: [
         { action: { character: 'd' }, label: { text: 'd' } },
-        { action: { character: 'D' }, label: { text: 'D' } }, 
+        { action: { character: 'D' }, label: { text: 'D' } },
         { action: { character: 'f' }, label: { text: 'f' } },
         { action: { character: 'F' }, label: { text: 'F' } },
         { action: { sendKeys: 'KP_7'}, label: { text: '7' } },
@@ -675,9 +678,9 @@
         { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },  //5
         { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },
         { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '混合' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '中文' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '英文' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '简关' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '空简' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '出简' } },
       ],
     },
     enter: {

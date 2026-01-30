@@ -4,6 +4,7 @@ patch:
     - { when: always, toggle: chinese_english, accept: Control+e } # 切换翻译功能
     - { when: always, toggle: super_tips, accept: Control+t } # 切换超级提示
     - { when: always, toggle: s2s, accept: Control+Shift+4 } #
+    - { when: always, toggle: abbrev_lazy, accept: Control+q } # 切换简码模式
 
   # 开关
   # reset: 默认状态。注释掉后，切换窗口时不会重置到默认状态。

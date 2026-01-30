@@ -73,11 +73,11 @@ local createButton(key, size, bounds, root, isUpper=true) =
     [
       // Main foreground: Letters only for 2-9 in center, others standard
       if std.length(key) == 1 then
-        if std.objectHas(t9_letters, key) then 
+        if std.objectHas(t9_letters, key) then
            ['number' + key + 'LettersStyle']
-        else 
+        else
            ['number' + key + 'ButtonForegroundStyle']
-      else 
+      else
            [key + 'ButtonForegroundStyle'],
 
       // Swipe hints overlap
@@ -143,7 +143,7 @@ local keyboard(theme, orientation) =
     keyboardHeight: others[if orientation == 'portrait' then '竖屏' else '横屏']['keyboard高度'],
 
     // Mixin the selected layout and styles from the library
-     } + chooseLayout(Settings.with_functions_row[deviceType], theme)['竖屏中文9键'] + 
+     } + chooseLayout(Settings.with_functions_row[deviceType], theme)['竖屏中文9键'] +
       hintSymbolsStyles.getStyle(theme, { [k]: hintSymbolsData.pinyin_9[k] for k in std.objectFields(hintSymbolsData.pinyin_9) if k != 'cn2en' }) +
      swipeStyles.getStyle('number', theme, swipe_up, swipe_down) +
      {
@@ -206,7 +206,7 @@ local keyboard(theme, orientation) =
       text: '@!:',
       normalColor: color[theme]['按键前景颜色'],
       highlightColor: color[theme]['按键前景颜色'],
-      fontSize: fontSize['中文九键字符键前景文字大小'], 
+      fontSize: fontSize['中文九键字符键前景文字大小'],
       center: center['中文九键字符前景偏移'],
     },
     number1ButtonNotification: {
@@ -220,7 +220,7 @@ local keyboard(theme, orientation) =
       text: '分词',
       normalColor: color[theme]['按键前景颜色'],
       highlightColor: color[theme]['按键前景颜色'],
-      fontSize: fontSize['中文九键字符键前景文字大小'], 
+      fontSize: fontSize['中文九键字符键前景文字大小'],
       center: center['中文九键字符前景偏移'],
     },
     // 2-9 buttons are created with T9 style via createButton logic
@@ -293,11 +293,13 @@ local keyboard(theme, orientation) =
         'cn2enButtonHintSymbolsStyleOf0',
         'cn2enButtonHintSymbolsStyleOf4',
         'cn2enButtonHintSymbolsStyleOf6',
+        'cn2enButtonHintSymbolsStyleOf8',
       ],
     },
     cn2enButtonHintSymbolsStyleOf0: p26Layout.cn2enButtonHintSymbolsStyleOf0,
     cn2enButtonHintSymbolsStyleOf4: p26Layout.cn2enButtonHintSymbolsStyleOf4,
     cn2enButtonHintSymbolsStyleOf6: p26Layout.cn2enButtonHintSymbolsStyleOf6,
+    cn2enButtonHintSymbolsStyleOf8: p26Layout.cn2enButtonHintSymbolsStyleOf8,
 
 
 
@@ -339,15 +341,15 @@ local keyboard(theme, orientation) =
       [if Settings.with_functions_row[deviceType] then null else 'swipeUpAction']: { shortcut: '#rimePreviousPage' },
       [if Settings.with_functions_row[deviceType] then null else 'swipeDownAction']: { shortcut: '#rimeNextPage' },
     },
-    cleanButtonPreeditForegroundStyle: if Settings.with_functions_row[deviceType] 
-    then 
+    cleanButtonPreeditForegroundStyle: if Settings.with_functions_row[deviceType]
+    then
     {
       buttonStyleType: 'text',
       text: '重输',
       normalColor: color[theme]['按键前景颜色'],
       highlightColor: color[theme]['按键前景颜色'],
       fontSize: fontSize['按键前景文字大小'] - 3,
-    } else 
+    } else
     {
         buttonStyleType: 'systemImage',
         systemImageName: if Settings.fix_sf_symbol then 'arrow.up.arrow.down' else 'chevron.compact.up.chevron.compact.down',
