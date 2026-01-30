@@ -34,9 +34,9 @@ patch:
       reset: 1
     - name: char_priority #多体现在编码重合但候选有单字或者多字的情况`引导的辅码查词时是否单字优先，全拼常见，类似于特定编码情况下、反查状态下的调序能力。归属：super_lookup.lua
       states: [词组先, 单字先]
-    - options: [mixed, zh_only, en_only]
-      states: [混合输入, 仅中文, 仅英文]
-      reset: 0
+    - options: [abbrev_off, abbrev_lazy, abbrev_always]
+      states: [简码关, 空出简, 总出简]
+      reset: 1
 
   # 输入引擎
   engine/processors/@before 3: lua_processor@*select_character # 以词定字，有了辅助码了，想开启可以注释掉
