@@ -1,6 +1,8 @@
+local Settings = import '../custom/Custom.libsonnet';
 local center = import 'center.libsonnet';
 local color = import 'color.libsonnet';
 local fontSize = import 'fontSize.libsonnet';
+
 
 // 文字前景样式
 local textStyle(text, fs, theme) = {  //fs 字体大小
@@ -30,10 +32,11 @@ local holdSymbolsStyle(key, selectedIndex, size, symbol_list, theme) = {
   [key + 'ButtonHintSymbolsStyle']: {
     insets: { top: 3, bottom: 3, left: 8, right: 8 },
     backgroundStyle: 'alphabeticHintSymbolsBackgroundStyle',
-    [if size != {} then 'size']: {
-      width: size.width,
-      height: size.height,
-    },
+    [if size != {} then 'size']:
+      {
+        width: size.width,
+        height: size.height,
+      },
     symbolStyles: [
       key + 'ButtonHintSymbolsStyleOf' + std.toString(index)
       for index in std.range(0, std.length(symbol_list) - 1)

@@ -11,7 +11,7 @@
       list: [
         { action: { character: 'q' }, label: { text: 'q' } },  // action同仓皮肤定义，label可选text/systemImageName, 具体见仓皮肤文档
         { action: { character: 'Q' }, label: { text: 'Q' } },
-        { action: { sendKeys: 'KP_1'}, label: { text: '1' } },
+        { action: { sendKeys: 'KP_1' }, label: { text: '1' } },
       ],
     },
     w: {
@@ -19,7 +19,7 @@
       list: [
         { action: { character: 'w' }, label: { text: 'w' } },
         { action: { character: 'W' }, label: { text: 'W' } },
-        { action: { sendKeys: 'KP_2'}, label: { text: '2' } },
+        { action: { sendKeys: 'KP_2' }, label: { text: '2' } },
       ],
     },
     e: {
@@ -27,7 +27,7 @@
       list: [
         { action: { character: 'e' }, label: { text: 'e' } },
         { action: { character: 'E' }, label: { text: 'E' } },
-        { action: { sendKeys: 'KP_3'}, label: { text: '3' } },
+        { action: { sendKeys: 'KP_3' }, label: { text: '3' } },
       ],
     },
     r: {
@@ -35,7 +35,7 @@
       list: [
         { action: { character: 'r' }, label: { text: 'r' } },
         { action: { character: 'R' }, label: { text: 'R' } },
-        { action: { sendKeys: 'KP_4'}, label: { text: '4' } },
+        { action: { sendKeys: 'KP_4' }, label: { text: '4' } },
       ],
     },
     t: {
@@ -43,7 +43,7 @@
       list: [
         { action: { character: 't' }, label: { text: 't' } },
         { action: { character: 'T' }, label: { text: 'T' } },
-        { action: { sendKeys: 'KP_5'}, label: { text: '5' } },
+        { action: { sendKeys: 'KP_5' }, label: { text: '5' } },
       ],
     },
     y: {
@@ -51,7 +51,7 @@
       list: [
         { action: { character: 'y' }, label: { text: 'y' } },
         { action: { character: 'Y' }, label: { text: 'Y' } },
-        { action: { sendKeys: 'KP_6'}, label: { text: '6' } },
+        { action: { sendKeys: 'KP_6' }, label: { text: '6' } },
       ],
     },
     u: {
@@ -59,7 +59,7 @@
       list: [
         { action: { character: 'u' }, label: { text: 'u' } },
         { action: { character: 'U' }, label: { text: 'U' } },
-        { action: { sendKeys: 'KP_7'}, label: { text: '7' } },
+        { action: { sendKeys: 'KP_7' }, label: { text: '7' } },
       ],
     },
     i: {
@@ -67,7 +67,7 @@
       list: [
         { action: { character: 'i' }, label: { text: 'i' } },
         { action: { character: 'I' }, label: { text: 'I' } },
-        { action: { sendKeys: 'KP_8'}, label: { text: '8' } },
+        { action: { sendKeys: 'KP_8' }, label: { text: '8' } },
       ],
     },
     o: {
@@ -75,7 +75,7 @@
       list: [
         { action: { character: 'o' }, label: { text: 'o' } },
         { action: { character: 'O' }, label: { text: 'O' } },
-        { action: { sendKeys: 'KP_9'}, label: { text: '9' } },
+        { action: { sendKeys: 'KP_9' }, label: { text: '9' } },
       ],
     },
     p: {
@@ -83,7 +83,7 @@
       list: [
         { action: { character: 'p' }, label: { text: 'p' } },
         { action: { character: 'P' }, label: { text: 'P' } },
-        { action: { sendKeys: 'KP_0'}, label: { text: '0' } },
+        { action: { sendKeys: 'KP_0' }, label: { text: '0' } },
       ],
     },
 
@@ -278,16 +278,16 @@
 
 
   pinyin_9: {
-    'number1': { selectedIndex: 0, list: [{ action: { character: '1' }, label: { text: '1' } }] },
-    'number2': { selectedIndex: 0, list: [{ action: { character: '2' }, label: { text: '2' } }, { action: { character: 'a' }, label: { text: 'a' } }, { action: { character: 'b' }, label: { text: 'b' } }, { action: { character: 'c' }, label: { text: 'c' } }] },
-    'number3': { selectedIndex: 0, list: [{ action: { character: '3' }, label: { text: '3' } }, { action: { character: 'd' }, label: { text: 'd' } }, { action: { character: 'e' }, label: { text: 'e' } }, { action: { character: 'f' }, label: { text: 'f' } }] },
-    'number4': { selectedIndex: 0, list: [{ action: { character: '4' }, label: { text: '4' } }, { action: { character: 'g' }, label: { text: 'g' } }, { action: { character: 'h' }, label: { text: 'h' } }, { action: { character: 'i' }, label: { text: 'i' } }] },
-    'number5': { selectedIndex: 0, list: [{ action: { character: '5' }, label: { text: '5' } }, { action: { character: 'j' }, label: { text: 'j' } }, { action: { character: 'k' }, label: { text: 'k' } }, { action: { character: 'l' }, label: { text: 'l' } }] },
-    'number6': { selectedIndex: 0, list: [{ action: { character: '6' }, label: { text: '6' } }, { action: { character: 'm' }, label: { text: 'm' } }, { action: { character: 'n' }, label: { text: 'n' } }, { action: { character: 'o' }, label: { text: 'o' } }] },
-    'number7': { selectedIndex: 0, list: [{ action: { character: '7' }, label: { text: '7' } }, { action: { character: 'p' }, label: { text: 'p' } }, { action: { character: 'q' }, label: { text: 'q' } }, { action: { character: 'r' }, label: { text: 'r' } }, { action: { character: 's' }, label: { text: 's' } }] },
-    'number8': { selectedIndex: 0, list: [{ action: { character: '8' }, label: { text: '8' } }, { action: { character: 't' }, label: { text: 't' } }, { action: { character: 'u' }, label: { text: 'u' } }, { action: { character: 'v' }, label: { text: 'v' } }] },
-    'number9': { selectedIndex: 0, list: [{ action: { character: '9' }, label: { text: '9' } }, { action: { character: 'w' }, label: { text: 'w' } }, { action: { character: 'x' }, label: { text: 'x' } }, { action: { character: 'y' }, label: { text: 'y' } }, { action: { character: 'z' }, label: { text: 'z' } }] },
-    'number0': { selectedIndex: 0, list: [{ action: { character: '0' }, label: { text: '0' } }] },
+    number1: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: { character: '1' }, label: { text: '1' } }] },
+    number2: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: { character: '2' }, label: { text: '2' } }, { action: { character: 'a' }, label: { text: 'a' } }, { action: { character: 'b' }, label: { text: 'b' } }, { action: { character: 'c' }, label: { text: 'c' } }] },
+    number3: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: { character: '3' }, label: { text: '3' } }, { action: { character: 'd' }, label: { text: 'd' } }, { action: { character: 'e' }, label: { text: 'e' } }, { action: { character: 'f' }, label: { text: 'f' } }] },
+    number4: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: { character: '4' }, label: { text: '4' } }, { action: { character: 'g' }, label: { text: 'g' } }, { action: { character: 'h' }, label: { text: 'h' } }, { action: { character: 'i' }, label: { text: 'i' } }] },
+    number5: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: { character: '5' }, label: { text: '5' } }, { action: { character: 'j' }, label: { text: 'j' } }, { action: { character: 'k' }, label: { text: 'k' } }, { action: { character: 'l' }, label: { text: 'l' } }] },
+    number6: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: { character: '6' }, label: { text: '6' } }, { action: { character: 'm' }, label: { text: 'm' } }, { action: { character: 'n' }, label: { text: 'n' } }, { action: { character: 'o' }, label: { text: 'o' } }] },
+    number7: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: { character: '7' }, label: { text: '7' } }, { action: { character: 'p' }, label: { text: 'p' } }, { action: { character: 'q' }, label: { text: 'q' } }, { action: { character: 'r' }, label: { text: 'r' } }, { action: { character: 's' }, label: { text: 's' } }] },
+    number8: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: { character: '8' }, label: { text: '8' } }, { action: { character: 't' }, label: { text: 't' } }, { action: { character: 'u' }, label: { text: 'u' } }, { action: { character: 'v' }, label: { text: 'v' } }] },
+    number9: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: { character: '9' }, label: { text: '9' } }, { action: { character: 'w' }, label: { text: 'w' } }, { action: { character: 'x' }, label: { text: 'x' } }, { action: { character: 'y' }, label: { text: 'y' } }, { action: { character: 'z' }, label: { text: 'z' } }] },
+    number0: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: { character: '0' }, label: { text: '0' } }] },
     cn2en: {
       selectedIndex: 1,
       size: { width: 50, height: 53 },
@@ -313,7 +313,7 @@
       list: [
         { action: { character: 'q' }, label: { text: 'q' } },  // action同仓皮肤定义，label可选text/systemImageName, 具体见仓皮肤文档
         { action: { character: 'Q' }, label: { text: 'Q' } },
-        { action: { sendKeys: 'KP_1'}, label: { text: '1' } },
+        { action: { sendKeys: 'KP_1' }, label: { text: '1' } },
       ],
     },
     we: {
@@ -323,7 +323,7 @@
         { action: { character: 'W' }, label: { text: 'W' } },
         { action: { character: 'e' }, label: { text: 'e' } },
         { action: { character: 'E' }, label: { text: 'E' } },
-        { action: { sendKeys: 'KP_2'}, label: { text: '2' } },
+        { action: { sendKeys: 'KP_2' }, label: { text: '2' } },
       ],
     },
     rt: {
@@ -331,7 +331,7 @@
       list: [
         { action: { character: 'r' }, label: { text: 'r' } },
         { action: { character: 'R' }, label: { text: 'R' } },
-        { action: { sendKeys: 'KP_3'}, label: { text: '3' } },
+        { action: { sendKeys: 'KP_3' }, label: { text: '3' } },
         { action: { character: 't' }, label: { text: 't' } },
         { action: { character: 'T' }, label: { text: 'T' } },
       ],
@@ -341,7 +341,7 @@
       list: [
         { action: { character: 'y' }, label: { text: 'y' } },
         { action: { character: 'Y' }, label: { text: 'Y' } },
-        { action: { sendKeys: 'KP_4'}, label: { text: '4' } },
+        { action: { sendKeys: 'KP_4' }, label: { text: '4' } },
       ],
     },
     u: {
@@ -349,7 +349,7 @@
       list: [
         { action: { character: 'u' }, label: { text: 'u' } },
         { action: { character: 'U' }, label: { text: 'U' } },
-        { action: { sendKeys: 'KP_5'}, label: { text: '5' } },
+        { action: { sendKeys: 'KP_5' }, label: { text: '5' } },
       ],
     },
     io: {
@@ -359,7 +359,7 @@
         { action: { character: 'I' }, label: { text: 'I' } },
         { action: { character: 'o' }, label: { text: 'o' } },
         { action: { character: 'O' }, label: { text: 'O' } },
-        { action: { sendKeys: 'KP_6'}, label: { text: '6' } },
+        { action: { sendKeys: 'KP_6' }, label: { text: '6' } },
       ],
     },
 
@@ -368,7 +368,7 @@
       list: [
         { action: { character: 'p' }, label: { text: 'p' } },
         { action: { character: 'P' }, label: { text: 'P' } },
-        { action: { sendKeys: 'KP_7'}, label: { text: '7' } },
+        { action: { sendKeys: 'KP_7' }, label: { text: '7' } },
       ],
     },
 
@@ -377,7 +377,7 @@
       list: [
         { action: { character: 'a' }, label: { text: 'a' } },
         { action: { character: 'A' }, label: { text: 'A' } },
-        { action: { sendKeys: 'KP_8'}, label: { text: '8' } },
+        { action: { sendKeys: 'KP_8' }, label: { text: '8' } },
 
       ],
     },
@@ -390,8 +390,8 @@
         { action: { character: 'S' }, label: { text: 'S' } },
         { action: { character: 'd' }, label: { text: 'd' } },
         { action: { character: 'D' }, label: { text: 'D' } },
-        { action: { sendKeys: 'KP_9'}, label: { text: '9' } },
-        ],
+        { action: { sendKeys: 'KP_9' }, label: { text: '9' } },
+      ],
     },
 
     fg: {
@@ -401,7 +401,7 @@
         { action: { character: 'F' }, label: { text: 'F' } },
         { action: { character: 'g' }, label: { text: 'g' } },
         { action: { character: 'G' }, label: { text: 'G' } },
-        { action: { sendKeys: 'KP_0'}, label: { text: '0' } },
+        { action: { sendKeys: 'KP_0' }, label: { text: '0' } },
       ],
     },
 
@@ -519,7 +519,7 @@
         { action: { character: 'Q' }, label: { text: 'Q' } },
         { action: { character: 'w' }, label: { text: 'w' } },
         { action: { character: 'W' }, label: { text: 'W' } },
-        { action: { sendKeys: 'KP_1'}, label: { text: '1' } },
+        { action: { sendKeys: 'KP_1' }, label: { text: '1' } },
       ],
     },
     er: {
@@ -530,7 +530,7 @@
         { action: { character: 'E' }, label: { text: 'E' } },
         { action: { character: 'r' }, label: { text: 'r' } },
         { action: { character: 'R' }, label: { text: 'R' } },
-        { action: { sendKeys: 'KP_2'}, label: { text: '2' } },
+        { action: { sendKeys: 'KP_2' }, label: { text: '2' } },
       ],
     },
     ty: {
@@ -540,7 +540,7 @@
         { action: { character: 'T' }, label: { text: 'T' } },
         { action: { character: 'y' }, label: { text: 'y' } },
         { action: { character: 'Y' }, label: { text: 'Y' } },
-        { action: { sendKeys: 'KP_3'}, label: { text: '3' } },
+        { action: { sendKeys: 'KP_3' }, label: { text: '3' } },
 
       ],
     },
@@ -551,7 +551,7 @@
         { action: { character: 'U' }, label: { text: 'U' } },
         { action: { character: 'i' }, label: { text: 'i' } },
         { action: { character: 'I' }, label: { text: 'I' } },
-        { action: { sendKeys: 'KP_4'}, label: { text: '4' } },
+        { action: { sendKeys: 'KP_4' }, label: { text: '4' } },
       ],
     },
     op: {
@@ -561,7 +561,7 @@
         { action: { character: 'O' }, label: { text: 'O' } },
         { action: { character: 'p' }, label: { text: 'p' } },
         { action: { character: 'P' }, label: { text: 'P' } },
-        { action: { sendKeys: 'KP_5'}, label: { text: '5' } },
+        { action: { sendKeys: 'KP_5' }, label: { text: '5' } },
       ],
     },
 
@@ -573,7 +573,7 @@
         { action: { character: 'A' }, label: { text: 'A' } },
         { action: { character: 's' }, label: { text: 's' } },
         { action: { character: 'S' }, label: { text: 'S' } },
-        { action: { sendKeys: 'KP_6'}, label: { text: '6' } },
+        { action: { sendKeys: 'KP_6' }, label: { text: '6' } },
       ],
     },
 
@@ -584,7 +584,7 @@
         { action: { character: 'D' }, label: { text: 'D' } },
         { action: { character: 'f' }, label: { text: 'f' } },
         { action: { character: 'F' }, label: { text: 'F' } },
-        { action: { sendKeys: 'KP_7'}, label: { text: '7' } },
+        { action: { sendKeys: 'KP_7' }, label: { text: '7' } },
 
       ],
     },
@@ -597,8 +597,8 @@
         { action: { character: 'G' }, label: { text: 'G' } },
         { action: { character: 'h' }, label: { text: 'h' } },
         { action: { character: 'H' }, label: { text: 'H' } },
-        { action: { sendKeys: 'KP_8'}, label: { text: '8' } },
-        ],
+        { action: { sendKeys: 'KP_8' }, label: { text: '8' } },
+      ],
     },
 
     jk: {
@@ -608,7 +608,7 @@
         { action: { character: 'J' }, label: { text: 'J' } },
         { action: { character: 'k' }, label: { text: 'k' } },
         { action: { character: 'K' }, label: { text: 'K' } },
-        { action: { sendKeys: 'KP_9'}, label: { text: '9' } },
+        { action: { sendKeys: 'KP_9' }, label: { text: '9' } },
       ],
     },
 
@@ -617,7 +617,7 @@
       list: [
         { action: { character: 'l' }, label: { text: 'l' } },
         { action: { character: 'L' }, label: { text: 'L' } },
-        { action: { sendKeys: 'KP_0'}, label: { text: '0' } },
+        { action: { sendKeys: 'KP_0' }, label: { text: '0' } },
       ],
     },
 
