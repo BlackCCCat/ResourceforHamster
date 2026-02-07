@@ -31,6 +31,13 @@
     align-self: center;
 }
 
+/* ✅ 序号稍微变大一点 */
+/* .fcitx-candidate .fcitx-label {
+/*  font-size: 1.05em;   /* 想再大就 1.1em / 1.15em */
+/*  font-weight: 600;    /* 可选：更清晰一点 */
+/*  line-height: 1;      /* 避免字体变大后上下撑开 */
+/* }
+
 /* 候选词文字：第一行 */
 .fcitx-candidate .fcitx-text {
     grid-column: 3;
@@ -45,4 +52,3 @@
     opacity: 0.75;
     line-height: 1.1;
 }
-
