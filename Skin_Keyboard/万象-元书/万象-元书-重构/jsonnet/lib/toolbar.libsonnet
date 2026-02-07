@@ -185,7 +185,7 @@ local getToolBar(theme) =
     ],
     HStackStyle: {
       size: {
-        height: '1/5',
+        height: '1/6',
       },
     },
     verticalCandidates: {
@@ -193,7 +193,7 @@ local getToolBar(theme) =
       type: 'verticalCandidates',
       insets: { top: 3, left: 3, right: 3, bottom: 3 },
       // （非必须，默认值为 4）显示区域内候选文字最大行数
-      maxRows: 4,
+      maxRows: 5,
       // （非必须，默认值为 5）显示区域内候选文字最大列数
       maxColumns: 5,
       // （非必须）显示区域内分割线颜色
