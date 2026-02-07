@@ -1,0 +1,48 @@
+/* 让 comment 出现在 text 下方 + 更美观的留白 + 序号垂直居中 */
+.fcitx-candidate .fcitx-candidate-inner {
+    display: grid;
+    grid-template-columns: auto auto 1fr; /* mark | label | content */
+    grid-template-rows: auto auto; /* text / comment */
+    column-gap: 6px;
+    row-gap: 2px;
+
+    /* ✅ 增加候选项上下（及左右一点）内边距，避免贴边 */
+    padding: 6px 10px;
+    align-items: center;
+}
+
+/* ✅ 选中态左侧竖条：垂直居中于 text+comment 整体 */
+.fcitx-candidate .fcitx-mark {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+
+    align-self: center; /* 关键：垂直居中 */
+    justify-self: center; /* 水平也居中（避免贴边） */
+
+    /* 可选：让竖条更像“指示条” */
+    height: 70%; /* 竖条高度相对候选项整体（可调：60%~85%） */
+    border-radius: 999px; /* 圆角 */
+}
+
+/* ✅ 序号：跨两行 + 垂直居中于“text+comment”整体 */
+.fcitx-candidate .fcitx-label {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+}
+
+/* 候选词文字：第一行 */
+.fcitx-candidate .fcitx-text {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+/* 注释：第二行 */
+.fcitx-candidate .fcitx-comment {
+    grid-column: 3;
+    grid-row: 2;
+    font-size: 0.85em;
+    opacity: 0.75;
+    line-height: 1.1;
+}
+
