@@ -30,13 +30,32 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Package cskin files
+        id: package
         run: |
+          set -euo pipefail
           mkdir -p release
-          cd "Skin_Keyboard/万象-元书"
-          zip -r "../../release/wanxiang.zip" "万象-元书"
-          zip -r "../../release/wanxiang-refactor.zip" "万象-元书-重构"
-          mv "../../release/wanxiang.zip" "../../release/wanxiang.cskin"
-          mv "../../release/wanxiang-refactor.zip" "../../release/wanxiang-refactor.cskin"
+          files=()
+          if [ -d "Skin_Keyboard/万象-元书/万象-元书" ]; then
+            (cd "Skin_Keyboard/万象-元书" && zip -r "../../release/wanxiang.zip" "万象-元书")
+            mv "release/wanxiang.zip" "release/wanxiang.cskin"
+            files+=("release/wanxiang.cskin")
+          else
+            echo "Skipping: Skin_Keyboard/万象-元书/万象-元书 not found"
+          fi
+          if [ -d "Skin_Keyboard/万象-元书/万象-元书-重构" ]; then
+            (cd "Skin_Keyboard/万象-元书" && zip -r "../../release/wanxiang-refactor.zip" "万象-元书-重构")
+            mv "release/wanxiang-refactor.zip" "release/wanxiang-refactor.cskin"
+            files+=("release/wanxiang-refactor.cskin")
+          else
+            echo "Skipping: Skin_Keyboard/万象-元书/万象-元书-重构 not found"
+          fi
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "No cskin files produced. Aborting release."
+            exit 1
+          fi
+          echo "files<<EOF" >> "$GITHUB_OUTPUT"
+          printf '%s\n' "${files[@]}" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
@@ -47,9 +66,7 @@ jobs:
             Changes since ${{ steps.commits.outputs.prev_tag }}:
             ${{ steps.commits.outputs.commits }}
           prerelease: ${{ contains(github.ref_name, '-rc') }}
-          files: |
-            release/wanxiang.cskin
-            release/wanxiang-refactor.cskin
+          files: ${{ steps.package.outputs.files }}
           token: ${{ secrets.AUTO_RELEASE }}
         env:
           GH_TOKEN: ${{ secrets.AUTO_RELEASE }}
