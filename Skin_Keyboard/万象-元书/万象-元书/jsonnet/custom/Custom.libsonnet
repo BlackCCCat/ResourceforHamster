@@ -7,9 +7,9 @@
     iPhone: true,
     iPad: false,
   },
-  keyboard_layout: 26, // 可选值为26、18、14、9, 26为全键，18为18键，14为14键，9为9键
-  is_wanxiang_18: true, // 是否为万象18键，涉及到方案中的转写规则，默认万象，为大写转写
-  is_wanxiang_14: true, // 是否为万象14键，涉及到方案中的转写规则，默认万象，为大写转写
+  keyboard_layout: 26,  // 可选值为26、18、14、9, 26为全键，18为18键，14为14键，9为9键
+  is_wanxiang_18: true,  // 是否为万象18键，涉及到方案中的转写规则，默认万象，为大写转写
+  is_wanxiang_14: true,  // 是否为万象14键，涉及到方案中的转写规则，默认万象，为大写转写
   enable_functions_notification: true,  // 功能按键是否启用通知功能，true为启用
   is_letter_capital: false,  // 26个字母按键大小写显示，false为显示小写
   fix_sf_symbol: false,  // 是否修复部分sf_symbol不显示的情况，false为不修复
@@ -27,5 +27,5 @@
     preedit_action: { character: '/' },  // shift按键预编辑状态的动作，默认为pro版的辅助码合并键
     preedit_sf_symbol: '',  // shift键预编辑状态显示的sf symbol，为空时显示已有的符号
   },
-
+  showExpandButton: false,  // 是否开启候选栏展开按钮
 }
