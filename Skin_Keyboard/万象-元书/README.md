@@ -17,7 +17,6 @@
 4. 可以通过[该快捷指令](https://www.icloud.com/shortcuts/c541ddb2a1614732b2c9fde38bb89be6)自动下载最新版本并导入到元书输入法中
 
 ## 万象拼音PRO
-- `26键-万象-元书.cskin`（对应release中`26-wanxiang.cskin`）
 
 **外观**
 
