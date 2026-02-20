@@ -69,7 +69,7 @@ local funcKeyPreeditsystemImageNameMap = {
   cut: '2.circle',  // 'arrow.up.right',
   copy: '3.circle',  // 'arrow.uturn.up',
   paste: '4.circle',  // 'arrow.down.right',
-  tail: 'ellipsis.viewfinder',
+  tail: if Settings.fix_sf_symbol then 'ellipsis.curlybraces' else 'ellipsis.viewfinder',
   right: 'square.and.line.vertical.and.square.filled',
 };
 
