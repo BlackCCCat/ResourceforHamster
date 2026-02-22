@@ -35,6 +35,11 @@
 
 15. 候选栏开启展开按钮：可在`custom/Custom.libsonnet`将`showExpandButton`的值改为`true`
 
+16. 字母按键字号可独立配置：可在`custom/Custom.libsonnet`中修改`font_size_config`
+   - `pinyin_26_letter_font_size`：26键字母按键字号
+   - `pinyin_14_18_letter_font_size`：14键/18键字母按键字号
+   - `pinyin_9_letter_font_size`：9键字母按键字号
+
 # 获取更新
 请到ResourceforHamster(`https://github.com/BlackCCCat/ResourceforHamster`)获取可能的更新，或者通过快捷指令(https://www.icloud.com/shortcuts/c541ddb2a1614732b2c9fde38bb89be6)自动下载最新版本并导入到元书输入法中
 
