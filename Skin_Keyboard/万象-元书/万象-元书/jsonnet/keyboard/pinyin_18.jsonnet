@@ -161,7 +161,7 @@ local keyboard(theme, orientation, keyboardLayout) =
   } + {
     [k.id + 'ButtonForegroundStyle']: utils.makeTextStyle(
       k.label,
-      if std.length(k.label) > 2 then fontSize['按键前景文字大小'] - 4 else fontSize['按键前景文字大小'],
+      if std.length(k.label) > 2 then fontSize['14/18键字母前景文字大小'] - 4 else fontSize['14/18键字母前景文字大小'],
       color[theme]['按键前景颜色'],
       color[theme]['按键前景颜色'],
       { x: 0.5, y: 0.5 }
@@ -170,7 +170,7 @@ local keyboard(theme, orientation, keyboardLayout) =
   } + {
     [k.id + 'ButtonUppercasedStateForegroundStyle']: utils.makeTextStyle(
       std.asciiUpper(k.label),
-      if std.length(k.label) > 2 then fontSize['按键前景文字大小'] - 4 else fontSize['按键前景文字大小'],
+      if std.length(k.label) > 2 then fontSize['14/18键字母前景文字大小'] - 4 else fontSize['14/18键字母前景文字大小'],
       color[theme]['按键前景颜色'],
       color[theme]['按键前景颜色'],
       { x: 0.5, y: 0.5 }

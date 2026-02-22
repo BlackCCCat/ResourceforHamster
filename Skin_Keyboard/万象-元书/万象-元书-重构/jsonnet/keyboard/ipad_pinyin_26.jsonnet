@@ -19,6 +19,7 @@ local keyboardLayout_ = if Settings.with_functions_row[deviceType] then import '
 
 local ipad_fontSize = fontSize + {
   '按键前景文字大小': 24,
+  '26键字母前景文字大小': 24,
   '上划文字大小': 12,
   '下划文字大小': 12,
   'toolbar按键前景sf符号大小': 20,

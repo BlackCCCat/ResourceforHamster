@@ -199,7 +199,7 @@ local genPinyinStyles(fontSize, color, theme, center) =
   {
     [keyName + 'ButtonForegroundStyle']: makeTextStyle(
       if Settings.is_letter_capital then CapkeyMap[keyName] else keyMap[keyName],
-      fontSize['按键前景文字大小'],
+      fontSize['26键字母前景文字大小'],
       color[theme]['按键前景颜色'],
       color[theme]['按键前景颜色'],
       center['26键中文前景偏移']
@@ -208,7 +208,7 @@ local genPinyinStyles(fontSize, color, theme, center) =
   } + {
     [keyName + 'ButtonBackslashForegroundStyle']: makeTextStyle(
       symbolKeyMap[keyName],
-      fontSize['按键前景文字大小'],
+      fontSize['26键字母前景文字大小'],
       color[theme]['按键前景颜色'],
       color[theme]['按键前景颜色'],
       center['26键中文前景偏移']
@@ -217,7 +217,7 @@ local genPinyinStyles(fontSize, color, theme, center) =
   } + {
     [keyName + 'ButtonUppercasedStateForegroundStyle']: makeTextStyle(
       CapkeyMap[keyName],
-      fontSize['按键前景文字大小'],
+      fontSize['26键字母前景文字大小'],
       color[theme]['按键前景颜色'],
       color[theme]['按键前景颜色'],
       center['26键中文前景偏移']
@@ -230,7 +230,7 @@ local genAlphabeticStyles(fontSize, color, theme, center) =
   {
     [keyName + 'ButtonForegroundStyle']: makeTextStyle(
       std.asciiLower(keyMap[keyName]),
-      fontSize['按键前景文字大小'],
+      fontSize['26键字母前景文字大小'],
       color[theme]['按键前景颜色'],
       color[theme]['按键前景颜色'],
       center['26键中文前景偏移']
@@ -239,7 +239,7 @@ local genAlphabeticStyles(fontSize, color, theme, center) =
   } + {
     [keyName + 'ButtonUppercasedStateForegroundStyle']: makeTextStyle(
       CapkeyMap[keyName],
-      fontSize['按键前景文字大小'],
+      fontSize['26键字母前景文字大小'],
       color[theme]['按键前景颜色'],
       color[theme]['按键前景颜色'],
       center['26键中文前景偏移']

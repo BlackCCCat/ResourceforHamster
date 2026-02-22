@@ -17,6 +17,12 @@
   tips_button_action: { sendKeys: 'Break' },  // 根据自己方案中tips上屏的按键进行调整，万象方案默认为 { character: ',' }
   show_wanxiang: true,  // 空格按键上是否显示“万象”标识
   ios26_style: true,  // 是否启用iOS26风格（统一按键颜色，Light模式下调整高亮）
+  font_size_config: {
+    pinyin_26_letter_font_size: 20,  // 仅控制26字母键(q~m)前景文字大小
+    pinyin_14_18_letter_font_size: 20,  // 仅控制14/18键字母前景文字大小
+    pinyin_9_letter_font_size: 20,  // 仅控制9键字母前景文字大小
+    numeric_digit_font_size: 20,  // 仅控制数字键盘数字前景文字大小
+  },
   button_insets: {
     portrait: { top: 3.8, left: 2.5, right: 2.5, bottom: 3.8 },  // 若需要间隔大稍大，可使用：{ top: 5, left: 3, bottom: 5, right: 3 }
     landscape: { top: 2.2, left: 1.8, bottom: 2.2, right: 1.8 },  // 若需要间隔大稍大，可按需调整:{top: 3, left: 2, bottom: 3, right: 2}

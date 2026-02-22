@@ -18,7 +18,7 @@
       text: k.label,
       normalColor: color[theme]['按键前景颜色'],
       highlightColor: color[theme]['按键前景颜色'],
-      fontSize: if std.length(k.label) > 2 then fontSize['按键前景文字大小'] - 4 else fontSize['按键前景文字大小'],
+      fontSize: if std.length(k.label) > 2 then fontSize['14/18键字母前景文字大小'] - 4 else fontSize['14/18键字母前景文字大小'],
       center: { x: 0.5, y: 0.5 },
     }
     for k in keys
@@ -28,7 +28,7 @@
       text: std.asciiUpper(k.label),
       normalColor: color[theme]['按键前景颜色'],
       highlightColor: color[theme]['按键前景颜色'],
-      fontSize: if std.length(k.label) > 2 then fontSize['按键前景文字大小'] - 4 else fontSize['按键前景文字大小'],
+      fontSize: if std.length(k.label) > 2 then fontSize['14/18键字母前景文字大小'] - 4 else fontSize['14/18键字母前景文字大小'],
       center: { x: 0.5, y: 0.5 },
     }
     for k in keys

@@ -7,7 +7,8 @@ local fontSize = import '../lib/fontSize.libsonnet';
 local others = import '../lib/others.libsonnet';
 
 local ipad_fontSize = fontSize + {
-  '数字键盘数字前景字体大小': 24,
+  // 保持iPad默认更大，同时允许通过custom.numeric_digit_font_size联动调整
+  '数字键盘数字前景字体大小': fontSize['数字键盘数字前景字体大小'] + 4,
   'toolbar按键前景sf符号大小': 20,
 };
 
