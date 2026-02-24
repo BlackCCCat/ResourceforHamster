@@ -4,7 +4,6 @@ local Settings = import '../custom/Custom.libsonnet';
 local keyboardLayout_ = if Settings.with_functions_row[deviceType] then import '../lib/keyboardLayout.libsonnet' else import '../lib/keyboardLayoutWithoutFuncRow.libsonnet';
 
 
-
 local animation = import '../lib/animation.libsonnet';
 local center = import '../lib/center.libsonnet';
 local color = import '../lib/color.libsonnet';
@@ -498,7 +497,7 @@ local keyboard(theme, orientation, keyboardLayout) =
     },
     shiftButtonPreeditForegroundStyle: {
       buttonStyleType: 'systemImage',
-      systemImageName: if Settings.shift_config.preedit_sf_symbol!="" then Settings.shift_config.preedit_sf_symbol else  if Settings.fix_sf_symbol then 'paragraphsign' else 'inset.filled.lefthalf.arrow.left.rectangle',
+      systemImageName: if Settings.shift_config.preedit_sf_symbol != '' then Settings.shift_config.preedit_sf_symbol else if Settings.fix_sf_symbol then 'paragraphsign' else 'inset.filled.lefthalf.arrow.left.rectangle',
       normalColor: color[theme]['按键前景颜色'],
       highlightColor: color[theme]['按键前景颜色'],
       fontSize: fontSize['按键前景文字大小'],
@@ -840,6 +839,7 @@ local keyboard(theme, orientation, keyboardLayout) =
         if Settings.show_wanxiang then 'spaceButtonForegroundStyle1' else null,
       ],
       action: 'space',
+      swipeUpAction: { sendKeys: 'Shift+space' },
       notification: [
         'spaceButtonPreeditNotification',
       ],
@@ -884,6 +884,7 @@ local keyboard(theme, orientation, keyboardLayout) =
       foregroundStyle: 'spaceFirstButtonForegroundStyle',
       backgroundStyle: 'alphabeticBackgroundStyle',
       action: 'space',
+      swipeUpAction: { sendKeys: 'Shift+space' },
       notification: [
         'spaceFirstButtonPreeditNotification',
       ],
@@ -921,6 +922,7 @@ local keyboard(theme, orientation, keyboardLayout) =
         if Settings.show_wanxiang then 'spaceSecondButtonForegroundStyle1' else null,
       ],
       action: 'space',
+      swipeUpAction: { sendKeys: 'Shift+space' },
       notification: [
         'spaceSecondButtonPreeditNotification',
       ],

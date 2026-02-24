@@ -1,3 +1,5 @@
+local Settings = import '../custom/Custom.libsonnet';
+
 // System / function key definitions for 26-key pinyin.
 {
   build(theme, orientation, keyboardLayout, Settings, color, fontSize, center, createButton, baseHintStyles):: {
@@ -29,7 +31,7 @@
     },
     shiftButtonPreeditForegroundStyle: {
       buttonStyleType: 'systemImage',
-      systemImageName: if Settings.shift_config.preedit_sf_symbol!="" then Settings.shift_config.preedit_sf_symbol else  if Settings.fix_sf_symbol then 'paragraphsign' else 'inset.filled.lefthalf.arrow.left.rectangle',
+      systemImageName: if Settings.shift_config.preedit_sf_symbol != '' then Settings.shift_config.preedit_sf_symbol else if Settings.fix_sf_symbol then 'paragraphsign' else 'inset.filled.lefthalf.arrow.left.rectangle',
       normalColor: color[theme]['按键前景颜色'],
       highlightColor: color[theme]['按键前景颜色'],
       fontSize: fontSize['按键前景文字大小'],
@@ -105,7 +107,7 @@
       center: center['功能键前景文字偏移'] { y: 0.5 },
     },
     // 基于 baseHintStyles 做二次覆盖，避免 super 依赖
-    cn2enButtonHintSymbolsStyleOf0: baseHintStyles['cn2enButtonHintSymbolsStyleOf0'] + {
+    cn2enButtonHintSymbolsStyleOf0: baseHintStyles.cn2enButtonHintSymbolsStyleOf0 {
       foregroundStyle: [
         {
           styleName: 'cn2enButtonHintSymbolsForegroundStyleOf0',
@@ -129,7 +131,7 @@
         },
       ],
     },
-    cn2enButtonHintSymbolsStyleOf4: baseHintStyles['cn2enButtonHintSymbolsStyleOf4'] + {
+    cn2enButtonHintSymbolsStyleOf4: baseHintStyles.cn2enButtonHintSymbolsStyleOf4 {
       foregroundStyle: [
         {
           styleName: 'cn2enButtonHintSymbolsForegroundStyleOf4',
@@ -143,7 +145,7 @@
         },
       ],
     },
-    cn2enButtonHintSymbolsStyleOf6: baseHintStyles['cn2enButtonHintSymbolsStyleOf6'] + {
+    cn2enButtonHintSymbolsStyleOf6: baseHintStyles.cn2enButtonHintSymbolsStyleOf6 {
       foregroundStyle: [
         {
           styleName: 'cn2enButtonHintSymbolsForegroundStyleOf6',
@@ -157,7 +159,7 @@
         },
       ],
     },
-    cn2enButtonHintSymbolsStyleOf8: baseHintStyles['cn2enButtonHintSymbolsStyleOf8'] + {
+    cn2enButtonHintSymbolsStyleOf8: baseHintStyles.cn2enButtonHintSymbolsStyleOf8 {
       foregroundStyle: [
         {
           styleName: 'cn2enButtonHintSymbolsForegroundStyleOf8',
@@ -176,7 +178,7 @@
         },
       ],
     },
-    cn2enButtonHintSymbolsStyleOf11: baseHintStyles['cn2enButtonHintSymbolsStyleOf11'] + {
+    cn2enButtonHintSymbolsStyleOf11: baseHintStyles.cn2enButtonHintSymbolsStyleOf11 {
       foregroundStyle: [
         {
           styleName: 'cn2enButtonHintSymbolsForegroundStyleOf11',
@@ -191,7 +193,7 @@
       ],
     },
 
-    cn2enButtonHintSymbolsStyle: baseHintStyles['cn2enButtonHintSymbolsStyle'] + {
+    cn2enButtonHintSymbolsStyle: baseHintStyles.cn2enButtonHintSymbolsStyle {
       symbolStyles: [
         'cn2enButtonHintSymbolsStyleOf0',
         'cn2enButtonHintSymbolsStyleOf4',
@@ -240,6 +242,7 @@
         if Settings.show_wanxiang then 'spaceButtonForegroundStyle1' else null,
       ],
       action: 'space',
+      [if Settings.keyboard_layout == 26 then 'swipeUpAction']: { sendKeys: 'Shift+space' },
       notification: [
         'spaceButtonPreeditNotification',
       ],
@@ -284,6 +287,7 @@
       foregroundStyle: 'spaceFirstButtonForegroundStyle',
       backgroundStyle: 'alphabeticBackgroundStyle',
       action: 'space',
+      [if Settings.keyboard_layout == 26 then 'swipeUpAction']: { sendKeys: 'Shift+space' },
       notification: [
         'spaceFirstButtonPreeditNotification',
       ],
@@ -321,6 +325,7 @@
         if Settings.show_wanxiang then 'spaceSecondButtonForegroundStyle1' else null,
       ],
       action: 'space',
+      [if Settings.keyboard_layout == 26 then 'swipeUpAction']: { sendKeys: 'Shift+space' },
       notification: [
         'spaceSecondButtonPreeditNotification',
       ],
