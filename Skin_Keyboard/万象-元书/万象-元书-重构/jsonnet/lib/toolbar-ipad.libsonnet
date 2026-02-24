@@ -1,4 +1,25 @@
 local toolbar = import 'toolbar.libsonnet';
+local Settings = import '../custom/Custom.libsonnet';
+
+local toolbarSearchEngine = if std.objectHas(Settings, 'toolbar_search_engine') then Settings.toolbar_search_engine else 'google';
+local searchEngine =
+  if std.member(['google', 'baidu', 'bing'], toolbarSearchEngine) then toolbarSearchEngine
+  else 'google';
+
+local searchOpenURLMap = {
+  google: 'https://www.google.com/search?q=#pasteboardContent',
+  baidu: 'https://www.baidu.com/s?wd=#pasteboardContent',
+  bing: 'https://www.bing.com/search?q=#pasteboardContent',
+};
+
+local searchCellStyleMap = {
+  google: 'toolbarButtonGoogleStyle',
+  baidu: 'toolbarButtonBaiduStyle',
+  bing: 'toolbarButtonBingStyle',
+};
+
+local searchOpenURL = searchOpenURLMap[searchEngine];
+local searchCellStyle = searchCellStyleMap[searchEngine];
 
 {
   getToolBar(theme):: toolbar.getToolBar(theme) + {
@@ -13,7 +34,7 @@ local toolbar = import 'toolbar.libsonnet';
             { Cell: 'toolbarButtonKeyboardPerformanceStyle' },
             { Cell: 'toolbarButtonEmbeddingToggleStyle' },
             { Cell: 'toolbarButtonRimeSwitcherStyle' },
-            { Cell: 'toolbarButtonGoogleStyle' },
+            { Cell: searchCellStyle },
             { Cell: 'toolbarButtonSafariStyle' },
             { Cell: 'toolbarButtonAppleStyle' },
             { Cell: 'toolbarButtonScriptStyle' },
@@ -44,8 +65,8 @@ local toolbar = import 'toolbar.libsonnet';
     toolbarButtonRimeSwitcherStyle+: {
       action: { shortcut: '#RimeSwitcher' },
     },
-    toolbarButtonGoogleStyle+: {
-      action: { openURL: 'https://www.google.com/search?q=#pasteboardContent' },
+    [searchCellStyle]+: {
+      action: { openURL: searchOpenURL },
     },
     toolbarButtonSafariStyle+: {
       action: { openURL: '#pasteboardContent' },

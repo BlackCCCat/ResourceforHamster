@@ -3,6 +3,26 @@ local center = import 'center.libsonnet';
 local color = import 'color.libsonnet';
 local fontSize = import 'fontSize.libsonnet';
 
+local toolbarSearchEngine = if std.objectHas(Settings, 'toolbar_search_engine') then Settings.toolbar_search_engine else 'google';
+local searchEngine =
+  if std.member(['google', 'baidu', 'bing'], toolbarSearchEngine) then toolbarSearchEngine
+  else 'google';
+
+local searchOpenURLMap = {
+  google: 'https://www.google.com/search?q=#pasteboardContent',
+  baidu: 'https://www.baidu.com/s?wd=#pasteboardContent',
+  bing: 'https://www.bing.com/search?q=#pasteboardContent',
+};
+
+local searchStyleNameMap = {
+  google: 'toolbarButtonGoogleStyle',
+  baidu: 'toolbarButtonBaiduStyle',
+  bing: 'toolbarButtonBingStyle',
+};
+
+local searchOpenURL = searchOpenURLMap[searchEngine];
+local searchStyleName = searchStyleNameMap[searchEngine];
+
 
 local getToolBar(theme) =
 
@@ -110,7 +130,7 @@ local getToolBar(theme) =
       normalColor: color[theme]['按键前景颜色'],
     },
     horizontalSymbolsDataSource: [
-      { label: '6', action: { openURL: 'https://www.google.com/search?q=#pasteboardContent' }, styleName: 'toolbarButtonGoogleStyle' },
+      { label: '6', action: { openURL: searchOpenURL }, styleName: searchStyleName },
       { label: '7', action: { openURL: '#pasteboardContent' }, styleName: 'toolbarButtonSafariStyle' },
       { label: '5', action: { openURL: 'itms-apps://search.itunes.apple.com/WebObjects/MZSearch.woa/wa/search?media=software&term=#pasteboardContent' }, styleName: 'toolbarButtonAppleStyle' },
     ],
@@ -445,6 +465,14 @@ local getToolBar(theme) =
       //   openURL: 'https://www.google.com/search?q=#pasteboardContent',
       // },
     },
+    toolbarButtonBaiduStyle: {
+      backgroundStyle: 'toolbarButtonBackgroundStyle',
+      foregroundStyle: 'toolbarButtonBaiduForegroundStyle',
+    },
+    toolbarButtonBingStyle: {
+      backgroundStyle: 'toolbarButtonBackgroundStyle',
+      foregroundStyle: 'toolbarButtonBingForegroundStyle',
+    },
     toolbarButton7ForegroundStyle: {
       buttonStyleType: 'systemImage',
       systemImageName: 'g.circle.fill',
@@ -452,6 +480,22 @@ local getToolBar(theme) =
       highlightColor: color[theme]['toolbar按键颜色'],
       fontSize: fontSize['toolbar按键前景sf符号大小'],
       // center: center['toolbar按键文字偏移'],
+      fontWeight: 'medium',
+    },
+    toolbarButtonBaiduForegroundStyle: {
+      buttonStyleType: 'systemImage',
+      systemImageName: 'pawprint.fill',
+      normalColor: color[theme]['toolbar按键颜色'],
+      highlightColor: color[theme]['toolbar按键颜色'],
+      fontSize: fontSize['toolbar按键前景sf符号大小'],
+      fontWeight: 'medium',
+    },
+    toolbarButtonBingForegroundStyle: {
+      buttonStyleType: 'systemImage',
+      systemImageName: 'b.circle.fill',
+      normalColor: color[theme]['toolbar按键颜色'],
+      highlightColor: color[theme]['toolbar按键颜色'],
+      fontSize: fontSize['toolbar按键前景sf符号大小'],
       fontWeight: 'medium',
     },
     toolbarButtonUndoStyle: {

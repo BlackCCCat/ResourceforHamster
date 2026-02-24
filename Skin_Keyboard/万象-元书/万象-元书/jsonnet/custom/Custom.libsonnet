@@ -34,4 +34,5 @@
     preedit_sf_symbol: '',  // shift键预编辑状态显示的sf symbol，为空时显示已有的符号
   },
   showExpandButton: false,  // 是否开启候选栏展开按钮
+  toolbar_search_engine: 'google',  // 可选值为 'google' 'baidu' 'bing'
 }
