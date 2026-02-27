@@ -379,7 +379,7 @@ local Settings = import '../custom/Custom.libsonnet';
       backgroundStyle: 'alphabeticBackgroundStyle',
       foregroundStyle: 'spaceRightButtonPreeditForegroundStyle',
       action: Settings.tips_button_action,
-      swipeUpAction: {character: ','}, 
+      swipeUpAction: {character: '.'}, 
       hintSymbolsStyle: 'cn2enButtonHintSymbolsStyle',
     },
     spaceRightButtonPreeditForegroundStyle: {
