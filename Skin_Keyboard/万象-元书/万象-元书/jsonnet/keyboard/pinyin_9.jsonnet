@@ -308,6 +308,7 @@ local keyboard(theme, orientation) =
       backgroundStyle: 'alphabeticBackgroundStyle',
       foregroundStyle: 'spaceRightButtonPreeditForegroundStyle',
       action: Settings.tips_button_action,
+      swipeUpAction: {character: ','}, 
       hintSymbolsStyle: 'cn2enButtonHintSymbolsStyle',  // 预编辑通知的长按菜单复用普通状态的长按菜单
     },
 
