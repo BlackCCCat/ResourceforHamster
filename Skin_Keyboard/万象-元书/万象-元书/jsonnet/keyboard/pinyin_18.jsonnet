@@ -98,6 +98,14 @@ local keyboard(theme, orientation, keyboardLayout) =
     { id: 'bn', action: 'b', label: if isCapital then 'B N' else 'b n', width: if isPortrait then keyboardLayout['竖屏按键尺寸']['18键Row3Size'].width.percentage else keyboardLayout['横屏按键尺寸']['18键横屏Row1LeftSize'].width.percentage }, 
     { id: 'm', action: 'm', label: if isCapital then 'M' else 'm', width: if isPortrait then keyboardLayout['竖屏按键尺寸']['18键Row3Size'].width.percentage else keyboardLayout['横屏按键尺寸']['18键横屏Row1LeftSize'].width.percentage }, 
   ];
+  local baseLetterFontSize = fontSize['14/18键字母前景文字大小'];
+  local normalizeLabel(label) = std.strReplace(label, ' ', '');
+  local getLetterFontSize(label) =
+    local compactLabel = normalizeLabel(label);
+    if std.length(compactLabel) <= 1 then baseLetterFontSize
+    else if baseLetterFontSize >= 22 then baseLetterFontSize - 2
+    else if baseLetterFontSize >= 18 then baseLetterFontSize - 1
+    else baseLetterFontSize;
 
   keyboardLayout[if orientation == 'portrait' then '竖屏中文18键' else '横屏中文18键'] +
   swipeStyles.getStyle('cn', theme, swipe_up, swipe_down) +
@@ -160,8 +168,8 @@ local keyboard(theme, orientation, keyboardLayout) =
     for k in keys
   } + {
     [k.id + 'ButtonForegroundStyle']: utils.makeTextStyle(
-      k.label,
-      if std.length(k.label) > 2 then fontSize['14/18键字母前景文字大小'] - 4 else fontSize['14/18键字母前景文字大小'],
+      normalizeLabel(k.label),
+      getLetterFontSize(k.label),
       color[theme]['按键前景颜色'],
       color[theme]['按键前景颜色'],
       { x: 0.5, y: 0.5 }
@@ -169,8 +177,8 @@ local keyboard(theme, orientation, keyboardLayout) =
     for k in keys
   } + {
     [k.id + 'ButtonUppercasedStateForegroundStyle']: utils.makeTextStyle(
-      std.asciiUpper(k.label),
-      if std.length(k.label) > 2 then fontSize['14/18键字母前景文字大小'] - 4 else fontSize['14/18键字母前景文字大小'],
+      std.asciiUpper(normalizeLabel(k.label)),
+      getLetterFontSize(k.label),
       color[theme]['按键前景颜色'],
       color[theme]['按键前景颜色'],
       { x: 0.5, y: 0.5 }

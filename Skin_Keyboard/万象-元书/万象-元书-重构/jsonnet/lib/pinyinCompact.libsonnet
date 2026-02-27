@@ -12,27 +12,36 @@
     for k in keys
   },
 
-  compactForegroundStyles(keys, fontSize, color, theme):: {
-    [k.id + 'ButtonForegroundStyle']: {
-      buttonStyleType: 'text',
-      text: k.label,
-      normalColor: color[theme]['按键前景颜色'],
-      highlightColor: color[theme]['按键前景颜色'],
-      fontSize: if std.length(k.label) > 2 then fontSize['14/18键字母前景文字大小'] - 4 else fontSize['14/18键字母前景文字大小'],
-      center: { x: 0.5, y: 0.5 },
-    }
-    for k in keys
-  } + {
-    [k.id + 'ButtonUppercasedStateForegroundStyle']: {
-      buttonStyleType: 'text',
-      text: std.asciiUpper(k.label),
-      normalColor: color[theme]['按键前景颜色'],
-      highlightColor: color[theme]['按键前景颜色'],
-      fontSize: if std.length(k.label) > 2 then fontSize['14/18键字母前景文字大小'] - 4 else fontSize['14/18键字母前景文字大小'],
-      center: { x: 0.5, y: 0.5 },
-    }
-    for k in keys
-  },
+  compactForegroundStyles(keys, fontSize, color, theme):: 
+    local baseLetterFontSize = fontSize['14/18键字母前景文字大小'];
+    local normalizeLabel(label) = std.strReplace(label, ' ', '');
+    local getLetterFontSize(label) =
+      local compactLabel = normalizeLabel(label);
+      if std.length(compactLabel) <= 1 then baseLetterFontSize
+      else if baseLetterFontSize >= 22 then baseLetterFontSize - 2
+      else if baseLetterFontSize >= 18 then baseLetterFontSize - 1
+      else baseLetterFontSize;
+    {
+      [k.id + 'ButtonForegroundStyle']: {
+        buttonStyleType: 'text',
+        text: normalizeLabel(k.label),
+        normalColor: color[theme]['按键前景颜色'],
+        highlightColor: color[theme]['按键前景颜色'],
+        fontSize: getLetterFontSize(k.label),
+        center: { x: 0.5, y: 0.5 },
+      }
+      for k in keys
+    } + {
+      [k.id + 'ButtonUppercasedStateForegroundStyle']: {
+        buttonStyleType: 'text',
+        text: std.asciiUpper(normalizeLabel(k.label)),
+        normalColor: color[theme]['按键前景颜色'],
+        highlightColor: color[theme]['按键前景颜色'],
+        fontSize: getLetterFontSize(k.label),
+        center: { x: 0.5, y: 0.5 },
+      }
+      for k in keys
+    },
 
   commonFromP26(p26Layout, sizes, baseHintStyles):: {
     shiftButton: p26Layout.shiftButton + { size: { width: sizes.shift } },
