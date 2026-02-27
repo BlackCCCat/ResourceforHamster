@@ -3,55 +3,58 @@ patch:
   speller/algebra:
     __patch:
       #- 模糊音                                  # 这里启用后，本文件末尾可配置具体条目
-      - wanxiang_algebra:/base/小鹤双拼            # 可选输入方案名称：全拼，自然码, 自然龙, 汉心龙，小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼，拼音加加，乱序17
+      - wanxiang_algebra:/base/小鹤双拼 # 可选输入方案名称：全拼，自然码, 自然龙, 汉心龙，小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼，拼音加加，乱序17
       # - 18jian  # 18键取消注释该行
       # - 14jian  # 14键取消注释该行
-##########################以上格式受指令初始化控制，最好保持格式不变，如果发生变更请不要使用指令修改相关数据#####################################
+  ##########################以上格式受指令初始化控制，最好保持格式不变，如果发生变更请不要使用指令修改相关数据#####################################
   #custom_phrase/user_dict: custom_phrasexx    # 这里改成什么就需要手动创建同名的 custom_phrasexx.txt 文件在用户目录，这个文件主要用于置顶，编码为自定义编码的词汇
   #translator/packs/+:
-    #- userxx                                  #导入根目录下名称为userxx.dict.yaml的自定义固定词典，编码要与固定词库一致，编码权重都不要少，形如姓名、专有名词公司名称等等
+  #- userxx                                  #导入根目录下名称为userxx.dict.yaml的自定义固定词典，编码要与固定词库一致，编码权重都不要少，形如姓名、专有名词公司名称等等
   #下面是候选数量
-  menu/page_size: 6  #不要超过6，7890用于代表声调1234，6个管够你用了，如果你非要10个，不要问我😜。
+  menu/page_size: 6 #不要超过6，7890用于代表声调1234，6个管够你用了，如果你非要10个，不要问我😜。
   #下面是超级注释相关
-  super_comment:                  # 超级注释模块，子项配置 true 开启，false 关闭
-    candidate_length: 1           # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理
-    corrector_type: "〔comment〕"  # 错音措字，随意更换左右括号，比如"〔comment〕" 不加括号为无括号，comment占位不能动
-    chaifen: "〔chaifen〕"         # 拆分显示，随意更换左右括号，比如"〔chaifen〕" 不加括号为无括号，chaifen占位不能动
-
+  super_comment/cand_type:
+    user_phrase: "📌" # 自造词
+    sentence: "🫧" # 模型造句
+    phrase: "🏷" # 字典词库
+    table: "🗂" # 表
+    user_table: "📝" # custom_phrase
+    completion: "🧬" # 补全
+    abbrev: "🚀" # 简码
+    derived: "💡" # 派生
   #在8105基础上你可以通过黑白名单微调你自己的字符集过滤清单，主数据库位于lua/charset.bin不可编辑
   charsetlist: [你]
   charsetblacklist: [鹵, 彔]
 
-
   switches:
-    - name: ascii_mode                    # 中英输入状态
-      states: [ 中文, 英文 ]
-    - name: ascii_punct                   # 中英标点，可以在中文输入状态输入英文符号
-      states: [ 中标, 英标 ]
-    - name: full_shape                    #全角、半角字符输出
-      states: [ 半角, 全角 ]
-    - name: emoji                         #候选出现emoji滤镜，会显示在相应的候选后面，万象侧重于tips提示，避免候选被占用，因此默认为reset: 0，归属opencc emoji滤镜
+    - name: ascii_mode # 中英输入状态
+      states: [中文, 英文]
+    - name: ascii_punct # 中英标点，可以在中文输入状态输入英文符号
+      states: [中标, 英标]
+    - name: full_shape #全角、半角字符输出
+      states: [半角, 全角]
+    - name: emoji #候选出现emoji滤镜，会显示在相应的候选后面，万象侧重于tips提示，避免候选被占用，因此默认为reset: 0，归属opencc emoji滤镜
       states: [表情关, 表情开]
-    - name: chinese_english               #候选进入翻译模式滤镜，会显示在相应的候选后面，万象侧重于tips提示，避免候选被占用，归属opencc 翻译滤镜
-      states: [ 翻译关, 翻译开 ]
-    - options: [ raw_input, tone_display, full_pinyin ]   #开启后在输入编码的位置实时转换为带声调全拼或者不带声调全拼，不开启则采用系统配置原始编码，影响的是preedit_format,归属：super_preedit.lua
-      states: [ 原编码, 有声调, 无声调 ]
-      reset: 1     #对于开关组从0开始数，第几个就reset几可设为默认
-    - options: [ s2s, s2t, s2hk, s2tw ]   # 简繁转换开关组，可以在一个空选项和多个实际“- simplifier@s2hk”引入的项目之前切换，这是一个开关组，你可以将其中任意一个s2s等设置为toggle快捷键，多次按下将轮询
-      states: [ 简体, 通繁, 港繁, 臺繁 ]
+    - name: chinese_english #候选进入翻译模式滤镜，会显示在相应的候选后面，万象侧重于tips提示，避免候选被占用，归属opencc 翻译滤镜
+      states: [翻译关, 翻译开]
+    - options: [raw_input, tone_display, full_pinyin] #开启后在输入编码的位置实时转换为带声调全拼或者不带声调全拼，不开启则采用系统配置原始编码，影响的是preedit_format,归属：super_preedit.lua
+      states: [原编码, 有声调, 无声调]
+      reset: 1 #对于开关组从0开始数，第几个就reset几可设为默认
+    - options: [s2s, s2t, s2hk, s2tw] # 简繁转换开关组，可以在一个空选项和多个实际“- simplifier@s2hk”引入的项目之前切换，这是一个开关组，你可以将其中任意一个s2s等设置为toggle快捷键，多次按下将轮询
+      states: [简体, 通繁, 港繁, 臺繁]
       reset: 0
-    - name: tone_hint                     #开启后在候选的注释里面实时显示全拼声调，不开启则采用系统配置，影响的是comment_format，归属：super_comment.lua
-      states: [ 读音关, 读音开 ]
-    - name: super_tips                    #开启后在输入编码后面的提示区显示实时的提示数据，受tips数据库影响，表情、翻译、车牌、符号等对应关系数据，并可实现句号上屏，不开启则默认，影响的是segment.prompt参数，归属：super_tips.lua
-      states: [ 提示关, 提示开 ]
+    - name: tone_hint #开启后在候选的注释里面实时显示全拼声调，不开启则采用系统配置，影响的是comment_format，归属：super_comment.lua
+      states: [读音关, 读音开]
+    - name: super_tips #开启后在输入编码后面的提示区显示实时的提示数据，受tips数据库影响，表情、翻译、车牌、符号等对应关系数据，并可实现句号上屏，不开启则默认，影响的是segment.prompt参数，归属：super_tips.lua
+      states: [提示关, 提示开]
       reset: 1
-    - name: charset_filter               #字符集过滤，默认开启8105通规显示，即小字集，可通过开关实时开启全字集，快捷键配套ctrl+g,归属：super_filter.lua
-      states: [ 小字集, 大字集 ]
+    - name: charset_filter #字符集过滤，默认开启8105通规显示，即小字集，可通过开关实时开启全字集，快捷键配套ctrl+g,归属：super_filter.lua
+      states: [小字集, 大字集]
       reset: 1
-    - name: char_priority                #多体现在编码重合但候选有单字或者多字的情况`引导的辅码查词时是否单字优先，全拼常见，类似于特定编码情况下、反查状态下的调序能力。归属：super_lookup.lua
+    - name: char_priority #多体现在编码重合但候选有单字或者多字的情况`引导的辅码查词时是否单字优先，全拼常见，类似于特定编码情况下、反查状态下的调序能力。归属：super_lookup.lua
       states: [词组先, 单字先]
-    - options: [ mixed, zh_only, en_only ]
-      states: [ 混合输入, 仅中文, 仅英文 ]
+    - options: [mixed, zh_only, en_only]
+      states: [混合输入, 仅中文, 仅英文]
       reset: 0
 
   #下面用于对/rq和N20250101这样的日期候选自定义（顺序、类型、候选个数）由你完全掌控，前面是对于公历后面默认携带农历
@@ -108,12 +111,12 @@ patch:
   #  icon: "icons/zhong.ico"
   #  ascii_icon: "icons/ying.ico"
   #下面这个可以改变tips上屏的按键
-  key_binder/tips_key: "comma"   #修改时候去default找，默认是逗号
+  key_binder/tips_key: "comma" #修改时候去default找，默认是逗号
   key_binder/sequence: # Lua 配置：手动排序的快捷键 super_sequence.lua，不要用方向键，各种冲突，一定要避免冲突
-    up: "Control+j"    # 上移
-    down: "Control+k"  # 下移
+    up: "Control+j" # 上移
+    down: "Control+k" # 下移
     reset: "Control+l" # 重置
-    pin: "Control+p"   # 置顶
+    pin: "Control+p" # 置顶
   key_binder/bindings/+: # 也可以再增加方案专有的
     - { when: always, toggle: chinese_english, accept: Control+e } # 切换翻译功能
     - { when: always, toggle: s2s, accept: Control+Shift+4 } # 切换简繁
@@ -158,91 +161,91 @@ patch:
   #两个字符可以不用|默认前后分割，需要明确区分前后的使用|分割，可以有一侧为空，不可以使用多个||
   paired_symbols:
     #sort_window: 10
-    trigger: "\\"  #(注意反斜杠这是转义写法\\使用时\单反斜杠即可)
-    mirror: true   #包裹后完全替换第一候选true,原候选后移到第二false
+    trigger: "\\" #(注意反斜杠这是转义写法\\使用时\单反斜杠即可)
+    mirror: true #包裹后完全替换第一候选true,原候选后移到第二false
     symkey:
       # ===== 基本括号与引号 =====
-      a: "[]"        # 方括号
-      b: "【】"       # 黑方头括号
-      c: "❲❳"        # 双大括号 / 装饰括号
-      d: "〔〕"       # 方头括号
-      e: "⟮⟯"        # 小圆括号 / 装饰括号
-      f: "⟦⟧"        # 双方括号 / 数学集群括号
-      g: "「」"       # 直角引号
+      a: "[]" # 方括号
+      b: "【】" # 黑方头括号
+      c: "❲❳" # 双大括号 / 装饰括号
+      d: "〔〕" # 方头括号
+      e: "⟮⟯" # 小圆括号 / 装饰括号
+      f: "⟦⟧" # 双方括号 / 数学集群括号
+      g: "「」" # 直角引号
       # h: 预留用于 Markdown 一级标题
-      i: "『』"       # 双直角引号
-      j: "<>"        # 尖括号
-      k: "《》"       # 书名号（双）
-      l: "〈〉"       # 书名号（单）
-      m: "‹›"        # 法文单书名号
-      n: "«»"        # 法文双书名号
-      o: "⦅⦆"         # 白圆括号
-      p: "⦇⦈"        # 白方括号
-      q: "()"        # 圆括号
-      r: "|儿"        #儿化候选
-      s: "［］"       # 全角方括号
-      t: "⟨⟩"        # 数学角括号
-      u: "〈〉"       # 数学尖括号
-      v: "〖〗"       # 装饰花括号
-      w: "（）"       # 全角圆括号
-      x: "｛｝"       # 全角花括号
-      y: "⟪⟫"        # 双角括号
-      z: "{}"        # 花括号
+      i: "『』" # 双直角引号
+      j: "<>" # 尖括号
+      k: "《》" # 书名号（双）
+      l: "〈〉" # 书名号（单）
+      m: "‹›" # 法文单书名号
+      n: "«»" # 法文双书名号
+      o: "⦅⦆" # 白圆括号
+      p: "⦇⦈" # 白方括号
+      q: "()" # 圆括号
+      r: "|儿" #儿化候选
+      s: "［］" # 全角方括号
+      t: "⟨⟩" # 数学角括号
+      u: "〈〉" # 数学尖括号
+      v: "〖〗" # 装饰花括号
+      w: "（）" # 全角圆括号
+      x: "｛｝" # 全角花括号
+      y: "⟪⟫" # 双角括号
+      z: "{}" # 花括号
 
       # ===== 扩展括号族 / 引号 =====
-      dy: "''"        # 英文单引号
-      sy: "\"\""      # 英文双引号
-      zs: "“”"        # 中文弯双引号
-      zd: "‘’"        # 中文弯单引号
-      fy: "``"        # 反引号
+      dy: "''" # 英文单引号
+      sy: '""' # 英文双引号
+      zs: "“”" # 中文弯双引号
+      zd: "‘’" # 中文弯单引号
+      fy: "``" # 反引号
 
       # ===== 双字母括号族 =====
-      aa: "〚〛"      # 双中括号
-      bb: "〘〙"      # 双中括号（小）
-      cc: "〚〛"      # 双中括号（重复，可用于 Lua 匹配）
-      dd: "❨❩"      # 小圆括号装饰
-      ee: "❪❫"      # 小圆括号装饰
-      ff: "❬❭"      # 小尖括号装饰
-      gg: "⦉⦊"      # 双弯方括号
-      ii: "⦍⦎"      # 双弯方括号
-      jj: "⦏⦐"      # 双弯方括号
-      kk: "⦑⦒"      # 双弯方括号
-      ll: "❮❯"      # 小尖括号装饰
-      mm: "⌈⌉"      # 上取整 / 数学符号
-      nn: "⌊⌋"      # 下取整 / 数学符号
-      oo: "⦗⦘"      # 双方括号装饰（补齐）
-      pp: "⦙⦚"      # 双方括号装饰（补齐）
-      qq: "⟬⟭"      # 小双角括号
-      rr: "❴❵"      # 花括号装饰
-      ss: "⌜⌝"      # 数学上角符号
-      tt: "⌞⌟"      # 数学下角符号
-      uu: "⸢⸣"      # 装饰方括号
-      vv: "⸤⸥"      # 装饰方括号
-      ww: "﹁﹂"      # 中文书名号 / 注释引号
-      xx: "﹃﹄"      # 中文书名号 / 注释引号
-      yy: "⌠⌡"      # 数学 / 程序符号
-      zz: "⟅⟆"      # 数学 / 装饰括号
+      aa: "〚〛" # 双中括号
+      bb: "〘〙" # 双中括号（小）
+      cc: "〚〛" # 双中括号（重复，可用于 Lua 匹配）
+      dd: "❨❩" # 小圆括号装饰
+      ee: "❪❫" # 小圆括号装饰
+      ff: "❬❭" # 小尖括号装饰
+      gg: "⦉⦊" # 双弯方括号
+      ii: "⦍⦎" # 双弯方括号
+      jj: "⦏⦐" # 双弯方括号
+      kk: "⦑⦒" # 双弯方括号
+      ll: "❮❯" # 小尖括号装饰
+      mm: "⌈⌉" # 上取整 / 数学符号
+      nn: "⌊⌋" # 下取整 / 数学符号
+      oo: "⦗⦘" # 双方括号装饰（补齐）
+      pp: "⦙⦚" # 双方括号装饰（补齐）
+      qq: "⟬⟭" # 小双角括号
+      rr: "❴❵" # 花括号装饰
+      ss: "⌜⌝" # 数学上角符号
+      tt: "⌞⌟" # 数学下角符号
+      uu: "⸢⸣" # 装饰方括号
+      vv: "⸤⸥" # 装饰方括号
+      ww: "﹁﹂" # 中文书名号 / 注释引号
+      xx: "﹃﹄" # 中文书名号 / 注释引号
+      yy: "⌠⌡" # 数学 / 程序符号
+      zz: "⟅⟆" # 数学 / 装饰括号
 
       # ===== Markdown / 标记 =====
-      md: "**|**"       # Markdown 粗体
-      jc: "**|**"       # 加粗
-      it: "__|__"       # 斜体
-      st: "~~|~~"       # 删除线
-      eq: "==|=="       # 高亮
-      ln: "`|`"         # 行内代码
-      cb: "```|```"     # 代码块
-      qt: "> |"         # 引用
-      ul: "- |"         # 无序列表项
-      ol: "1. |"        # 有序列表项
-      lk: "[|](url)"    # 链接
-      im: "![|](img)"   # 图片
-      h: "# |"          # 一级标题
-      hh: "## |"        # 二级标题
-      hhh: "### |"      # 三级标题
-      hhhh: "#### |"    # 四级标题
-      sp: "\\|"         # 反斜杠转义
-      br: "|  "         # 换行
-      cm: "<!--|-->"    # 注释
+      md: "**|**" # Markdown 粗体
+      jc: "**|**" # 加粗
+      it: "__|__" # 斜体
+      st: "~~|~~" # 删除线
+      eq: "==|==" # 高亮
+      ln: "`|`" # 行内代码
+      cb: "```|```" # 代码块
+      qt: "> |" # 引用
+      ul: "- |" # 无序列表项
+      ol: "1. |" # 有序列表项
+      lk: "[|](url)" # 链接
+      im: "![|](img)" # 图片
+      h: "# |" # 一级标题
+      hh: "## |" # 二级标题
+      hhh: "### |" # 三级标题
+      hhhh: "#### |" # 四级标题
+      sp: "\\|" # 反斜杠转义
+      br: "|  " # 换行
+      cm: "<!--|-->" # 注释
 
       # ===== 运算与标记符 =====
       pl: "++"
@@ -263,14 +266,14 @@ patch:
   #translator/enable_user_dict: true  # 是否开启自动调频用户词，如果你希望使用下面``造词功能，请保持false，因为两个跨翻译器会造成词汇不能正常记录
 
 #以下恢复``造词功能，也就是平时不记录，引导才记录，按需造词，如果你想恢复这个功能，请取消注释----
-  #recognizer/patterns/add_user_dict: "^``[A-Za-z/`']*$"      #自造词引导方式
-  #user_dict_set/enable_user_dict: true     
-  #add_user_dict/enable_user_dict: true
-  # 取消注释以开启自动无词频造词
-  #add_user_dict/enable_auto_phrase: true
+#recognizer/patterns/add_user_dict: "^``[A-Za-z/`']*$"      #自造词引导方式
+#user_dict_set/enable_user_dict: true
+#add_user_dict/enable_user_dict: true
+# 取消注释以开启自动无词频造词
+#add_user_dict/enable_auto_phrase: true
 #按需造词全功能段落结束---------------------------------------------------------------
 
-模糊音: 
+模糊音:
   __append:
     # n - l
     - derive/^l/n
