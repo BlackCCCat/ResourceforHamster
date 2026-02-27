@@ -35,19 +35,12 @@ jobs:
           set -euo pipefail
           mkdir -p release
           files=()
-          if [ -d "Skin_Keyboard/万象-元书/万象-元书" ]; then
-            (cd "Skin_Keyboard/万象-元书" && zip -r "../../release/wanxiang.zip" "万象-元书")
+          if [ -d "Skin_Keyboard/万象-元书/万象键盘" ]; then
+            (cd "Skin_Keyboard/万象-元书" && zip -r "../../release/wanxiang.zip" "万象键盘")
             mv "release/wanxiang.zip" "release/wanxiang.cskin"
             files+=("release/wanxiang.cskin")
           else
-            echo "Skipping: Skin_Keyboard/万象-元书/万象-元书 not found"
-          fi
-          if [ -d "Skin_Keyboard/万象-元书/万象-元书-重构" ]; then
-            (cd "Skin_Keyboard/万象-元书" && zip -r "../../release/wanxiang-refactor.zip" "万象-元书-重构")
-            mv "release/wanxiang-refactor.zip" "release/wanxiang-refactor.cskin"
-            files+=("release/wanxiang-refactor.cskin")
-          else
-            echo "Skipping: Skin_Keyboard/万象-元书/万象-元书-重构 not found"
+            echo "Skipping: Skin_Keyboard/万象-元书/万象键盘 not found"
           fi
           if [ "${#files[@]}" -eq 0 ]; then
             echo "No cskin files produced. Aborting release."
