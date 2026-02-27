@@ -1,5 +1,15 @@
 patch:
   super_comment/candidate_length: 50 # 超级注释模块，子项配置 true 开启，false 关闭
+  super_comment/chaifen: "chaifen"
+  super_comment/cand_type:
+    user_phrase: "📌" # 自造词
+    sentence: "🫧" # 模型造句
+    phrase: "🏷" # 字典词库
+    table: "🗂" # 表
+    user_table: "📝" # custom_phrase
+    completion: "🧬" # 补全
+    abbrev: "🚀" # 简码
+    derived: "💡" # 派生 
 
   speller/algebra:
     __patch:
