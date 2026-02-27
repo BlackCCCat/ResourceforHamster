@@ -1,5 +1,5 @@
-local toolbar = import 'toolbar.libsonnet';
 local Settings = import '../Custom.libsonnet';
+local toolbar = import 'toolbar.libsonnet';
 
 local toolbarSearchEngine = if std.objectHas(Settings, 'toolbar_search_engine') then Settings.toolbar_search_engine else 'google';
 local searchEngine =
@@ -54,7 +54,7 @@ local searchCellStyle = searchCellStyleMap[searchEngine];
       action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSettings' },
     },
     toolbarButtonKeyboardSkinsStyle+: {
-      action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSkins' },
+      action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/finder?action=openAppFile&fileURL=Skins/万象键盘/jsonnet/Custom.libsonnet' },
     },
     toolbarButtonKeyboardPerformanceStyle+: {
       action: { shortcut: '#keyboardPerformance' },
