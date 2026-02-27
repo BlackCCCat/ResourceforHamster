@@ -3,7 +3,7 @@ local deviceType = 'iPhone';
 
 local Settings = import '../Custom.libsonnet';
 // Import layout with functions row or without, similar to pinyin_26
-local keyboardLayout_ = if Settings.with_functions_row[deviceType] then import '../lib/keyboardLayout.libsonnet' else import '../lib/keyboardLayoutWithoutFuncRow.libsonnet';
+local keyboardLayout_ = if Settings.with_functions_row[deviceType] then import '../lib/keyboardLayout.libsonnet' else import '../lib/keyboardLayoutNoFuncRow.libsonnet';
 local p26 = import 'pinyin_26.jsonnet';
 
 local animation = import '../lib/animation.libsonnet';

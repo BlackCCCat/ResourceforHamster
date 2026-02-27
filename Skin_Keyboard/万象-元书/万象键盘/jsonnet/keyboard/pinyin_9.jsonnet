@@ -2,16 +2,15 @@ local deviceType = 'iPhone';
 local Settings = import '../Custom.libsonnet';
 // Import shared layout libraries
 local keyboardLayoutFuncRow = import '../lib/keyboardLayout.libsonnet';
-local keyboardLayoutWithoutFuncRow = import '../lib/keyboardLayoutWithoutFuncRow.libsonnet';
+local keyboardLayoutNoFuncRow = import '../lib/keyboardLayoutNoFuncRow.libsonnet';
 local p26 = import 'pinyin_26.jsonnet';
 
 local chooseLayout(selector, theme) =
   if selector then keyboardLayoutFuncRow.getKeyboardLayout(theme)
-  else keyboardLayoutWithoutFuncRow.getKeyboardLayout(theme);
+  else keyboardLayoutNoFuncRow.getKeyboardLayout(theme);
 
 local animation = import '../lib/animation.libsonnet';
 local center = import '../lib/center.libsonnet';
-local collectionData = import '../lib/collectionData.libsonnet';
 local color = import '../lib/color.libsonnet';
 local fontSize = import '../lib/fontSize.libsonnet';
 local hintSymbolsData = import '../lib/hintSymbolsData.libsonnet';
@@ -134,15 +133,21 @@ local keyboard(theme, orientation) =
   local layoutRoot = chooseLayout(Settings.with_functions_row[deviceType], theme);
   local layout = layoutRoot['竖屏中文9键'];
   local p26Layout = p26.keyboard(theme, orientation, layoutRoot);
+  local hintDataOnlyCn2en = { cn2en: hintSymbolsData.pinyin_9.cn2en };
+  local hintDataWithoutCn2en = {
+    [k]: hintSymbolsData.pinyin_9[k]
+    for k in std.objectFields(hintSymbolsData.pinyin_9)
+    if k != 'cn2en'
+  };
   slideForeground.slideForeground(theme) +
-  hintSymbolsStyles.getStyle(theme, hintSymbolsData.pinyin_9) +
+  hintSymbolsStyles.getStyle(theme, hintDataOnlyCn2en) +
   {
     preeditHeight: others[if orientation == 'portrait' then '竖屏' else '横屏']['preedit高度'],
     toolbarHeight: others[if orientation == 'portrait' then '竖屏' else '横屏']['toolbar高度'],
     keyboardHeight: others[if orientation == 'portrait' then '竖屏' else '横屏']['keyboard高度'],
   } +
   layout +
-  hintSymbolsStyles.getStyle(theme, { [k]: hintSymbolsData.pinyin_9[k] for k in std.objectFields(hintSymbolsData.pinyin_9) if k != 'cn2en' }) +
+  hintSymbolsStyles.getStyle(theme, hintDataWithoutCn2en) +
   swipeStyles.getStyle('number', theme, swipe_up, swipe_down) +
   {
 

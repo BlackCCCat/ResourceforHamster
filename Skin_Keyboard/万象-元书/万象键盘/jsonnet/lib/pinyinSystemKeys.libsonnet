@@ -236,7 +236,6 @@ local Settings = import '../Custom.libsonnet';
       baseHintStyles,
       false
     ) + {
-      backgroundStyle: 'alphabeticBackgroundStyle',
       foregroundStyle: [
         'spaceButtonForegroundStyle',
         if Settings.show_wanxiang then 'spaceButtonForegroundStyle1' else null,
@@ -285,7 +284,6 @@ local Settings = import '../Custom.libsonnet';
       false
     ) + {
       foregroundStyle: 'spaceFirstButtonForegroundStyle',
-      backgroundStyle: 'alphabeticBackgroundStyle',
       action: 'space',
       [if Settings.keyboard_layout == 26 then 'swipeUpAction']: { sendKeys: 'Shift+space' },
       notification: [
@@ -319,7 +317,6 @@ local Settings = import '../Custom.libsonnet';
       baseHintStyles,
       false
     ) + {
-      backgroundStyle: 'alphabeticBackgroundStyle',
       foregroundStyle: [
         'spaceSecondButtonForegroundStyle',
         if Settings.show_wanxiang then 'spaceSecondButtonForegroundStyle1' else null,
@@ -367,7 +364,6 @@ local Settings = import '../Custom.libsonnet';
       baseHintStyles,
       false
     ) + {
-      backgroundStyle: 'alphabeticBackgroundStyle',
       action: { character: '.' },
       repeatAction: { character: '.' },
       notification: [

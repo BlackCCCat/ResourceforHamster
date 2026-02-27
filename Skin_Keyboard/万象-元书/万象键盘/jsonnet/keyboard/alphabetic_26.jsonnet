@@ -1,7 +1,7 @@
 local deviceType = 'iPhone';
 
 local Settings = import '../Custom.libsonnet';
-local keyboardLayout_ = if Settings.with_functions_row[deviceType] then import '../lib/keyboardLayout.libsonnet' else import '../lib/keyboardLayoutWithoutFuncRow.libsonnet';
+local keyboardLayout_ = if Settings.with_functions_row[deviceType] then import '../lib/keyboardLayout.libsonnet' else import '../lib/keyboardLayoutNoFuncRow.libsonnet';
 
 
 local animation = import '../lib/animation.libsonnet';

@@ -1,6 +1,6 @@
 local config = {
   author: 'BlackCCCat',
-  name: '万象键盘-重构版',
+  name: '万象键盘',
   pinyin: {
     iPhone: {
       portrait: 'pinyin_26_portrait',
@@ -45,11 +45,11 @@ local config = {
 
 local Settings = import 'Custom.libsonnet';
 
-local pinyin = 
-if Settings.keyboard_layout == 18 then import 'keyboard/pinyin_18.jsonnet' 
-else if Settings.keyboard_layout == 14 then import 'keyboard/pinyin_14.jsonnet' 
-else if Settings.keyboard_layout == 9 then import 'keyboard/pinyin_9.jsonnet'
-else import 'keyboard/pinyin_26.jsonnet';
+local pinyin =
+  if Settings.keyboard_layout == 18 then import 'keyboard/pinyin_18.jsonnet'
+  else if Settings.keyboard_layout == 14 then import 'keyboard/pinyin_14.jsonnet'
+  else if Settings.keyboard_layout == 9 then import 'keyboard/pinyin_9.jsonnet'
+  else import 'keyboard/pinyin_26.jsonnet';
 local alphabetic = import 'keyboard/alphabetic_26.jsonnet';
 local numeric = import 'keyboard/numeric_9.jsonnet';
 local panel = import 'keyboard/panel.jsonnet';
@@ -72,10 +72,10 @@ local render(module, prefix) = {
 {
   'config.yaml': std.manifestYamlDoc(config, indent_array_in_object=true, quote_keys=false),
 } +
-  render(pinyin, 'pinyin_26') +
-  render(ipad_pinyin, 'ipad_pinyin_26') +
-  render(alphabetic, 'alphabetic_26') +
-  render(ipad_alphabetic, 'ipad_alphabetic_26') +
-  render(numeric, 'numeric_9') +
-  render(ipad_numeric, 'ipad_numeric_9') +
-  render(panel, 'panel')
+render(pinyin, 'pinyin_26') +
+render(ipad_pinyin, 'ipad_pinyin_26') +
+render(alphabetic, 'alphabetic_26') +
+render(ipad_alphabetic, 'ipad_alphabetic_26') +
+render(numeric, 'numeric_9') +
+render(ipad_numeric, 'ipad_numeric_9') +
+render(panel, 'panel')

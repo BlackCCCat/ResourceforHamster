@@ -1,4 +1,3 @@
-local Settings = import '../Custom.libsonnet';
 local center = import 'center.libsonnet';
 local color = import 'color.libsonnet';
 local fontSize = import 'fontSize.libsonnet';
