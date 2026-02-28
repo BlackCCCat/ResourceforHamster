@@ -52,7 +52,7 @@ local keyboard(theme, orientation) =
   ) +
   createButton(
     'Skin',
-    { openURL: 'hamster3://com.ihsiao.apps.hamster3/finder?action=openAppFile&fileURL=Skins/万象键盘/jsonnet/Custom.libsonnet' },
+    { openURL: 'hamster3://com.ihsiao.apps.hamster3/finder?action=openSkinsFile&fileURL=jsonnet/Custom.libsonnet' },
     'paintpalette.fill',
     '皮肤调整',
     theme

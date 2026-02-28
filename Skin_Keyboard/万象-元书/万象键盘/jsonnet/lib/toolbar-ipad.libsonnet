@@ -54,7 +54,7 @@ local searchCellStyle = searchCellStyleMap[searchEngine];
       action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSettings' },
     },
     toolbarButtonKeyboardSkinsStyle+: {
-      action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/finder?action=openAppFile&fileURL=Skins/万象键盘/jsonnet/Custom.libsonnet' },
+      action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/finder?action=openSkinsFile&fileURL=jsonnet/Custom.libsonnet' },
     },
     toolbarButtonKeyboardPerformanceStyle+: {
       action: { shortcut: '#keyboardPerformance' },
