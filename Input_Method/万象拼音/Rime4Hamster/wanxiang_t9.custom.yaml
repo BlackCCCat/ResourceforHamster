@@ -6,6 +6,16 @@ patch:
     - { when: always, toggle: s2s, accept: Control+Shift+4 } #
     - { when: always, toggle: abbrev_lazy, accept: Control+q } # 切换简码模式
 
+  super_comment/cand_type:
+    user_phrase: "📌" # 自造词
+    sentence: "💬" # 模型造句
+    phrase: "🏷" # 字典词库
+    table: "🗂" # 表
+    user_table: "📝" # custom_phrase
+    completion: "♾️" # 补全
+    abbrev: "🚀" # 简码
+    derived: "💡" # 派生
+
   # 开关
   # reset: 默认状态。注释掉后，切换窗口时不会重置到默认状态。
   # states: 方案选单显示的名称。可以注释掉，仍可以通过快捷键切换。

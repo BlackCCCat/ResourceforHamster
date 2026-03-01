@@ -10,13 +10,13 @@ patch:
   super_comment/chaifen: "chaifen"
   super_comment/cand_type:
     user_phrase: "📌" # 自造词
-    sentence: "🫧" # 模型造句
+    sentence: "💬" # 模型造句
     phrase: "🏷" # 字典词库
     table: "🗂" # 表
     user_table: "📝" # custom_phrase
-    completion: "🧬" # 补全
+    completion: "♾️" # 补全
     abbrev: "🚀" # 简码
-    derived: "💡" # 派生 
+    derived: "💡" # 派生
 
   # 输入引擎
   engine/processors/@before 1: lua_processor@*select_character # 以词定字，有了辅助码了，想开启可以注释掉
