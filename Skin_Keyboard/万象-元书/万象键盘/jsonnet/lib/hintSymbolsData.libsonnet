@@ -1,3 +1,10 @@
+local Settings = import '../Custom.libsonnet';
+local makeAction(instance) =
+  if Settings.wanxiang_9_hintSymbol then
+    { symbol: instance }
+  else
+    { character: instance };
+
 {
   /*
   说明:
@@ -278,16 +285,16 @@
 
 
   pinyin_9: {
-    number1: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: { character: '1' }, label: { text: '1' } }] },
-    number2: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: { character: '2' }, label: { text: '2' } }, { action: { character: 'a' }, label: { text: 'a' } }, { action: { character: 'b' }, label: { text: 'b' } }, { action: { character: 'c' }, label: { text: 'c' } }] },
-    number3: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: { character: '3' }, label: { text: '3' } }, { action: { character: 'd' }, label: { text: 'd' } }, { action: { character: 'e' }, label: { text: 'e' } }, { action: { character: 'f' }, label: { text: 'f' } }] },
-    number4: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: { character: '4' }, label: { text: '4' } }, { action: { character: 'g' }, label: { text: 'g' } }, { action: { character: 'h' }, label: { text: 'h' } }, { action: { character: 'i' }, label: { text: 'i' } }] },
-    number5: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: { character: '5' }, label: { text: '5' } }, { action: { character: 'j' }, label: { text: 'j' } }, { action: { character: 'k' }, label: { text: 'k' } }, { action: { character: 'l' }, label: { text: 'l' } }] },
-    number6: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: { character: '6' }, label: { text: '6' } }, { action: { character: 'm' }, label: { text: 'm' } }, { action: { character: 'n' }, label: { text: 'n' } }, { action: { character: 'o' }, label: { text: 'o' } }] },
-    number7: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: { character: '7' }, label: { text: '7' } }, { action: { character: 'p' }, label: { text: 'p' } }, { action: { character: 'q' }, label: { text: 'q' } }, { action: { character: 'r' }, label: { text: 'r' } }, { action: { character: 's' }, label: { text: 's' } }] },
-    number8: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: { character: '8' }, label: { text: '8' } }, { action: { character: 't' }, label: { text: 't' } }, { action: { character: 'u' }, label: { text: 'u' } }, { action: { character: 'v' }, label: { text: 'v' } }] },
-    number9: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: { character: '9' }, label: { text: '9' } }, { action: { character: 'w' }, label: { text: 'w' } }, { action: { character: 'x' }, label: { text: 'x' } }, { action: { character: 'y' }, label: { text: 'y' } }, { action: { character: 'z' }, label: { text: 'z' } }] },
-    number0: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: { character: '0' }, label: { text: '0' } }] },
+    number1: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: makeAction('1'), label: { text: '1' } }] },
+    number2: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: makeAction('2'), label: { text: '2' } }, { action: makeAction('a'), label: { text: 'a' } }, { action: makeAction('b'), label: { text: 'b' } }, { action: makeAction('c'), label: { text: 'c' } }] },
+    number3: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: makeAction('3'), label: { text: '3' } }, { action: makeAction('d'), label: { text: 'd' } }, { action: makeAction('e'), label: { text: 'e' } }, { action: makeAction('f'), label: { text: 'f' } }] },
+    number4: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: makeAction('4'), label: { text: '4' } }, { action: makeAction('g'), label: { text: 'g' } }, { action: makeAction('h'), label: { text: 'h' } }, { action: makeAction('i'), label: { text: 'i' } }] },
+    number5: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: makeAction('5'), label: { text: '5' } }, { action: makeAction('j'), label: { text: 'j' } }, { action: makeAction('k'), label: { text: 'k' } }, { action: makeAction('l'), label: { text: 'l' } }] },
+    number6: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: makeAction('6'), label: { text: '6' } }, { action: makeAction('m'), label: { text: 'm' } }, { action: makeAction('n'), label: { text: 'n' } }, { action: makeAction('o'), label: { text: 'o' } }] },
+    number7: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: makeAction('7'), label: { text: '7' } }, { action: makeAction('p'), label: { text: 'p' } }, { action: makeAction('q'), label: { text: 'q' } }, { action: makeAction('r'), label: { text: 'r' } }, { action: makeAction('s'), label: { text: 's' } }] },
+    number8: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: makeAction('8'), label: { text: '8' } }, { action: makeAction('t'), label: { text: 't' } }, { action: makeAction('u'), label: { text: 'u' } }, { action: makeAction('v'), label: { text: 'v' } }] },
+    number9: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: makeAction('9'), label: { text: '9' } }, { action: makeAction('w'), label: { text: 'w' } }, { action: makeAction('x'), label: { text: 'x' } }, { action: makeAction('y'), label: { text: 'y' } }, { action: makeAction('z'), label: { text: 'z' } }] },
+    number0: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: makeAction('0'), label: { text: '0' } }] },
     cn2en: {
       selectedIndex: 1,
       size: { width: 50, height: 53 },
