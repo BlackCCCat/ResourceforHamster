@@ -46,7 +46,7 @@ local getToolBar(theme) =
           subviews: [
             { Cell: 'toolbarButtonPanelStyle' },  // 面板
             // { Cell: 'toolbarButtonOpenAppStyle' },
-            { Cell: 'toolbarButtonLefthandKeyboardStyle' },  // 切换左手键盘
+            // { Cell: 'toolbarButtonLefthandKeyboardStyle' },  // 切换左手键盘
             // { Cell: 'toolbarSlideButtons2' },  // 滑动工具栏 包含 app相关内容
             { Cell: 'toolbarSlideButtons' },  // 滑动工具栏 包含 谷歌搜索、浏览器打开、App Store搜索
             // { Cell: 'toolbarButtonKeyboardSettingsStyle' },  //键盘设置
@@ -64,7 +64,7 @@ local getToolBar(theme) =
             { Cell: 'toolbarButtonNoteStyle' },  // 常用语
             { Cell: 'toolbarButtonClipboardStyle' },  // 剪切板
             // { Cell: 'toolbarButtonKeyboardSelectionStyle' },  // 键盘相关功能，包括收起键盘，切换单手键盘
-            { Cell: 'toolbarButtonRighthandKeyboardStyle' },  // 切换右手键盘
+            // { Cell: 'toolbarButtonRighthandKeyboardStyle' },  // 切换右手键盘
             { Cell: 'toolbarButtonHideStyle' },  // 收起键盘
           ],
         },
@@ -72,7 +72,7 @@ local getToolBar(theme) =
     ],
     toolbarSlideButtons2: {
       type: 'horizontalSymbols',
-      size: { width: '2/9' },
+      size: { width: '2/7' },
       maxColumns: 2,
       contentRightToLeft: false,
       insets: { left: 3, right: 3 },
@@ -92,7 +92,7 @@ local getToolBar(theme) =
 
     toolbarButtonKeyboardSelectionStyle: {
       type: 'horizontalSymbols',
-      size: { width: '1/9' },
+      size: { width: '1/7' },
       maxColumns: 1,
       contentRightToLeft: false,
       insets: { left: 3, right: 3 },
@@ -108,7 +108,7 @@ local getToolBar(theme) =
 
     toolbarSlideButtons: {
       type: 'horizontalSymbols',
-      size: { width: '2/9' },
+      size: { width: '2/7' },
       maxColumns: 2,
       contentRightToLeft: false,
       insets: { left: 3, right: 3 },
