@@ -5,11 +5,9 @@ local fontSize = import '../lib/fontSize.libsonnet';
 local theme = std.extVar('theme');
 
 // key: 按键名称
-local createButton(key, action, sf_symbol, text, theme) = {
+local createButton(key, action, sf_symbol, text, theme, size={ height: '1/2' }) = {
   [key + 'Button']: {
-    size: {
-      height: '1/2',
-    },
+    size: size,
     backgroundStyle: 'ButtonBackgroundStyle',
     foregroundStyle: [
       key + 'ButtonForegroundStyle',
@@ -92,32 +90,100 @@ local keyboard(theme, orientation) =
     '方案管理',
     theme
   ) +
+  (if orientation == 'portrait' then
+     createButton(
+       'LefthandKeyboard',
+       { shortcut: '#左手模式' },
+       'keyboard.onehanded.left.fill',
+       '左手',
+       theme,
+       { height: '1' }
+     ) +
+     createButton(
+       'RighthandKeyboard',
+       { shortcut: '#右手模式' },
+       'keyboard.onehanded.right.fill',
+       '右手',
+       theme,
+       { height: '1' }
+     )
+   else {}) +
   {
-    keyboardLayout: [
-      {
-        HStack: {
-          subviews: [
-            { Cell: 'KeyboardSettingsButton' },
-            { Cell: 'SwitcherButton' },
-            { Cell: 'FinderButton' },
-            { Cell: 'toogleEmbeddedButton' },
-          ],
-        },
-      },
-      {
-        HStack: {
-          subviews: [
-            { Cell: 'SkinButton' },
-            { Cell: 'ScriptButton' },
-            { Cell: 'InputSchemaButton' },
-            { Cell: 'PerformanceButton' },
-          ],
-        },
-      },
-    ],
+    keyboardLayout:
+      if orientation == 'portrait' then
+        [
+          {
+            HStack: {
+              subviews: [
+                {
+                  VStack: {
+                    style: 'panelSideColumnStyle',
+                    subviews: [{ Cell: 'LefthandKeyboardButton' }],
+                  },
+                },
+                {
+                  VStack: {
+                    style: 'panelCenterColumnStyle',
+                    subviews: [
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: 'KeyboardSettingsButton' },
+                            { Cell: 'SwitcherButton' },
+                            { Cell: 'FinderButton' },
+                            { Cell: 'toogleEmbeddedButton' },
+                          ],
+                        },
+                      },
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: 'SkinButton' },
+                            { Cell: 'ScriptButton' },
+                            { Cell: 'InputSchemaButton' },
+                            { Cell: 'PerformanceButton' },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  VStack: {
+                    style: 'panelSideColumnStyle',
+                    subviews: [{ Cell: 'RighthandKeyboardButton' }],
+                  },
+                },
+              ],
+            },
+          },
+        ]
+      else
+        [
+          {
+            HStack: {
+              subviews: [
+                { Cell: 'KeyboardSettingsButton' },
+                { Cell: 'SwitcherButton' },
+                { Cell: 'FinderButton' },
+                { Cell: 'toogleEmbeddedButton' },
+              ],
+            },
+          },
+          {
+            HStack: {
+              subviews: [
+                { Cell: 'SkinButton' },
+                { Cell: 'ScriptButton' },
+                { Cell: 'InputSchemaButton' },
+                { Cell: 'PerformanceButton' },
+              ],
+            },
+          },
+        ],
     floatTargetScale:
       if orientation == 'portrait' then
-        { x: 0.75, y: 0.8 }
+        { x: 0.85, y: 0.8 }
       else
         { x: 0.45, y: 0.8 }
     ,
@@ -126,6 +192,12 @@ local keyboard(theme, orientation) =
       insets: if orientation == 'portrait' then { top: 50, left: 24, bottom: 50, right: 24 }
       else { top: 20, left: 24, bottom: 20, right: 24 },
       backgroundStyle: 'keyboardBackgroundStyle',
+    },
+    panelSideColumnStyle: {
+      size: { width: '1/6' },
+    },
+    panelCenterColumnStyle: {
+      size: { width: '2/3' },
     },
     keyboardBackgroundStyle: {
       // buttonStyleType: 'fileImage',
@@ -146,7 +218,7 @@ local keyboard(theme, orientation) =
 
     ButtonBackgroundStyle: {
       buttonStyleType: 'geometry',
-      insets: { top: 15, left: 3, bottom: 10, right: 3 },
+      insets: { top: 10, left: 3, bottom: 10, right: 3 },
       normalColor: color[theme]['字母键背景颜色-普通'],
       highlightColor: color[theme]['字母键背景颜色-高亮'],
       cornerRadius: Settings.cornerRadius,
