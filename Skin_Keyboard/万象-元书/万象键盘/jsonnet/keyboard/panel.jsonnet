@@ -183,14 +183,13 @@ local keyboard(theme, orientation) =
         ],
     floatTargetScale:
       if orientation == 'portrait' then
-        { x: 0.85, y: 0.8 }
+        { x: 0.8, y: 0.55 }
       else
-        { x: 0.45, y: 0.8 }
+        { x: 0.45, y: 0.65 }
     ,
     // floatKeyboardAlpha: 0.7,
     keyboardStyle: {
-      insets: if orientation == 'portrait' then { top: 50, left: 24, bottom: 50, right: 24 }
-      else { top: 20, left: 24, bottom: 20, right: 24 },
+      insets: { top: 1, left: 1, bottom: 1, right: 1 },
       backgroundStyle: 'keyboardBackgroundStyle',
     },
     panelSideColumnStyle: {
