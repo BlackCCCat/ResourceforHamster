@@ -15,6 +15,7 @@ patch:
     completion: "♾️" # 补全
     abbrev: "🚀" # 简码
     derived: "💡" # 派生
+    fallback: "❕" 
 
   # 开关
   # reset: 默认状态。注释掉后，切换窗口时不会重置到默认状态。
