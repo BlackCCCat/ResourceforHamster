@@ -44,7 +44,6 @@ local getToolBar(theme) =
       {
         HStack: {
           subviews: [
-            { Cell: 'toolbarButtonPanelStyle' },  // 面板
             // { Cell: 'toolbarButtonOpenAppStyle' },
             // { Cell: 'toolbarButtonLefthandKeyboardStyle' },  // 切换左手键盘
             // { Cell: 'toolbarSlideButtons2' },  // 滑动工具栏 包含 app相关内容
@@ -61,6 +60,7 @@ local getToolBar(theme) =
             // { Cell: 'toolbarButtonSymbolStyle' },  // 符号
             // { Cell: 'toolbarButtonEmojiStyle' },  // 表情
             { Cell: 'toolbarButtonScriptStyle' },  // 脚本
+            { Cell: 'toolbarButtonPanelStyle' },  // 面板
             { Cell: 'toolbarButtonNoteStyle' },  // 常用语
             { Cell: 'toolbarButtonClipboardStyle' },  // 剪切板
             // { Cell: 'toolbarButtonKeyboardSelectionStyle' },  // 键盘相关功能，包括收起键盘，切换单手键盘
@@ -340,7 +340,7 @@ local getToolBar(theme) =
     },
     toolbarButtonPanelForegroundStyle: {
       buttonStyleType: 'systemImage',
-      systemImageName: if Settings.fix_sf_symbol then 'bubbles.and.sparkles.fill' else 'swirl.circle.righthalf.filled',
+      systemImageName: 'hexagon.righthalf.filled',
       normalColor: color[theme]['toolbar按键颜色'],
       highlightColor: color[theme]['toolbar按键颜色'],
       fontSize: fontSize['toolbar按键前景sf符号大小'],
@@ -373,7 +373,7 @@ local getToolBar(theme) =
     },
     toolbarButtonScriptForegroundStyle: {
       buttonStyleType: 'systemImage',
-      systemImageName: if Settings.fix_sf_symbol then 'apple.terminal.fill' else 'terminal.fill',
+      systemImageName: if Settings.fix_sf_symbol then 's.circle.fill' else 'peruviansolessign.circle.fill',
       normalColor: color[theme]['toolbar按键颜色'],
       highlightColor: color[theme]['toolbar按键颜色'],
       fontSize: fontSize['toolbar按键前景sf符号大小'],
