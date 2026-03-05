@@ -33,9 +33,11 @@ jobs:
         id: package
         run: |
           set -euo pipefail
+          CURRENT_TAG="${{ github.ref_name }}"
           mkdir -p release
           files=()
           if [ -d "Skin_Keyboard/万象-元书/万象键盘" ]; then
+            printf '%s\n' "$CURRENT_TAG" > "Skin_Keyboard/万象-元书/万象键盘/version.txt"
             (cd "Skin_Keyboard/万象-元书" && zip -r "../../release/wanxiang.zip" "万象键盘")
             mv "release/wanxiang.zip" "release/wanxiang.cskin"
             files+=("release/wanxiang.cskin")
