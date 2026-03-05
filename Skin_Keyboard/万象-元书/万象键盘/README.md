@@ -31,16 +31,18 @@
 
 13. `shift`按键通知动作前景样式，默认为`/`对应的sf symbol，请在`custom/Custom.libsonnet`中修改`preedit_sf_symbol`
 
-14. 关于键盘布局，iOS支持多种布局：9键、14键、18键、26键，可在`custom/Custom.libsonnet`中修改`keyboard_layout`的值
+14. `shift`按键预编辑状态上划操作，默认为`辅助筛选`，如不使用万象pro，想使用分词功能，请在`custom/Custom.libsonnet`中修改`preedit_swipeup_action`为`分词`
 
-15. 候选栏开启展开按钮：可在`custom/Custom.libsonnet`将`showExpandButton`的值改为`true`
+15. 关于键盘布局，iOS支持多种布局：9键、14键、18键、26键，可在`custom/Custom.libsonnet`中修改`keyboard_layout`的值
 
-16. 字母按键字号可独立配置：可在`custom/Custom.libsonnet`中修改`font_size_config`
+16. 候选栏开启展开按钮：可在`custom/Custom.libsonnet`将`showExpandButton`的值改为`true`
+
+17. 字母按键字号可独立配置：可在`custom/Custom.libsonnet`中修改`font_size_config`
    - `pinyin_26_letter_font_size`：26键字母按键字号
    - `pinyin_14_18_letter_font_size`：14键/18键字母按键字号
    - `pinyin_9_letter_font_size`：9键字母按键字号
-
-17. 工具栏搜索引擎可选：可在`custom/Custom.libsonnet`中修改`toolbar_search_engine`
+      
+18. 工具栏搜索引擎可选：可在`custom/Custom.libsonnet`中修改`toolbar_search_engine`
    - 可选值：`google`、`baidu`、`bing`
    - 影响范围：iPhone/iPad 工具栏中的搜索按钮
 
