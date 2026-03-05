@@ -27,7 +27,7 @@ local Settings = import '../Custom.libsonnet';
       backgroundStyle: 'systemButtonBackgroundStyle',
       foregroundStyle: 'shiftButtonPreeditForegroundStyle',
       action: Settings.shift_config.preedit_action,
-      swipeUpAction: { character: "'" },
+      swipeUpAction: if Settings.keyboard_layout == 26 && Settings.shift_config.preedit_swipeup_action == '辅助筛选' then { character: '`' } else { character: "'" },
     },
     shiftButtonPreeditForegroundStyle: {
       buttonStyleType: 'systemImage',
@@ -375,7 +375,7 @@ local Settings = import '../Custom.libsonnet';
       backgroundStyle: 'alphabeticBackgroundStyle',
       foregroundStyle: 'spaceRightButtonPreeditForegroundStyle',
       action: Settings.tips_button_action,
-      swipeUpAction: {character: '.'}, 
+      swipeUpAction: { character: '.' },
       hintSymbolsStyle: 'cn2enButtonHintSymbolsStyle',
     },
     spaceRightButtonPreeditForegroundStyle: {
