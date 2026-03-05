@@ -44,7 +44,7 @@ local getToolBar(theme) =
       {
         HStack: {
           subviews: [
-            // { Cell: 'toolbarButtonOpenAppStyle' },
+            // { Cell: 'toolbarButtonOpenAppMenuStyle' },
             // { Cell: 'toolbarButtonLefthandKeyboardStyle' },  // 切换左手键盘
             // { Cell: 'toolbarSlideButtons2' },  // 滑动工具栏 包含 app相关内容
             { Cell: 'toolbarSlideButtons' },  // 滑动工具栏 包含 谷歌搜索、浏览器打开、App Store搜索
@@ -60,7 +60,7 @@ local getToolBar(theme) =
             // { Cell: 'toolbarButtonSymbolStyle' },  // 符号
             // { Cell: 'toolbarButtonEmojiStyle' },  // 表情
             { Cell: 'toolbarButtonScriptStyle' },  // 脚本
-            { Cell: 'toolbarButtonPanelStyle' },  // 面板
+            { Cell: if Settings.toolbar_menu then 'toolbarButtonOpenAppMenuStyle' else 'toolbarButtonPanelStyle' },  // 面板 或 app菜单
             { Cell: 'toolbarButtonNoteStyle' },  // 常用语
             { Cell: 'toolbarButtonClipboardStyle' },  // 剪切板
             // { Cell: 'toolbarButtonKeyboardSelectionStyle' },  // 键盘相关功能，包括收起键盘，切换单手键盘
@@ -82,7 +82,7 @@ local getToolBar(theme) =
       cellStyle: 'toolbarcollectionCellStyle',
     },
     horizontalSymbolsDataSource2: [
-      { label: '0', action: { openURL: 'hamster3://' }, styleName: 'toolbarButtonOpenAppStyle' },
+      { label: '0', action: { openURL: 'hamster3://' }, styleName: 'toolbarButtonOpenAppMenuStyle' },
       { label: '1', action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSettings' }, styleName: 'toolbarButtonKeyboardSettingsStyle' },
       { label: '2', action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSkins' }, styleName: 'toolbarButtonKeyboardSkinsStyle' },
       { label: '5', action: { shortcut: '#keyboardPerformance' }, styleName: 'toolbarButtonKeyboardPerformanceStyle' },
@@ -313,18 +313,17 @@ local getToolBar(theme) =
       // center: center['toolbar按键文字偏移'],
       fontWeight: 'medium',
     },
-    toolbarButtonOpenAppStyle: {
+    toolbarButtonOpenAppMenuStyle: {
       backgroundStyle: 'toolbarButtonBackgroundStyle',
-      foregroundStyle: 'toolbarButtonOpenAppForegroundStyle',
-      // action: {
-      //   // floatKeyboardType: 'panel',
-      //   openURL: 'hamster3://',
-      // },
+      foregroundStyle: 'toolbarButtonOpenAppMenuForegroundStyle',
+      action: {
+        shortcut: '#keyboardMenu',
+      },
     },
 
-    toolbarButtonOpenAppForegroundStyle: {
+    toolbarButtonOpenAppMenuForegroundStyle: {
       buttonStyleType: 'systemImage',
-      systemImageName: if Settings.fix_sf_symbol then 'bubbles.and.sparkles.fill' else 'swirl.circle.righthalf.filled',
+      systemImageName: 'hexagon.righthalf.filled',
       normalColor: color[theme]['toolbar按键颜色'],
       highlightColor: color[theme]['toolbar按键颜色'],
       fontSize: fontSize['toolbar按键前景sf符号大小'],

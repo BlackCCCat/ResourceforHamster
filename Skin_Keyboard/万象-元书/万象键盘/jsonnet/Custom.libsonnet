@@ -96,4 +96,7 @@
   // 工具栏搜索引擎
   // 可选值: 'google' 'baidu' 'bing'
   toolbar_search_engine: 'google',
+
+  // 工具栏菜单是否启用键盘菜单页面（否则使用皮肤内置的悬浮键盘，若菜单功能需在app内自行配置）
+  toolbar_menu: false,
 }

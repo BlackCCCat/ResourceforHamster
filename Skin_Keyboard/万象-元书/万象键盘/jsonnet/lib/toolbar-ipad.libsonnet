@@ -28,7 +28,7 @@ local searchCellStyle = searchCellStyleMap[searchEngine];
       {
         HStack: {
           subviews: [
-            { Cell: 'toolbarButtonOpenAppStyle' },
+            { Cell: 'toolbarButtonOpenAppMenuStyle' },
             { Cell: 'toolbarButtonKeyboardSettingsStyle' },
             { Cell: 'toolbarButtonKeyboardSkinsStyle' },
             { Cell: 'toolbarButtonKeyboardPerformanceStyle' },
@@ -47,8 +47,8 @@ local searchCellStyle = searchCellStyleMap[searchEngine];
     ],
 
     // 为平铺的按钮补充 action 定义（原文件中这些按钮可能只在 dataSource 中定义了 action）
-    toolbarButtonOpenAppStyle+: {
-      action: { openURL: 'hamster3://' },
+    toolbarButtonOpenAppMenuStyle+: {
+      action: { shortcut: '#keyboardMenu' },
     },
     toolbarButtonKeyboardSettingsStyle+: {
       action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSettings' },

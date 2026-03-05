@@ -46,6 +46,10 @@
    - 可选值：`google`、`baidu`、`bing`
    - 影响范围：iPhone/iPad 工具栏中的搜索按钮
 
+19. 工具栏菜单可选：可在`custom/Custom.libsonnet`中修改`toolbar_menu`
+   - 可选值：`true`、`false`，默认`false`，为关闭，此时使用皮肤内置的浮动键盘
+   - 影响范围：iPhone 工具栏中的菜单按钮
+
 # 获取更新
 请到ResourceforHamster(`https://github.com/BlackCCCat/ResourceforHamster`)获取可能的更新，或者通过快捷指令(https://www.icloud.com/shortcuts/c541ddb2a1614732b2c9fde38bb89be6)自动下载最新版本并导入到元书输入法中
 
