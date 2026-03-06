@@ -190,7 +190,7 @@ patch:
     - { when: always, toggle: chinese_english, accept: Control+e } # 切换翻译功能
     - { when: always, toggle: s2s, accept: Control+Shift+4 } # 切换简繁
     - { when: always, toggle: super_tips, accept: Control+t } # 切换超级提示
-    - { when: always, toggle: mixed, accept: Control+q } # 切换混输
+    - { when: always, toggle: abbrev, accept: Control+q } # 切换混输
 
   # 快符功能：
   # a/、单字母组合，触发预设编码自动上屏快符，支持将值设为"repeat" 以支持对应按键重复上屏功能，custom>schema>lua最终合并键值
