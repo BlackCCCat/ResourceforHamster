@@ -1,3 +1,9 @@
+# 符合条件的键盘文件
+# #符号为注释
+# 其余内容一行为一个正则表达式
+
 ^.*[.]userdb.*$
-^(?!.*(include_keyboard_rime_files|custom_phrase(_double)?)\.txt$).+\.txt$
+^(?!.*(include_keyboard_rime_files\.txt|version\.txt)$)(?!.*custom_phrase_double\.txt$).+\.txt$
+# 不会patch的可以取消下面一行的注释
+# ^.*[.]custom.*$
 [\/]lua[\/].*userdb.*$

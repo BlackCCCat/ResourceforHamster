@@ -17,7 +17,7 @@ patch:
     completion: "♾️" # 补全
     abbrev: "🚀" # 简码
     derived: "💡" # 派生
-    fallback: "❕" 
+    fallback: "❕"
 
   # 输入引擎
   engine/processors/@before 1: lua_processor@*select_character # 以词定字，有了辅助码了，想开启可以注释掉
@@ -58,9 +58,76 @@ patch:
       reset: 1
     - name: char_priority #多体现在编码重合但候选有单字或者多字的情况`引导的辅码查词时是否单字优先，全拼常见，类似于特定编码情况下、反查状态下的调序能力。归属：super_lookup.lua
       states: [词组先, 单字先]
-    - options: [abbrev_off, abbrev_lazy, abbrev_always]
-      states: [简码关, 空出简, 总出简]
+    - name: abbrev
+      states: [简码关, 简码开]
       reset: 1
+
+  super_replacer:
+    db_name: lua/replacer
+    delimiter: "|"
+    comment_format: "〔%s〕"
+    chain: true #true表示流水线作业，上一个option产出交给下一个处理，典型的s2t>t2hk=s2hk，false就是并行，直接用text转换
+    types:
+      # 场景1：输入 '哈哈' -> 变成 '1.哈哈 2.😄'
+      - option: emoji # 开关名称与上面开关名称保持一致
+        mode: append # 新增候选append 替换原候选replace 替换注释comment 简码模式abbrev匹配输入编码置顶词组
+        comment_mode: none # 注释模式: "append"(原候选注释继承), "text"(原候选文本放在注释), "none"(空，默认)
+        tags: [abc] # 生效的tag
+        prefix: "_em_" # 前缀用于区分同一个数据库的不同用途数据
+        files:
+          - lua/data/emoji.txt
+      # 场景2：输入 'hello' -> 显示 'hello 〔你好 | 哈喽〕'
+      - option: chinese_english
+        mode: append # <--- 添加注释模式
+        comment_mode: none
+        tags: [abc]
+        prefix: "_en_"
+        files:
+          - lua/data/english_chinese.txt
+          - lua/data/chinese_english.txt
+      # 场景3：用于常驻的直接替换 option: true
+      - option: true
+        mode: append # <--- 新增候选模式
+        comment_mode: none
+        tags: [abc]
+        prefix: "_ot_"
+        files:
+          - lua/data/others.txt
+      # 场景4：用于简繁转换的直接替换
+      - option: [s2t, s2hk, s2tw] #后面依赖这条流水线有一个开关为true这条流水线就能工作
+        mode: replace # <--- 替换原候选模式
+        comment_mode: append
+        sentence: true # <--- 句子级别替换
+        tags: [abc]
+        prefix: "_s2t_"
+        files:
+          - lua/data/STCharacters.txt
+          - lua/data/STPhrases.txt
+      - option: s2hk
+        mode: replace # <--- 替换原候选模式
+        comment_mode: append
+        sentence: true # <--- 句子级别替换
+        tags: [abc]
+        prefix: "_s2hk_"
+        files:
+          - lua/data/HKVariants.txt
+      - option: s2tw
+        mode: replace # <--- 替换原候选模式
+        comment_mode: append
+        sentence: true # <--- 句子级别替换
+        tags: [abc]
+        prefix: "_s2tw_"
+        files:
+          - lua/data/TWVariants.txt
+      - option: abbrev # 对应上面开关名称
+        mode: abbrev
+        prefix: "_abbr_"
+        abbrev_rule: "1,6"
+        # 前置数量1，前置位置6,数量说的是你维护得数据库编码后面分割了几个词前几个要前置显示,位置说的是你要前置到第二候选还是第几
+        # 然后空码或只有英文等自定义词组的时候直接全部兜底显示,这个新的设计简化的应用层面,我们只需要维护一个数据库即可.
+        files:
+          - lua/data/abbrev.txt
+          - lua/data/chengyu.txt
 
   # 以下两个bool防止表情和翻译下面出现辅助码
   emoji/+:
