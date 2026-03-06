@@ -163,18 +163,13 @@ local Settings = import '../Custom.libsonnet';
       foregroundStyle: [
         {
           styleName: 'cn2enButtonHintSymbolsForegroundStyleOf8',
-          conditionKey: 'rime$abbrev_off',
+          conditionKey: 'rime$abbrev',
           conditionValue: 'true',
         },
         {
           styleName: 'cn2enButtonHintSymbolsForegroundStyleOf9',
-          conditionKey: 'rime$abbrev_lazy',
-          conditionValue: 'true',
-        },
-        {
-          styleName: 'cn2enButtonHintSymbolsForegroundStyleOf10',
-          conditionKey: 'rime$abbrev_always',
-          conditionValue: 'true',
+          conditionKey: 'rime$abbrev',
+          conditionValue: 'false',
         },
       ],
     },

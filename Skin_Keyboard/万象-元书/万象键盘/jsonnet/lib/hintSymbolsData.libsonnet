@@ -255,9 +255,8 @@ local makeAction(instance) =
         { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },
         { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },
         { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '简开' } },
         { action: { sendKeys: 'Control+q' }, label: { text: '简关' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '空简' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '出简' } },
         { action: { sendKeys: 'Control+c' }, label: { text: '拆分' } },
         { action: { sendKeys: 'Control+c' }, label: { text: '拆关' } },
       ],
@@ -307,9 +306,8 @@ local makeAction(instance) =
         { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },  //5
         { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },  //6*
         { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },  //7
+        { action: { sendKeys: 'Control+q' }, label: { text: '简开' } },
         { action: { sendKeys: 'Control+q' }, label: { text: '简关' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '空简' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '出简' } },
       ],
     },
   },
@@ -504,9 +502,8 @@ local makeAction(instance) =
         { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },  //5
         { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },
         { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '简开' } },
         { action: { sendKeys: 'Control+q' }, label: { text: '简关' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '空简' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '出简' } },
       ],
     },
     enter: {
@@ -685,9 +682,8 @@ local makeAction(instance) =
         { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },  //5
         { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },
         { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: '简开' } },
         { action: { sendKeys: 'Control+q' }, label: { text: '简关' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '空简' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '出简' } },
       ],
     },
     enter: {
