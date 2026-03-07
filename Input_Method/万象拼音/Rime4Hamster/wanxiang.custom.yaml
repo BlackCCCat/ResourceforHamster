@@ -22,7 +22,7 @@ patch:
     completion: "♾️" # 补全
     abbrev: "🚀" # 简码
     derived: "💡" # 派生
-    fallback: "❕"
+    fallback: "❗"
 
   #在8105基础上你可以通过黑白名单微调你自己的字符集过滤清单，主数据库位于lua/charset.bin不可编辑
   charsetlist: [你]

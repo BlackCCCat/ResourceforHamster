@@ -17,7 +17,7 @@ patch:
     completion: "♾️" # 补全
     abbrev: "🚀" # 简码
     derived: "💡" # 派生
-    fallback: "❕"
+    fallback: "❗"
 
   # 输入引擎
   engine/processors/@before 1: lua_processor@*select_character # 以词定字，有了辅助码了，想开启可以注释掉

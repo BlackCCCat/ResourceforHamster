@@ -10,7 +10,7 @@ patch:
     completion: "♾️" # 补全
     abbrev: "🚀" # 简码
     derived: "💡" # 派生
-    fallback: "❕"
+    fallback: "❗"
 
   speller/algebra:
     __patch:
