@@ -3,11 +3,6 @@ local center = import 'center.libsonnet';
 local color = import 'color.libsonnet';
 local fontSize = import 'fontSize.libsonnet';
 
-local toolbarSearchEngine = if std.objectHas(Settings, 'toolbar_search_engine') then Settings.toolbar_search_engine else 'google';
-local searchEngine =
-  if std.member(['google', 'baidu', 'bing'], toolbarSearchEngine) then toolbarSearchEngine
-  else 'google';
-
 local searchOpenURLMap = {
   google: 'https://www.google.com/search?q=#pasteboardContent',
   baidu: 'https://www.baidu.com/s?wd=#pasteboardContent',
@@ -20,8 +15,179 @@ local searchStyleNameMap = {
   bing: 'toolbarButtonBingStyle',
 };
 
-local searchOpenURL = searchOpenURLMap[searchEngine];
-local searchStyleName = searchStyleNameMap[searchEngine];
+local toolbarConfig = if std.objectHas(Settings, 'toolbar_config') then Settings.toolbar_config else {};
+local toolbarMenu =
+  if std.objectHas(toolbarConfig, 'toolbar_menu') then toolbarConfig.toolbar_menu else false;
+local toolbarMode =
+  if std.objectHas(toolbarConfig, 'mode') && std.member(['segmented', 'carousel'], toolbarConfig.mode) then
+    toolbarConfig.mode
+  else
+    'segmented';
+
+local segmentedConfig =
+  if std.objectHas(toolbarConfig, 'segmented') then toolbarConfig.segmented else {};
+local carouselConfig =
+  if std.objectHas(toolbarConfig, 'carousel') then toolbarConfig.carousel else {};
+
+local toolbarButtonRegistry = {
+  script: {
+    cellName: 'toolbarButtonScriptStyle',
+    slideStyleName: 'toolbarButtonScriptStyle',
+    action: { shortcutCommand: '#toggleScriptView' },
+  },
+  note: {
+    cellName: 'toolbarButtonNoteStyle',
+    slideStyleName: 'toolbarButtonNoteStyle',
+    action: { shortcutCommand: '#showPhraseView' },
+  },
+  clipboard: {
+    cellName: 'toolbarButtonClipboardStyle',
+    slideStyleName: 'toolbarButtonClipboardStyle',
+    action: { shortcutCommand: '#showPasteboardView' },
+  },
+  hide: {
+    cellName: 'toolbarButtonHideStyle',
+    slideStyleName: 'toolbarButtonHideStyle',
+    action: 'dismissKeyboard',
+  },
+  menu_or_panel: {
+    cellName: if toolbarMenu then 'toolbarButtonOpenAppMenuStyle' else 'toolbarButtonPanelStyle',
+    slideStyleName: if toolbarMenu then 'toolbarButtonOpenAppMenuStyle' else 'toolbarButtonPanelStyle',
+    action: if toolbarMenu then { shortcut: '#keyboardMenu' } else { floatKeyboardType: 'panel' },
+  },
+  google: {
+    cellName: 'toolbarButtonGoogleStyle',
+    slideStyleName: searchStyleNameMap.google,
+    action: { openURL: searchOpenURLMap.google },
+  },
+  baidu: {
+    cellName: 'toolbarButtonBaiduStyle',
+    slideStyleName: searchStyleNameMap.baidu,
+    action: { openURL: searchOpenURLMap.baidu },
+  },
+  bing: {
+    cellName: 'toolbarButtonBingStyle',
+    slideStyleName: searchStyleNameMap.bing,
+    action: { openURL: searchOpenURLMap.bing },
+  },
+  safari: {
+    cellName: 'toolbarButtonSafariStyle',
+    slideStyleName: 'toolbarButtonSafariStyle',
+    action: { openURL: '#pasteboardContent' },
+  },
+  apple: {
+    cellName: 'toolbarButtonAppleStyle',
+    slideStyleName: 'toolbarButtonAppleStyle',
+    action: { openURL: 'itms-apps://search.itunes.apple.com/WebObjects/MZSearch.woa/wa/search?media=software&term=#pasteboardContent' },
+  },
+  keyboard_settings: {
+    cellName: 'toolbarButtonKeyboardSettingsStyle',
+    slideStyleName: 'toolbarButtonKeyboardSettingsStyle',
+    action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSettings' },
+  },
+  keyboard_skins: {
+    cellName: 'toolbarButtonKeyboardSkinsStyle',
+    slideStyleName: 'toolbarButtonKeyboardSkinsStyle',
+    action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSkins' },
+  },
+  keyboard_performance: {
+    cellName: 'toolbarButtonKeyboardPerformanceStyle',
+    slideStyleName: 'toolbarButtonKeyboardPerformanceStyle',
+    action: { shortcut: '#keyboardPerformance' },
+  },
+  rime_switcher: {
+    cellName: 'toolbarButtonRimeSwitcherStyle',
+    slideStyleName: 'toolbarButtonRimeSwitcherStyle',
+    action: { shortcut: '#RimeSwitcher' },
+  },
+  embedding_toggle: {
+    cellName: 'toolbarButtonEmbeddingToggleStyle',
+    slideStyleName: 'toolbarButtonEmbeddingToggleStyle',
+    action: { shortcut: '#toggleEmbeddedInputMode' },
+  },
+  symbol: {
+    cellName: 'toolbarButtonSymbolStyle',
+    slideStyleName: 'toolbarButtonSymbolStyle',
+    action: { keyboardType: 'symbolic' },
+  },
+  emoji: {
+    cellName: 'toolbarButtonEmojiStyle',
+    slideStyleName: 'toolbarButtonEmojiStyle',
+    action: { keyboardType: 'emojis' },
+  },
+  left_hand: {
+    cellName: 'toolbarButtonLefthandKeyboardStyle',
+    slideStyleName: 'toolbarButtonLefthandKeyboardStyle',
+    action: { shortcut: '#左手模式' },
+  },
+  right_hand: {
+    cellName: 'toolbarButtonRighthandKeyboardStyle',
+    slideStyleName: 'toolbarButtonRighthandKeyboardStyle',
+    action: { shortcut: '#右手模式' },
+  },
+  switch_keyboard: {
+    cellName: 'toolbarButtonswitchKeyboardStyle',
+    slideStyleName: 'toolbarButtonswitchKeyboardStyle',
+    action: { keyboardType: 'alphabetic' },
+  },
+};
+
+local getToolbarId(value, fallback) =
+  if std.type(value) == 'string' && std.objectHas(toolbarButtonRegistry, value) then value else fallback;
+
+local getToolbarIds(values, fallback) =
+  local source = if std.type(values) == 'array' then values else fallback;
+  local result = [
+    value
+    for value in source
+    if std.type(value) == 'string' && std.objectHas(toolbarButtonRegistry, value)
+  ];
+  if std.length(result) > 0 then result else fallback;
+
+local segmentedResolved = {
+  left_fixed: getToolbarId(
+    if std.objectHas(segmentedConfig, 'left_fixed') then segmentedConfig.left_fixed else null,
+    'script'
+  ),
+  left_slide: getToolbarIds(
+    if std.objectHas(segmentedConfig, 'left_slide') then segmentedConfig.left_slide else [],
+    ['google', 'safari', 'apple']
+  ),
+  center_fixed: getToolbarId(
+    if std.objectHas(segmentedConfig, 'center_fixed') then segmentedConfig.center_fixed else null,
+    'menu_or_panel'
+  ),
+  right_slide: getToolbarIds(
+    if std.objectHas(segmentedConfig, 'right_slide') then segmentedConfig.right_slide else [],
+    ['note', 'clipboard']
+  ),
+  right_fixed: getToolbarId(
+    if std.objectHas(segmentedConfig, 'right_fixed') then segmentedConfig.right_fixed else null,
+    'hide'
+  ),
+};
+
+local carouselResolved = {
+  left_fixed: getToolbarId(
+    if std.objectHas(carouselConfig, 'left_fixed') then carouselConfig.left_fixed else null,
+    'menu_or_panel'
+  ),
+  center_slide: getToolbarIds(
+    if std.objectHas(carouselConfig, 'center_slide') then carouselConfig.center_slide else [],
+    ['script', 'google', 'note', 'clipboard', 'keyboard_settings']
+  ),
+  right_fixed: getToolbarId(
+    if std.objectHas(carouselConfig, 'right_fixed') then carouselConfig.right_fixed else null,
+    'hide'
+  ),
+};
+
+local makeToolbarCell(id) = { Cell: toolbarButtonRegistry[id].cellName };
+local makeSlideItem(id, index) = {
+  label: std.toString(index),
+  action: toolbarButtonRegistry[id].action,
+  styleName: toolbarButtonRegistry[id].slideStyleName,
+};
 
 
 local getToolBar(theme) =
@@ -43,30 +209,21 @@ local getToolBar(theme) =
     toolbarLayout: [
       {
         HStack: {
-          subviews: [
-            // { Cell: 'toolbarButtonOpenAppMenuStyle' },
-            // { Cell: 'toolbarButtonLefthandKeyboardStyle' },  // 切换左手键盘
-            // { Cell: 'toolbarSlideButtons2' },  // 滑动工具栏 包含 app相关内容
-            { Cell: 'toolbarSlideButtons' },  // 滑动工具栏 包含 谷歌搜索、浏览器打开、App Store搜索
-            // { Cell: 'toolbarButtonKeyboardSettingsStyle' },  //键盘设置
-            // { Cell: 'toolbarButtonRimeSwitcherStyle' },  // 方案
-            // { Cell: 'toolbarButtonEmbeddingToggleStyle' },  //内嵌开关
-            // { Cell: 'toolbarButtonswitchKeyboardStyle'},  // 切换中英键盘
-            // { Cell: 'toolbarButtonUndoStyle' },  // 撤销
-            // { Cell: 'toolbarButtonRedoStyle' },  //重做
-            // { Cell: 'toolbarButtonAppleStyle' },  // App Store搜索
-            // { Cell: 'toolbarButtonGoogleStyle' },  // 谷歌搜索
-            // { Cell: 'toolbarButtonSafariStyle' },  // 浏览器打开
-            // { Cell: 'toolbarButtonSymbolStyle' },  // 符号
-            // { Cell: 'toolbarButtonEmojiStyle' },  // 表情
-            { Cell: 'toolbarButtonScriptStyle' },  // 脚本
-            { Cell: if Settings.toolbar_menu then 'toolbarButtonOpenAppMenuStyle' else 'toolbarButtonPanelStyle' },  // 面板 或 app菜单
-            { Cell: 'toolbarButtonNoteStyle' },  // 常用语
-            { Cell: 'toolbarButtonClipboardStyle' },  // 剪切板
-            // { Cell: 'toolbarButtonKeyboardSelectionStyle' },  // 键盘相关功能，包括收起键盘，切换单手键盘
-            // { Cell: 'toolbarButtonRighthandKeyboardStyle' },  // 切换右手键盘
-            { Cell: 'toolbarButtonHideStyle' },  // 收起键盘
-          ],
+          subviews:
+            if toolbarMode == 'carousel' then
+              [
+                makeToolbarCell(carouselResolved.left_fixed),
+                { Cell: 'toolbarSlideButtonsCenter' },
+                makeToolbarCell(carouselResolved.right_fixed),
+              ]
+            else
+              [
+                makeToolbarCell(segmentedResolved.left_fixed),
+                { Cell: 'toolbarSlideButtonsLeft' },
+                makeToolbarCell(segmentedResolved.center_fixed),
+                { Cell: 'toolbarSlideButtonsRight' },
+                makeToolbarCell(segmentedResolved.right_fixed),
+              ],
         },
       },
     ],
@@ -106,15 +263,35 @@ local getToolBar(theme) =
       { label: '0', action: { shortcut: '#左手模式' }, styleName: 'toolbarButtonLefthandKeyboardStyle' },
     ],
 
-    toolbarSlideButtons: {
+    toolbarSlideButtonsLeft: {
       type: 'horizontalSymbols',
       size: { width: '2/7' },
       maxColumns: 2,
       contentRightToLeft: false,
       insets: { left: 3, right: 3 },
       backgroundStyle: 'toolbarcollectionCellBackgroundStyle',
-      dataSource: 'horizontalSymbolsDataSource',
+      dataSource: 'horizontalSymbolsDataSourceLeft',
       // 用于定义符号列表中每个符号的样式(仅支持文本)
+      cellStyle: 'toolbarcollectionCellStyle',
+    },
+    toolbarSlideButtonsRight: {
+      type: 'horizontalSymbols',
+      size: { width: '2/7' },
+      maxColumns: 2,
+      contentRightToLeft: false,
+      insets: { left: 3, right: 3 },
+      backgroundStyle: 'toolbarcollectionCellBackgroundStyle',
+      dataSource: 'horizontalSymbolsDataSourceRight',
+      cellStyle: 'toolbarcollectionCellStyle',
+    },
+    toolbarSlideButtonsCenter: {
+      type: 'horizontalSymbols',
+      size: { width: '5/7' },
+      maxColumns: 5,
+      contentRightToLeft: false,
+      insets: { left: 3, right: 3 },
+      backgroundStyle: 'toolbarcollectionCellBackgroundStyle',
+      dataSource: 'horizontalSymbolsDataSourceCenter',
       cellStyle: 'toolbarcollectionCellStyle',
     },
     toolbarcollectionCellStyle: {
@@ -129,10 +306,17 @@ local getToolBar(theme) =
       buttonStyleType: 'geometry',
       normalColor: color[theme]['按键前景颜色'],
     },
-    horizontalSymbolsDataSource: [
-      { label: '6', action: { openURL: searchOpenURL }, styleName: searchStyleName },
-      { label: '7', action: { openURL: '#pasteboardContent' }, styleName: 'toolbarButtonSafariStyle' },
-      { label: '5', action: { openURL: 'itms-apps://search.itunes.apple.com/WebObjects/MZSearch.woa/wa/search?media=software&term=#pasteboardContent' }, styleName: 'toolbarButtonAppleStyle' },
+    horizontalSymbolsDataSourceLeft: [
+      makeSlideItem(segmentedResolved.left_slide[i], i)
+      for i in std.range(0, std.length(segmentedResolved.left_slide) - 1)
+    ],
+    horizontalSymbolsDataSourceRight: [
+      makeSlideItem(segmentedResolved.right_slide[i], i)
+      for i in std.range(0, std.length(segmentedResolved.right_slide) - 1)
+    ],
+    horizontalSymbolsDataSourceCenter: [
+      makeSlideItem(carouselResolved.center_slide[i], i)
+      for i in std.range(0, std.length(carouselResolved.center_slide) - 1)
     ],
 
 
@@ -382,7 +566,7 @@ local getToolBar(theme) =
     toolbarButtonEmojiStyle: {
       backgroundStyle: 'toolbarButtonBackgroundStyle',
       foregroundStyle: 'toolbarButtonEmojiForegroundStyle',
-      action: { keyboardType: 'emoji' },
+      action: { keyboardType: 'emojis' },
     },
     toolbarButtonEmojiForegroundStyle: {
       buttonStyleType: 'systemImage',
@@ -427,9 +611,7 @@ local getToolBar(theme) =
     toolbarButtonSafariStyle: {
       backgroundStyle: 'toolbarButtonBackgroundStyle',
       foregroundStyle: 'toolbarButton5ForegroundStyle',
-      // action: {
-      //   openURL: '#pasteboardContent',
-      // },
+      action: { openURL: '#pasteboardContent' },
     },
     toolbarButton5ForegroundStyle: {
       buttonStyleType: 'systemImage',
@@ -444,9 +626,7 @@ local getToolBar(theme) =
     toolbarButtonAppleStyle: {
       backgroundStyle: 'toolbarButtonBackgroundStyle',
       foregroundStyle: 'toolbarButton6ForegroundStyle',
-      // action: {
-      //   openURL: 'itms-apps://search.itunes.apple.com/WebObjects/MZSearch.woa/wa/search?media=software&term=#pasteboardContent',
-      // },
+      action: { openURL: 'itms-apps://search.itunes.apple.com/WebObjects/MZSearch.woa/wa/search?media=software&term=#pasteboardContent' },
     },
     toolbarButton6ForegroundStyle: {
       buttonStyleType: 'systemImage',
@@ -460,17 +640,17 @@ local getToolBar(theme) =
     toolbarButtonGoogleStyle: {
       backgroundStyle: 'toolbarButtonBackgroundStyle',
       foregroundStyle: 'toolbarButton7ForegroundStyle',
-      // action: {
-      //   openURL: 'https://www.google.com/search?q=#pasteboardContent',
-      // },
+      action: { openURL: 'https://www.google.com/search?q=#pasteboardContent' },
     },
     toolbarButtonBaiduStyle: {
       backgroundStyle: 'toolbarButtonBackgroundStyle',
       foregroundStyle: 'toolbarButtonBaiduForegroundStyle',
+      action: { openURL: 'https://www.baidu.com/s?wd=#pasteboardContent' },
     },
     toolbarButtonBingStyle: {
       backgroundStyle: 'toolbarButtonBackgroundStyle',
       foregroundStyle: 'toolbarButtonBingForegroundStyle',
+      action: { openURL: 'https://www.bing.com/search?q=#pasteboardContent' },
     },
     toolbarButton7ForegroundStyle: {
       buttonStyleType: 'systemImage',
@@ -532,9 +712,7 @@ local getToolBar(theme) =
     toolbarButtonRimeSwitcherStyle: {
       backgroundStyle: 'toolbarButtonBackgroundStyle',
       foregroundStyle: 'toolbarButtonRimeSwitcherForegroundStyle',
-      // action: {
-      //   shortcut: '#RimeSwitcher',
-      // },
+      action: { shortcut: '#RimeSwitcher' },
     },
     toolbarButtonRimeSwitcherForegroundStyle: {
       buttonStyleType: 'systemImage',
@@ -548,9 +726,7 @@ local getToolBar(theme) =
     toolbarButtonEmbeddingToggleStyle: {
       backgroundStyle: 'toolbarButtonBackgroundStyle',
       foregroundStyle: 'toolbarButtonEmbeddingToggleForegroundStyle',
-      // action: {
-      //   shortcut: '#toggleEmbeddedInputMode',
-      // },
+      action: { shortcut: '#toggleEmbeddedInputMode' },
     },
     toolbarButtonEmbeddingToggleForegroundStyle: {
       buttonStyleType: 'systemImage',
@@ -564,9 +740,7 @@ local getToolBar(theme) =
     toolbarButtonKeyboardSettingsStyle: {
       backgroundStyle: 'toolbarButtonBackgroundStyle',
       foregroundStyle: 'toolbarButtonKeyboardSettingsForegroundStyle',
-      // action: {
-      //   openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSettings',
-      // },
+      action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSettings' },
     },
     toolbarButtonKeyboardSettingsForegroundStyle: {
       buttonStyleType: 'systemImage',
@@ -580,6 +754,7 @@ local getToolBar(theme) =
     toolbarButtonKeyboardSkinsStyle: {
       backgroundStyle: 'toolbarButtonBackgroundStyle',
       foregroundStyle: 'toolbarButtonKeyboardSkinsForegroundStyle',
+      action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSkins' },
     },
     toolbarButtonKeyboardSkinsForegroundStyle: {
       buttonStyleType: 'systemImage',
@@ -593,6 +768,7 @@ local getToolBar(theme) =
     toolbarButtonKeyboardPerformanceStyle: {
       backgroundStyle: 'toolbarButtonBackgroundStyle',
       foregroundStyle: 'toolbarButtonKeyboardPerformanceForegroundStyle',
+      action: { shortcut: '#keyboardPerformance' },
     },
     toolbarButtonKeyboardPerformanceForegroundStyle: {
       buttonStyleType: 'systemImage',

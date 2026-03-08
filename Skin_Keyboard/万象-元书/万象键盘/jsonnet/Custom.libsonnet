@@ -93,10 +93,116 @@
   // 是否开启候选栏展开按钮
   showExpandButton: false,
 
-  // 工具栏搜索引擎
-  // 可选值: 'google' 'baidu' 'bing'
-  toolbar_search_engine: 'google',
+  // 工具栏布局配置
+  toolbar_config: {
+    // 是否启用键盘菜单页面
+    // false: 使用皮肤内置的悬浮键盘
+    // true: 使用 app 的 keyboardMenu
+    toolbar_menu: false,
 
-  // 工具栏菜单是否启用键盘菜单页面（否则使用皮肤内置的悬浮键盘，若菜单功能需在app内自行配置）
-  toolbar_menu: false,
+    // segmented:
+    // 固定按钮 + 左侧横向滑动 + 固定中间按钮 + 右侧横向滑动 + 固定收起按钮
+    //
+    // carousel:
+    // 固定首按钮 + 中间整体横向滑动 + 固定尾按钮
+    mode: 'segmented',
+
+    // 可用按钮 ID:
+    // script: 脚本
+    // note: 常用语
+    // clipboard: 剪切板
+    // hide: 收起键盘
+    // menu_or_panel: 键盘菜单或浮动键盘
+    // google: Google 搜索
+    // baidu: 百度搜索
+    // bing: Bing 搜索
+    // safari: 浏览器打开剪切板内容
+    // apple: App Store 搜索
+    // keyboard_settings: 键盘设置
+    // keyboard_skins: 皮肤管理
+    // keyboard_performance: 内存占用
+    // rime_switcher: 方案切换
+    // embedding_toggle: 内嵌开关
+    // symbol: 符号键盘
+    // emoji: 表情键盘
+    // left_hand: 左手键盘
+    // right_hand: 右手键盘
+    // switch_keyboard: 切换手机键盘
+
+    segmented: {
+      // 第一种布局
+      left_fixed: 'script',
+      left_slide: [
+        'google',
+        'safari',
+        'apple',
+        'bing',
+        // 如有需要添加的按钮直接在后面添加即可
+      ],
+      center_fixed: 'menu_or_panel',
+      right_slide: [
+        'note',
+        'clipboard',
+        'symbol',
+        'emoji',
+        // 如有需要添加的按钮直接在后面添加即可
+      ],
+      right_fixed: 'hide',
+    },
+
+    carousel: {
+      // 第二种布局
+      left_fixed: 'menu_or_panel',
+      center_slide: [
+        'script',
+        'google',
+        'note',
+        'clipboard',
+        'keyboard_settings',
+        // 如有需要添加的按钮直接在后面添加即可
+      ],
+      right_fixed: 'hide',
+    },
+
+    // iPad 工具栏
+    // 首按钮固定为 menu_or_panel
+    // 末按钮固定为 hide
+    // 中间为显示 11 个按钮的横向滑动区域
+    ipad: {
+      // 是否启用键盘菜单页面
+      // false: 使用皮肤内置的悬浮键盘
+      // true: 使用 app 的 keyboardMenu
+      toolbar_menu: false,
+
+      // 可用按钮 ID:
+      // keyboard_settings: 键盘设置
+      // keyboard_skins: 皮肤管理
+      // keyboard_performance: 内存占用
+      // embedding_toggle: 内嵌开关
+      // rime_switcher: 方案切换
+      // google: Google 搜索
+      // baidu: 百度搜索
+      // bing: Bing 搜索
+      // safari: 浏览器打开剪切板内容
+      // apple: App Store 搜索
+      // script: 脚本
+      // note: 常用语
+      // clipboard: 剪切板
+      // symbol: 符号键盘
+      // emoji: 表情键盘
+      center_slide: [
+        'keyboard_settings',
+        'keyboard_skins',
+        'keyboard_performance',
+        'embedding_toggle',
+        'rime_switcher',
+        'google',
+        'safari',
+        'apple',
+        'script',
+        'note',
+        'clipboard',
+      ],
+    },
+  },
 }

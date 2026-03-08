@@ -1,10 +1,13 @@
 local Settings = import '../Custom.libsonnet';
 local toolbar = import 'toolbar.libsonnet';
 
-local toolbarSearchEngine = if std.objectHas(Settings, 'toolbar_search_engine') then Settings.toolbar_search_engine else 'google';
-local searchEngine =
-  if std.member(['google', 'baidu', 'bing'], toolbarSearchEngine) then toolbarSearchEngine
-  else 'google';
+local toolbarConfig = if std.objectHas(Settings, 'toolbar_config') then Settings.toolbar_config else {};
+local ipadToolbarConfig =
+  if std.objectHas(toolbarConfig, 'ipad') then toolbarConfig.ipad else {};
+local toolbarMenu =
+  if std.objectHas(ipadToolbarConfig, 'toolbar_menu') then ipadToolbarConfig.toolbar_menu
+  else if std.objectHas(toolbarConfig, 'toolbar_menu') then toolbarConfig.toolbar_menu
+  else false;
 
 local searchOpenURLMap = {
   google: 'https://www.google.com/search?q=#pasteboardContent',
@@ -12,67 +15,162 @@ local searchOpenURLMap = {
   bing: 'https://www.bing.com/search?q=#pasteboardContent',
 };
 
-local searchCellStyleMap = {
+local searchStyleNameMap = {
   google: 'toolbarButtonGoogleStyle',
   baidu: 'toolbarButtonBaiduStyle',
   bing: 'toolbarButtonBingStyle',
 };
 
-local searchOpenURL = searchOpenURLMap[searchEngine];
-local searchCellStyle = searchCellStyleMap[searchEngine];
+local ipadToolbarButtonRegistry = {
+  keyboard_settings: {
+    cellName: 'toolbarButtonKeyboardSettingsStyle',
+    slideStyleName: 'toolbarButtonKeyboardSettingsStyle',
+    action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSettings' },
+  },
+  keyboard_skins: {
+    cellName: 'toolbarButtonKeyboardSkinsStyle',
+    slideStyleName: 'toolbarButtonKeyboardSkinsStyle',
+    action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/finder?action=openSkinsFile&fileURL=jsonnet/Custom.libsonnet' },
+  },
+  keyboard_performance: {
+    cellName: 'toolbarButtonKeyboardPerformanceStyle',
+    slideStyleName: 'toolbarButtonKeyboardPerformanceStyle',
+    action: { shortcut: '#keyboardPerformance' },
+  },
+  embedding_toggle: {
+    cellName: 'toolbarButtonEmbeddingToggleStyle',
+    slideStyleName: 'toolbarButtonEmbeddingToggleStyle',
+    action: { shortcut: '#toggleEmbeddedInputMode' },
+  },
+  rime_switcher: {
+    cellName: 'toolbarButtonRimeSwitcherStyle',
+    slideStyleName: 'toolbarButtonRimeSwitcherStyle',
+    action: { shortcut: '#RimeSwitcher' },
+  },
+  google: {
+    cellName: 'toolbarButtonGoogleStyle',
+    slideStyleName: searchStyleNameMap.google,
+    action: { openURL: searchOpenURLMap.google },
+  },
+  baidu: {
+    cellName: 'toolbarButtonBaiduStyle',
+    slideStyleName: searchStyleNameMap.baidu,
+    action: { openURL: searchOpenURLMap.baidu },
+  },
+  bing: {
+    cellName: 'toolbarButtonBingStyle',
+    slideStyleName: searchStyleNameMap.bing,
+    action: { openURL: searchOpenURLMap.bing },
+  },
+  safari: {
+    cellName: 'toolbarButtonSafariStyle',
+    slideStyleName: 'toolbarButtonSafariStyle',
+    action: { openURL: '#pasteboardContent' },
+  },
+  apple: {
+    cellName: 'toolbarButtonAppleStyle',
+    slideStyleName: 'toolbarButtonAppleStyle',
+    action: { openURL: 'itms-apps://search.itunes.apple.com/WebObjects/MZSearch.woa/wa/search?media=software&term=#pasteboardContent' },
+  },
+  script: {
+    cellName: 'toolbarButtonScriptStyle',
+    slideStyleName: 'toolbarButtonScriptStyle',
+    action: { shortcutCommand: '#toggleScriptView' },
+  },
+  symbol: {
+    cellName: 'toolbarButtonSymbolStyle',
+    slideStyleName: 'toolbarButtonSymbolStyle',
+    action: { keyboardType: 'symbolic' },
+  },
+  emoji: {
+    cellName: 'toolbarButtonEmojiStyle',
+    slideStyleName: 'toolbarButtonEmojiStyle',
+    action: { keyboardType: 'emojis' },
+  },
+  note: {
+    cellName: 'toolbarButtonNoteStyle',
+    slideStyleName: 'toolbarButtonNoteStyle',
+    action: { shortcutCommand: '#showPhraseView' },
+  },
+  clipboard: {
+    cellName: 'toolbarButtonClipboardStyle',
+    slideStyleName: 'toolbarButtonClipboardStyle',
+    action: { shortcutCommand: '#showPasteboardView' },
+  },
+};
+
+local dedupeIds(ids) =
+  std.foldl(
+    function(acc, id)
+      if std.member(acc, id) then acc else acc + [id],
+    ids,
+    []
+  );
+
+local getIpadToolbarIds(values, fallback) =
+  local source = if std.type(values) == 'array' then values else fallback;
+  local filtered = [
+    value
+    for value in source
+    if std.type(value) == 'string' && std.objectHas(ipadToolbarButtonRegistry, value)
+  ];
+  local deduped = dedupeIds(filtered);
+  if std.length(deduped) > 0 then deduped else fallback;
+
+local ipadToolbarItems = getIpadToolbarIds(
+  if std.objectHas(ipadToolbarConfig, 'center_slide') then ipadToolbarConfig.center_slide else [],
+  [
+    'keyboard_settings',
+    'keyboard_skins',
+    'keyboard_performance',
+    'embedding_toggle',
+    'rime_switcher',
+    'google',
+    'safari',
+    'apple',
+    'script',
+    'note',
+    'clipboard',
+  ]
+);
+
+local makeIpadSlideItem(id, index) = {
+  label: std.toString(index),
+  action: ipadToolbarButtonRegistry[id].action,
+  styleName: ipadToolbarButtonRegistry[id].slideStyleName,
+};
 
 {
   getToolBar(theme):: toolbar.getToolBar(theme) + {
-    // 覆盖工具栏布局：移除单手键盘切换和滑动区域，平铺所有按钮
     toolbarLayout: [
       {
         HStack: {
           subviews: [
-            { Cell: 'toolbarButtonOpenAppMenuStyle' },
-            { Cell: 'toolbarButtonKeyboardSettingsStyle' },
-            { Cell: 'toolbarButtonKeyboardSkinsStyle' },
-            { Cell: 'toolbarButtonKeyboardPerformanceStyle' },
-            { Cell: 'toolbarButtonEmbeddingToggleStyle' },
-            { Cell: 'toolbarButtonRimeSwitcherStyle' },
-            { Cell: searchCellStyle },
-            { Cell: 'toolbarButtonSafariStyle' },
-            { Cell: 'toolbarButtonAppleStyle' },
-            { Cell: 'toolbarButtonScriptStyle' },
-            { Cell: 'toolbarButtonNoteStyle' },
-            { Cell: 'toolbarButtonClipboardStyle' },
+            { Cell: if toolbarMenu then 'toolbarButtonOpenAppMenuStyle' else 'toolbarButtonPanelStyle' },
+            { Cell: 'toolbarSlideButtonsIpadCenter' },
             { Cell: 'toolbarButtonHideStyle' },
           ],
         },
       },
     ],
 
-    // 为平铺的按钮补充 action 定义（原文件中这些按钮可能只在 dataSource 中定义了 action）
-    toolbarButtonOpenAppMenuStyle+: {
-      action: { shortcut: '#keyboardMenu' },
+    toolbarSlideButtonsIpadCenter: {
+      type: 'horizontalSymbols',
+      size: { width: '11/13' },
+      maxColumns: 11,
+      contentRightToLeft: false,
+      insets: { left: 3, right: 3 },
+      backgroundStyle: 'toolbarcollectionCellBackgroundStyle',
+      dataSource: 'horizontalSymbolsDataSourceIpadCenter',
+      cellStyle: 'toolbarcollectionCellStyle',
     },
-    toolbarButtonKeyboardSettingsStyle+: {
-      action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSettings' },
-    },
+    horizontalSymbolsDataSourceIpadCenter: [
+      makeIpadSlideItem(ipadToolbarItems[i], i)
+      for i in std.range(0, std.length(ipadToolbarItems) - 1)
+    ],
+
     toolbarButtonKeyboardSkinsStyle+: {
       action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/finder?action=openSkinsFile&fileURL=jsonnet/Custom.libsonnet' },
-    },
-    toolbarButtonKeyboardPerformanceStyle+: {
-      action: { shortcut: '#keyboardPerformance' },
-    },
-    toolbarButtonEmbeddingToggleStyle+: {
-      action: { shortcut: '#toggleEmbeddedInputMode' },
-    },
-    toolbarButtonRimeSwitcherStyle+: {
-      action: { shortcut: '#RimeSwitcher' },
-    },
-    [searchCellStyle]+: {
-      action: { openURL: searchOpenURL },
-    },
-    toolbarButtonSafariStyle+: {
-      action: { openURL: '#pasteboardContent' },
-    },
-    toolbarButtonAppleStyle+: {
-      action: { openURL: 'itms-apps://search.itunes.apple.com/WebObjects/MZSearch.woa/wa/search?media=software&term=#pasteboardContent' },
     },
   },
 }
