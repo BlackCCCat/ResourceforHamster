@@ -173,15 +173,15 @@ local Settings = import '../Custom.libsonnet';
         },
       ],
     },
-    cn2enButtonHintSymbolsStyleOf11: baseHintStyles.cn2enButtonHintSymbolsStyleOf11 {
+    cn2enButtonHintSymbolsStyleOf10: baseHintStyles.cn2enButtonHintSymbolsStyleOf10 {
       foregroundStyle: [
         {
-          styleName: 'cn2enButtonHintSymbolsForegroundStyleOf11',
+          styleName: 'cn2enButtonHintSymbolsForegroundStyleOf10',
           conditionKey: 'rime$chaifen_switch',
           conditionValue: 'true',
         },
         {
-          styleName: 'cn2enButtonHintSymbolsForegroundStyleOf12',
+          styleName: 'cn2enButtonHintSymbolsForegroundStyleOf11',
           conditionKey: 'rime$chaifen_switch',
           conditionValue: 'false',
         },
@@ -194,7 +194,7 @@ local Settings = import '../Custom.libsonnet';
         'cn2enButtonHintSymbolsStyleOf4',
         'cn2enButtonHintSymbolsStyleOf6',
         'cn2enButtonHintSymbolsStyleOf8',
-        'cn2enButtonHintSymbolsStyleOf11',
+        'cn2enButtonHintSymbolsStyleOf10',
       ],
     },
 
