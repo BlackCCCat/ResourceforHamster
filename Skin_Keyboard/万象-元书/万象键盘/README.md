@@ -111,19 +111,19 @@
   - 布局结构：
     固定按钮 + 左侧横向滑动 + 固定中间按钮 + 右侧横向滑动 + 固定收起按钮。
   - 对应配置：
-    `segmented.left_fixed`
-    `segmented.left_slide`
-    `segmented.center_fixed`
-    `segmented.right_slide`
-    `segmented.right_fixed`
+    - `segmented.left_fixed`
+    - `segmented.left_slide`
+    - `segmented.center_fixed`
+    - `segmented.right_slide`
+    - `segmented.right_fixed`
 
 - `carousel`
   - 布局结构：
     固定首按钮 + 中间整体横向滑动 + 固定尾按钮。
   - 对应配置：
-    `carousel.left_fixed`
-    `carousel.center_slide`
-    `carousel.right_fixed`
+    - `carousel.left_fixed`
+    - `carousel.center_slide`
+    - `carousel.right_fixed`
 
 - iPhone 可用按钮 ID
   - `script`：脚本
