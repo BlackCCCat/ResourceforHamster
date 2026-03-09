@@ -313,7 +313,7 @@ local keyboard(theme, orientation) =
 
     spaceRightButtonPreeditForegroundStyle: {
       buttonStyleType: 'systemImage',
-      systemImageName: 'plus.bubble',
+      systemImageName: if Settings.fix_sf_symbol then 'lightbulb' else 'lightbulb.max',
       normalColor: color[theme]['按键前景颜色'],
       highlightColor: color[theme]['按键前景颜色'],
       fontSize: fontSize['按键前景文字大小'],
