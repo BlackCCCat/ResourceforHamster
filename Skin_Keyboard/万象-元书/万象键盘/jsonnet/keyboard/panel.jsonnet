@@ -45,7 +45,7 @@ local keyboard(theme, orientation) =
     'Switcher',
     { shortcutCommand: '#RimeSwitcher' },
     'filemenu.and.selection',
-    '方案开关',
+    '状态面板',
     theme
   ) +
   createButton(
