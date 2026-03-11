@@ -58,6 +58,16 @@ patch:
     - name: abbrev
       states: [简码关, 简码开]
       reset: 1
+    - name: prediction
+      states: [预测关, 预测开]
+
+  engine/processors/@before 0: predictor
+  engine/translators/@before 0: predict_translator
+
+  predictor:
+    db: wanxiang-lts-zh-hans-predict.db
+    max_candidates: 10
+    max_iterations: 1
 
   super_replacer:
     db_name: lua/replacer
