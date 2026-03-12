@@ -332,7 +332,7 @@ function_button_config: {
 
 也可以通过快捷指令自动下载最新版本并导入到元书输入法中：
 
-`https://www.icloud.com/shortcuts/5a6d61427a7640f283a58c1cfb9118a1`
+`https://www.icloud.com/shortcuts/a1cec82c7b91493e9c0bf9f46da3e469`
 
 ## 后续自定义建议
 
