@@ -36,6 +36,7 @@ jobs:
           CURRENT_TAG="${{ github.ref_name }}"
           mkdir -p release
           files=()
+
           if [ -d "Skin_Keyboard/万象-元书/万象键盘" ]; then
             printf '%s\n' "$CURRENT_TAG" > "Skin_Keyboard/万象-元书/万象键盘/version.txt"
             (cd "Skin_Keyboard/万象-元书" && zip -r "../../release/wanxiang.zip" "万象键盘")
@@ -44,6 +45,23 @@ jobs:
           else
             echo "Skipping: Skin_Keyboard/万象-元书/万象键盘 not found"
           fi
+
+          if [ -d "Skin_Keyboard/万象-元书/wanxiang-skin" ]; then
+            printf '%s\n' "$CURRENT_TAG" > "Skin_Keyboard/万象-元书/wanxiang-skin/version.txt"
+            (cd "Skin_Keyboard/万象-元书" && zip -r "../../release/wanxiang-skin.zip" "wanxiang-skin")
+            mv "release/wanxiang-skin.zip" "release/wanxiang-skin.cskin"
+            files+=("release/wanxiang-skin.cskin")
+          else
+            echo "Skipping: Skin_Keyboard/万象-元书/wanxiang-skin not found"
+          fi
+
+          if [ -d "Skin_Keyboard/万象-元书/wanxiang-skin-modifier" ]; then
+            (cd "Skin_Keyboard/万象-元书" && zip -r "../../release/wanxiang-skin-modifier.zip" "wanxiang-skin-modifier")
+            files+=("release/wanxiang-skin-modifier.zip")
+          else
+            echo "Skipping: Skin_Keyboard/万象-元书/wanxiang-skin-modifier not found"
+          fi
+
           if [ "${#files[@]}" -eq 0 ]; then
             echo "No cskin files produced. Aborting release."
             exit 1
