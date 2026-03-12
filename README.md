@@ -14,8 +14,8 @@
 
 # Tools
 - ~~[皮肤配置修改](https://github.com/BlackCCCat/ResourceforHamster/tree/main/Python_Tools) （仅适用于仓的皮肤修改）~~
-- [万象皮肤（元书）皮肤修改skill](https://github.com/BlackCCCat/ResourceforHamster/tree/main/Skin_Keyboard/万象-元书/wanxiang-skin-modifier)：可用于支持skill的app中，通过ai进行皮肤的修改
-  - 主要面向 `wanxiang-skin` 目录，适合做 `Custom.libsonnet` 配置调整、toolbar 按钮修改、按键功能调整等功能
+- [万象皮肤（元书）皮肤修改skill](https://github.com/BlackCCCat/ResourceforHamster/tree/main/Skin_Keyboard/万象-元书/wanxiang-modifier)：可用于支持skill的app中，通过ai进行皮肤的修改
+  - 主要面向 `wanxiang` 目录，适合做 `Custom.libsonnet` 配置调整、toolbar 按钮修改、按键功能调整等功能
 
 
 # Other
