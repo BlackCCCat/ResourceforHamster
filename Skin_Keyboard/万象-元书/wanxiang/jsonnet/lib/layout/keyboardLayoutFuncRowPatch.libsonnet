@@ -7,6 +7,17 @@ local functionButtonSpecs = import '../functionButtons/specs.libsonnet';
 
   cell(name):: { Cell: name + 'Button' },
 
+  functionCellWidth(count):: {
+    width: {
+      percentage: 1 / count,
+    },
+  },
+
+  functionCell(name, count):: {
+    Cell: name + 'Button',
+    size: $.functionCellWidth(count),
+  },
+
   rowofFunctionStyle:: {
     size: {
       height: { percentage: 0.17 },
@@ -17,13 +28,14 @@ local functionButtonSpecs = import '../functionButtons/specs.libsonnet';
   standardFunctionRow(orderedKeys):: {
     HStack: {
       style: 'rowofFunctionStyle',
-      subviews: [$.cell(key) for key in orderedKeys],
+      subviews: [$.functionCell(key, std.length(orderedKeys)) for key in orderedKeys],
     },
   },
 
   splitFunctionRow(orderedKeys):: (
-    local leftKeys = std.slice(orderedKeys, 0, 4, 1);
-    local rightKeys = std.slice(orderedKeys, 4, std.length(orderedKeys), 1);
+    local splitIndex = std.ceil(std.length(orderedKeys) / 2);
+    local leftKeys = std.slice(orderedKeys, 0, splitIndex, 1);
+    local rightKeys = std.slice(orderedKeys, splitIndex, std.length(orderedKeys), 1);
     {
       HStack: {
         style: 'rowofFunctionStyle',
@@ -34,7 +46,7 @@ local functionButtonSpecs = import '../functionButtons/specs.libsonnet';
               subviews: [
                 {
                   HStack: {
-                    subviews: [$.cell(key) for key in leftKeys],
+                    subviews: [$.functionCell(key, std.length(leftKeys)) for key in leftKeys],
                   },
                 },
               ],
@@ -51,7 +63,7 @@ local functionButtonSpecs = import '../functionButtons/specs.libsonnet';
               subviews: [
                 {
                   HStack: {
-                    subviews: [$.cell(key) for key in rightKeys],
+                    subviews: [$.functionCell(key, std.length(rightKeys)) for key in rightKeys],
                   },
                 },
               ],

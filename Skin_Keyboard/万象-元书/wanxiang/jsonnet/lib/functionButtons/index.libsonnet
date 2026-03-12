@@ -23,10 +23,13 @@ local makeFunctionButtons(orientation, keyboardLayout, keyboard_type) =
     else
       {}
   ;
+  local normalizedSize =
+    if std.objectHas(getSafeSize, 'height') then { height: getSafeSize.height } else {};
   local getbg =
     if keyboard_type == 'numeric' then 'functionBackgroundStyle' else 'alphabeticBackgroundStyle'
   ;
-  functionButtonBuilder.build(Settings, keyboard_type, getbg, swipe_up, swipe_down, getSafeSize, resolvedOrderedKeys);
+  // 功能行宽度改由 layout 层按当前按钮数量动态分配，这里不再给按钮对象写死 width。
+  functionButtonBuilder.build(Settings, keyboard_type, getbg, swipe_up, swipe_down, normalizedSize, resolvedOrderedKeys);
 
 {
   makeFunctionButtons(orientation, keyboardLayout, keyboard_type): makeFunctionButtons(orientation, keyboardLayout, keyboard_type),

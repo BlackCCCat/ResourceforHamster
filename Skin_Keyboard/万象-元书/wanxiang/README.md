@@ -201,6 +201,7 @@
 
 - `function_button_config.order`
   - 控制功能行按钮顺序。
+  - 如果删除部分按钮，剩余按钮会自动平分功能行宽度。
   - 默认顺序：
 
 ```jsonnet

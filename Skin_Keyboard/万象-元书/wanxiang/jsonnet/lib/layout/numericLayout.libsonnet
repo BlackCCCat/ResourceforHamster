@@ -1,21 +1,26 @@
 // Define the shared numeric keyboard layout structures.
+local Settings = import '../../Custom.libsonnet';
+local functionButtonSpecs = import '../functionButtons/specs.libsonnet';
+
 {
-    LayoutWithFunc: [
-      {
-        HStack: {
-          style: 'rowofFunctionStyle',
-          subviews: [
-            { Cell: 'leftButton' },
-            { Cell: 'headButton' },
-            { Cell: 'selectButton' },
-            { Cell: 'cutButton' },
-            { Cell: 'copyButton' },
-            { Cell: 'pasteButton' },
-            { Cell: 'tailButton' },
-            { Cell: 'rightButton' },
-          ],
-        },
+    functionRowOrderedKeys:: functionButtonSpecs.resolveOrderedKeys(Settings),
+    functionCellWidth(count):: {
+      width: {
+        percentage: 1 / count,
       },
+    },
+    functionCell(name, count):: {
+      Cell: name + 'Button',
+      size: $.functionCellWidth(count),
+    },
+    functionRow(orderedKeys):: {
+      HStack: {
+        style: 'rowofFunctionStyle',
+        subviews: [$.functionCell(key, std.length(orderedKeys)) for key in orderedKeys],
+      },
+    },
+    LayoutWithFunc: [
+      $.functionRow($.functionRowOrderedKeys),
       {
         HStack: {
           style: 'keyboardStyle',

@@ -16,6 +16,7 @@ All playbooks assume you already resolved one `<keyboard-root>`.
 3. If the change is only about function-button foreground styles or SF Symbols, prefer `jsonnet/lib/functionButtons/styles.libsonnet` and `jsonnet/lib/functionButtons/styleSpecs.libsonnet`.
 4. Only edit `jsonnet/lib/functionButtons/builder.libsonnet` if the current build logic cannot express the new button.
 5. Compile one keyboard with function row enabled.
+6. If buttons are removed from `function_button_config.order`, ensure the function-row layout still auto-distributes width across the remaining buttons.
 
 ## Change toolbar buttons
 
