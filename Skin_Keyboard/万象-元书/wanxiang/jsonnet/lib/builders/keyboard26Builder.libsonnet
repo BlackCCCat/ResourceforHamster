@@ -17,6 +17,7 @@ local swipeStyles = import '../swipe/index.libsonnet';
 local toolbar = import '../toolbar/index.libsonnet';
 local utils = import '../utils/index.libsonnet';
 local functions = import '../functionButtons/index.libsonnet';
+local functionButtonStyles = import '../functionButtons/styles.libsonnet';
 
 {
   createButtonFactory(context, swipeUp, swipeDown, letters)::
@@ -42,7 +43,7 @@ local functions = import '../functionButtons/index.libsonnet';
     hintStyles +
     toolbar.getToolBar(theme) +
     utils.genPinyinStyles(fontSize, color, theme, center) +
-    utils.genFuncKeyStyles(fontSize, color, theme, center) +
+    functionButtonStyles.genFuncKeyStyles(fontSize, color, theme, center) +
     slideForeground.slideForeground(theme) +
     functions.makeFunctionButtons(orientation, keyboardLayout, 'pinyin') +
     keyboardBaseStyles.baseStyles(theme, orientation, settings, color, animation, hintSymbolsStyles) +

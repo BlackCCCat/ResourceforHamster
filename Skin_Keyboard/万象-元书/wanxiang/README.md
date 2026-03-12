@@ -55,7 +55,7 @@
 
 - `jsonnet/lib/core/`
   - 共享上下文和布局解析
-  - 例如 `theme`、`orientation`、`deviceType`、`with_functions_row`
+  - 例如 `theme`、`orientation`、`deviceType`、`function_button_config.with_functions_row`
 
 - `jsonnet/lib/layout/`
   - 统一的布局定义和 function-row patch
@@ -70,7 +70,7 @@
   - 已拆成 shared、registry、renderer
 
 - `jsonnet/lib/functionButtons/`
-  - 功能行按钮的 specs 与 builder
+  - 功能行按钮的 specs、builder 与专用前景样式
 
 - `jsonnet/lib/data/`
   - 纯数据文件
@@ -91,12 +91,12 @@
   - swipe 样式生成的共享 helper
 
 - `jsonnet/lib/utils/`
-  - 共用样式生成 helper 与 specs
+  - 共用样式生成 helper，与字母/数字键样式 specs
 
 # 自定义配置
 ## 基础配置
 
-- `with_functions_row`
+- `function_button_config.with_functions_row`
   - 控制是否启用功能行。
   - 按设备区分：`iPhone` 和 `iPad`。
   - 默认 iPad 不启用功能行。
@@ -118,6 +118,7 @@
 - `function_button_config`
   - 功能按键自定义配置。
   - 包含：
+    - `with_functions_row`：按设备控制是否启用功能行。
     - `enable_notification`：控制功能按键通知功能是否启用。
     - `order`：控制功能行按钮顺序。
   - `order` 可用值：
@@ -191,6 +192,10 @@
 
 - 配置入口：`function_button_config`
 
+- `function_button_config.with_functions_row`
+  - 控制是否启用功能行。
+  - 按设备区分：`iPhone` 和 `iPad`。
+
 - `function_button_config.enable_notification`
   - 控制功能按键通知功能是否启用。
 
@@ -200,6 +205,10 @@
 
 ```jsonnet
 function_button_config: {
+  with_functions_row: {
+    iPhone: true,
+    iPad: false,
+  },
   enable_notification: true,
   order: [
     'left',
@@ -322,7 +331,7 @@ function_button_config: {
 
 也可以通过快捷指令自动下载最新版本并导入到元书输入法中：
 
-`https://www.icloud.com/shortcuts/c541ddb2a1614732b2c9fde38bb89be6`
+`https://www.icloud.com/shortcuts/5a6d61427a7640f283a58c1cfb9118a1`
 
 ## 后续自定义建议
 

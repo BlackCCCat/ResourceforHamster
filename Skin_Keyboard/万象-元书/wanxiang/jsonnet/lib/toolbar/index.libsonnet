@@ -600,7 +600,7 @@ local getToolBar(theme) =
     },
     toolbarButtonKeyboardPerformanceForegroundStyle: {
       buttonStyleType: 'systemImage',
-      systemImageName: 'gauge.with.dots.needle.bottom.50percent',
+      systemImageName: if Settings.fix_sf_symbol then 'gauge.medium' else 'gauge.with.dots.needle.bottom.50percent',
       normalColor: color[theme]['toolbar按键颜色'],
       highlightColor: color[theme]['toolbar按键颜色'],
       fontSize: fontSize['toolbar按键前景sf符号大小'],

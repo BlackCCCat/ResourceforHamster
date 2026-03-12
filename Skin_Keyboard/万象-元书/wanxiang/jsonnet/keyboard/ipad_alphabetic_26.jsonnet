@@ -40,6 +40,6 @@ local config = {
       config,
       theme,
       orientation,
-      keyboardLayouts.getKeyboardLayout(theme, Settings.with_functions_row[deviceType])
+      keyboardLayouts.getKeyboardLayout(theme, Settings.function_button_config.with_functions_row[deviceType])
     ),
 }

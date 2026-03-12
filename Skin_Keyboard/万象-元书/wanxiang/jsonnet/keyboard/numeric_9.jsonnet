@@ -10,7 +10,7 @@ local chooseLayout(selector) =
 local moduleForDevice(deviceType) = {
   keyboard(theme, orientation):
     local context = contextLib.new(Settings, theme, orientation, deviceType);
-    numeric9Builder.build(context, chooseLayout(Settings.with_functions_row[deviceType])),
+    numeric9Builder.build(context, chooseLayout(Settings.function_button_config.with_functions_row[deviceType])),
   new(theme, orientation):
     self.keyboard(theme, orientation),
 };

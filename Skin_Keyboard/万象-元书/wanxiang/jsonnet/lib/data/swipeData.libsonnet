@@ -29,7 +29,7 @@ local genSwipeData(deviceType) =
     d: { action: { character: '=' }, label: { text: '=' } },
     f: { action: { symbol: '【' }, label: { text: '[' } },
     g: { action: { symbol: '】' }, label: { text: ']' } },
-    h: { action: if Settings.with_functions_row[deviceType] && Settings.function_button_config.enable_notification then { symbol: '\\' } else { character: '\\' }, label: { text: '\\' } },
+    h: { action: if Settings.function_button_config.with_functions_row[deviceType] && Settings.function_button_config.enable_notification then { symbol: '\\' } else { character: '\\' }, label: { text: '\\' } },
     j: { action: { character: '/' }, label: { text: '/' } },
     k: { action: { character: ':' }, label: { text: ':' } },
     l: { action: { character: '"' }, label: { text: '"' } },
@@ -77,7 +77,7 @@ local genSwipeData(deviceType) =
       label: { systemImageName: 'av.remote.fill' },
       // center: { x: 0.5, y: 0.8 },  // 不同于其他按键的偏移，可这样设置，例如这里zxcvbnm的下划都在按键正下方
     },
-    x: if Settings.with_functions_row[deviceType] then {
+    x: if Settings.function_button_config.with_functions_row[deviceType] then {
       action: { sendKeys: 'onl' },
       label: { systemImageName: 'clock.arrow.circlepath' },
       // center: { x: 0.5, y: 0.8 },
@@ -86,7 +86,7 @@ local genSwipeData(deviceType) =
       label: { systemImageName: 'scissors' },
       // center: { x: 0.5, y: 0.8 },
     },
-    c: if Settings.with_functions_row[deviceType] then {
+    c: if Settings.function_button_config.with_functions_row[deviceType] then {
       action: { sendKeys: 'orc' },
       label: { systemImageName: 'calendar' },
       // center: { x: 0.5, y: 0.8 },
@@ -95,7 +95,7 @@ local genSwipeData(deviceType) =
       label: { systemImageName: 'arrow.up.doc.on.clipboard' },
       // center: { x: 0.5, y: 0.8 },
     },
-    v: if Settings.with_functions_row[deviceType] then {
+    v: if Settings.function_button_config.with_functions_row[deviceType] then {
       action: { sendKeys: 'osj' },
       label: { systemImageName: 'clock.circle' },
       // center: { x: 0.5, y: 0.8 },
@@ -104,7 +104,7 @@ local genSwipeData(deviceType) =
       label: { systemImageName: 'doc.on.clipboard.fill' },
       // center: { x: 0.5, y: 0.8 },
     },
-    b: if Settings.with_functions_row[deviceType] then {
+    b: if Settings.function_button_config.with_functions_row[deviceType] then {
       action: { sendKeys: 'R' },
       label: { systemImageName: if Settings.fix_sf_symbol then 'dollarsign.square.fill' else 'chineseyuanrenminbisign.square.fill' },
       // center: { x: 0.5, y: 0.8 },
@@ -113,7 +113,7 @@ local genSwipeData(deviceType) =
       label: { systemImageName: 'selection.pin.in.out' },
       // center: { x: 0.5, y: 0.8 },
     },
-    n: if Settings.with_functions_row[deviceType] then {
+    n: if Settings.function_button_config.with_functions_row[deviceType] then {
       action: { sendKeys: 'N' },
       label: { systemImageName: 'calendar.badge.exclamationmark' },
       // center: { x: 0.5, y: 0.8 },
@@ -122,7 +122,7 @@ local genSwipeData(deviceType) =
       label: { systemImageName: 'chevron.up' },
       // center: { x: 0.5, y: 0.8 },
     },
-    m: if Settings.with_functions_row[deviceType] then {
+    m: if Settings.function_button_config.with_functions_row[deviceType] then {
       action: { character: '`' },
       label: { systemImageName: 'rectangle.3.group.fill' },
       // center: { x: 0.5, y: 0.8 },
@@ -159,13 +159,13 @@ local genSwipeData(deviceType) =
     er: { action: { character: '+' }, label: { text: '+' } },
     ty: { action: { character: '*' }, label: { text: '*' } },
     ui: { action: { character: '=' }, label: { text: '=' } },
-    op: if Settings.with_functions_row[deviceType] then { 
+    op: if Settings.function_button_config.with_functions_row[deviceType] then { 
       action: { character: '%' }, label: { text: '%' } 
       } else {
         action: { shortcut: '#paste' },
         label: { systemImageName: 'doc.on.clipboard.fill' },
       },
-    as: if Settings.with_functions_row[deviceType] then {
+    as: if Settings.function_button_config.with_functions_row[deviceType] then {
       action: { character: '^' },
       label: { text: '^' },
     } else {
@@ -174,9 +174,9 @@ local genSwipeData(deviceType) =
     },
     df: { action: { character: '_' }, label: { text: '_' } },
     gh: { action: { character: '#' }, label: { text: '#' } },
-    jk: { action: if Settings.with_functions_row[deviceType] && Settings.function_button_config.enable_notification then { symbol: '\\' } else { character: '\\' }, label: { text: '\\' } },
+    jk: { action: if Settings.function_button_config.with_functions_row[deviceType] && Settings.function_button_config.enable_notification then { symbol: '\\' } else { character: '\\' }, label: { text: '\\' } },
     l:  { action: { character: ';' }, label: { text: ';' } },
-    zx: if Settings.with_functions_row[deviceType] then {
+    zx: if Settings.function_button_config.with_functions_row[deviceType] then {
       action: { sendKeys: 'orc' },
       label: { systemImageName: 'calendar' },
       // center: { x: 0.5, y: 0.8 },
@@ -185,7 +185,7 @@ local genSwipeData(deviceType) =
       label: { systemImageName: 'scissors' },
       // center: { x: 0.5, y: 0.8 },
     },
-    cv: if Settings.with_functions_row[deviceType] then {
+    cv: if Settings.function_button_config.with_functions_row[deviceType] then {
       action: { character: 'V' },
       label: { systemImageName: 'av.remote.fill' },
       // center: { x: 0.5, y: 0.8 },
@@ -193,14 +193,14 @@ local genSwipeData(deviceType) =
       action: { shortcut: '#copy' },
       label: { systemImageName: 'arrow.up.doc.on.clipboard' },
     },
-    bn: if Settings.with_functions_row[deviceType] then {
+    bn: if Settings.function_button_config.with_functions_row[deviceType] then {
       action: { sendKeys: 'osj' },
       label: { systemImageName: 'clock.circle' },
     } else {
       action: { shortcut: '#rimePreviousPage' },
       label: { systemImageName: 'chevron.up' },
     },
-    m:  if Settings.with_functions_row[deviceType] then {
+    m:  if Settings.function_button_config.with_functions_row[deviceType] then {
       action: { character: '`' },
       label: { systemImageName: 'rectangle.3.group.fill' },
     } else {
@@ -243,29 +243,29 @@ local genSwipeData(deviceType) =
     sd: { action: { character: '(' }, label: { text: '(' } },
     fg: { action: { character: ')' }, label: { text: ')' } },
     h:  { action: { character: '_' }, label: { text: '_' } },
-    jk: { action: if Settings.with_functions_row[deviceType] && Settings.function_button_config.enable_notification then { symbol: '\\' } else { character: '\\' }, label: { text: '\\' } },
-    l:  if Settings.with_functions_row[deviceType] then {
+    jk: { action: if Settings.function_button_config.with_functions_row[deviceType] && Settings.function_button_config.enable_notification then { symbol: '\\' } else { character: '\\' }, label: { text: '\\' } },
+    l:  if Settings.function_button_config.with_functions_row[deviceType] then {
       action: { character: ';' },
       label: { text: ';' },
     } else {
       action: { shortcut: '#selectText' },
       label: { systemImageName: 'selection.pin.in.out' },
     },
-    z:  if Settings.with_functions_row[deviceType] then {
+    z:  if Settings.function_button_config.with_functions_row[deviceType] then {
       action: { character: 'V' },
       label: { systemImageName: 'av.remote.fill' },
     } else {
       action: { shortcut: '#copy' },
       label: { systemImageName: 'arrow.up.doc.on.clipboard' },
     },
-    xc: if Settings.with_functions_row[deviceType] then {
+    xc: if Settings.function_button_config.with_functions_row[deviceType] then {
       action: { sendKeys: 'orc' },
       label: { systemImageName: 'calendar' },
     } else {
       action: { shortcut: '#cut' },
       label: { systemImageName: 'scissors' },
     },
-    v:  if Settings.with_functions_row[deviceType] then {
+    v:  if Settings.function_button_config.with_functions_row[deviceType] then {
       action: { sendKeys: 'osj' },
       label: { systemImageName: 'clock.circle' },
       // center: { x: 0.5, y: 0.8 },
@@ -274,7 +274,7 @@ local genSwipeData(deviceType) =
       label: { systemImageName: 'doc.on.clipboard.fill' },
       // center: { x: 0.5, y: 0.8 },
     },
-    bn: if Settings.with_functions_row[deviceType] then {
+    bn: if Settings.function_button_config.with_functions_row[deviceType] then {
       action: { sendKeys: 'N' },
       label: { systemImageName: 'calendar.badge.exclamationmark' },
       // center: { x: 0.5, y: 0.8 },
@@ -283,7 +283,7 @@ local genSwipeData(deviceType) =
       label: { systemImageName: 'chevron.up' },
       // center: { x: 0.5, y: 0.8 },
     },
-    m:  if Settings.with_functions_row[deviceType] then {
+    m:  if Settings.function_button_config.with_functions_row[deviceType] then {
       action: { character: '`' },
       label: { systemImageName: 'rectangle.3.group.fill' },
       // center: { x: 0.5, y: 0.8 },

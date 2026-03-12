@@ -1,10 +1,4 @@
 {
-  // 是否启用功能行（按设备区分）
-  with_functions_row: {
-    iPhone: true,
-    iPad: false,
-  },
-
   // 当前中文键盘布局（实际生效配置）
   // 26: 全键（pinyin_26）
   // 18: 18键（pinyin_18）
@@ -24,6 +18,12 @@
 
   // 功能按键配置
   function_button_config: {
+    // 是否启用功能行（按设备区分）
+    with_functions_row: {
+      iPhone: true,
+      iPad: false,
+    },
+
     // 是否启用功能按键通知功能
     enable_notification: true,
 

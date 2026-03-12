@@ -6,6 +6,6 @@
     orientation: orientation,
     deviceType: deviceType,
     isPortrait: orientation == 'portrait',
-    withFunctionsRow: Settings.with_functions_row[deviceType],
+    withFunctionsRow: Settings.function_button_config.with_functions_row[deviceType],
   },
 }

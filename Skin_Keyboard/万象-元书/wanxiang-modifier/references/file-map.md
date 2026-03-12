@@ -49,6 +49,8 @@ Edit builders when a spec-only change is not enough.
 - `jsonnet/lib/functionButtons/index.libsonnet`
 - `jsonnet/lib/functionButtons/specs.libsonnet`
 - `jsonnet/lib/functionButtons/builder.libsonnet`
+- `jsonnet/lib/functionButtons/styles.libsonnet`
+- `jsonnet/lib/functionButtons/styleSpecs.libsonnet`
 
 Typical edits:
 
@@ -56,6 +58,7 @@ Typical edits:
 - button actions
 - notification behavior
 - function-row generation
+- function-button-only foreground styles
 
 If order changes do not appear, also inspect:
 

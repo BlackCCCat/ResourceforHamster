@@ -15,6 +15,7 @@ local toolbar = import '../toolbar/en.libsonnet';
 local utils = import '../utils/index.libsonnet';
 local functions = import '../functionButtons/index.libsonnet';
 local systemKeysAlphabetic26 = import '../specs/systemKeysAlphabetic26.libsonnet';
+local functionButtonStyles = import '../functionButtons/styles.libsonnet';
 
 {
   createButtonFactory(context, swipeUp, swipeDown)::
@@ -38,7 +39,7 @@ local systemKeysAlphabetic26 = import '../specs/systemKeysAlphabetic26.libsonnet
     hintStyles +
     toolbar.getToolBar(theme) +
     utils.genAlphabeticStyles(fontSize, color, theme, center) +
-    utils.genFuncKeyStyles(fontSize, color, theme, center) +
+    functionButtonStyles.genFuncKeyStyles(fontSize, color, theme, center) +
     slideForeground.slideForeground(theme) +
     functions.makeFunctionButtons(orientation, keyboardLayout, 'alphabetic') +
     {

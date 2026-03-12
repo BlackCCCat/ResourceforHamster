@@ -189,11 +189,14 @@
 职责：
 
 - 管理功能行按钮的规格和构建
+- 管理功能行按钮专用前景样式
 
 主要文件：
 
 - `specs.libsonnet`
 - `builder.libsonnet`
+- `styles.libsonnet`
+- `styleSpecs.libsonnet`
 
 入口文件：
 
@@ -207,6 +210,7 @@
 
 配置来源：
 
+- `jsonnet/Custom.libsonnet` 中的 `function_button_config.with_functions_row`
 - `jsonnet/Custom.libsonnet` 中的 `function_button_config.order`
 - `jsonnet/Custom.libsonnet` 中的 `function_button_config.enable_notification`
 - `jsonnet/lib/functionButtons/specs.libsonnet` 中的 `defaultOrderedKeys`
@@ -218,6 +222,8 @@
 职责：
 
 - 通用样式生成 helper
+- 字母键与数字键的批量样式生成
+- 不再承载功能按键专用样式
 
 主要文件：
 

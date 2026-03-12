@@ -13,6 +13,7 @@ local swipeStyles = import '../swipe/index.libsonnet';
 local toolbar = import '../toolbar/index.libsonnet';
 local utils = import '../utils/index.libsonnet';
 local functions = import '../functionButtons/index.libsonnet';
+local functionButtonStyles = import '../functionButtons/styles.libsonnet';
 
 {
   createButtonFactory(context, swipeUp, swipeDown)::
@@ -366,6 +367,6 @@ local functions = import '../functionButtons/index.libsonnet';
     hintSymbolsStyles.getStyle(theme, hintSymbolsData.number) +
     toolbar.getToolBar(theme) +
     utils.genNumberStyles(fontSize, color, theme, center) +
-    utils.genFuncKeyStyles(fontSize, color, theme, center) +
+    functionButtonStyles.genFuncKeyStyles(fontSize, color, theme, center) +
     functions.makeFunctionButtons('', {}, 'numeric'),
 }
