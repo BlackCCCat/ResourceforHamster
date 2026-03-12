@@ -3,7 +3,7 @@ name: Create Release (cskin)
 on:
   push:
     tags:
-      - '*'
+      - "*"
 
 jobs:
   create-release:
@@ -37,29 +37,20 @@ jobs:
           mkdir -p release
           files=()
 
-          if [ -d "Skin_Keyboard/万象-元书/万象键盘" ]; then
-            printf '%s\n' "$CURRENT_TAG" > "Skin_Keyboard/万象-元书/万象键盘/version.txt"
-            (cd "Skin_Keyboard/万象-元书" && zip -r "../../release/wanxiang.zip" "万象键盘")
+          if [ -d "Skin_Keyboard/万象-元书/wanxiang" ]; then
+            printf '%s\n' "$CURRENT_TAG" > "Skin_Keyboard/万象-元书/wanxiang/version.txt"
+            (cd "Skin_Keyboard/万象-元书" && zip -r "../../release/wanxiang.zip" "wanxiang")
             mv "release/wanxiang.zip" "release/wanxiang.cskin"
             files+=("release/wanxiang.cskin")
           else
-            echo "Skipping: Skin_Keyboard/万象-元书/万象键盘 not found"
+            echo "Skipping: Skin_Keyboard/万象-元书/wanxiang not found"
           fi
 
-          if [ -d "Skin_Keyboard/万象-元书/wanxiang-skin" ]; then
-            printf '%s\n' "$CURRENT_TAG" > "Skin_Keyboard/万象-元书/wanxiang-skin/version.txt"
-            (cd "Skin_Keyboard/万象-元书" && zip -r "../../release/wanxiang-skin.zip" "wanxiang-skin")
-            mv "release/wanxiang-skin.zip" "release/wanxiang-skin.cskin"
-            files+=("release/wanxiang-skin.cskin")
+          if [ -d "Skin_Keyboard/万象-元书/wanxiang-modifier" ]; then
+            (cd "Skin_Keyboard/万象-元书" && zip -r "../../release/wanxiang-modifier.zip" "wanxiang-modifier")
+            files+=("release/wanxiang-modifier.zip")
           else
-            echo "Skipping: Skin_Keyboard/万象-元书/wanxiang-skin not found"
-          fi
-
-          if [ -d "Skin_Keyboard/万象-元书/wanxiang-skin-modifier" ]; then
-            (cd "Skin_Keyboard/万象-元书" && zip -r "../../release/wanxiang-skin-modifier.zip" "wanxiang-skin-modifier")
-            files+=("release/wanxiang-skin-modifier.zip")
-          else
-            echo "Skipping: Skin_Keyboard/万象-元书/wanxiang-skin-modifier not found"
+            echo "Skipping: Skin_Keyboard/万象-元书/wanxiang-modifier not found"
           fi
 
           if [ "${#files[@]}" -eq 0 ]; then
