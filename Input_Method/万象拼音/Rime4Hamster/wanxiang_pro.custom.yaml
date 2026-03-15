@@ -153,7 +153,7 @@ patch:
       - "〗"
       - "』"
 
-  key_binder/tips_key: "Break" # "backslash" # Lua 配置: 超级tips上屏按键
+  super_tips/tips_key: "Break" # "backslash" # Lua 配置: 超级tips上屏按键
   key_binder/bindings/+: # 也可以再增加方案专有的
     - { when: always, toggle: chinese_english, accept: Control+e } # 切换翻译功能
     - { when: always, toggle: chaifen_switch, accept: Control+c } # 切换拆分功能

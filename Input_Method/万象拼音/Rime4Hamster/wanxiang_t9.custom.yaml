@@ -1,7 +1,7 @@
 patch:
   t9/isDisplayOriginalPreedit: false # false避免显示数字
 
-  key_binder/tips_key: "Break"
+  super_tips/tips_key: "Break"
   key_binder/bindings/+: # 也可以再增加方案专有的
     - { when: always, toggle: chinese_english, accept: Control+e } # 切换翻译功能
     - { when: always, toggle: super_tips, accept: Control+t } # 切换超级提示
