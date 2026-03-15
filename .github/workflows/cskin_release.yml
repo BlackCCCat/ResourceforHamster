@@ -3,7 +3,10 @@ name: Create Release (cskin)
 on:
   push:
     tags:
-      - "*"
+      - "v*"
+
+permissions:
+  contents: write
 
 jobs:
   create-release:
@@ -18,16 +21,18 @@ jobs:
         id: commits
         run: |
           PREV_TAG=$(git tag --list "v[0-9]*" --sort=-v:refname | grep -Ev "rc|beta|alpha" | head -n 1)
-          CURRENT_TAG=${{ github.ref_name }}
+          CURRENT_TAG="${{ github.ref_name }}"
+
           if [ "$PREV_TAG" = "$CURRENT_TAG" ]; then
             PREV_TAG=$(git tag --list "v[0-9]*" --sort=-v:refname | grep -Ev "rc|beta|alpha" | head -n 2 | tail -n 1)
           fi
-          echo "prev_tag=$PREV_TAG" >> $GITHUB_OUTPUT
 
-          commits=$(git log --pretty=format:'- %s' $PREV_TAG..HEAD | sed 's/[^[:print:]]//g')
-          echo "commits<<EOF" >> $GITHUB_OUTPUT
-          echo "$commits" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          echo "prev_tag=$PREV_TAG" >> "$GITHUB_OUTPUT"
+
+          commits=$(git log --pretty=format:'- %s' "$PREV_TAG"..HEAD | sed 's/[^[:print:]]//g')
+          echo "commits<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$commits" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
 
       - name: Package cskin files
         id: package
@@ -57,6 +62,7 @@ jobs:
             echo "No cskin files produced. Aborting release."
             exit 1
           fi
+
           echo "files<<EOF" >> "$GITHUB_OUTPUT"
           printf '%s\n' "${files[@]}" >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
@@ -71,6 +77,3 @@ jobs:
             ${{ steps.commits.outputs.commits }}
           prerelease: ${{ contains(github.ref_name, '-rc') }}
           files: ${{ steps.package.outputs.files }}
-          token: ${{ secrets.AUTO_RELEASE }}
-        env:
-          GH_TOKEN: ${{ secrets.AUTO_RELEASE }}
