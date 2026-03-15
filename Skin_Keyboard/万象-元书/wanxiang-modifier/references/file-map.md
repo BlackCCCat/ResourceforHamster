@@ -10,6 +10,7 @@ Inside `<keyboard-root>`:
 
 - config entry:
   - `jsonnet/Custom.libsonnet`
+  - public 9-key layout toggles such as `wanxiang_9_swap_123_and_symbol`
 - output entry:
   - `jsonnet/main.jsonnet`
 - maintenance docs:
@@ -90,6 +91,12 @@ Typical edits:
 - `jsonnet/lib/layout/numericLayout.libsonnet`
 
 Edit layout files when button placement changes.
+
+Examples:
+
+- 9-key bottom-row `123` / symbol position swap:
+  - `jsonnet/Custom.libsonnet`
+  - `jsonnet/lib/layout/keyboardLayoutBaseData.libsonnet`
 
 ## Specs
 

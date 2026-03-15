@@ -30,6 +30,7 @@ Use it when the user asks to:
 - change button actions, swipe actions, or notifications
 - reorder function buttons or toolbar buttons
 - add or change `Custom.libsonnet` options
+- expose or adjust 9-key bottom-row position options such as swapping `123` and symbol
 - add a new layout such as a compact layout variant
 - adjust toolbar structure or available toolbar IDs
 - update README or module documentation after code changes
@@ -53,6 +54,7 @@ Use it when the user asks to:
    - `builders/` only if specs are not enough
    - `layout/` only if button placement changes
    - docs only after code is settled
+   - for 9-key bottom-row swaps, prefer `Custom.libsonnet` + `layout/keyboardLayoutBaseData.libsonnet`
 4. Before editing, inspect the relevant mapping in `references/file-map.md`.
 5. Keep behavior stable unless the user explicitly asks for a behavior change.
 6. After every code change, validate with Jsonnet.

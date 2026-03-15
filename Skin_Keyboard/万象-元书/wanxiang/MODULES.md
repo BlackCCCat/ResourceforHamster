@@ -138,6 +138,7 @@
 
 - `keyboardLayoutBaseData.libsonnet`
   - 无 function-row 的基础布局数据
+  - 同时负责 9 键底行基础槽位定义，例如 `wanxiang_9_swap_123_and_symbol` 对 `123` 与符号按钮位置/尺寸的交换
 - `keyboardLayoutBase.libsonnet`
   - base 数据入口
 - `keyboardLayoutFuncRowPatch.libsonnet`

@@ -9,6 +9,8 @@
 
   // 9键按键长按符号是否直接上屏
   wanxiang_9_hintSymbol: true,
+  // 9键键盘是否交换左下角数字键盘和符号键盘按钮位置
+  wanxiang_9_swap_123_and_symbol: false,
 
   // 是否使用万象18键转写规则（大写转写）
   is_wanxiang_18: true,

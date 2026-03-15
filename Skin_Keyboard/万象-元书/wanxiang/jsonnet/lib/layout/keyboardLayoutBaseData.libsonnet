@@ -1,19 +1,42 @@
 // Define the shared no-function-row keyboard layout content used as the base layout data.
+local Settings = import '../../Custom.libsonnet';
 local color = import '../shared/color.libsonnet';
+
+local pinyin9bottomRowSlots =
+  if Settings.wanxiang_9_swap_123_and_symbol then {
+    left: {
+      cell: 'symbolButton',
+      sizeKey: { width: { percentage: 1 / 4 } },
+    },
+    right: {
+      cell: '123Button',
+      sizeKey: { width: { percentage: 1.5 / 7 } },
+    },
+  } else {
+    left: {
+      cell: '123Button',
+      sizeKey: { width: { percentage: 1.5 / 7 } },
+    },
+    right: {
+      cell: 'symbolButton',
+      sizeKey: { width: { percentage: 1 / 4 } },
+    },
+  };
+
 
 {
   getKeyboardLayout(theme)::
     {
       '竖屏中文9键': {
         '竖屏按键尺寸': {
-          'symbolButton': { width: { percentage: 1.5/7 } },
-          'spaceButton': { width: { percentage: 4/7 } },
-          'cn2enButton': { width: { percentage: 1.5/7 } },
-          '123Button': { width: { percentage: 1/4 } },
-          'emojiButton': { width: { percentage: 1/4 } },
-          'backspaceButton': { height: { percentage: 1/4 } },
-          'cleanButton': { height: { percentage: 1/4 } },
-          'enterButton': { height: { percentage: 1/4 } },
+          [pinyin9bottomRowSlots.left.cell]: pinyin9bottomRowSlots.left.sizeKey,
+          [pinyin9bottomRowSlots.right.cell]: pinyin9bottomRowSlots.right.sizeKey,
+          spaceButton: { width: { percentage: 4 / 7 } },
+          cn2enButton: { width: { percentage: 1.5 / 7 } },
+          emojiButton: { width: { percentage: 1 / 4 } },
+          backspaceButton: { height: { percentage: 1 / 4 } },
+          cleanButton: { height: { percentage: 1 / 4 } },
+          enterButton: { height: { percentage: 1 / 4 } },
         },
         keyboardLayout: [
           {
@@ -25,7 +48,7 @@ local color = import '../shared/color.libsonnet';
                     style: 'VStackStyle1',
                     subviews: [
                       { Cell: 'collection' },
-                      { Cell: '123Button' },
+                      { Cell: pinyin9bottomRowSlots.left.cell },
                       // { Cell: 'emojiButton' },
                     ],
                   },
@@ -38,9 +61,9 @@ local color = import '../shared/color.libsonnet';
                         HStack: {
                           style: 'HStackStyle1',
                           subviews: [
-                            { VStack: { subviews: [ { Cell: 'number1Button' }, { Cell: 'number4Button' }, { Cell: 'number7Button' } ] } },
-                            { VStack: { subviews: [ { Cell: 'number2Button' }, { Cell: 'number5Button' }, { Cell: 'number8Button' } ] } },
-                            { VStack: { subviews: [ { Cell: 'number3Button' }, { Cell: 'number6Button' }, { Cell: 'number9Button' } ] } },
+                            { VStack: { subviews: [{ Cell: 'number1Button' }, { Cell: 'number4Button' }, { Cell: 'number7Button' }] } },
+                            { VStack: { subviews: [{ Cell: 'number2Button' }, { Cell: 'number5Button' }, { Cell: 'number8Button' }] } },
+                            { VStack: { subviews: [{ Cell: 'number3Button' }, { Cell: 'number6Button' }, { Cell: 'number9Button' }] } },
                           ],
                         },
                       },
@@ -48,7 +71,7 @@ local color = import '../shared/color.libsonnet';
                         HStack: {
                           style: 'HStackStyle2',
                           subviews: [
-                            { Cell: 'symbolButton' },
+                            { Cell: pinyin9bottomRowSlots.right.cell },
                             { Cell: 'spaceButton' },
                             { Cell: 'cn2enButton' },
                           ],
@@ -1077,23 +1100,23 @@ local color = import '../shared/color.libsonnet';
         '14键Row2Size': { width: { percentage: 0.2 } },
         '14键Row3Size': { width: { percentage: 0.175 } },
         '14键As键size和bounds': {
-            size: { width: { percentage: 0.2 } },
+          size: { width: { percentage: 0.2 } },
         },
         '14键L键size和bounds': {
-            size: { width: { percentage: 0.2 } },
+          size: { width: { percentage: 0.2 } },
         },
         // 18-Key Portrait Sizes
-        '18键Row1Size': { width: { percentage: 1/7 } }, 
-        '18键Row2Size': { width: { percentage: 1/7 } },
+        '18键Row1Size': { width: { percentage: 1 / 7 } },
+        '18键Row2Size': { width: { percentage: 1 / 7 } },
         '18键A键size和bounds': {
-            size: { width: { percentage: 3/14 } },
-            bounds: { width: '2/3', alignment: 'right' },
+          size: { width: { percentage: 3 / 14 } },
+          bounds: { width: '2/3', alignment: 'right' },
         },
         '18键L键size和bounds': {
-            size: { width: { percentage: 3/14 } },
-            bounds: { width: '2/3', alignment: 'left' },
+          size: { width: { percentage: 3 / 14 } },
+          bounds: { width: '2/3', alignment: 'left' },
         },
-        '18键Row3Size': { width: { percentage: 1/7 } },
+        '18键Row3Size': { width: { percentage: 1 / 7 } },
       },
 
       '横屏按键尺寸': {
@@ -1183,24 +1206,24 @@ local color = import '../shared/color.libsonnet';
         // 14-Key Landscape Sizes
         '14键横屏Row1Size': { width: { percentage: 0.33 } },
         '14键横屏As键size和bounds': {
-            size: { width: { percentage: 0.33 } },
+          size: { width: { percentage: 0.33 } },
         },
         '14键横屏L键size和bounds': {
-            size: { width: { percentage: 0.33 } },
+          size: { width: { percentage: 0.33 } },
         },
         '14键横屏shift键size': { width: { percentage: 0.33 } },
         '14键横屏backspace键size': { width: { percentage: 0.33 } },
         // 18-Key Landscape Sizes
-        '18键横屏Row1LeftSize': { width: { percentage: 1/4 } },
-        '18键横屏Row1RightSize': { width: { percentage: 1/4 } },
-        '18键横屏Row2Size': { width: { percentage: 1/4 } },
+        '18键横屏Row1LeftSize': { width: { percentage: 1 / 4 } },
+        '18键横屏Row1RightSize': { width: { percentage: 1 / 4 } },
+        '18键横屏Row2Size': { width: { percentage: 1 / 4 } },
         '18键横屏A键size和bounds': {
-            size: { width: { percentage: 2/4 } },
-            bounds: { width: '1/2', alignment: 'right' },
+          size: { width: { percentage: 2 / 4 } },
+          bounds: { width: '1/2', alignment: 'right' },
         },
         '18键横屏L键size和bounds': {
-             size: { width: { percentage: 2/4 } },
-             bounds: { width: '1/2', alignment: 'left' },
+          size: { width: { percentage: 2 / 4 } },
+          bounds: { width: '1/2', alignment: 'left' },
         },
       },
     },

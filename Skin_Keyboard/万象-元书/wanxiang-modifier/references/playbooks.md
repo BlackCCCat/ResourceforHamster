@@ -9,6 +9,14 @@ All playbooks assume you already resolved one `<keyboard-root>`.
 3. If the option changes behavior, compile the affected entry file.
 4. Update `README.md` and `MODULES.md`.
 
+Notes:
+
+- If the option changes button placement instead of button behavior, update the owning layout file instead of a builder.
+- Example:
+  - `wanxiang_9_swap_123_and_symbol`
+  - reader: `jsonnet/lib/layout/keyboardLayoutBaseData.libsonnet`
+  - affected entry: `jsonnet/keyboard/pinyin_9.jsonnet`
+
 ## Add or change a function button
 
 1. Edit `jsonnet/lib/functionButtons/specs.libsonnet` first.
@@ -38,6 +46,18 @@ All playbooks assume you already resolved one `<keyboard-root>`.
 1. Locate the right module under `jsonnet/lib/specs/`.
 2. Prefer changing the most specific split module, such as shift, space, enter, or switcher.
 3. Only touch `jsonnet/lib/keys/pinyinSystemKeys.libsonnet` or the 26-key builders if the change affects assembly instead of the key behavior itself.
+
+## Change 9-key bottom-row button order
+
+1. If the change is user-configurable, expose it in `jsonnet/Custom.libsonnet`.
+2. Implement the position swap in `jsonnet/lib/layout/keyboardLayoutBaseData.libsonnet`.
+3. Treat this as a slot/layout change, not a button-action change.
+4. If the swapped buttons have different widths, swap the slot definitions together with the button names.
+5. Validate with:
+   - `jsonnet -e "(import '<keyboard-root>/jsonnet/keyboard/pinyin_9.jsonnet').new('light','portrait')"`
+6. Update:
+   - `README.md`
+   - `MODULES.md`
 
 ## Change a key SF Symbol
 
