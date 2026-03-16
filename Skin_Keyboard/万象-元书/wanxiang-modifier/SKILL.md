@@ -31,6 +31,9 @@ Use it when the user asks to:
 - reorder function buttons or toolbar buttons
 - add or change `Custom.libsonnet` options
 - expose or adjust 9-key bottom-row position options such as swapping `123` and symbol
+ - expose or adjust numeric keyboard bottom-row position options such as swapping return and the switch-keyboard button
+- adjust the dedicated landscape 9-key split layout, including function-row visibility, `collection`, and `verticalCandidates`
+ - adjust the dedicated landscape numeric split layout, including function-row visibility, left-side symbol panels, and slot swapping
 - add a new layout such as a compact layout variant
 - adjust toolbar structure or available toolbar IDs
 - update README or module documentation after code changes
@@ -55,6 +58,8 @@ Use it when the user asks to:
    - `layout/` only if button placement changes
    - docs only after code is settled
    - for 9-key bottom-row swaps, prefer `Custom.libsonnet` + `layout/keyboardLayoutBaseData.libsonnet`
+   - for landscape 9-key split layout changes, prefer `layout/keyboardLayoutBaseData.libsonnet`; only touch `builders/pinyin9Builder.libsonnet` when the component type definition itself changes
+   - for landscape numeric split layout changes, prefer `layout/numericLayout.libsonnet`; only touch `builders/numeric9Builder.libsonnet` when the symbol panel or collection component definition itself changes
 4. Before editing, inspect the relevant mapping in `references/file-map.md`.
 5. Keep behavior stable unless the user explicitly asks for a behavior change.
 6. After every code change, validate with Jsonnet.

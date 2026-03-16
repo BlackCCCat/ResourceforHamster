@@ -10,7 +10,7 @@ Inside `<keyboard-root>`:
 
 - config entry:
   - `jsonnet/Custom.libsonnet`
-  - public 9-key layout toggles such as `wanxiang_9_swap_123_and_symbol`
+  - public layout toggles such as `swap_9_123_symbol` and `swap_numeric_return_symbol`
 - output entry:
   - `jsonnet/main.jsonnet`
 - maintenance docs:
@@ -44,6 +44,13 @@ Edit these only when changing entry wiring or adding a new keyboard type.
 - `jsonnet/lib/builders/ipad26Builder.libsonnet`
 
 Edit builders when a spec-only change is not enough.
+
+For 9-key landscape split layout:
+
+- use `jsonnet/lib/builders/pinyin9Builder.libsonnet` only when changing component definitions such as:
+  - `collection` (`type: 't9Symbols'`)
+  - `verticalCandidates`
+  - candidate cell style
 
 ## Function buttons
 
@@ -97,6 +104,15 @@ Examples:
 - 9-key bottom-row `123` / symbol position swap:
   - `jsonnet/Custom.libsonnet`
   - `jsonnet/lib/layout/keyboardLayoutBaseData.libsonnet`
+- numeric keyboard `return` / switch-keyboard position swap:
+  - `jsonnet/Custom.libsonnet`
+  - `jsonnet/lib/layout/numericLayout.libsonnet`
+- 9-key landscape split layout:
+  - `jsonnet/lib/layout/keyboardLayoutBaseData.libsonnet`
+  - `jsonnet/lib/builders/pinyin9Builder.libsonnet` only if the displayed component type or candidate style changes
+- numeric keyboard landscape split layout:
+  - `jsonnet/lib/layout/numericLayout.libsonnet`
+  - `jsonnet/lib/builders/numeric9Builder.libsonnet` only if the displayed component type changes
 
 ## Specs
 

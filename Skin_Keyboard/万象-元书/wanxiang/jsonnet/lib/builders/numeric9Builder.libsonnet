@@ -1,19 +1,19 @@
 // Build the numeric 9-key keyboard from shared context, layout data, and the existing style registries.
+local collectionData = import '../data/collectionData.libsonnet';
+local hintSymbolsData = import '../data/hintSymbolsData.libsonnet';
+local swipeData = import '../data/swipeData.libsonnet';
+local functions = import '../functionButtons/index.libsonnet';
+local functionButtonStyles = import '../functionButtons/styles.libsonnet';
 local animation = import '../shared/animation.libsonnet';
 local center = import '../shared/center.libsonnet';
-local collectionData = import '../data/collectionData.libsonnet';
 local color = import '../shared/color.libsonnet';
 local fontSize = import '../shared/fontSize.libsonnet';
-local hintSymbolsData = import '../data/hintSymbolsData.libsonnet';
 local hintSymbolsStyles = import '../shared/hintSymbolsStyles.libsonnet';
 local others = import '../shared/others.libsonnet';
 local slideForeground = import '../shared/slideForeground.libsonnet';
-local swipeData = import '../data/swipeData.libsonnet';
 local swipeStyles = import '../swipe/index.libsonnet';
 local toolbar = import '../toolbar/index.libsonnet';
 local utils = import '../utils/index.libsonnet';
-local functions = import '../functionButtons/index.libsonnet';
-local functionButtonStyles = import '../functionButtons/styles.libsonnet';
 
 {
   createButtonFactory(context, swipeUp, swipeDown)::
@@ -49,6 +49,9 @@ local functionButtonStyles = import '../functionButtons/styles.libsonnet';
   build(context, layoutSpec)::
     local theme = context.theme;
     local orientation = context.orientation;
+    local landscapeShowFunctions = context.Settings.function_button_config.with_functions_row.iPhone;
+    local landscapeTopHeight = if landscapeShowFunctions then 0.17 else 0;
+    local landscapeBottomHeight = if landscapeShowFunctions then 0.83 else 1;
     local swipeDataRoot = swipeData.genSwipeData(context.deviceType);
     local swipeUp = if std.objectHas(swipeDataRoot, 'number_swipe_up') then swipeDataRoot.number_swipe_up else {};
     local swipeDown = if std.objectHas(swipeDataRoot, 'number_swipe_up') then swipeDataRoot.number_swipe_down else {};
@@ -94,6 +97,63 @@ local functionButtonStyles = import '../functionButtons/styles.libsonnet';
           width: '125/549',
         },
       },
+      landscapeNumericLeftColumnStyle: {
+        size: {
+          width: '2/5',
+        },
+      },
+      landscapeNumericSpacerColumnStyle: {
+        size: {
+          width: '1/5',
+        },
+      },
+      landscapeNumericRightColumnStyle: {
+        size: {
+          width: '2/5',
+        },
+      },
+      landscapeNumericTopRowStyle: {
+        size: {
+          height: { percentage: landscapeTopHeight },
+        },
+      },
+      landscapeNumericBottomRowStyle: {
+        size: {
+          height: { percentage: landscapeBottomHeight },
+        },
+      },
+      landscapeNumericCollectionColumnStyle: {
+        size: {
+          width: '29/154',
+          height: '1',
+        },
+      },
+      landscapeNumericSymbolsColumnStyle: {
+        size: {
+          width: '125/154',
+          height: '1',
+        },
+      },
+      landscapeNumericInputAreaStyle: {
+        size: {
+          width: '125/154',
+        },
+      },
+      landscapeNumericRightActionColumnStyle: {
+        size: {
+          width: '29/154',
+        },
+      },
+      landscapeNumericInputMatrixStyle: {
+        size: {
+          height: '3/4',
+        },
+      },
+      landscapeNumericInputBottomRowStyle: {
+        size: {
+          height: '1/4',
+        },
+      },
       collection: {
         size: {
           height: '3/4',
@@ -103,6 +163,24 @@ local functionButtonStyles = import '../functionButtons/styles.libsonnet';
         type: 'symbols',
         dataSource: 'symbols',
         cellStyle: 'collectionCellStyle',
+      },
+      landscapeCollection: {
+        size: {
+          height: '3/4',
+        },
+        insets: { top: 6, bottom: 6 },
+        backgroundStyle: 'collectionBackgroundStyle',
+        type: 't9Symbols',
+        dataSource: 'landscapeSymbols',
+        cellStyle: 'collectionCellStyle',
+      },
+      landscapeNumericSymbols: {
+        size: {
+          height: '1',
+        },
+        insets: { top: 3, bottom: 3, left: 3, right: 3 },
+        backgroundStyle: 'collectionBackgroundStyle',
+        type: 'categorySymbols',
       },
       collectionBackgroundStyle: {
         buttonStyleType: 'geometry',
@@ -362,6 +440,13 @@ local functionButtonStyles = import '../functionButtons/styles.libsonnet';
       alphabeticHintSymbolsSelectedStyle: hintSymbolsStyles['长按选中背景样式'],
       ButtonScaleAnimation: animation['26键按键动画'],
       symbols: collectionData.numericSymbols,
+      landscapeSymbols: [
+        if std.type(item) == 'string' then {
+          label: item,
+          action: { character: item },
+        } else item
+        for item in collectionData.numericSymbols
+      ],
     } +
     swipeStyles.getStyle('number', theme, swipeUp, swipeDown) +
     hintSymbolsStyles.getStyle(theme, hintSymbolsData.number) +

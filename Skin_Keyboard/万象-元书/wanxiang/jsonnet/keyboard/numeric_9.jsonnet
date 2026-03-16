@@ -7,10 +7,19 @@ local numericLayout = import '../lib/layout/numericLayout.libsonnet';
 local chooseLayout(selector) =
   if selector then numericLayout.LayoutWithFunc else numericLayout.LayoutWithoutFunc;
 
+local chooseLandscapeLayout() =
+  numericLayout.LandscapeLayout;
+
 local moduleForDevice(deviceType) = {
   keyboard(theme, orientation):
     local context = contextLib.new(Settings, theme, orientation, deviceType);
-    numeric9Builder.build(context, chooseLayout(Settings.function_button_config.with_functions_row[deviceType])),
+    numeric9Builder.build(
+      context,
+      if orientation == 'portrait' then
+        chooseLayout(Settings.function_button_config.with_functions_row[deviceType])
+      else
+        chooseLandscapeLayout()
+    ),
   new(theme, orientation):
     self.keyboard(theme, orientation),
 };

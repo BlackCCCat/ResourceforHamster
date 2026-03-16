@@ -138,7 +138,10 @@
 
 - `keyboardLayoutBaseData.libsonnet`
   - 无 function-row 的基础布局数据
-  - 同时负责 9 键底行基础槽位定义，例如 `wanxiang_9_swap_123_and_symbol` 对 `123` 与符号按钮位置/尺寸的交换
+  - 同时负责 9 键底行基础槽位定义，例如 `swap_9_123_symbol` 对 `123` 与符号按钮位置/尺寸的交换
+  - 同时负责数字键盘底部基础槽位定义，例如 `swap_numeric_return_symbol` 对返回按钮与切换键盘按钮位置/尺寸的交换
+  - 同时负责横屏 9 键的分栏布局，以及 `with_functions_row.iPhone` 对横屏 9 键顶部功能按键显隐与高度的联动
+  - 同时负责横屏数字键盘的分栏布局，以及 `with_functions_row.iPhone` 对横屏数字键盘顶部功能按键显隐与高度的联动
 - `keyboardLayoutBase.libsonnet`
   - base 数据入口
 - `keyboardLayoutFuncRowPatch.libsonnet`
@@ -151,6 +154,18 @@
 - 新增一种布局结构
 - 调整按键排列
 - 调整带功能行/不带功能行的布局差异
+- 调整横屏 9 键左右分区、底部 `collection` / `verticalCandidates` 结构、或左右下角按钮交换逻辑
+
+补充说明：
+
+- 横屏 9 键的布局归 layout 层管理，入口在 `keyboardLayoutBaseData.libsonnet`
+- 横屏 9 键里真正的 `verticalCandidates` / `collection` 类型定义仍由构建层提供，位置在：
+  - `jsonnet/lib/builders/pinyin9Builder.libsonnet`
+- 横屏数字键盘的布局归 `numericLayout.libsonnet` 管理：
+  - 左侧第一列是 `collection + 返回/切换按钮`
+  - 左侧第二列是独立符号面板
+- 横屏数字键盘里真正的 `collection` / `landscapeNumericSymbols` 组件类型定义仍由构建层提供，位置在：
+  - `jsonnet/lib/builders/numeric9Builder.libsonnet`
 
 ## 六、toolbar 层
 

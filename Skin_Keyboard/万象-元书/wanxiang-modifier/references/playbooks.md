@@ -13,7 +13,16 @@ Notes:
 
 - If the option changes button placement instead of button behavior, update the owning layout file instead of a builder.
 - Example:
-  - `wanxiang_9_swap_123_and_symbol`
+  - `swap_9_123_symbol`
+  - reader: `jsonnet/lib/layout/keyboardLayoutBaseData.libsonnet`
+  - affected entry: `jsonnet/keyboard/pinyin_9.jsonnet`
+- Example:
+  - `swap_numeric_return_symbol`
+  - reader: `jsonnet/lib/layout/numericLayout.libsonnet`
+  - affected entry: `jsonnet/keyboard/numeric_9.jsonnet`
+- Example:
+  - `function_button_config.with_functions_row.iPhone`
+  - may also affect the dedicated landscape 9-key split layout
   - reader: `jsonnet/lib/layout/keyboardLayoutBaseData.libsonnet`
   - affected entry: `jsonnet/keyboard/pinyin_9.jsonnet`
 
@@ -58,6 +67,47 @@ Notes:
 6. Update:
    - `README.md`
    - `MODULES.md`
+
+## Change landscape 9-key split layout
+
+1. Treat this as a layout-layer task first.
+2. Edit:
+   - `jsonnet/lib/layout/keyboardLayoutBaseData.libsonnet`
+3. Only edit:
+   - `jsonnet/lib/builders/pinyin9Builder.libsonnet`
+   when changing component definitions such as `collection`, `verticalCandidates`, or candidate cell style.
+4. Keep these responsibilities separate:
+   - button placement, left/right split, spacer width, function-row visibility -> layout
+   - `type: 't9Symbols'`, `type: 'verticalCandidates'`, candidate appearance -> builder
+5. If the landscape layout should follow a Custom option, update:
+   - `jsonnet/Custom.libsonnet`
+   - all readers with `rg`
+6. Validate with:
+   - `jsonnet -e \"(import '<keyboard-root>/jsonnet/keyboard/pinyin_9.jsonnet').new('light','landscape')\"`
+7. Then run full compile if the change touches shared layout data:
+   - `jsonnet '<keyboard-root>/jsonnet/main.jsonnet' >/tmp/wanxiang_main.json`
+
+## Change landscape numeric split layout
+
+1. Treat this as a layout-layer task first.
+2. Edit:
+   - `jsonnet/lib/layout/numericLayout.libsonnet`
+3. Only edit:
+   - `jsonnet/lib/builders/numeric9Builder.libsonnet`
+   when changing component definitions such as `collection`, `landscapeNumericSymbols`, or symbol panel type.
+4. Keep these responsibilities separate:
+   - left/right split, spacer width, function-row visibility, slot swapping -> layout
+   - `type: 'symbols'`, `type: 't9Symbols'`, `type: 'categorySymbols'`, symbol data source -> builder
+5. Preserve existing tuned component settings unless the user explicitly asks to change them, especially:
+   - `pinyin9Builder.libsonnet` -> `verticalCandidates.insets`
+   - `numeric9Builder.libsonnet` -> `landscapeNumericSymbols` component settings
+6. If the layout should follow a Custom option, update:
+   - `jsonnet/Custom.libsonnet`
+   - all readers with `rg`
+7. Validate with:
+   - `jsonnet -e \"(import '<keyboard-root>/jsonnet/keyboard/numeric_9.jsonnet').new('light','landscape')\"`
+8. Then run full compile if shared layout or config changed:
+   - `jsonnet '<keyboard-root>/jsonnet/main.jsonnet' >/tmp/wanxiang_main.json`
 
 ## Change a key SF Symbol
 

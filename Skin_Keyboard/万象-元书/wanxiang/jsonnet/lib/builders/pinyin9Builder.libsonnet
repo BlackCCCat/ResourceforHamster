@@ -1,20 +1,20 @@
 // Build the pinyin 9-key keyboard from shared layout context, T9 specs, and existing style registries.
+local hintSymbolsData = import '../data/hintSymbolsData.libsonnet';
+local swipeData = import '../data/swipeData.libsonnet';
+local functions = import '../functionButtons/index.libsonnet';
+local functionButtonStyles = import '../functionButtons/styles.libsonnet';
 local animation = import '../shared/animation.libsonnet';
 local center = import '../shared/center.libsonnet';
 local color = import '../shared/color.libsonnet';
 local fontSize = import '../shared/fontSize.libsonnet';
-local hintSymbolsData = import '../data/hintSymbolsData.libsonnet';
 local hintSymbolsStyles = import '../shared/hintSymbolsStyles.libsonnet';
 local others = import '../shared/others.libsonnet';
-local pinyin9ButtonFactory = import 'pinyin9ButtonFactory.libsonnet';
-local pinyin9T9 = import '../specs/pinyin9T9.libsonnet';
 local slideForeground = import '../shared/slideForeground.libsonnet';
-local swipeData = import '../data/swipeData.libsonnet';
+local pinyin9T9 = import '../specs/pinyin9T9.libsonnet';
 local swipeStyles = import '../swipe/index.libsonnet';
 local toolbar = import '../toolbar/index.libsonnet';
 local utils = import '../utils/index.libsonnet';
-local functions = import '../functionButtons/index.libsonnet';
-local functionButtonStyles = import '../functionButtons/styles.libsonnet';
+local pinyin9ButtonFactory = import 'pinyin9ButtonFactory.libsonnet';
 
 {
   createButtonFactory(context, swipeUp, swipeDown, t9Letters)::
@@ -23,6 +23,8 @@ local functionButtonStyles = import '../functionButtons/styles.libsonnet';
   build(context, layoutRoot, p26Layout)::
     local theme = context.theme;
     local orientation = context.orientation;
+    local layoutName = if orientation == 'portrait' then '竖屏中文9键' else '横屏中文9键';
+    local sizeName = if orientation == 'portrait' then '竖屏按键尺寸' else '横屏按键尺寸';
     local swipeDataRoot = swipeData.genSwipeData(context.deviceType);
     local swipeUp = if std.objectHas(swipeDataRoot, 'swipe_up_9') then swipeDataRoot.swipe_up_9 else {};
     local swipeDown = if std.objectHas(swipeDataRoot, 'swipe_down_9') then swipeDataRoot.swipe_down_9 else {};
@@ -34,7 +36,7 @@ local functionButtonStyles = import '../functionButtons/styles.libsonnet';
         // 9 键长按样式由 pinyin_9 hint 数据决定，不能依赖当前对象层的字段可见性判断。
         [if std.objectHas(hintSymbolsData.pinyin_9, styleKey) then 'hintSymbolsStyle']: styleKey + 'ButtonHintSymbolsStyle',
       };
-    local layout = layoutRoot['竖屏中文9键'];
+    local layout = layoutRoot[layoutName];
     local hintDataOnlyCn2en = { cn2en: hintSymbolsData.pinyin_9.cn2en };
     local hintDataWithoutCn2en = {
       [k]: hintSymbolsData.pinyin_9[k]
@@ -124,7 +126,7 @@ local functionButtonStyles = import '../functionButtons/styles.libsonnet';
       for key in pinyin9T9.digitKeys
     } +
     {
-      symbolButton: createButtonWithHints('symbol', layout['竖屏按键尺寸']['symbolButton'], {}, $, false) + {
+      symbolButton: createButtonWithHints('symbol', layout[sizeName].symbolButton, {}, $, false) + {
         backgroundStyle: 'systemButtonBackgroundStyle',
         type: 'horizontalSymbols',
         maxColumns: 1,
@@ -136,7 +138,7 @@ local functionButtonStyles = import '../functionButtons/styles.libsonnet';
         { label: '1', action: { keyboardType: 'symbolic' }, styleName: 'symbolicStyle' },
         { label: '3', action: { keyboardType: 'emojis' }, styleName: 'emojisStyle' },
       ],
-      '123Button': createButtonWithHints('123', layout['竖屏按键尺寸']['123Button'], {}, $, false) + {
+      '123Button': createButtonWithHints('123', layout[sizeName]['123Button'], {}, $, false) + {
         backgroundStyle: 'systemButtonBackgroundStyle',
         foregroundStyle: '123ButtonForegroundStyle',
         action: { keyboardType: 'numeric' },
@@ -149,7 +151,7 @@ local functionButtonStyles = import '../functionButtons/styles.libsonnet';
         fontSize: fontSize['按键前景文字大小'] - 3,
         center: center['功能键前景文字偏移'] { y: 0.5 },
       },
-      emojiButton: createButtonWithHints('emoji', layout['竖屏按键尺寸']['emojiButton'], {}, $, false) + {
+      emojiButton: createButtonWithHints('emoji', layout[sizeName].emojiButton, {}, $, false) + {
         backgroundStyle: 'systemButtonBackgroundStyle',
         foregroundStyle: 'emojiButtonForegroundStyle',
         action: { keyboardType: 'emojis' },
@@ -190,7 +192,7 @@ local functionButtonStyles = import '../functionButtons/styles.libsonnet';
         highlightColor: color[theme]['按键前景颜色'],
         fontSize: fontSize['按键前景文字大小'],
       },
-      cleanButton: createButtonWithHints('clean', layout['竖屏按键尺寸']['cleanButton'], {}, $, false) + {
+      cleanButton: createButtonWithHints('clean', layout[sizeName].cleanButton, {}, $, false) + {
         backgroundStyle: 'systemButtonBackgroundStyle',
         action: { shortcut: '#换行' },
         notification: ['cleanButtonPreeditNotification'],
@@ -223,14 +225,14 @@ local functionButtonStyles = import '../functionButtons/styles.libsonnet';
         highlightColor: color[theme]['按键前景颜色'],
         fontSize: fontSize['数字键盘数字前景字体大小'],
       },
-      spaceButton: p26Layout.spaceButton + {
-        size: layout['竖屏按键尺寸']['spaceButton'],
-        [if std.objectHas(swipeUp, 'space') then 'swipeUpAction']: swipeUp['space'].action,
+      spaceButton: p26Layout.spaceButton {
+        size: layout[sizeName].spaceButton,
+        [if std.objectHas(swipeUp, 'space') then 'swipeUpAction']: swipeUp.space.action,
       },
       spaceButtonForegroundStyle: p26Layout.spaceButtonForegroundStyle,
       spaceButtonForegroundStyle1: if std.objectHas(p26Layout, 'spaceButtonForegroundStyle1') then p26Layout.spaceButtonForegroundStyle1 else {},
       spaceButtonPreeditNotification: p26Layout.spaceButtonPreeditNotification,
-      backspaceButton: createButtonWithHints('backspace', layout['竖屏按键尺寸']['backspaceButton'], {}, $, false) + {
+      backspaceButton: createButtonWithHints('backspace', layout[sizeName].backspaceButton, {}, $, false) + {
         backgroundStyle: 'systemButtonBackgroundStyle',
         action: 'backspace',
         repeatAction: 'backspace',
@@ -244,7 +246,7 @@ local functionButtonStyles = import '../functionButtons/styles.libsonnet';
         highlightColor: color[theme]['按键前景颜色'],
         fontSize: fontSize['数字键盘数字前景字体大小'] - 3,
       },
-      enterButton: createButtonWithHints('enter', layout['竖屏按键尺寸']['enterButton'], {}, $, false) + {
+      enterButton: createButtonWithHints('enter', layout[sizeName].enterButton, {}, $, false) + {
         backgroundStyle: [
           { styleName: 'systemButtonBackgroundStyle', conditionKey: '$returnKeyType', conditionValue: [0, 2, 3, 5, 8, 10, 11] },
           { styleName: 'enterButtonBlueBackgroundStyle', conditionKey: '$returnKeyType', conditionValue: [1, 4, 6, 7, 9] },
@@ -353,6 +355,32 @@ local functionButtonStyles = import '../functionButtons/styles.libsonnet';
     } +
     pinyin9ButtonFactory.genT9Styles(t9Letters, theme, color, fontSize, center) +
     toolbar.getToolBar(theme) +
+    {
+      // 横屏 9 键左侧候选区必须使用固定名称 verticalCandidates，避免宿主不识别自定义前缀名称。
+      verticalCandidates: {
+        type: 'verticalCandidates',
+        size: { height: '1' },
+        insets: { top: 3, left: 6, right: 6, bottom: 3 },
+        maxRows: 4,
+        separatorColor: 0,
+        backgroundStyle: 'alphabeticBackgroundStyle',
+        candidateStyle: 'verticalCandidateCellStyle',
+      },
+      verticalCandidateCellStyle: {
+        highlightBackgroundColor: 0,
+        preferredBackgroundColor: color[theme]['选中候选背景颜色'],
+        preferredIndexColor: color[theme]['候选字体选中字体颜色'],
+        preferredTextColor: color[theme]['候选字体选中字体颜色'],
+        preferredCommentColor: color[theme]['候选字体选中字体颜色'],
+        indexColor: color[theme]['长按非选中字体颜色'],
+        textColor: color[theme]['长按非选中字体颜色'],
+        commentColor: color[theme]['长按非选中字体颜色'],
+        indexFontSize: 16,
+        textFontSize: 16,
+        commentFontSize: 16,
+        bottomRowHeight: 50,
+      },
+    } +
     utils.genNumberStyles(fontSize, color, theme, center) +
     functionButtonStyles.genFuncKeyStyles(fontSize, color, theme, center) +
     functions.makeFunctionButtons(orientation, {}, 'numeric'),

@@ -5,12 +5,14 @@
   // 14: 14键（pinyin_14）
   // 9: 九键（pinyin_9）
   // 其他值会回退到 26
-  keyboard_layout: 26,
+  keyboard_layout: 9,
 
   // 9键按键长按符号是否直接上屏
   wanxiang_9_hintSymbol: true,
   // 9键键盘是否交换左下角数字键盘和符号键盘按钮位置
-  wanxiang_9_swap_123_and_symbol: false,
+  swap_9_123_symbol: false,
+  // 数字键盘是否交换左侧返回按钮和右侧切换键盘按钮位置
+  swap_numeric_return_symbol: false,
 
   // 是否使用万象18键转写规则（大写转写）
   is_wanxiang_18: true,
