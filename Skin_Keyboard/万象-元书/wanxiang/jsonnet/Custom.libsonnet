@@ -127,6 +127,8 @@
     // false: 使用皮肤内置的悬浮键盘
     // true: 使用 app 的 keyboardMenu
     toolbar_menu: false,
+
+    // 工具栏滑动区域按钮显示方向
     content_right_to_left: false,
 
     // segmented:
@@ -210,6 +212,8 @@
       // false: 使用皮肤内置的悬浮键盘
       // true: 使用 app 的 keyboardMenu
       toolbar_menu: false,
+
+      // 工具栏滑动区域按钮显示方向
       content_right_to_left: false,
 
       // 可用按钮 ID:
