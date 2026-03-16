@@ -20,7 +20,8 @@ local ipad_others = others + {
 local base = numeric9.layout('iPad');
 
 local ipad_keyboard(theme, orientation) =
-  local base_def = base.new(theme, orientation);
+  local base_orientation = if orientation == 'landscape' then 'portrait' else orientation;
+  local base_def = base.new(theme, base_orientation);
   local toolbar_def = toolbar_ipad.getToolBar(theme);
 
   local ipad_overrides =
