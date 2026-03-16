@@ -31,7 +31,8 @@ local functionButtonStyles = import '../functionButtons/styles.libsonnet';
     local createButtonWithHints = function(key, size, bounds, root, isUpper=true)
       local styleKey = if std.length(key) == 1 then 'number' + key else key;
       createBaseButton(key, size, bounds, root, isUpper) + {
-        [if std.objectHas(root, styleKey + 'ButtonHintSymbolsStyle') then 'hintSymbolsStyle']: styleKey + 'ButtonHintSymbolsStyle',
+        // 9 键长按样式由 pinyin_9 hint 数据决定，不能依赖当前对象层的字段可见性判断。
+        [if std.objectHas(hintSymbolsData.pinyin_9, styleKey) then 'hintSymbolsStyle']: styleKey + 'ButtonHintSymbolsStyle',
       };
     local layout = layoutRoot['竖屏中文9键'];
     local hintDataOnlyCn2en = { cn2en: hintSymbolsData.pinyin_9.cn2en };
