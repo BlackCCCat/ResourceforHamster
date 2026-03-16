@@ -5,7 +5,7 @@
   // 14: 14键（pinyin_14）
   // 9: 九键（pinyin_9）
   // 其他值会回退到 26
-  keyboard_layout: 9,
+  keyboard_layout: 26,
 
   // 9键按键长按符号是否直接上屏
   wanxiang_9_hintSymbol: true,
