@@ -13,7 +13,7 @@ local slideForeground = import '../shared/slideForeground.libsonnet';
 local swipeData = import '../data/swipeData.libsonnet';
 local swipeStyles = import '../swipe/index.libsonnet';
 local toolbar = import '../toolbar/index.libsonnet';
-local utils = import '../utils/index.libsonnet';
+local utils = import '../utils/keyStyles.libsonnet';
 local functions = import '../functionButtons/index.libsonnet';
 local functionButtonStyles = import '../functionButtons/styles.libsonnet';
 

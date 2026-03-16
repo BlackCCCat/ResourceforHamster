@@ -1,4 +1,6 @@
-// Build a shared render context so keyboard modules read theme, orientation, and settings consistently.
+// Build keyboard runtime context and resolve the effective layout set from one entry point.
+local keyboardLayoutProvider = import '../layout/keyboardLayoutProvider.libsonnet';
+
 {
   new(Settings, theme, orientation, deviceType='iPhone'):: {
     Settings: Settings,
@@ -8,4 +10,7 @@
     isPortrait: orientation == 'portrait',
     withFunctionsRow: Settings.function_button_config.with_functions_row[deviceType],
   },
+
+  getKeyboardLayout(context)::
+    keyboardLayoutProvider.getKeyboardLayout(context.theme, context.withFunctionsRow),
 }

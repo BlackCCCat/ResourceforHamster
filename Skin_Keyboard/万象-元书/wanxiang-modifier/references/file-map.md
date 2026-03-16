@@ -32,6 +32,12 @@ Inside `<keyboard-root>`:
 
 Edit these only when changing entry wiring or adding a new keyboard type.
 
+## Core runtime
+
+- `jsonnet/lib/core/keyboardRuntime.libsonnet`
+
+Edit this only when changing shared runtime context fields or the common layout-resolution flow.
+
 ## Builders
 
 - `jsonnet/lib/builders/keyboard26Builder.libsonnet`
@@ -39,7 +45,6 @@ Edit these only when changing entry wiring or adding a new keyboard type.
 - `jsonnet/lib/builders/keyboard26ButtonFactory.libsonnet`
 - `jsonnet/lib/builders/compactKeyboardBuilder.libsonnet`
 - `jsonnet/lib/builders/pinyin9Builder.libsonnet`
-- `jsonnet/lib/builders/pinyin9ButtonFactory.libsonnet`
 - `jsonnet/lib/builders/numeric9Builder.libsonnet`
 - `jsonnet/lib/builders/ipad26Builder.libsonnet`
 
@@ -58,7 +63,6 @@ For 9-key landscape split layout:
 - `jsonnet/lib/functionButtons/specs.libsonnet`
 - `jsonnet/lib/functionButtons/builder.libsonnet`
 - `jsonnet/lib/functionButtons/styles.libsonnet`
-- `jsonnet/lib/functionButtons/styleSpecs.libsonnet`
 
 Typical edits:
 
@@ -76,7 +80,7 @@ If order changes do not appear, also inspect:
 
 - `jsonnet/lib/toolbar/index.libsonnet`
 - `jsonnet/lib/toolbar/ipad.libsonnet`
-- `jsonnet/lib/toolbar/en.libsonnet`
+- `jsonnet/lib/toolbar/toolbarEn.libsonnet`
 - `jsonnet/lib/toolbar/shared.libsonnet`
 - `jsonnet/lib/toolbar/registry.libsonnet`
 - `jsonnet/lib/toolbar/iPhoneRenderer.libsonnet`
@@ -91,11 +95,10 @@ Typical edits:
 
 ## Layout
 
-- `jsonnet/lib/layout/keyboardLayouts.libsonnet`
-- `jsonnet/lib/layout/keyboardLayoutBase.libsonnet`
+- `jsonnet/lib/layout/keyboardLayoutProvider.libsonnet`
 - `jsonnet/lib/layout/keyboardLayoutBaseData.libsonnet`
 - `jsonnet/lib/layout/keyboardLayoutFuncRowPatch.libsonnet`
-- `jsonnet/lib/layout/numericLayout.libsonnet`
+- `jsonnet/lib/layout/numeric9Layout.libsonnet`
 
 Edit layout files when button placement changes.
 
@@ -106,12 +109,12 @@ Examples:
   - `jsonnet/lib/layout/keyboardLayoutBaseData.libsonnet`
 - numeric keyboard `return` / switch-keyboard position swap:
   - `jsonnet/Custom.libsonnet`
-  - `jsonnet/lib/layout/numericLayout.libsonnet`
+  - `jsonnet/lib/layout/numeric9Layout.libsonnet`
 - 9-key landscape split layout:
   - `jsonnet/lib/layout/keyboardLayoutBaseData.libsonnet`
   - `jsonnet/lib/builders/pinyin9Builder.libsonnet` only if the displayed component type or candidate style changes
 - numeric keyboard landscape split layout:
-  - `jsonnet/lib/layout/numericLayout.libsonnet`
+  - `jsonnet/lib/layout/numeric9Layout.libsonnet`
   - `jsonnet/lib/builders/numeric9Builder.libsonnet` only if the displayed component type changes
 
 ## Specs
@@ -135,9 +138,16 @@ Prefer editing specs before editing builders.
 ## Shared key helpers
 
 - `jsonnet/lib/keys/keyBuilders.libsonnet`
-- `jsonnet/lib/keys/letterKeySpecs.libsonnet`
+- `jsonnet/lib/keys/letter26KeysSpecs.libsonnet`
 - `jsonnet/lib/keys/pinyinCompact.libsonnet`
 - `jsonnet/lib/keys/pinyinSystemKeys.libsonnet`
+
+## Shared key-style helpers
+
+- `jsonnet/lib/utils/keyStyles.libsonnet`
+- `jsonnet/lib/utils/styleFactories.libsonnet`
+
+Use these when changing reusable foreground style generation for 26-key letters or numeric keys.
 
 ## Shared style and data
 
@@ -151,7 +161,7 @@ Prefer editing specs before editing builders.
 - `jsonnet/lib/shared/slideForeground.libsonnet`
 - `jsonnet/lib/data/hintSymbolsData.libsonnet`
 - `jsonnet/lib/data/swipeData.libsonnet`
-- `jsonnet/lib/data/swipeData-en.libsonnet`
+- `jsonnet/lib/data/swipeDataEn.libsonnet`
 - `jsonnet/lib/data/collectionData.libsonnet`
 
 Use these for pure style or data updates.

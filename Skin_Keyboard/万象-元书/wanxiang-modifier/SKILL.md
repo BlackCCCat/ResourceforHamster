@@ -59,7 +59,7 @@ Use it when the user asks to:
    - docs only after code is settled
    - for 9-key bottom-row swaps, prefer `Custom.libsonnet` + `layout/keyboardLayoutBaseData.libsonnet`
    - for landscape 9-key split layout changes, prefer `layout/keyboardLayoutBaseData.libsonnet`; only touch `builders/pinyin9Builder.libsonnet` when the component type definition itself changes
-   - for landscape numeric split layout changes, prefer `layout/numericLayout.libsonnet`; only touch `builders/numeric9Builder.libsonnet` when the symbol panel or collection component definition itself changes
+   - for landscape numeric split layout changes, prefer `layout/numeric9Layout.libsonnet`; only touch `builders/numeric9Builder.libsonnet` when the symbol panel or collection component definition itself changes
 4. Before editing, inspect the relevant mapping in `references/file-map.md`.
 5. Keep behavior stable unless the user explicitly asks for a behavior change.
 6. After every code change, validate with Jsonnet.

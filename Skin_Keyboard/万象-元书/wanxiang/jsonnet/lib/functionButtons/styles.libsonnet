@@ -1,14 +1,46 @@
-// 生成功能按键专用前景样式，避免 functionButtons 相关逻辑散落在 utils 目录中。
+// 生成功能按键专用前景样式，并内聚功能按键自己的 SF Symbol 映射。
 local Settings = import '../../Custom.libsonnet';
-local styleShared = import '../utils/shared.libsonnet';
-local styleSpecs = import 'styleSpecs.libsonnet';
+local styleFactories = import '../utils/styleFactories.libsonnet';
 
 {
+  funcKeyMap: {
+    left: 'left',
+    head: 'head',
+    select: 'select',
+    cut: 'cut',
+    copy: 'copy',
+    paste: 'paste',
+    tail: 'tail',
+    right: 'right',
+  },
+
+  funcKeySystemImageNameMap(Settings): {
+    left: 'arrowshape.turn.up.left.fill',
+    head: 'text.line.first.and.arrowtriangle.forward',
+    select: 'selection.pin.in.out',
+    cut: 'scissors',
+    copy: 'arrow.up.doc.on.clipboard',
+    paste: 'doc.on.clipboard.fill',
+    tail: 'text.line.last.and.arrowtriangle.forward',
+    right: 'arrowshape.turn.up.right.fill',
+  },
+
+  funcKeyPreeditSystemImageNameMap(Settings): {
+    left: 'square.filled.and.line.vertical.and.square',
+    head: if Settings.fix_sf_symbol then 'arrow.up.arrow.down' else 'chevron.compact.up.chevron.compact.down',
+    select: '1.circle',
+    cut: '2.circle',
+    copy: '3.circle',
+    paste: '4.circle',
+    tail: if Settings.fix_sf_symbol then 'ellipsis.curlybraces' else 'ellipsis.viewfinder',
+    right: 'square.and.line.vertical.and.square.filled',
+  },
+
   genFuncKeyStyles(fontSize, color, theme, center)::
-    local funcKeyMap = styleSpecs.funcKeyMap;
-    local funcKeySystemImageNameMap = styleSpecs.funcKeySystemImageNameMap(Settings);
-    local funcKeyPreeditSystemImageNameMap = styleSpecs.funcKeyPreeditSystemImageNameMap(Settings);
-    styleShared.genSystemImageStates(
+    local funcKeyMap = self.funcKeyMap;
+    local funcKeySystemImageNameMap = self.funcKeySystemImageNameMap(Settings);
+    local funcKeyPreeditSystemImageNameMap = self.funcKeyPreeditSystemImageNameMap(Settings);
+    styleFactories.genSystemImageStates(
       funcKeyMap,
       funcKeySystemImageNameMap,
       'ButtonForegroundStyle',
@@ -16,7 +48,7 @@ local styleSpecs = import 'styleSpecs.libsonnet';
       color[theme]['按键前景颜色'],
       color[theme]['按键前景颜色'],
       center['功能键前景文字偏移']
-    ) + styleShared.genSystemImageStates(
+    ) + styleFactories.genSystemImageStates(
       funcKeyMap,
       funcKeyPreeditSystemImageNameMap,
       'ButtonPreeditForegroundStyle',
@@ -24,7 +56,7 @@ local styleSpecs = import 'styleSpecs.libsonnet';
       color[theme]['按键前景颜色'],
       color[theme]['按键前景颜色'],
       center['功能键前景文字偏移']
-    ) + styleShared.genSystemImageStates(
+    ) + styleFactories.genSystemImageStates(
       funcKeyMap,
       funcKeySystemImageNameMap,
       'ButtonUppercasedStateForegroundStyle',

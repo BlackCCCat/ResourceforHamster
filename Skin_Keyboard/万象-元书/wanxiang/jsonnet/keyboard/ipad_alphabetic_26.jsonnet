@@ -1,12 +1,12 @@
 // Expose the iPad 26-key alphabetic keyboard through the shared iPad 26-key overlay builder.
 local Settings = import '../Custom.libsonnet';
-local keyboardLayouts = import '../lib/layout/keyboardLayouts.libsonnet';
+local keyboardLayoutProvider = import '../lib/layout/keyboardLayoutProvider.libsonnet';
 local ipad26Builder = import '../lib/builders/ipad26Builder.libsonnet';
 local alphabetic_base = import 'alphabetic_26.jsonnet';
 local toolbar_ipad = import '../lib/toolbar/ipad.libsonnet';
-local utils = import '../lib/utils/index.libsonnet';
+local keyStyles = import '../lib/utils/keyStyles.libsonnet';
 local hintSymbolsData = import '../lib/data/hintSymbolsData.libsonnet';
-local swipeData = import '../lib/data/swipeData-en.libsonnet';
+local swipeData = import '../lib/data/swipeDataEn.libsonnet';
 
 local deviceType = 'iPad';
 
@@ -17,7 +17,7 @@ local config = {
   swipeStyleType: 'en',
   hintData: hintSymbolsData.alphabetic,
   layoutKey: 'ipad英文26键',
-  styleGenerator(fontSize, color, theme, center): utils.genAlphabeticStyles(fontSize, color, theme, center),
+  styleGenerator(fontSize, color, theme, center): keyStyles.genAlphabeticStyles(fontSize, color, theme, center),
   fontSizeOverrides: {
     '按键前景文字大小': 24,
     '上划文字大小': 12,
@@ -40,6 +40,6 @@ local config = {
       config,
       theme,
       orientation,
-      keyboardLayouts.getKeyboardLayout(theme, Settings.function_button_config.with_functions_row[deviceType])
+      keyboardLayoutProvider.getKeyboardLayout(theme, Settings.function_button_config.with_functions_row[deviceType])
     ),
 }

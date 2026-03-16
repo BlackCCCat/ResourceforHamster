@@ -8,14 +8,14 @@ local hintSymbolsData = import '../data/hintSymbolsData.libsonnet';
 local hintSymbolsStyles = import '../shared/hintSymbolsStyles.libsonnet';
 local keyBuilders = import '../keys/keyBuilders.libsonnet';
 local keyboardBaseStyles = import '../shared/keyboardBaseStyles.libsonnet';
-local letterKeySpecs = import '../keys/letterKeySpecs.libsonnet';
+local letter26KeysSpecs = import '../keys/letter26KeysSpecs.libsonnet';
 local others = import '../shared/others.libsonnet';
 local slideForeground = import '../shared/slideForeground.libsonnet';
 local systemKeysPinyin26 = import '../specs/systemKeysPinyin26.libsonnet';
 local swipeData = import '../data/swipeData.libsonnet';
 local swipeStyles = import '../swipe/index.libsonnet';
 local toolbar = import '../toolbar/index.libsonnet';
-local utils = import '../utils/index.libsonnet';
+local utils = import '../utils/keyStyles.libsonnet';
 local functions = import '../functionButtons/index.libsonnet';
 local functionButtonStyles = import '../functionButtons/styles.libsonnet';
 
@@ -34,10 +34,10 @@ local functionButtonStyles = import '../functionButtons/styles.libsonnet';
     local swipeDataRoot = swipeData.genSwipeData(context.deviceType);
     local swipeUp = if std.objectHas(swipeDataRoot, 'swipe_up') then swipeDataRoot.swipe_up else {};
     local swipeDown = if std.objectHas(swipeDataRoot, 'swipe_down') then swipeDataRoot.swipe_down else {};
-    local letterSpecs = letterKeySpecs.get26KeySpecs(orientation, keyboardLayout);
+    local letterSpecs = letter26KeysSpecs.get26KeySpecs(orientation, keyboardLayout);
     local letterKeys = [spec.key for spec in letterSpecs];
     local hintStyles = hintSymbolsStyles.getStyle(theme, hintSymbolsData.pinyin);
-    local createButton = self.createButtonFactory(context, swipeUp, swipeDown, letterKeySpecs.letters);
+    local createButton = self.createButtonFactory(context, swipeUp, swipeDown, letter26KeysSpecs.letters);
     keyboardLayout[if orientation == 'portrait' then '竖屏中文26键' else '横屏中文26键'] +
     swipeStyles.getStyle('cn', theme, swipeUp, swipeDown) +
     hintStyles +

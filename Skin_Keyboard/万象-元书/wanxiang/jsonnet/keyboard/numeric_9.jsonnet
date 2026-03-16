@@ -1,18 +1,18 @@
 // Expose the numeric 9-key keyboard through a thin entry module backed by shared context and builder logic.
 local Settings = import '../Custom.libsonnet';
-local contextLib = import '../lib/core/context.libsonnet';
+local keyboardRuntime = import '../lib/core/keyboardRuntime.libsonnet';
 local numeric9Builder = import '../lib/builders/numeric9Builder.libsonnet';
-local numericLayout = import '../lib/layout/numericLayout.libsonnet';
+local numeric9Layout = import '../lib/layout/numeric9Layout.libsonnet';
 
 local chooseLayout(selector) =
-  if selector then numericLayout.LayoutWithFunc else numericLayout.LayoutWithoutFunc;
+  if selector then numeric9Layout.LayoutWithFunc else numeric9Layout.LayoutWithoutFunc;
 
 local chooseLandscapeLayout() =
-  numericLayout.LandscapeLayout;
+  numeric9Layout.LandscapeLayout;
 
 local moduleForDevice(deviceType) = {
   keyboard(theme, orientation):
-    local context = contextLib.new(Settings, theme, orientation, deviceType);
+    local context = keyboardRuntime.new(Settings, theme, orientation, deviceType);
     numeric9Builder.build(
       context,
       if orientation == 'portrait' then

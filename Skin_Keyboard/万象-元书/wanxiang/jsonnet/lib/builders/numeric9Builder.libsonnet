@@ -13,7 +13,7 @@ local others = import '../shared/others.libsonnet';
 local slideForeground = import '../shared/slideForeground.libsonnet';
 local swipeStyles = import '../swipe/index.libsonnet';
 local toolbar = import '../toolbar/index.libsonnet';
-local utils = import '../utils/index.libsonnet';
+local utils = import '../utils/keyStyles.libsonnet';
 
 {
   createButtonFactory(context, swipeUp, swipeDown)::

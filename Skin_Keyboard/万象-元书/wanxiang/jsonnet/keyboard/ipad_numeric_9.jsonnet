@@ -1,6 +1,6 @@
 local numeric9 = import 'numeric_9.jsonnet';
 local toolbar_ipad = import '../lib/toolbar/ipad.libsonnet';
-local utils = import '../lib/utils/index.libsonnet';
+local keyStyles = import '../lib/utils/keyStyles.libsonnet';
 local color = import '../lib/shared/color.libsonnet';
 local center = import '../lib/shared/center.libsonnet';
 local fontSize = import '../lib/shared/fontSize.libsonnet';
@@ -26,7 +26,7 @@ local ipad_keyboard(theme, orientation) =
 
   local ipad_overrides =
     toolbar_def +
-    utils.genNumberStyles(ipad_fontSize, color, theme, center) +
+    keyStyles.genNumberStyles(ipad_fontSize, color, theme, center) +
     {
       preeditHeight: ipad_others[if orientation == 'portrait' then '竖屏' else '横屏']['preedit高度'],
       toolbarHeight: ipad_others[if orientation == 'portrait' then '竖屏' else '横屏']['toolbar高度'],

@@ -18,7 +18,7 @@ Notes:
   - affected entry: `jsonnet/keyboard/pinyin_9.jsonnet`
 - Example:
   - `swap_numeric_return_symbol`
-  - reader: `jsonnet/lib/layout/numericLayout.libsonnet`
+  - reader: `jsonnet/lib/layout/numeric9Layout.libsonnet`
   - affected entry: `jsonnet/keyboard/numeric_9.jsonnet`
 - Example:
   - `function_button_config.with_functions_row.iPhone`
@@ -30,7 +30,7 @@ Notes:
 
 1. Edit `jsonnet/lib/functionButtons/specs.libsonnet` first.
 2. If order is involved, also inspect `jsonnet/lib/layout/keyboardLayoutFuncRowPatch.libsonnet`.
-3. If the change is only about function-button foreground styles or SF Symbols, prefer `jsonnet/lib/functionButtons/styles.libsonnet` and `jsonnet/lib/functionButtons/styleSpecs.libsonnet`.
+3. If the change is only about function-button foreground styles or SF Symbols, prefer `jsonnet/lib/functionButtons/styles.libsonnet`.
 4. Only edit `jsonnet/lib/functionButtons/builder.libsonnet` if the current build logic cannot express the new button.
 5. Compile one keyboard with function row enabled.
 6. If buttons are removed from `function_button_config.order`, ensure the function-row layout still auto-distributes width across the remaining buttons.
@@ -91,7 +91,7 @@ Notes:
 
 1. Treat this as a layout-layer task first.
 2. Edit:
-   - `jsonnet/lib/layout/numericLayout.libsonnet`
+   - `jsonnet/lib/layout/numeric9Layout.libsonnet`
 3. Only edit:
    - `jsonnet/lib/builders/numeric9Builder.libsonnet`
    when changing component definitions such as `collection`, `landscapeNumericSymbols`, or symbol panel type.

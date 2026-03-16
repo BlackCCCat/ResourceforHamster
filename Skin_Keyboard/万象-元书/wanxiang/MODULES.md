@@ -58,6 +58,28 @@
 
 ## 三、builder 层
 
+## 三、core 层
+
+### `jsonnet/lib/core/`
+
+职责：
+
+- 管理共享运行时上下文
+- 统一根据 `theme`、`orientation`、`deviceType` 解析有效布局
+
+主要文件：
+
+- `keyboardRuntime.libsonnet`
+  - 合并后的运行时入口
+  - 同时提供 `new(...)` 和 `getKeyboardLayout(...)`
+
+什么时候改：
+
+- 新增共享上下文字段
+- 调整按设备读取布局或功能行的公共规则
+
+## 四、builder 层
+
 ### `jsonnet/lib/builders/`
 
 职责：
@@ -75,9 +97,7 @@
 - `compactKeyboardBuilder.libsonnet`
   - 14 键 / 18 键共享 builder
 - `pinyin9Builder.libsonnet`
-  - 中文 9 键 builder
-- `pinyin9ButtonFactory.libsonnet`
-  - 中文 9 键按钮工厂
+  - 中文 9 键 builder，内部已合并 9 键按钮工厂
 - `numeric9Builder.libsonnet`
   - 数字键盘 builder
 - `ipad26Builder.libsonnet`
@@ -88,7 +108,7 @@
 - 某类键盘的生成逻辑要变
 - 想把重复逻辑继续抽成共享工厂
 
-## 四、spec 层
+## 五、spec 层
 
 ### `jsonnet/lib/specs/`
 
@@ -126,7 +146,7 @@
 - 修改某类系统键的规格
 - 调整 26 键字母模板尺寸规则
 
-## 五、layout 层
+## 六、layout 层
 
 ### `jsonnet/lib/layout/`
 
@@ -136,18 +156,18 @@
 
 主要文件：
 
+- `keyboardLayoutProvider.libsonnet`
+  - 对外统一布局解析入口
 - `keyboardLayoutBaseData.libsonnet`
   - 无 function-row 的基础布局数据
   - 同时负责 9 键底行基础槽位定义，例如 `swap_9_123_symbol` 对 `123` 与符号按钮位置/尺寸的交换
   - 同时负责数字键盘底部基础槽位定义，例如 `swap_numeric_return_symbol` 对返回按钮与切换键盘按钮位置/尺寸的交换
   - 同时负责横屏 9 键的分栏布局，以及 `with_functions_row.iPhone` 对横屏 9 键顶部功能按键显隐与高度的联动
-  - 同时负责横屏数字键盘的分栏布局，以及 `with_functions_row.iPhone` 对横屏数字键盘顶部功能按键显隐与高度的联动
-- `keyboardLayoutBase.libsonnet`
-  - base 数据入口
+  - 同时负责 9 键竖屏与横屏共享的基础尺寸和底行槽位
 - `keyboardLayoutFuncRowPatch.libsonnet`
   - function-row patch
-- `keyboardLayouts.libsonnet`
-  - 对外统一布局解析入口
+- `numeric9Layout.libsonnet`
+  - 数字键盘专用布局入口，负责竖屏和 iPhone 横屏数字键盘布局
 
 什么时候改：
 
@@ -161,13 +181,13 @@
 - 横屏 9 键的布局归 layout 层管理，入口在 `keyboardLayoutBaseData.libsonnet`
 - 横屏 9 键里真正的 `verticalCandidates` / `collection` 类型定义仍由构建层提供，位置在：
   - `jsonnet/lib/builders/pinyin9Builder.libsonnet`
-- 横屏数字键盘的布局归 `numericLayout.libsonnet` 管理：
+- 横屏数字键盘的布局归 `numeric9Layout.libsonnet` 管理：
   - 左侧第一列是 `collection + 返回/切换按钮`
   - 左侧第二列是独立符号面板
 - 横屏数字键盘里真正的 `collection` / `landscapeNumericSymbols` 组件类型定义仍由构建层提供，位置在：
   - `jsonnet/lib/builders/numeric9Builder.libsonnet`
 
-## 六、toolbar 层
+## 七、toolbar 层
 
 ### `jsonnet/lib/toolbar/`
 
@@ -190,7 +210,7 @@
 
 - `jsonnet/lib/toolbar/index.libsonnet`
 - `jsonnet/lib/toolbar/ipad.libsonnet`
-- `jsonnet/lib/toolbar/en.libsonnet`
+- `jsonnet/lib/toolbar/toolbarEn.libsonnet`
 
 什么时候改：
 
@@ -198,7 +218,7 @@
 - 调整 toolbar 布局模式
 - 调整 iPhone/iPad toolbar 配置行为
 
-## 七、functionButton 层
+## 八、functionButton 层
 
 ### `jsonnet/lib/functionButtons/`
 
@@ -212,7 +232,6 @@
 - `specs.libsonnet`
 - `builder.libsonnet`
 - `styles.libsonnet`
-- `styleSpecs.libsonnet`
 
 入口文件：
 
@@ -232,7 +251,7 @@
 - `jsonnet/Custom.libsonnet` 中的 `function_button_config.enable_notification`
 - `jsonnet/lib/functionButtons/specs.libsonnet` 中的 `defaultOrderedKeys`
 
-## 八、utils / swipe / 样式层
+## 九、utils / swipe / 样式层
 
 ### `jsonnet/lib/utils/`
 
@@ -244,9 +263,8 @@
 
 主要文件：
 
-- `jsonnet/lib/utils/index.libsonnet`
-- `jsonnet/lib/utils/shared.libsonnet`
-- `jsonnet/lib/utils/specs.libsonnet`
+- `jsonnet/lib/utils/keyStyles.libsonnet`
+- `jsonnet/lib/utils/styleFactories.libsonnet`
 
 ### `jsonnet/lib/swipe/`
 
@@ -268,7 +286,7 @@
 - `jsonnet/lib/data/hintSymbolsData.libsonnet`
 - `jsonnet/lib/shared/hintSymbolsStyles.libsonnet`
 - `jsonnet/lib/data/swipeData.libsonnet`
-- `jsonnet/lib/data/swipeData-en.libsonnet`
+- `jsonnet/lib/data/swipeDataEn.libsonnet`
 - `jsonnet/lib/shared/others.libsonnet`
 
 什么时候改：
@@ -276,7 +294,7 @@
 - 调整颜色、字号、偏移、上划/下划显示
 - 调整长按候选或符号数据
 
-## 九、新增一个布局时改哪些文件
+## 十、新增一个布局时改哪些文件
 
 按布局类型分情况。
 
