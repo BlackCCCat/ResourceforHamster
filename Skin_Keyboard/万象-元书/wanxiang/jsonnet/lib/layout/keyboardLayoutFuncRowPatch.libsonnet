@@ -6,6 +6,7 @@ local functionButtonSpecs = import '../functionButtons/specs.libsonnet';
   functionRowOrderedKeys:: functionButtonSpecs.resolveOrderedKeys(Settings),
 
   cell(name):: { Cell: name + 'Button' },
+  rawCell(name):: { Cell: name },
 
   functionCellWidth(count):: {
     width: {
@@ -150,31 +151,31 @@ local functionButtonSpecs = import '../functionButtons/specs.libsonnet';
     '横屏中文18键': $.compactLandscapeLayoutPatch(
       baseLayout['横屏中文18键'],
       [
-        [$.cell('qButton'), $.cell('weButton'), $.cell('rtButton'), $.cell('yButton')],
-        [$.cell('aButton'), $.cell('sdButton'), $.cell('fgButton')],
-        [$.cell('shiftButton'), $.cell('zButton'), $.cell('xcButton'), $.cell('vButton')],
-        [$.cell('123Button'), $.cell('spaceLeftButton'), $.cell('spaceFirstButton')],
+        [$.rawCell('qButton'), $.rawCell('weButton'), $.rawCell('rtButton'), $.rawCell('yButton')],
+        [$.rawCell('aButton'), $.rawCell('sdButton'), $.rawCell('fgButton')],
+        [$.rawCell('shiftButton'), $.rawCell('zButton'), $.rawCell('xcButton'), $.rawCell('vButton')],
+        [$.rawCell('123Button'), $.rawCell('spaceLeftButton'), $.rawCell('spaceFirstButton')],
       ],
       [
-        [$.cell('yButton'), $.cell('uButton'), $.cell('ioButton'), $.cell('pButton')],
-        [$.cell('hButton'), $.cell('jkButton'), $.cell('lButton')],
-        [$.cell('vButton'), $.cell('bnButton'), $.cell('mButton'), $.cell('backspaceButton')],
-        [$.cell('spaceSecondButton'), $.cell('cn2enButton'), $.cell('enterButton')],
+        [$.rawCell('yButton'), $.rawCell('uButton'), $.rawCell('ioButton'), $.rawCell('pButton')],
+        [$.rawCell('hButton'), $.rawCell('jkButton'), $.rawCell('lButton')],
+        [$.rawCell('vButton'), $.rawCell('bnButton'), $.rawCell('mButton'), $.rawCell('backspaceButton')],
+        [$.rawCell('spaceSecondButton'), $.rawCell('cn2enButton'), $.rawCell('enterButton')],
       ]
     ),
     '横屏中文14键': $.compactLandscapeLayoutPatch(
       baseLayout['横屏中文14键'],
       [
-        [$.cell('qwButton'), $.cell('erButton'), $.cell('tyButton')],
-        [$.cell('asButton'), $.cell('dfButton'), $.cell('ghButton')],
-        [$.cell('shiftButton'), $.cell('zxButton'), $.cell('cvButton')],
-        [$.cell('123Button'), $.cell('spaceLeftButton'), $.cell('spaceFirstButton')],
+        [$.rawCell('qwButton'), $.rawCell('erButton'), $.rawCell('tyButton')],
+        [$.rawCell('asButton'), $.rawCell('dfButton'), $.rawCell('ghButton')],
+        [$.rawCell('shiftButton'), $.rawCell('zxButton'), $.rawCell('cvButton')],
+        [$.rawCell('123Button'), $.rawCell('spaceLeftButton'), $.rawCell('spaceFirstButton')],
       ],
       [
-        [$.cell('tyButton'), $.cell('uiButton'), $.cell('opButton')],
-        [$.cell('ghButton'), $.cell('jkButton'), $.cell('lButton')],
-        [$.cell('bnButton'), $.cell('mButton'), $.cell('backspaceButton')],
-        [$.cell('spaceSecondButton'), $.cell('cn2enButton'), $.cell('enterButton')],
+        [$.rawCell('tyButton'), $.rawCell('uiButton'), $.rawCell('opButton')],
+        [$.rawCell('ghButton'), $.rawCell('jkButton'), $.rawCell('lButton')],
+        [$.rawCell('bnButton'), $.rawCell('mButton'), $.rawCell('backspaceButton')],
+        [$.rawCell('spaceSecondButton'), $.rawCell('cn2enButton'), $.rawCell('enterButton')],
       ]
     ),
   },
