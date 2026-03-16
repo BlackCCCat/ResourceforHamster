@@ -39,7 +39,7 @@ Notes:
 
 1. Edit `jsonnet/lib/toolbar/registry.libsonnet` for IDs, styles, and actions.
 2. Edit `jsonnet/lib/toolbar/shared.libsonnet` for config parsing.
-3. Edit `jsonnet/lib/toolbar/iPhoneRenderer.libsonnet` or `ipadRenderer.libsonnet` only if layout rules change.
+3. Edit `jsonnet/lib/toolbar/iPhoneRenderer.libsonnet` or `ipadRenderer.libsonnet` when changing layout rules or horizontalSymbols direction, such as `content_right_to_left`.
 4. Update `Custom.libsonnet` docs if a new public button ID becomes available.
 
 ## Add a compact layout

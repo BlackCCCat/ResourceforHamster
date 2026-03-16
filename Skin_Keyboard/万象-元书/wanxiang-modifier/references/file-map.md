@@ -92,6 +92,7 @@ Typical edits:
 - toolbar action mapping
 - iPhone or iPad ordering rules
 - toolbar menu behavior
+- horizontalSymbols 内容方向，例如 `content_right_to_left`
 
 ## Layout
 

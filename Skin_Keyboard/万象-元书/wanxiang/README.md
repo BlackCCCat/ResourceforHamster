@@ -283,6 +283,10 @@ function_button_config: {
   - `false`：使用皮肤内置浮动键盘。
   - `true`：使用 app 的 `keyboardMenu`。
 
+- `toolbar_config.content_right_to_left`
+  - 控制 iPhone 工具栏横向滑动区域是否从右向左排列内容。
+  - 当前由 `jsonnet/lib/toolbar/iPhoneRenderer.libsonnet` 读取。
+
 - `toolbar_config.mode`
   - iPhone 工具栏布局模式。
   - 可选值：`segmented`、`carousel`。
@@ -339,6 +343,10 @@ function_button_config: {
 - `toolbar_config.ipad.toolbar_menu`
   - 控制首个固定按钮使用键盘菜单还是浮动键盘。
   - 若未填写，则回退到 `toolbar_config.toolbar_menu`。
+
+- `toolbar_config.ipad.content_right_to_left`
+  - 控制 iPad 工具栏中间横向滑动区域是否从右向左排列内容。
+  - 当前由 `jsonnet/lib/toolbar/ipadRenderer.libsonnet` 读取。
 
 - `toolbar_config.ipad.center_slide`
   - 控制中间横向滑动区域的按钮列表。

@@ -1,4 +1,5 @@
 // 手机工具栏渲染器：只负责布局结构和 horizontalSymbols 数据源，不定义固定按钮样式。
+local Settings = import '../../Custom.libsonnet';
 local toolbarShared = import 'shared.libsonnet';
 
 {
@@ -27,26 +28,6 @@ local toolbarShared = import 'shared.libsonnet';
           },
         },
       ],
-      toolbarSlideButtons2: {
-        type: 'horizontalSymbols',
-        size: { width: '2/7' },
-        maxColumns: 2,
-        contentRightToLeft: false,
-        insets: { left: 3, right: 3 },
-        backgroundStyle: 'toolbarcollectionCellBackgroundStyle',
-        dataSource: 'horizontalSymbolsDataSource2',
-        cellStyle: 'toolbarcollectionCellStyle',
-      },
-      // 这一组是历史保留的二级工具入口，样式名和 action 在这里直接绑定。
-      // 如果后续调整某个入口动作，要同时检查 index.libsonnet 中固定按钮的同名样式定义。
-      horizontalSymbolsDataSource2: [
-        { label: '0', action: { openURL: 'hamster3://' }, styleName: 'toolbarButtonOpenAppMenuStyle' },
-        { label: '1', action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSettings' }, styleName: 'toolbarButtonKeyboardSettingsStyle' },
-        { label: '2', action: { openURL: 'hamster3://com.ihsiao.apps.hamster3/keyboardSkins' }, styleName: 'toolbarButtonKeyboardSkinsStyle' },
-        { label: '5', action: { shortcut: '#keyboardPerformance' }, styleName: 'toolbarButtonKeyboardPerformanceStyle' },
-        { label: '3', action: { shortcut: '#toggleEmbeddedInputMode' }, styleName: 'toolbarButtonEmbeddingToggleStyle' },
-        { label: '4', action: { shortcut: '#RimeSwitcher' }, styleName: 'toolbarButtonRimeSwitcherStyle' },
-      ],
       toolbarButtonKeyboardSelectionStyle: {
         type: 'horizontalSymbols',
         size: { width: '1/7' },
@@ -66,7 +47,7 @@ local toolbarShared = import 'shared.libsonnet';
         type: 'horizontalSymbols',
         size: { width: '2/7' },
         maxColumns: 2,
-        contentRightToLeft: false,
+        contentRightToLeft: Settings.toolbar_config.content_right_to_left,
         insets: { left: 3, right: 3 },
         backgroundStyle: 'toolbarcollectionCellBackgroundStyle',
         dataSource: 'horizontalSymbolsDataSourceLeft',
@@ -76,7 +57,7 @@ local toolbarShared = import 'shared.libsonnet';
         type: 'horizontalSymbols',
         size: { width: '2/7' },
         maxColumns: 2,
-        contentRightToLeft: false,
+        contentRightToLeft: Settings.toolbar_config.content_right_to_left,
         insets: { left: 3, right: 3 },
         backgroundStyle: 'toolbarcollectionCellBackgroundStyle',
         dataSource: 'horizontalSymbolsDataSourceRight',
@@ -86,7 +67,7 @@ local toolbarShared = import 'shared.libsonnet';
         type: 'horizontalSymbols',
         size: { width: '5/7' },
         maxColumns: 5,
-        contentRightToLeft: false,
+        contentRightToLeft: Settings.toolbar_config.content_right_to_left,
         insets: { left: 3, right: 3 },
         backgroundStyle: 'toolbarcollectionCellBackgroundStyle',
         dataSource: 'horizontalSymbolsDataSourceCenter',

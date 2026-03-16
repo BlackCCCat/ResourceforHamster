@@ -89,8 +89,6 @@ local getToolBar(theme) =
       // backgroundStyle: 'toolbarBackgroundStyle',
     },
     toolbarLayout: iPhoneRendererConfig.toolbarLayout,
-    toolbarSlideButtons2: iPhoneRendererConfig.toolbarSlideButtons2,
-    horizontalSymbolsDataSource2: iPhoneRendererConfig.horizontalSymbolsDataSource2,
 
     toolbarButtonKeyboardSelectionStyle: iPhoneRendererConfig.toolbarButtonKeyboardSelectionStyle,
     horizontalSymbolsDataSource3: iPhoneRendererConfig.horizontalSymbolsDataSource3,

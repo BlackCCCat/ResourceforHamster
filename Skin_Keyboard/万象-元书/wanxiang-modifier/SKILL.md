@@ -36,6 +36,7 @@ Use it when the user asks to:
  - adjust the dedicated landscape numeric split layout, including function-row visibility, left-side symbol panels, and slot swapping
 - add a new layout such as a compact layout variant
 - adjust toolbar structure or available toolbar IDs
+- adjust toolbar slide direction such as `content_right_to_left`
 - update README or module documentation after code changes
 - fix regressions inside the selected keyboard root
 

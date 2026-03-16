@@ -1,4 +1,5 @@
 // iPad 工具栏渲染器：固定首按钮 + 中间滑动区 + 固定收起按钮。
+local Settings = import '../../Custom.libsonnet';
 local toolbarShared = import 'shared.libsonnet';
 
 {
@@ -22,7 +23,7 @@ local toolbarShared = import 'shared.libsonnet';
         type: 'horizontalSymbols',
         size: { width: '11/13' },
         maxColumns: 11,
-        contentRightToLeft: false,
+        contentRightToLeft: Settings.toolbar_config.ipad.content_right_to_left,
         insets: { left: 3, right: 3 },
         backgroundStyle: 'toolbarcollectionCellBackgroundStyle',
         dataSource: 'horizontalSymbolsDataSourceIpadCenter',

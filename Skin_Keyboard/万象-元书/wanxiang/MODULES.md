@@ -203,8 +203,10 @@
   - 按钮注册表，包含 iPhone / iPad 共用的皮肤管理与皮肤调整按钮映射
 - `iPhoneRenderer.libsonnet`
   - iPhone toolbar 渲染
+  - 负责读取 `toolbar_config.content_right_to_left`
 - `ipadRenderer.libsonnet`
   - iPad toolbar 渲染
+  - 负责读取 `toolbar_config.ipad.content_right_to_left`
 
 入口文件：
 

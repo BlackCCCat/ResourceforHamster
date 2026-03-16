@@ -127,6 +127,7 @@
     // false: 使用皮肤内置的悬浮键盘
     // true: 使用 app 的 keyboardMenu
     toolbar_menu: false,
+    content_right_to_left: false,
 
     // segmented:
     // 固定按钮 + 左侧横向滑动 + 固定中间按钮 + 右侧横向滑动 + 固定收起按钮
@@ -209,6 +210,7 @@
       // false: 使用皮肤内置的悬浮键盘
       // true: 使用 app 的 keyboardMenu
       toolbar_menu: false,
+      content_right_to_left: false,
 
       // 可用按钮 ID:
       // keyboard_settings: 键盘设置
