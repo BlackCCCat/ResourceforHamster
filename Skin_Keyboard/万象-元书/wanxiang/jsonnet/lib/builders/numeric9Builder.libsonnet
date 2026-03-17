@@ -92,6 +92,11 @@ local utils = import '../utils/keyStyles.libsonnet';
           width: '29/183',
         },
       },
+      CenterStackStyle: {
+        size: {
+          width: '375/549',
+        },
+      },
       VStackStyle2: {
         size: {
           width: '125/549',

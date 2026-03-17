@@ -79,17 +79,33 @@ local pinyin9FunctionCells(keys) = [
                     subviews: [
                       {
                         HStack: {
-                          style: 'HStackStyle1',
                           subviews: [
-                            { VStack: { subviews: [{ Cell: 'number1Button' }, { Cell: 'number4Button' }, { Cell: 'number7Button' }] } },
-                            { VStack: { subviews: [{ Cell: 'number2Button' }, { Cell: 'number5Button' }, { Cell: 'number8Button' }] } },
-                            { VStack: { subviews: [{ Cell: 'number3Button' }, { Cell: 'number6Button' }, { Cell: 'number9Button' }] } },
+                            { Cell: 'number1Button' },
+                            { Cell: 'number2Button' },
+                            { Cell: 'number3Button' },
                           ],
                         },
                       },
                       {
                         HStack: {
-                          style: 'HStackStyle2',
+                          subviews: [
+                            { Cell: 'number4Button' },
+                            { Cell: 'number5Button' },
+                            { Cell: 'number6Button' },
+                          ],
+                        },
+                      },
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: 'number7Button' },
+                            { Cell: 'number8Button' },
+                            { Cell: 'number9Button' },
+                          ],
+                        },
+                      },
+                      {
+                        HStack: {
                           subviews: [
                             { Cell: pinyin9bottomRowSlots.right.cell },
                             { Cell: 'spaceButton' },
@@ -138,16 +154,6 @@ local pinyin9FunctionCells(keys) = [
         CenterStackStyle: {
           size: {
             width: '375/549',
-          },
-        },
-        HStackStyle1: {
-          size: {
-            height: '3/4',
-          },
-        },
-        HStackStyle2: {
-          size: {
-            height: '1/4',
           },
         },
       },
