@@ -20,7 +20,7 @@ async function extractLinks() {
     return accumulator;
   }, []);
 
-  // 返回最终格式化后的结果，遵循汇率脚本格式
+  // 返回最终格式化后的结果
   return [`[链接提取结果] -> 共找到 ${links.length} 个链接：`].concat(info);
 }
 
