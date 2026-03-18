@@ -3,7 +3,7 @@
 1. 请和[自定义配置](../../Input_Method/万象拼音/Rime4Hamster/)一起使用，尤其是自定义按键部分
 2. 打开元书输入法键盘皮肤中的“启动皮肤开发者模式”，导入后点击皮肤，或者在导入皮肤后长按手动运行`main.jsonnet`，两种方式来生成皮肤配置文件
 3. 支持一些简单的自定义配置：可长按皮肤阅读`README.md`
-4. 可以通过[该快捷指令](https://www.icloud.com/shortcuts/c541ddb2a1614732b2c9fde38bb89be6)自动下载最新版本并导入到元书输入法中
+4. 可以通过[该快捷指令](https://www.icloud.com/shortcuts/2aff51bac0bf41c6b9285a423d05176f)自动下载最新版本并导入到元书输入法中
 
 ## 万象拼音PRO
 

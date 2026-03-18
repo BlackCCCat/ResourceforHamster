@@ -217,7 +217,7 @@ local keyboard(theme, orientation) =
 
     ButtonBackgroundStyle: {
       buttonStyleType: 'geometry',
-      insets: { top: 10, left: 3, bottom: 10, right: 3 },
+      insets: { top: 5, left: 3, bottom: 5, right: 3 },
       normalColor: color[theme]['字母键背景颜色-普通'],
       highlightColor: color[theme]['字母键背景颜色-高亮'],
       cornerRadius: Settings.cornerRadius,
