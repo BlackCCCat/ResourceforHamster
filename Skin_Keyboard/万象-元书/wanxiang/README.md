@@ -179,6 +179,31 @@
 - `show_swipe`
   - 控制是否显示上下划前景。
 
+- `button_123_config`
+  - 控制 26 键、14 键、18 键的 `123Button` 是否使用滑动切换。
+  - `enable_slide: true` 时保持当前 `horizontalSymbols` 行为不变。
+  - `enable_slide: false` 时改用下面的二级交互配置：
+    - `secondary_action_mode: 'hint_symbols'`
+      - 点击保持切到数字键盘。
+      - 长按菜单中显示「符号键盘 / emoji 键盘」。
+    - `secondary_action_mode: 'swipe'`
+      - 点击保持切到数字键盘。
+      - `swipe_up_keyboard` / `swipe_down_keyboard` 控制上滑和下滑分别切到 `symbolic` 或 `emojis`。
+  - 14 键和 18 键复用 26 键这套 `123Button` 配置。
+
+- `button_symbol_config`
+  - 控制九键和数字键盘中的 `symbolButton` 是否使用滑动切换。
+  - `enable_slide: true` 时保持当前 `horizontalSymbols` 行为不变。
+  - `enable_slide: false` 时改用下面的二级交互配置：
+    - `secondary_action_mode: 'hint_symbols'`
+      - 点击保持切到符号键盘。
+      - 长按菜单中只显示「emoji 键盘」。
+    - `secondary_action_mode: 'swipe'`
+      - 点击保持切到符号键盘。
+      - 只保留上滑动作。
+      - `swipe_up_keyboard` 控制上滑切到哪个次级键盘；当前推荐保持为 `emojis`。
+  - 不影响九键 `swap_9_123_symbol` 或数字键盘 `swap_numeric_return_symbol` 的位置交换逻辑。
+
 - `tips_button_action`
   - 控制 tips 上屏按键动作。
   - 万象默认方式可改为 `{ character: ',' }`。

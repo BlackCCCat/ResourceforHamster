@@ -11,6 +11,8 @@ Inside `<keyboard-root>`:
 - config entry:
   - `jsonnet/Custom.libsonnet`
   - public layout toggles such as `swap_9_123_symbol` and `swap_numeric_return_symbol`
+  - public `123Button` interaction config such as `button_123_config`
+  - public 9-key / numeric symbol-button interaction config such as `button_symbol_config`
 - output entry:
   - `jsonnet/main.jsonnet`
 - maintenance docs:
@@ -56,6 +58,12 @@ For 9-key landscape split layout:
   - `collection` (`type: 't9Symbols'`)
   - `verticalCandidates`
   - candidate cell style
+
+For 9-key or numeric `symbolButton` interaction changes:
+
+- use `jsonnet/lib/builders/pinyin9Builder.libsonnet` for 9-key
+- use `jsonnet/lib/builders/numeric9Builder.libsonnet` for numeric
+- keep bottom-row position swaps in layout files, not in these builders
 
 ## Function buttons
 
@@ -135,6 +143,13 @@ Examples:
 - `jsonnet/lib/specs/pinyinSystemKeysEnter.libsonnet`
 
 Prefer editing specs before editing builders.
+
+For `123Button` interaction changes on 26-key / 14-key / 18-key:
+
+- `jsonnet/Custom.libsonnet`
+- `jsonnet/lib/specs/pinyinSystemKeysSwitcher.libsonnet`
+- `jsonnet/lib/specs/systemKeysAlphabetic26.libsonnet` when English 26-key should match
+- `jsonnet/lib/keys/pinyinCompact.libsonnet` only to verify reuse, not as the first edit target
 
 ## Shared key helpers
 

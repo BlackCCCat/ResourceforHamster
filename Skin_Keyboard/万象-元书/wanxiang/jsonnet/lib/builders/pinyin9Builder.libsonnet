@@ -15,6 +15,42 @@ local swipeStyles = import '../swipe/index.libsonnet';
 local toolbar = import '../toolbar/index.libsonnet';
 local utils = import '../utils/keyStyles.libsonnet';
 
+local symbolButtonConfig(settings) =
+  if std.objectHas(settings, 'button_symbol_config') then settings.button_symbol_config else {};
+
+local symbolButtonSlideEnabled(settings) =
+  if std.objectHas(symbolButtonConfig(settings), 'enable_slide') then symbolButtonConfig(settings).enable_slide else true;
+
+local symbolButtonSecondaryActionMode(settings) =
+  if std.objectHas(symbolButtonConfig(settings), 'secondary_action_mode') then symbolButtonConfig(settings).secondary_action_mode else 'hint_symbols';
+
+local normalizeKeyboardType(value, fallback) =
+  if value == 'symbolic' || value == 'emojis' then value else fallback;
+
+local symbolButtonSwipeMapping(settings) =
+  local conf = symbolButtonConfig(settings);
+  local up = normalizeKeyboardType(
+    if std.objectHas(conf, 'swipe_up_keyboard') then conf.swipe_up_keyboard else 'emojis',
+    'emojis'
+  );
+  {
+    // symbolButton 点击本身已经进入 symbolic，这里只保留一个次级目标。
+    up: if up == 'symbolic' then 'emojis' else up,
+  };
+
+local symbolButtonHintData = {
+  symbol: {
+    selectedIndex: 0,
+    list: [
+      {
+        action: { keyboardType: 'emojis' },
+        label: { systemImageName: 'face.dashed' },
+        fontSize: 16,
+      },
+    ],
+  },
+};
+
 {
   createButtonFactory(context, swipeUp, swipeDown, t9Letters)::
     function(key, size, bounds, root, isUpper=true)
@@ -81,6 +117,11 @@ local utils = import '../utils/keyStyles.libsonnet';
       for k in std.objectFields(hintSymbolsData.pinyin_9)
       if k != 'cn2en'
     };
+    local slideEnabled = symbolButtonSlideEnabled(context.Settings);
+    local useHintSymbols = !slideEnabled && symbolButtonSecondaryActionMode(context.Settings) == 'hint_symbols';
+    local useSwipeActions = !slideEnabled && symbolButtonSecondaryActionMode(context.Settings) == 'swipe';
+    local swipeTargets = symbolButtonSwipeMapping(context.Settings);
+    local symbolHintStyles = if useHintSymbols then hintSymbolsStyles.getStyle(theme, symbolButtonHintData) else {};
     slideForeground.slideForeground(theme) +
     hintSymbolsStyles.getStyle(theme, hintDataOnlyCn2en) +
     {
@@ -90,6 +131,7 @@ local utils = import '../utils/keyStyles.libsonnet';
     } +
     layout +
     hintSymbolsStyles.getStyle(theme, hintDataWithoutCn2en) +
+    symbolHintStyles +
     swipeStyles.getStyle('number', theme, swipeUp, swipeDown) +
     {
       collection: {
@@ -166,11 +208,15 @@ local utils = import '../utils/keyStyles.libsonnet';
     {
       symbolButton: createButtonWithHints('symbol', layout[sizeName].symbolButton, {}, $, false) + {
         backgroundStyle: 'systemButtonBackgroundStyle',
-        type: 'horizontalSymbols',
-        maxColumns: 1,
-        insets: { left: 3, right: 3 },
-        contentRightToLeft: false,
-        dataSource: 'symbolButtonSymbolsDataSource',
+        [if slideEnabled then 'type']: 'horizontalSymbols',
+        [if slideEnabled then 'maxColumns']: 1,
+        [if slideEnabled then 'insets']: { left: 3, right: 3 },
+        [if slideEnabled then 'contentRightToLeft']: false,
+        [if slideEnabled then 'dataSource']: 'symbolButtonSymbolsDataSource',
+        [if !slideEnabled then 'foregroundStyle']: 'symbolicButtonForegroundStyle',
+        [if !slideEnabled then 'action']: { keyboardType: 'symbolic' },
+        [if useHintSymbols then 'hintSymbolsStyle']: 'symbolButtonHintSymbolsStyle',
+        [if useSwipeActions then 'swipeUpAction']: { keyboardType: swipeTargets.up },
       },
       symbolButtonSymbolsDataSource: [
         { label: '1', action: { keyboardType: 'symbolic' }, styleName: 'symbolicStyle' },

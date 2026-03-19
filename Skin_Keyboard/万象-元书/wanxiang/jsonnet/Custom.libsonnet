@@ -62,6 +62,39 @@
   // 是否显示上下划前景
   show_swipe: true,
 
+  // 26键 / 14键 / 18键 的 123 按键交互配置
+  button_123_config: {
+    // true: 保持当前 horizontalSymbols 滑动切换
+    // false: 改用下方配置的长按菜单或上下滑动
+    enable_slide: true,
+
+    // 当 enable_slide 为 false 时生效
+    // hint_symbols: 使用长按菜单显示「符号键盘 / emoji键盘」
+    // swipe: 使用上下滑动切换「符号键盘 / emoji键盘」
+    secondary_action_mode: 'hint_symbols',
+
+    // 当 secondary_action_mode 为 swipe 时生效
+    // 可选值: symbolic / emojis
+    swipe_up_keyboard: 'symbolic',
+    swipe_down_keyboard: 'emojis',
+  },
+
+  // 九键 / 数字键盘的符号按钮交互配置
+  button_symbol_config: {
+    // true: 保持当前 horizontalSymbols 滑动切换
+    // false: 改用下方配置的长按菜单或上下滑动
+    enable_slide: true,
+
+    // 当 enable_slide 为 false 时生效
+    // hint_symbols: 使用长按菜单显示「emoji键盘」
+    // swipe: 仅使用上滑切换到次级键盘
+    secondary_action_mode: 'hint_symbols',
+
+    // 当 secondary_action_mode 为 swipe 时生效
+    // symbolButton 点击本身已经进入 symbolic，因此这里只建议设置为 emojis
+    swipe_up_keyboard: 'emojis',
+  },
+
   // tips 上屏动作
   // 万象默认可改为 { character: ',' }
   tips_button_action: { sendKeys: 'Break' },

@@ -145,6 +145,7 @@
 - 新增一个紧凑键布局
 - 修改某类系统键的规格
 - 调整 26 键字母模板尺寸规则
+- 调整 `123Button` 的交互模式，例如滑动切换、长按菜单、上下滑切换
 
 ## 六、layout 层
 
@@ -252,6 +253,56 @@
 - `jsonnet/Custom.libsonnet` 中的 `function_button_config.order`
 - `jsonnet/Custom.libsonnet` 中的 `function_button_config.enable_notification`
 - `jsonnet/lib/functionButtons/specs.libsonnet` 中的 `defaultOrderedKeys`
+
+## 十、123Button 交互配置
+
+### `jsonnet/Custom.libsonnet`
+
+职责：
+
+- 暴露 `button_123_config`
+- 控制 26 键 / 14 键 / 18 键的 `123Button` 是使用滑动切换、长按菜单，还是上下滑动
+
+### 相关实现文件
+
+- `jsonnet/lib/specs/pinyinSystemKeysSwitcher.libsonnet`
+  - 中文 26 键 `123Button` 定义
+  - 14 键 / 18 键通过复用这套定义继承相同行为
+- `jsonnet/lib/specs/systemKeysAlphabetic26.libsonnet`
+  - 英文 26 键 `123Button` 定义
+- `jsonnet/lib/keys/pinyinCompact.libsonnet`
+  - 14 键 / 18 键复用 `123Button` 与对应数据源
+
+什么时候改：
+
+- 想保持当前 `horizontalSymbols` 滑动切换
+- 想改成点击切数字键盘 + 长按菜单切符号/emoji
+- 想改成点击切数字键盘 + 上滑/下滑切符号/emoji
+
+## 十一、九键 / 数字键盘符号按钮交互配置
+
+### `jsonnet/Custom.libsonnet`
+
+职责：
+
+- 暴露 `button_symbol_config`
+- 控制九键与数字键盘 `symbolButton` 是使用滑动切换、长按菜单，还是上下滑动
+
+### 相关实现文件
+
+- `jsonnet/lib/builders/pinyin9Builder.libsonnet`
+  - 九键 `symbolButton` 定义
+  - 负责长按菜单样式、上下滑动行为与默认点击动作
+- `jsonnet/lib/builders/numeric9Builder.libsonnet`
+  - 数字键盘 `symbolButton` 定义
+  - 负责长按菜单样式、上下滑动行为与默认点击动作
+
+什么时候改：
+
+- 想保持当前 `horizontalSymbols` 滑动切换
+- 想改成点击切符号键盘 + 长按菜单切 emoji
+- 想改成点击切符号键盘 + 上滑切次级键盘
+- 想调整这两个键盘里 `symbolButton` 的菜单图标或滑动目标
 
 ## 九、utils / swipe / 样式层
 

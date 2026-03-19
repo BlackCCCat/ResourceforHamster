@@ -2,9 +2,49 @@
 local center = import '../shared/center.libsonnet';
 local color = import '../shared/color.libsonnet';
 local fontSize = import '../shared/fontSize.libsonnet';
+local Settings = import '../../Custom.libsonnet';
+
+local config(settings) =
+  if std.objectHas(settings, 'button_123_config') then settings.button_123_config else {};
+
+local enableSlide(settings) =
+  if std.objectHas(config(settings), 'enable_slide') then config(settings).enable_slide else true;
+
+local secondaryActionMode(settings) =
+  if std.objectHas(config(settings), 'secondary_action_mode') then config(settings).secondary_action_mode else 'hint_symbols';
+
+local normalizeKeyboardType(value, fallback) =
+  if value == 'symbolic' || value == 'emojis' then value else fallback;
+
+local swipeMapping(settings) =
+  local conf = config(settings);
+  local up = normalizeKeyboardType(
+    if std.objectHas(conf, 'swipe_up_keyboard') then conf.swipe_up_keyboard else 'symbolic',
+    'symbolic'
+  );
+  local downDefault = if up == 'symbolic' then 'emojis' else 'symbolic';
+  local down = normalizeKeyboardType(
+    if std.objectHas(conf, 'swipe_down_keyboard') then conf.swipe_down_keyboard else downDefault,
+    downDefault
+  );
+  if down == up then
+    {
+      up: up,
+      down: if up == 'symbolic' then 'emojis' else 'symbolic',
+    }
+  else
+    {
+      up: up,
+      down: down,
+    };
 
 {
-  getOverrides(theme, keyboardLayout, createButtonFunc, hintRoot):: {
+  getOverrides(theme, keyboardLayout, createButtonFunc, hintRoot):: (
+    local slideEnabled = enableSlide(Settings);
+    local useHintSymbols = !slideEnabled && secondaryActionMode(Settings) == 'hint_symbols';
+    local useSwipeActions = !slideEnabled && secondaryActionMode(Settings) == 'swipe';
+    local swipeTargets = swipeMapping(Settings);
+    {
     // 移除 iPhone 的 123Button
     '123Button':: null,
 
@@ -37,19 +77,22 @@ local fontSize = import '../shared/fontSize.libsonnet';
       hintRoot,
       false
     ) + {
-      type: 'horizontalSymbols',
-      maxColumns: 1,
-      contentRightToLeft: false,
       backgroundStyle: 'systemButtonBackgroundStyle',
-      
-      // 关键：确保这里引用的 styleName (如 numericStyle) 在 root 中是存在的
-      // 它们通常由 slideForeground.libsonnet 生成并被导入到 root
-      dataSource: 'ipad123ButtonSymbolsDataSource',
+      [if slideEnabled then 'type']: 'horizontalSymbols',
+      [if slideEnabled then 'maxColumns']: 1,
+      [if slideEnabled then 'contentRightToLeft']: false,
+      [if slideEnabled then 'dataSource']: 'ipad123ButtonSymbolsDataSource',
+      [if !slideEnabled then 'action']: { keyboardType: 'numeric' },
+      [if !slideEnabled then 'foregroundStyle']: ['123ButtonForegroundStyle'],
+      [if useHintSymbols then 'hintSymbolsStyle']: '123ButtonHintSymbolsStyle',
+      [if useSwipeActions then 'swipeUpAction']: { keyboardType: swipeTargets.up },
+      [if useSwipeActions then 'swipeDownAction']: { keyboardType: swipeTargets.down },
     },
     ipad123ButtonSymbolsDataSource: [
         { label: '1', action: { keyboardType: 'numeric' }, styleName: 'numericStyle' },
         { label: '2', action: { keyboardType: 'symbolic' }, styleName: 'symbolicStyle' },
         { label: '4', action: { keyboardType: 'emojis' }, styleName: 'emojisStyle' },
       ],
-  },
+    }
+  ),
 }

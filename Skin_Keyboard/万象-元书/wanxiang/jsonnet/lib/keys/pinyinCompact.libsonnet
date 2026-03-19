@@ -54,6 +54,15 @@
 
     '123Button': p26Layout['123Button'] + { size: { width: sizes.oneTwoThree } },
     '123ButtonSymbolsDataSource': p26Layout['123ButtonSymbolsDataSource'],
+    [if std.objectHas(p26Layout, '123ButtonHintSymbolsStyle') then '123ButtonHintSymbolsStyle']: p26Layout['123ButtonHintSymbolsStyle'],
+    [if std.objectHas(p26Layout, '123ButtonHintSymbolsForegroundStyleOf0') then '123ButtonHintSymbolsForegroundStyleOf0']:
+      p26Layout['123ButtonHintSymbolsForegroundStyleOf0'],
+    [if std.objectHas(p26Layout, '123ButtonHintSymbolsForegroundStyleOf1') then '123ButtonHintSymbolsForegroundStyleOf1']:
+      p26Layout['123ButtonHintSymbolsForegroundStyleOf1'],
+    [if std.objectHas(p26Layout, '123ButtonHintSymbolsStyleOf0') then '123ButtonHintSymbolsStyleOf0']:
+      p26Layout['123ButtonHintSymbolsStyleOf0'],
+    [if std.objectHas(p26Layout, '123ButtonHintSymbolsStyleOf1') then '123ButtonHintSymbolsStyleOf1']:
+      p26Layout['123ButtonHintSymbolsStyleOf1'],
 
     spaceButton: p26Layout.spaceButton + { size: { width: sizes.space } },
     spaceButtonForegroundStyle: p26Layout.spaceButtonForegroundStyle,

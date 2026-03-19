@@ -2,7 +2,7 @@
 local Settings = import '../../Custom.libsonnet';
 
 
-local genSwipeData(deviceType) = 
+local genSwipeData(deviceType) =
 {
   /*
   说明:
@@ -40,7 +40,6 @@ local genSwipeData(deviceType) =
     b: { action: { character: '>' }, label: { text: '>' } },
     n: { action: { character: '!' }, label: { text: '!' } },
     m: { action: { character: '?' }, label: { text: '?' } },
-    '123': { action: { keyboardType: 'symbolic' } },
     spaceLeft: { action: { character: '.' } },
     spaceRight: { action: { symbol: '.' } },
     // space: { action: { shortcut: '#次选上屏' } },
@@ -159,8 +158,8 @@ local genSwipeData(deviceType) =
     er: { action: { character: '+' }, label: { text: '+' } },
     ty: { action: { character: '*' }, label: { text: '*' } },
     ui: { action: { character: '=' }, label: { text: '=' } },
-    op: if Settings.function_button_config.with_functions_row[deviceType] then { 
-      action: { character: '%' }, label: { text: '%' } 
+    op: if Settings.function_button_config.with_functions_row[deviceType] then {
+      action: { character: '%' }, label: { text: '%' }
       } else {
         action: { shortcut: '#paste' },
         label: { systemImageName: 'doc.on.clipboard.fill' },

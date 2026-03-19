@@ -31,7 +31,9 @@ Use it when the user asks to:
 - reorder function buttons or toolbar buttons
 - add or change `Custom.libsonnet` options
 - expose or adjust 9-key bottom-row position options such as swapping `123` and symbol
- - expose or adjust numeric keyboard bottom-row position options such as swapping return and the switch-keyboard button
+- expose or adjust numeric keyboard bottom-row position options such as swapping return and the switch-keyboard button
+- expose or adjust `button_123_config` to switch 26-key / 14-key / 18-key `123Button` between slide, long-press menu, and swipe actions
+- expose or adjust `button_symbol_config` to switch 9-key / numeric `symbolButton` between slide, long-press menu, and swipe actions
 - adjust the dedicated landscape 9-key split layout, including function-row visibility, `collection`, and `verticalCandidates`
  - adjust the dedicated landscape numeric split layout, including function-row visibility, left-side symbol panels, and slot swapping
 - add a new layout such as a compact layout variant
@@ -59,6 +61,8 @@ Use it when the user asks to:
    - `layout/` only if button placement changes
    - docs only after code is settled
    - for 9-key bottom-row swaps, prefer `Custom.libsonnet` + `layout/keyboardLayoutBaseData.libsonnet`
+   - for `123Button` interaction changes on 26-key / 14-key / 18-key, prefer `Custom.libsonnet` + `specs/pinyinSystemKeysSwitcher.libsonnet`; only touch `specs/systemKeysAlphabetic26.libsonnet` when English 26-key should match
+   - for 9-key / numeric `symbolButton` interaction changes, prefer `Custom.libsonnet` + `builders/pinyin9Builder.libsonnet` / `builders/numeric9Builder.libsonnet`; do not touch bottom-row swap logic unless placement itself changes
    - for landscape 9-key split layout changes, prefer `layout/keyboardLayoutBaseData.libsonnet`; only touch `builders/pinyin9Builder.libsonnet` when the component type definition itself changes
    - for landscape numeric split layout changes, prefer `layout/numeric9Layout.libsonnet`; only touch `builders/numeric9Builder.libsonnet` when the symbol panel or collection component definition itself changes
 4. Before editing, inspect the relevant mapping in `references/file-map.md`.

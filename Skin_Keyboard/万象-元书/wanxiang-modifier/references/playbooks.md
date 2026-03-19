@@ -25,6 +25,24 @@ Notes:
   - may also affect the dedicated landscape 9-key split layout
   - reader: `jsonnet/lib/layout/keyboardLayoutBaseData.libsonnet`
   - affected entry: `jsonnet/keyboard/pinyin_9.jsonnet`
+- Example:
+  - `button_123_config`
+  - readers:
+    - `jsonnet/lib/specs/pinyinSystemKeysSwitcher.libsonnet`
+    - `jsonnet/lib/specs/systemKeysAlphabetic26.libsonnet`
+  - affected entries:
+    - `jsonnet/keyboard/pinyin_26.jsonnet`
+    - `jsonnet/keyboard/pinyin_18.jsonnet`
+    - `jsonnet/keyboard/pinyin_14.jsonnet`
+    - optionally `jsonnet/keyboard/alphabetic_26.jsonnet`
+- Example:
+  - `button_symbol_config`
+  - readers:
+    - `jsonnet/lib/builders/pinyin9Builder.libsonnet`
+    - `jsonnet/lib/builders/numeric9Builder.libsonnet`
+  - affected entries:
+    - `jsonnet/keyboard/pinyin_9.jsonnet`
+    - `jsonnet/keyboard/numeric_9.jsonnet`
 
 ## Add or change a function button
 
@@ -56,6 +74,25 @@ Notes:
 2. Prefer changing the most specific split module, such as shift, space, enter, or switcher.
 3. Only touch `jsonnet/lib/keys/pinyinSystemKeys.libsonnet` or the 26-key builders if the change affects assembly instead of the key behavior itself.
 
+## Change 123Button interaction
+
+1. If the interaction should be user-configurable, expose it in:
+   - `jsonnet/Custom.libsonnet`
+2. For Chinese 26-key and the compact 14/18 reuse path, edit:
+   - `jsonnet/lib/specs/pinyinSystemKeysSwitcher.libsonnet`
+3. If English 26-key should match, also edit:
+   - `jsonnet/lib/specs/systemKeysAlphabetic26.libsonnet`
+4. Keep the behavior split clear:
+   - slide mode -> `type: 'horizontalSymbols'` + dataSource
+   - long-press mode -> `hintSymbolsStyle`
+   - swipe mode -> `swipeUpAction` / `swipeDownAction`
+5. Validate with:
+   - `jsonnet -e \"(import '<keyboard-root>/jsonnet/keyboard/pinyin_26.jsonnet').new('light','portrait')\"`
+   - `jsonnet -e \"(import '<keyboard-root>/jsonnet/keyboard/pinyin_18.jsonnet').new('light','portrait')\"`
+   - `jsonnet -e \"(import '<keyboard-root>/jsonnet/keyboard/pinyin_14.jsonnet').new('light','portrait')\"`
+6. If English 26-key also changed, additionally validate:
+   - `jsonnet -e \"(import '<keyboard-root>/jsonnet/keyboard/alphabetic_26.jsonnet').new('light','portrait')\"`
+
 ## Change 9-key bottom-row button order
 
 1. If the change is user-configurable, expose it in `jsonnet/Custom.libsonnet`.
@@ -64,6 +101,27 @@ Notes:
 4. If the swapped buttons have different widths, swap the slot definitions together with the button names.
 5. Validate with:
    - `jsonnet -e "(import '<keyboard-root>/jsonnet/keyboard/pinyin_9.jsonnet').new('light','portrait')"`
+6. Update:
+   - `README.md`
+   - `MODULES.md`
+
+## Change 9-key / numeric symbolButton interaction
+
+1. If the interaction should be user-configurable, expose it in:
+   - `jsonnet/Custom.libsonnet`
+2. Edit:
+   - `jsonnet/lib/builders/pinyin9Builder.libsonnet`
+   - `jsonnet/lib/builders/numeric9Builder.libsonnet`
+3. Keep the behavior split clear:
+   - slide mode -> `type: 'horizontalSymbols'` + dataSource
+   - long-press mode -> `hintSymbolsStyle`, and the menu should only expose the secondary target
+   - swipe mode -> `swipeUpAction` only when the primary click action already occupies the base keyboard
+4. Do not break:
+   - `swap_9_123_symbol`
+   - `swap_numeric_return_symbol`
+5. Validate with:
+   - `jsonnet -e "(import '<keyboard-root>/jsonnet/keyboard/pinyin_9.jsonnet').new('light','portrait')"`
+   - `jsonnet -e "(import '<keyboard-root>/jsonnet/keyboard/numeric_9.jsonnet').new('light','portrait')"`
 6. Update:
    - `README.md`
    - `MODULES.md`

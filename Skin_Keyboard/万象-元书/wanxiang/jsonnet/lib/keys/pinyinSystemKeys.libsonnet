@@ -14,7 +14,7 @@ local pinyinSystemKeysSwitcher = import '../specs/pinyinSystemKeysSwitcher.libso
     pinyinSystemKeysShift.build(theme, orientation, keyboardLayout, Settings, color, fontSize, createButton, baseHintStyles) +
     pinyinSystemKeysBackspace.build(theme, orientation, keyboardLayout, color, fontSize, createButton, baseHintStyles) +
     pinyinSystemKeysCn2en.build(theme, orientation, keyboardLayout, Settings, color, fontSize, center, createButton, baseHintStyles) +
-    pinyinSystemKeysSwitcher.build(theme, orientation, keyboardLayout, createButton, baseHintStyles) +
+    pinyinSystemKeysSwitcher.build(theme, orientation, keyboardLayout, Settings, createButton, baseHintStyles) +
     pinyinSystemKeysSpace.build(theme, orientation, keyboardLayout, Settings, color, fontSize, center, createButton, baseHintStyles) +
   pinyinSystemKeysEnter.build(theme, orientation, keyboardLayout, Settings, color, fontSize, center, createButton, baseHintStyles),
 }
