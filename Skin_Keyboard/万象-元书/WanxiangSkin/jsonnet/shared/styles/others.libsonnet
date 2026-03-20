@@ -1,6 +1,6 @@
 // 定义共享尺寸与几何常量。
 
-local Settings = import '../../../Custom.libsonnet';
+local Settings = import '../../Custom.libsonnet';
 
 local fromVh(s) =
   local num = std.substr(s, 0, std.length(s) - 2);
