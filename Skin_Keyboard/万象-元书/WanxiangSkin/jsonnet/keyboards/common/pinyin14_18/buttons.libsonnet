@@ -1,0 +1,124 @@
+// 组装 14 键与 18 键共用的按钮集合。
+{
+  compactButtons(keys, createButton, root, theme):: {
+    [k.id + 'Button']: createButton(
+      k.id,
+      k.action,
+      { width: { percentage: k.width } },
+      if std.objectHas(k, 'bounds') && k.bounds != null then k.bounds else {},
+      root,
+      theme
+    )
+    for k in keys
+  },
+
+  compactForegroundStyles(keys, fontSize, color, theme):: 
+    local baseLetterFontSize = fontSize['14/18键字母前景文字大小'];
+    local normalizeLabel(label) = std.strReplace(label, ' ', '');
+    local getLetterFontSize(label) =
+      local compactLabel = normalizeLabel(label);
+      if std.length(compactLabel) <= 1 then baseLetterFontSize
+      else if baseLetterFontSize >= 22 then baseLetterFontSize - 2
+      else if baseLetterFontSize >= 18 then baseLetterFontSize - 1
+      else baseLetterFontSize;
+    {
+      [k.id + 'ButtonForegroundStyle']: {
+        buttonStyleType: 'text',
+        text: normalizeLabel(k.label),
+        normalColor: color[theme]['按键前景颜色'],
+        highlightColor: color[theme]['按键前景颜色'],
+        fontSize: getLetterFontSize(k.label),
+        center: { x: 0.5, y: 0.5 },
+      }
+      for k in keys
+    } + {
+      [k.id + 'ButtonUppercasedStateForegroundStyle']: {
+        buttonStyleType: 'text',
+        text: std.asciiUpper(normalizeLabel(k.label)),
+        normalColor: color[theme]['按键前景颜色'],
+        highlightColor: color[theme]['按键前景颜色'],
+        fontSize: getLetterFontSize(k.label),
+        center: { x: 0.5, y: 0.5 },
+      }
+      for k in keys
+    },
+
+  commonFromP26(p26Layout, sizes, baseHintStyles):: {
+    shiftButton: p26Layout.shiftButton + { size: { width: sizes.shift } },
+    shiftButtonForegroundStyle: p26Layout.shiftButtonForegroundStyle,
+    shiftButtonUppercasedForegroundStyle: p26Layout.shiftButtonUppercasedForegroundStyle,
+    shiftButtonCapsLockedForegroundStyle: p26Layout.shiftButtonCapsLockedForegroundStyle,
+
+    backspaceButton: p26Layout.backspaceButton + { size: { width: sizes.backspace } },
+    backspaceButtonForegroundStyle: p26Layout.backspaceButtonForegroundStyle,
+
+    '123Button': p26Layout['123Button'] + { size: { width: sizes.oneTwoThree } },
+    '123ButtonSymbolsDataSource': p26Layout['123ButtonSymbolsDataSource'],
+    [if std.objectHas(p26Layout, '123ButtonHintStyle') then '123ButtonHintStyle']:
+      p26Layout['123ButtonHintStyle'],
+    [if std.objectHas(p26Layout, '123ButtonHintForegroundStyle') then '123ButtonHintForegroundStyle']:
+      p26Layout['123ButtonHintForegroundStyle'],
+    [if std.objectHas(p26Layout, '123ButtonSwipeUpHintForegroundStyle') then '123ButtonSwipeUpHintForegroundStyle']:
+      p26Layout['123ButtonSwipeUpHintForegroundStyle'],
+    [if std.objectHas(p26Layout, '123ButtonSwipeDownHintForegroundStyle') then '123ButtonSwipeDownHintForegroundStyle']:
+      p26Layout['123ButtonSwipeDownHintForegroundStyle'],
+    [if std.objectHas(p26Layout, '123ButtonUpForegroundStyle') then '123ButtonUpForegroundStyle']:
+      p26Layout['123ButtonUpForegroundStyle'],
+    [if std.objectHas(p26Layout, '123ButtonDownForegroundStyle') then '123ButtonDownForegroundStyle']:
+      p26Layout['123ButtonDownForegroundStyle'],
+    [if std.objectHas(p26Layout, '123ButtonHintSymbolsStyle') then '123ButtonHintSymbolsStyle']: p26Layout['123ButtonHintSymbolsStyle'],
+    [if std.objectHas(p26Layout, '123ButtonHintSymbolsForegroundStyleOf0') then '123ButtonHintSymbolsForegroundStyleOf0']:
+      p26Layout['123ButtonHintSymbolsForegroundStyleOf0'],
+    [if std.objectHas(p26Layout, '123ButtonHintSymbolsForegroundStyleOf1') then '123ButtonHintSymbolsForegroundStyleOf1']:
+      p26Layout['123ButtonHintSymbolsForegroundStyleOf1'],
+    [if std.objectHas(p26Layout, '123ButtonHintSymbolsStyleOf0') then '123ButtonHintSymbolsStyleOf0']:
+      p26Layout['123ButtonHintSymbolsStyleOf0'],
+    [if std.objectHas(p26Layout, '123ButtonHintSymbolsStyleOf1') then '123ButtonHintSymbolsStyleOf1']:
+      p26Layout['123ButtonHintSymbolsStyleOf1'],
+
+    spaceButton: p26Layout.spaceButton + { size: { width: sizes.space } },
+    spaceButtonForegroundStyle: p26Layout.spaceButtonForegroundStyle,
+    spaceButtonPreeditNotification: p26Layout.spaceButtonPreeditNotification,
+    spaceButtonForegroundStyle1: p26Layout.spaceButtonForegroundStyle1,
+
+    spaceLeftButton: p26Layout.spaceLeftButton + { size: { width: sizes.spaceLeft } },
+    spaceLeftButtonForegroundStyle: p26Layout.spaceLeftButtonForegroundStyle,
+    spaceLeftButtonForegroundStyle2: p26Layout.spaceLeftButtonForegroundStyle2,
+    spaceRightButtonForegroundStyle: p26Layout.spaceRightButtonForegroundStyle,
+    spaceRightButtonForegroundStyle2: p26Layout.spaceRightButtonForegroundStyle2,
+
+    spaceFirstButtonPreeditNotification: p26Layout.spaceFirstButtonPreeditNotification,
+    spaceFirstButtonForegroundStyle: p26Layout.spaceFirstButtonForegroundStyle,
+    spaceSecondButtonPreeditNotification: p26Layout.spaceSecondButtonPreeditNotification,
+    spaceSecondButtonForegroundStyle: p26Layout.spaceSecondButtonForegroundStyle,
+    spaceSecondButtonForegroundStyle1: p26Layout.spaceSecondButtonForegroundStyle1,
+
+    spaceRightButtonPreeditNotification: p26Layout.spaceRightButtonPreeditNotification,
+    spaceRightButtonPreeditForegroundStyle: p26Layout.spaceRightButtonPreeditForegroundStyle,
+
+    cn2enButton: p26Layout.cn2enButton,
+    cn2enButtonForegroundStyle: p26Layout.cn2enButtonForegroundStyle,
+    cn2enButtonHintSymbolsStyle: baseHintStyles['cn2enButtonHintSymbolsStyle'] + {
+      symbolStyles: [
+        'cn2enButtonHintSymbolsStyleOf0',
+        'cn2enButtonHintSymbolsStyleOf4',
+        'cn2enButtonHintSymbolsStyleOf6',
+        'cn2enButtonHintSymbolsStyleOf8',
+      ],
+    },
+    cn2enButtonHintSymbolsStyleOf0: p26Layout.cn2enButtonHintSymbolsStyleOf0,
+    cn2enButtonHintSymbolsStyleOf4: p26Layout.cn2enButtonHintSymbolsStyleOf4,
+    cn2enButtonHintSymbolsStyleOf6: p26Layout.cn2enButtonHintSymbolsStyleOf6,
+    cn2enButtonHintSymbolsStyleOf8: p26Layout.cn2enButtonHintSymbolsStyleOf8,
+
+    enterButton: p26Layout.enterButton + { size: { width: sizes.enter } },
+    enterButtonForegroundStyle0: p26Layout.enterButtonForegroundStyle0,
+    enterButtonForegroundStyle6: p26Layout.enterButtonForegroundStyle6,
+    enterButtonForegroundStyle7: p26Layout.enterButtonForegroundStyle7,
+    enterButtonForegroundStyle14: p26Layout.enterButtonForegroundStyle14,
+    enterButtonForegroundStyle9: p26Layout.enterButtonForegroundStyle9,
+
+    spaceFirstButton: p26Layout.spaceFirstButton,
+    spaceSecondButton: p26Layout.spaceSecondButton,
+  },
+}

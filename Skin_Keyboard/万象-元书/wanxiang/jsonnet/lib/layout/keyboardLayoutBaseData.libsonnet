@@ -1,0 +1,1453 @@
+// Define the shared no-function-row keyboard layout content used as the base layout data.
+local Settings = import '../../Custom.libsonnet';
+local functionButtonSpecs = import '../functionButtons/specs.libsonnet';
+local color = import '../shared/color.libsonnet';
+
+local pinyin9bottomRowSlots =
+  if Settings.swap_9_123_symbol then {
+    left: {
+      cell: 'symbolButton',
+      sizeKey: { width: { percentage: 1 / 4 } },
+    },
+    right: {
+      cell: '123Button',
+      sizeKey: { width: { percentage: 1.5 / 7 } },
+    },
+  } else {
+    left: {
+      cell: '123Button',
+      sizeKey: { width: { percentage: 1 / 4 } },
+    },
+    right: {
+      cell: 'symbolButton',
+      sizeKey: { width: { percentage: 1.5 / 7 } },
+    },
+  };
+
+local pinyin9FunctionOrderedKeys = functionButtonSpecs.resolveOrderedKeys(Settings);
+local pinyin9FunctionSplitIndex = std.ceil(std.length(pinyin9FunctionOrderedKeys) / 2);
+local pinyin9LeftFunctionKeys = std.slice(pinyin9FunctionOrderedKeys, 0, pinyin9FunctionSplitIndex, 1);
+local pinyin9RightFunctionKeys = std.slice(pinyin9FunctionOrderedKeys, pinyin9FunctionSplitIndex, std.length(pinyin9FunctionOrderedKeys), 1);
+local pinyin9FunctionCellWidth(keys) = 1 / std.length(keys);
+local pinyin9LandscapeShowFunctions = Settings.function_button_config.with_functions_row.iPhone;
+local pinyin9LandscapeTopHeight = if pinyin9LandscapeShowFunctions then 0.17 else 0;
+local pinyin9LandscapeBottomHeight = if pinyin9LandscapeShowFunctions then 0.83 else 1;
+local pinyin9FunctionCells(keys) = [
+  {
+    Cell: key + 'Button',
+    size: {
+      width: {
+        percentage: pinyin9FunctionCellWidth(keys),
+      },
+    },
+  }
+  for key in keys
+];
+
+{
+  getKeyboardLayout(theme)::
+    {
+      '竖屏中文9键': {
+        '竖屏按键尺寸': {
+          [pinyin9bottomRowSlots.left.cell]: pinyin9bottomRowSlots.left.sizeKey,
+          [pinyin9bottomRowSlots.right.cell]: pinyin9bottomRowSlots.right.sizeKey,
+          spaceButton: { width: { percentage: 4 / 7 } },
+          cn2enButton: { width: { percentage: 1.5 / 7 } },
+          emojiButton: { width: { percentage: 1 / 4 } },
+          backspaceButton: { height: { percentage: 1 / 4 } },
+          cleanButton: { height: { percentage: 1 / 4 } },
+          enterButton: { height: { percentage: 1 / 4 } },
+        },
+        keyboardLayout: [
+          {
+            HStack: {
+              style: 'keyboardStyle',
+              subviews: [
+                {
+                  VStack: {
+                    style: 'VStackStyle1',
+                    subviews: [
+                      { Cell: 'collection' },
+                      { Cell: pinyin9bottomRowSlots.left.cell },
+                      // { Cell: 'emojiButton' },
+                    ],
+                  },
+                },
+                {
+                  VStack: {
+                    style: 'CenterStackStyle',
+                    subviews: [
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: 'number1Button' },
+                            { Cell: 'number2Button' },
+                            { Cell: 'number3Button' },
+                          ],
+                        },
+                      },
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: 'number4Button' },
+                            { Cell: 'number5Button' },
+                            { Cell: 'number6Button' },
+                          ],
+                        },
+                      },
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: 'number7Button' },
+                            { Cell: 'number8Button' },
+                            { Cell: 'number9Button' },
+                          ],
+                        },
+                      },
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: pinyin9bottomRowSlots.right.cell },
+                            { Cell: 'spaceButton' },
+                            { Cell: 'cn2enButton' },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  VStack: {
+                    style: 'VStackStyle1',
+                    subviews: [
+                      { Cell: 'backspaceButton' },
+                      { Cell: 'cleanButton' },
+                      { Cell: 'enterButton' },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+        keyboardStyle: {
+          size: {
+            height: { percentage: 0.73 },
+          },
+          insets: {
+            top: 3,
+            bottom: 3,
+            left: 4,
+            right: 4,
+          },
+          backgroundStyle: 'keyboardBackgroundStyle',
+        },
+        keyboardBackgroundStyle: {
+          buttonStyleType: 'geometry',
+          normalColor: color[theme]['键盘背景颜色'],
+        },
+        VStackStyle1: {
+          size: {
+            width: '29/183',
+          },
+        },
+        CenterStackStyle: {
+          size: {
+            width: '375/549',
+          },
+        },
+      },
+      '横屏中文9键': {
+        '横屏按键尺寸': {
+          [pinyin9bottomRowSlots.left.cell]: pinyin9bottomRowSlots.left.sizeKey,
+          [pinyin9bottomRowSlots.right.cell]: pinyin9bottomRowSlots.right.sizeKey,
+          spaceButton: { width: { percentage: 4 / 7 } },
+          cn2enButton: { width: { percentage: 1.5 / 7 } },
+          emojiButton: { width: { percentage: 1 / 4 } },
+          backspaceButton: { height: { percentage: 1 / 3 } },
+          cleanButton: { height: { percentage: 1 / 3 } },
+          enterButton: { height: { percentage: 1 / 3 } },
+        },
+        keyboardLayout: [
+          {
+            HStack: {
+              style: 'keyboardStyle',
+              subviews: [
+                {
+                  VStack: {
+                    style: 'landscape9LeftColumnStyle',
+                    subviews:
+                      (if pinyin9LandscapeShowFunctions then [
+                         {
+                           HStack: {
+                             style: 'landscape9TopRowStyle',
+                             subviews: pinyin9FunctionCells(pinyin9LeftFunctionKeys),
+                           },
+                         },
+                       ] else []) + [
+                        {
+                          HStack: {
+                            style: 'landscape9BottomRowStyle',
+                            subviews: [
+                              {
+                                VStack: {
+                                  style: 'landscape9CollectionColumnStyle',
+                                  subviews: [
+                                    { Cell: 'collection' },
+                                    { Cell: pinyin9bottomRowSlots.left.cell },
+                                  ],
+                                },
+                              },
+                              {
+                                VStack: {
+                                  style: 'landscape9VerticalCandidatesColumnStyle',
+                                  subviews: [
+                                    { Cell: 'verticalCandidates' },
+                                  ],
+                                },
+                              },
+                            ],
+                          },
+                        },
+                      ],
+                  },
+                },
+                {
+                  VStack: {
+                    style: 'landscape9SpacerColumnStyle',
+                  },
+                },
+                {
+                  VStack: {
+                    style: 'landscape9RightColumnStyle',
+                    subviews:
+                      (if pinyin9LandscapeShowFunctions then [
+                         {
+                           HStack: {
+                             style: 'landscape9TopRowStyle',
+                             subviews: pinyin9FunctionCells(pinyin9RightFunctionKeys),
+                           },
+                         },
+                       ] else []) + [
+                        {
+                          HStack: {
+                            style: 'landscape9BottomRowStyle',
+                            subviews: [
+                              {
+                                VStack: {
+                                  style: 'landscape9InputAreaStyle',
+                                  subviews: [
+                                    {
+                                      HStack: {
+                                        style: 'landscape9InputMatrixStyle',
+                                        subviews: [
+                                          { VStack: { subviews: [{ Cell: 'number1Button' }, { Cell: 'number4Button' }, { Cell: 'number7Button' }] } },
+                                          { VStack: { subviews: [{ Cell: 'number2Button' }, { Cell: 'number5Button' }, { Cell: 'number8Button' }] } },
+                                          { VStack: { subviews: [{ Cell: 'number3Button' }, { Cell: 'number6Button' }, { Cell: 'number9Button' }] } },
+                                        ],
+                                      },
+                                    },
+                                    {
+                                      HStack: {
+                                        style: 'landscape9InputBottomRowStyle',
+                                        subviews: [
+                                          { Cell: pinyin9bottomRowSlots.right.cell },
+                                          { Cell: 'spaceButton' },
+                                          { Cell: 'cn2enButton' },
+                                        ],
+                                      },
+                                    },
+                                  ],
+                                },
+                              },
+                              {
+                                VStack: {
+                                  style: 'landscape9RightActionColumnStyle',
+                                  subviews: [
+                                    { Cell: 'backspaceButton' },
+                                    { Cell: 'cleanButton' },
+                                    { Cell: 'enterButton' },
+                                  ],
+                                },
+                              },
+                            ],
+                          },
+                        },
+                      ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+        keyboardStyle: {
+          size: {
+            height: { percentage: 0.73 },
+          },
+          insets: {
+            top: 3,
+            bottom: 3,
+            left: 4,
+            right: 4,
+          },
+          backgroundStyle: 'keyboardBackgroundStyle',
+        },
+        keyboardBackgroundStyle: {
+          buttonStyleType: 'geometry',
+          normalColor: color[theme]['键盘背景颜色'],
+        },
+        landscape9LeftColumnStyle: {
+          size: {
+            width: '2/5',
+          },
+        },
+        landscape9SpacerColumnStyle: {
+          size: {
+            width: '1/5',
+          },
+        },
+        landscape9RightColumnStyle: {
+          size: {
+            width: '2/5',
+          },
+        },
+        landscape9TopRowStyle: {
+          size: {
+            height: { percentage: pinyin9LandscapeTopHeight },
+          },
+        },
+        landscape9BottomRowStyle: {
+          size: {
+            height: { percentage: pinyin9LandscapeBottomHeight },
+          },
+        },
+        landscape9CollectionColumnStyle: {
+          size: {
+            width: '29/154',
+            height: '1',
+          },
+        },
+        landscape9VerticalCandidatesColumnStyle: {
+          size: {
+            width: '125/154',
+            height: '1',
+          },
+        },
+        landscape9InputAreaStyle: {
+          size: {
+            width: '125/154',
+          },
+        },
+        landscape9RightActionColumnStyle: {
+          size: {
+            width: '29/154',
+          },
+        },
+        landscape9InputMatrixStyle: {
+          size: {
+            height: '3/4',
+          },
+        },
+        landscape9InputBottomRowStyle: {
+          size: {
+            height: '1/4',
+          },
+        },
+      },
+      '竖屏中文26键': {
+        keyboardLayout: [
+          {
+            HStack: {
+              style: 'keyboardStyle',
+              subviews: [
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'qButton' },
+                      { Cell: 'wButton' },
+                      { Cell: 'eButton' },
+                      { Cell: 'rButton' },
+                      { Cell: 'tButton' },
+                      { Cell: 'yButton' },
+                      { Cell: 'uButton' },
+                      { Cell: 'iButton' },
+                      { Cell: 'oButton' },
+                      { Cell: 'pButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'aButton' },
+                      { Cell: 'sButton' },
+                      { Cell: 'dButton' },
+                      { Cell: 'fButton' },
+                      { Cell: 'gButton' },
+                      { Cell: 'hButton' },
+                      { Cell: 'jButton' },
+                      { Cell: 'kButton' },
+                      { Cell: 'lButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'shiftButton' },
+                      { Cell: 'zButton' },
+                      { Cell: 'xButton' },
+                      { Cell: 'cButton' },
+                      { Cell: 'vButton' },
+                      { Cell: 'bButton' },
+                      { Cell: 'nButton' },
+                      { Cell: 'mButton' },
+                      { Cell: 'backspaceButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: '123Button' },
+                      // { Cell: 'cn2enButton' },
+                      { Cell: 'spaceLeftButton' },
+                      { Cell: 'spaceButton' },
+                      { Cell: 'cn2enButton' },
+                      // { Cell: 'spaceRightButton' },
+                      { Cell: 'enterButton' },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+        keyboardStyle: {
+          size: {
+            height: { percentage: 0.73 },
+          },
+          insets: {
+            top: 3,
+            bottom: 3,
+            left: 4,
+            right: 4,
+          },
+          backgroundStyle: 'keyboardBackgroundStyle',
+        },
+        keyboardBackgroundStyle: {
+          buttonStyleType: 'geometry',
+          normalColor: color[theme]['键盘背景颜色'],
+        },
+      },
+      'ipad中文26键': {
+        keyboardLayout: [
+          {
+            HStack: {
+              style: 'keyboardStyle',
+              subviews: [
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'qButton' },
+                      { Cell: 'wButton' },
+                      { Cell: 'eButton' },
+                      { Cell: 'rButton' },
+                      { Cell: 'tButton' },
+                      { Cell: 'yButton' },
+                      { Cell: 'uButton' },
+                      { Cell: 'iButton' },
+                      { Cell: 'oButton' },
+                      { Cell: 'pButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'aButton' },
+                      { Cell: 'sButton' },
+                      { Cell: 'dButton' },
+                      { Cell: 'fButton' },
+                      { Cell: 'gButton' },
+                      { Cell: 'hButton' },
+                      { Cell: 'jButton' },
+                      { Cell: 'kButton' },
+                      { Cell: 'lButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'shiftButton' },
+                      { Cell: 'zButton' },
+                      { Cell: 'xButton' },
+                      { Cell: 'cButton' },
+                      { Cell: 'vButton' },
+                      { Cell: 'bButton' },
+                      { Cell: 'nButton' },
+                      { Cell: 'mButton' },
+                      { Cell: 'backspaceButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'nextButton' },
+                      { Cell: 'ipad123Button' },
+                      // { Cell: 'cn2enButton' },
+                      { Cell: 'spaceLeftButton' },
+                      { Cell: 'spaceButton' },
+                      { Cell: 'cn2enButton' },
+                      // { Cell: 'spaceRightButton' },
+                      { Cell: 'enterButton' },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+        keyboardStyle: {
+          size: {
+            height: { percentage: 0.73 },
+          },
+          insets: {
+            top: 3,
+            bottom: 3,
+            left: 4,
+            right: 4,
+          },
+          backgroundStyle: 'keyboardBackgroundStyle',
+        },
+        keyboardBackgroundStyle: {
+          buttonStyleType: 'geometry',
+          normalColor: color[theme]['键盘背景颜色'],
+        },
+      },
+
+      '横屏中文26键': {
+        keyboardLayout: [
+          {
+            HStack: {
+              style: 'keyboardStyle',
+              subviews: [
+                {
+                  VStack: {
+                    style: 'columnStyle1',
+                    subviews: [
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: 'qButton' },
+                            { Cell: 'wButton' },
+                            { Cell: 'eButton' },
+                            { Cell: 'rButton' },
+                            { Cell: 'tButton' },
+                          ],
+                        },
+                      },
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: 'aButton' },
+                            { Cell: 'sButton' },
+                            { Cell: 'dButton' },
+                            { Cell: 'fButton' },
+                            { Cell: 'gButton' },
+                          ],
+                        },
+                      },
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: 'shiftButton' },
+                            { Cell: 'zButton' },
+                            { Cell: 'xButton' },
+                            { Cell: 'cButton' },
+                            { Cell: 'vButton' },
+                          ],
+                        },
+                      },
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: '123Button' },
+                            // { Cell: 'cn2enButton' },
+                            { Cell: 'spaceLeftButton' },
+                            { Cell: 'spaceFirstButton' },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  VStack: {
+                    style: 'columnStyle2',
+                  },
+                },
+                {
+                  VStack: {
+                    style: 'columnStyle3',
+                    subviews: [
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: 'yButton' },
+                            { Cell: 'uButton' },
+                            { Cell: 'iButton' },
+                            { Cell: 'oButton' },
+                            { Cell: 'pButton' },
+                          ],
+                        },
+                      },
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: 'gButton' },
+                            { Cell: 'hButton' },
+                            { Cell: 'jButton' },
+                            { Cell: 'kButton' },
+                            { Cell: 'lButton' },
+                          ],
+                        },
+                      },
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: 'vButton' },
+                            { Cell: 'bButton' },
+                            { Cell: 'nButton' },
+                            { Cell: 'mButton' },
+                            { Cell: 'backspaceButton' },
+                          ],
+                        },
+                      },
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: 'spaceSecondButton' },
+                            { Cell: 'cn2enButton' },
+                            // { Cell: 'spaceRightButton' },
+                            { Cell: 'enterButton' },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+        keyboardStyle: {
+          size: {
+            height: { percentage: 0.73 },
+          },
+          insets: {
+            top: 3,
+            bottom: 3,
+            left: 4,
+            right: 4,
+          },
+          backgroundStyle: 'keyboardBackgroundStyle',
+        },
+        keyboardBackgroundStyle: {
+          buttonStyleType: 'geometry',
+          normalColor: color[theme]['键盘背景颜色'],
+        },
+        columnStyle1: {
+          size: {
+            width: '2/5',
+          },
+        },
+        columnStyle2: {
+          size: {
+            width: '1/5',
+          },
+        },
+        columnStyle3: {
+          size: {
+            width: '2/5',
+          },
+        },
+      },
+
+      '竖屏英文26键': {
+        keyboardLayout: [
+          {
+            HStack: {
+              style: 'keyboardStyle',
+              subviews: [
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'qButton' },
+                      { Cell: 'wButton' },
+                      { Cell: 'eButton' },
+                      { Cell: 'rButton' },
+                      { Cell: 'tButton' },
+                      { Cell: 'yButton' },
+                      { Cell: 'uButton' },
+                      { Cell: 'iButton' },
+                      { Cell: 'oButton' },
+                      { Cell: 'pButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'aButton' },
+                      { Cell: 'sButton' },
+                      { Cell: 'dButton' },
+                      { Cell: 'fButton' },
+                      { Cell: 'gButton' },
+                      { Cell: 'hButton' },
+                      { Cell: 'jButton' },
+                      { Cell: 'kButton' },
+                      { Cell: 'lButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'shiftButton' },
+                      { Cell: 'zButton' },
+                      { Cell: 'xButton' },
+                      { Cell: 'cButton' },
+                      { Cell: 'vButton' },
+                      { Cell: 'bButton' },
+                      { Cell: 'nButton' },
+                      { Cell: 'mButton' },
+                      { Cell: 'backspaceButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: '123Button' },
+                      // { Cell: 'en2cnButton' },
+                      { Cell: 'spaceLeftButton' },
+                      { Cell: 'spaceButton' },
+                      { Cell: 'en2cnButton' },
+                      // { Cell: 'spaceRightButton' },
+                      { Cell: 'enterButton' },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+        keyboardStyle: {
+          size: {
+            height: { percentage: 0.73 },
+          },
+          insets: {
+            top: 3,
+            bottom: 3,
+            left: 4,
+            right: 4,
+          },
+          backgroundStyle: 'keyboardBackgroundStyle',
+        },
+        keyboardBackgroundStyle: {
+          buttonStyleType: 'geometry',
+          normalColor: color[theme]['键盘背景颜色'],
+        },
+      },
+
+
+      '横屏中文18键': {
+        keyboardLayout: [
+          {
+            HStack: {
+              style: 'keyboardStyle',
+              subviews: [
+                {
+                  VStack: {
+                    style: 'columnStyle1',
+                    subviews: [
+                      { HStack: { subviews: [{ Cell: 'qButton' }, { Cell: 'weButton' }, { Cell: 'rtButton' }] } },
+                      { HStack: { subviews: [{ Cell: 'aButton' }, { Cell: 'sdButton' }, { Cell: 'fgButton' }] } },
+                      { HStack: { subviews: [{ Cell: 'shiftButton' }, { Cell: 'zButton' }, { Cell: 'xcButton' }, { Cell: 'vButton' }] } },
+                      { HStack: { subviews: [{ Cell: '123Button' }, { Cell: 'spaceLeftButton' }] } },
+                    ],
+                  },
+                },
+                { VStack: { style: 'columnStyle2' } },
+                {
+                  VStack: {
+                    style: 'columnStyle3',
+                    subviews: [
+                      { HStack: { subviews: [{ Cell: 'yButton' }, { Cell: 'uButton' }, { Cell: 'ioButton' }, { Cell: 'pButton' }] } },
+                      { HStack: { subviews: [{ Cell: 'hButton' }, { Cell: 'jkButton' }, { Cell: 'lButton' }] } },
+                      { HStack: { subviews: [{ Cell: 'bnButton' }, { Cell: 'mButton' }, { Cell: 'backspaceButton' }] } },
+                      { HStack: { subviews: [{ Cell: 'spaceButton' }, { Cell: 'enterButton' }] } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+        keyboardStyle: { size: { height: { percentage: 0.73 } }, insets: { top: 3, bottom: 3, left: 4, right: 4 }, backgroundStyle: 'keyboardBackgroundStyle' },
+        keyboardBackgroundStyle: { buttonStyleType: 'geometry', normalColor: color[theme]['键盘背景颜色'] },
+        columnStyle1: { size: { width: '2/5' } },
+        columnStyle2: { size: { width: '1/5' } },
+        columnStyle3: { size: { width: '2/5' } },
+      },
+      '横屏中文14键': {
+        keyboardLayout: [
+          {
+            HStack: {
+              style: 'keyboardStyle',
+              subviews: [
+                {
+                  VStack: {
+                    style: 'columnStyle1',
+                    subviews: [
+                      { HStack: { subviews: [{ Cell: 'qwButton' }, { Cell: 'erButton' }, { Cell: 'tyButton' }] } },
+                      { HStack: { subviews: [{ Cell: 'asButton' }, { Cell: 'dfButton' }, { Cell: 'ghButton' }] } },
+                      { HStack: { subviews: [{ Cell: 'shiftButton' }, { Cell: 'zxButton' }, { Cell: 'cvButton' }] } },
+                      { HStack: { subviews: [{ Cell: '123Button' }, { Cell: 'spaceLeftButton' }, { Cell: 'spaceButtonLeft' }] } },
+                    ],
+                  },
+                },
+                { VStack: { style: 'columnStyle2' } },
+                {
+                  VStack: {
+                    style: 'columnStyle3',
+                    subviews: [
+                      { HStack: { subviews: [{ Cell: 'tyButton' }, { Cell: 'uiButton' }, { Cell: 'opButton' }] } },
+                      { HStack: { subviews: [{ Cell: 'ghButton' }, { Cell: 'jkButton' }, { Cell: 'lButton' }] } },
+                      { HStack: { subviews: [{ Cell: 'bnButton' }, { Cell: 'mButton' }, { Cell: 'backspaceButton' }] } },
+                      { HStack: { subviews: [{ Cell: 'spaceButton' }, { Cell: 'enterButton' }] } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+        keyboardStyle: { size: { height: { percentage: 0.73 } }, insets: { top: 3, bottom: 3, left: 4, right: 4 }, backgroundStyle: 'keyboardBackgroundStyle' },
+        keyboardBackgroundStyle: { buttonStyleType: 'geometry', normalColor: color[theme]['键盘背景颜色'] },
+        columnStyle1: { size: { width: '2/5' } },
+        columnStyle2: { size: { width: '1/5' } },
+        columnStyle3: { size: { width: '2/5' } },
+      },
+      'ipad英文26键': {
+        keyboardLayout: [
+          {
+            HStack: {
+              style: 'keyboardStyle',
+              subviews: [
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'qButton' },
+                      { Cell: 'wButton' },
+                      { Cell: 'eButton' },
+                      { Cell: 'rButton' },
+                      { Cell: 'tButton' },
+                      { Cell: 'yButton' },
+                      { Cell: 'uButton' },
+                      { Cell: 'iButton' },
+                      { Cell: 'oButton' },
+                      { Cell: 'pButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'aButton' },
+                      { Cell: 'sButton' },
+                      { Cell: 'dButton' },
+                      { Cell: 'fButton' },
+                      { Cell: 'gButton' },
+                      { Cell: 'hButton' },
+                      { Cell: 'jButton' },
+                      { Cell: 'kButton' },
+                      { Cell: 'lButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'shiftButton' },
+                      { Cell: 'zButton' },
+                      { Cell: 'xButton' },
+                      { Cell: 'cButton' },
+                      { Cell: 'vButton' },
+                      { Cell: 'bButton' },
+                      { Cell: 'nButton' },
+                      { Cell: 'mButton' },
+                      { Cell: 'backspaceButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'nextButton' },
+                      { Cell: 'ipad123Button' },
+                      // { Cell: 'en2cnButton' },
+                      { Cell: 'spaceLeftButton' },
+                      { Cell: 'spaceButton' },
+                      { Cell: 'en2cnButton' },
+                      // { Cell: 'spaceRightButton' },
+                      { Cell: 'enterButton' },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+        keyboardStyle: {
+          size: {
+            height: { percentage: 0.73 },
+          },
+          insets: {
+            top: 3,
+            bottom: 3,
+            left: 4,
+            right: 4,
+          },
+          backgroundStyle: 'keyboardBackgroundStyle',
+        },
+        keyboardBackgroundStyle: {
+          buttonStyleType: 'geometry',
+          normalColor: color[theme]['键盘背景颜色'],
+        },
+      },
+
+      '横屏英文26键': {
+        keyboardLayout: [
+          {
+            HStack: {
+              style: 'keyboardStyle',
+              subviews: [
+                {
+                  VStack: {
+                    style: 'columnStyle1',
+                    subviews: [
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: 'qButton' },
+                            { Cell: 'wButton' },
+                            { Cell: 'eButton' },
+                            { Cell: 'rButton' },
+                            { Cell: 'tButton' },
+                          ],
+                        },
+                      },
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: 'aButton' },
+                            { Cell: 'sButton' },
+                            { Cell: 'dButton' },
+                            { Cell: 'fButton' },
+                            { Cell: 'gButton' },
+                          ],
+                        },
+                      },
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: 'shiftButton' },
+                            { Cell: 'zButton' },
+                            { Cell: 'xButton' },
+                            { Cell: 'cButton' },
+                            { Cell: 'vButton' },
+                          ],
+                        },
+                      },
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: '123Button' },
+                            // { Cell: 'en2cnButton' },
+                            { Cell: 'spaceLeftButton' },
+                            { Cell: 'spaceFirstButton' },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  VStack: {
+                    style: 'columnStyle2',
+                  },
+                },
+                {
+                  VStack: {
+                    style: 'columnStyle3',
+                    subviews: [
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: 'yButton' },
+                            { Cell: 'uButton' },
+                            { Cell: 'iButton' },
+                            { Cell: 'oButton' },
+                            { Cell: 'pButton' },
+                          ],
+                        },
+                      },
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: 'gButton' },
+                            { Cell: 'hButton' },
+                            { Cell: 'jButton' },
+                            { Cell: 'kButton' },
+                            { Cell: 'lButton' },
+                          ],
+                        },
+                      },
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: 'vButton' },
+                            { Cell: 'bButton' },
+                            { Cell: 'nButton' },
+                            { Cell: 'mButton' },
+                            { Cell: 'backspaceButton' },
+                          ],
+                        },
+                      },
+                      {
+                        HStack: {
+                          subviews: [
+                            { Cell: 'spaceSecondButton' },
+                            { Cell: 'en2cnButton' },
+                            // { Cell: 'spaceRightButton' },
+                            { Cell: 'enterButton' },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+        keyboardStyle: {
+          size: {
+            height: { percentage: 0.73 },
+          },
+          insets: {
+            top: 3,
+            bottom: 3,
+            left: 4,
+            right: 4,
+          },
+          backgroundStyle: 'keyboardBackgroundStyle',
+        },
+        keyboardBackgroundStyle: {
+          buttonStyleType: 'geometry',
+          normalColor: color[theme]['键盘背景颜色'],
+        },
+        columnStyle1: {
+          size: {
+            width: '2/5',
+          },
+        },
+        columnStyle2: {
+          size: {
+            width: '1/5',
+          },
+        },
+        columnStyle3: {
+          size: {
+            width: '2/5',
+          },
+        },
+      },
+      '竖屏中文18键': {
+        keyboardLayout: [
+          {
+            HStack: {
+              style: 'keyboardStyle',
+              subviews: [
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'qButton' },
+                      { Cell: 'weButton' },
+                      { Cell: 'rtButton' },
+                      { Cell: 'yButton' },
+                      { Cell: 'uButton' },
+                      { Cell: 'ioButton' },
+                      { Cell: 'pButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'aButton' },
+                      { Cell: 'sdButton' },
+                      { Cell: 'fgButton' },
+                      { Cell: 'hButton' },
+                      { Cell: 'jkButton' },
+                      { Cell: 'lButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'shiftButton' },
+                      { Cell: 'zButton' },
+                      { Cell: 'xcButton' },
+                      { Cell: 'vButton' },
+                      { Cell: 'bnButton' },
+                      { Cell: 'mButton' },
+                      { Cell: 'backspaceButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: '123Button' },
+                      { Cell: 'spaceLeftButton' },
+                      { Cell: 'spaceButton' },
+                      { Cell: 'cn2enButton' },
+                      { Cell: 'enterButton' },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+        keyboardStyle: {
+          size: {
+            height: { percentage: 0.73 },
+          },
+          insets: {
+            top: 3,
+            bottom: 3,
+            left: 4,
+            right: 4,
+          },
+          backgroundStyle: 'keyboardBackgroundStyle',
+        },
+        keyboardBackgroundStyle: {
+          buttonStyleType: 'geometry',
+          normalColor: color[theme]['键盘背景颜色'],
+        },
+      },
+      '竖屏中文14键': {
+        keyboardLayout: [
+          {
+            HStack: {
+              style: 'keyboardStyle',
+              subviews: [
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'qwButton' },
+                      { Cell: 'erButton' },
+                      { Cell: 'tyButton' },
+                      { Cell: 'uiButton' },
+                      { Cell: 'opButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'asButton' },
+                      { Cell: 'dfButton' },
+                      { Cell: 'ghButton' },
+                      { Cell: 'jkButton' },
+                      { Cell: 'lButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: 'shiftButton' },
+                      { Cell: 'zxButton' },
+                      { Cell: 'cvButton' },
+                      { Cell: 'bnButton' },
+                      { Cell: 'mButton' },
+                      { Cell: 'backspaceButton' },
+                    ],
+                  },
+                },
+                {
+                  HStack: {
+                    subviews: [
+                      { Cell: '123Button' },
+                      { Cell: 'spaceLeftButton' },
+                      { Cell: 'spaceButton' },
+                      { Cell: 'cn2enButton' },
+                      { Cell: 'enterButton' },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+        keyboardStyle: {
+          size: {
+            height: { percentage: 0.73 },
+          },
+          insets: {
+            top: 3,
+            bottom: 3,
+            left: 4,
+            right: 4,
+          },
+          backgroundStyle: 'keyboardBackgroundStyle',
+        },
+        keyboardBackgroundStyle: {
+          buttonStyleType: 'geometry',
+          normalColor: color[theme]['键盘背景颜色'],
+        },
+      },
+      '竖屏按键尺寸': {
+        '自定义键size': {
+          width: {
+            percentage: 1 / 8,
+          },
+        },
+        '普通键size': {
+          width: {
+            percentage: 0.1,
+          },
+        },
+        'a键size和bounds': {
+          size: {
+            width: {
+              percentage: 0.15,
+            },
+          },
+          bounds: {
+            width: '2/3',
+            alignment: 'right',
+          },
+        },
+        'l键size和bounds': {
+          size: {
+            width: {
+              percentage: 0.15,
+            },
+          },
+          bounds: {
+            width: '2/3',
+            alignment: 'left',
+          },
+        },
+        'shift键size': {
+          width: {
+            percentage: 0.15,
+          },
+        },
+        'backspace键size': {
+          width: {
+            percentage: 0.15,
+          },
+        },
+        'en2cn键size': {
+          width: {
+            percentage: 0.1,
+          },
+        },
+        'cn2en键size': {
+          width: {
+            percentage: 0.1,
+          },
+        },
+        'spaceLeft键size': {
+          width: {
+            percentage: 0.1,
+          },
+        },
+        '123键size': {
+          width: {
+            percentage: 0.2,  // 0.12,
+          },
+        },
+        'ipad123键size': {
+          width: {
+            percentage: 0.1,
+          },
+        },
+        'next键size': {
+          width: {
+            percentage: 0.1,
+          },
+        },
+        'space键size': {
+          width: {
+            percentage: 0.4,
+          },
+        },
+        'spaceRight键size': {
+          width: {
+            percentage: 0.1,
+          },
+        },
+        // "EnZh键size": {
+        //   "width": {
+        //     "percentage": 0.1
+        //   }
+        // },
+        'enter键size': {
+          width: {
+            percentage: 0.2,
+          },
+        },
+        // 14-Key Portrait Sizes
+        '14键Row1Size': { width: { percentage: 0.2 } },
+        '14键Row2Size': { width: { percentage: 0.2 } },
+        '14键Row3Size': { width: { percentage: 0.175 } },
+        '14键As键size和bounds': {
+          size: { width: { percentage: 0.2 } },
+        },
+        '14键L键size和bounds': {
+          size: { width: { percentage: 0.2 } },
+        },
+        // 18-Key Portrait Sizes
+        '18键Row1Size': { width: { percentage: 1 / 7 } },
+        '18键Row2Size': { width: { percentage: 1 / 7 } },
+        '18键A键size和bounds': {
+          size: { width: { percentage: 3 / 14 } },
+          bounds: { width: '2/3', alignment: 'right' },
+        },
+        '18键L键size和bounds': {
+          size: { width: { percentage: 3 / 14 } },
+          bounds: { width: '2/3', alignment: 'left' },
+        },
+        '18键Row3Size': { width: { percentage: 1 / 7 } },
+      },
+
+      '横屏按键尺寸': {
+        '自定义键size': {
+          width: {
+            percentage: 1 / 4,
+          },
+          height: {
+            percentage: 0.1,
+          },
+        },
+        '普通键size': {
+          width: '146/784',
+        },
+        't键size和bounds': {
+          size: {
+            width: '200/784',
+          },
+          bounds: {
+            width: '146/200',
+            alignment: 'left',
+          },
+        },
+        'y键size和bounds': {
+          size: {
+            width: '200/784',
+          },
+          bounds: {
+            width: '146/200',
+            alignment: 'right',
+          },
+        },
+        'a键size和bounds': {
+          size: {
+            width: '200/784',
+          },
+          bounds: {
+            width: '146/200',
+            alignment: 'right',
+          },
+        },
+        'l键size和bounds': {
+          size: {
+            width: '200/784',
+          },
+          bounds: {
+            width: '146/200',
+            alignment: 'left',
+          },
+        },
+        'shift键size': {
+          width: '200/784',
+        },
+        'backspace键size': {
+          width: '200/784',
+        },
+        'en2cn键size': {
+          width: '146/784',
+        },
+        'cn2en键size': {
+          width: '146/784',
+        },
+        'spaceLeft键size': {
+          width: '146/784',
+        },
+        '123键size': {
+          width: '273/784',  // '173/784',
+        },
+        'space键size': {
+          width: '365/784',
+        },
+        'spaceFirst键size': {
+          width: '365/784',
+        },
+        'spaceSecond键size': {
+          width: '365/784',
+        },
+        'spaceRight键size': {
+          width: '146/784',
+        },
+        // "EnZh键size": {
+        //   "width": "173/784"
+        // },
+        'enter键size': {
+          width: '273/784',
+        },
+        // 14-Key Landscape Sizes
+        '14键横屏Row1Size': { width: { percentage: 0.33 } },
+        '14键横屏As键size和bounds': {
+          size: { width: { percentage: 0.33 } },
+        },
+        '14键横屏L键size和bounds': {
+          size: { width: { percentage: 0.33 } },
+        },
+        '14键横屏shift键size': { width: { percentage: 0.33 } },
+        '14键横屏backspace键size': { width: { percentage: 0.33 } },
+        // 18-Key Landscape Sizes
+        '18键横屏Row1LeftSize': { width: { percentage: 1 / 4 } },
+        '18键横屏Row1RightSize': { width: { percentage: 1 / 4 } },
+        '18键横屏Row2Size': { width: { percentage: 1 / 4 } },
+        '18键横屏A键size和bounds': {
+          size: { width: { percentage: 2 / 4 } },
+          bounds: { width: '1/2', alignment: 'right' },
+        },
+        '18键横屏L键size和bounds': {
+          size: { width: { percentage: 2 / 4 } },
+          bounds: { width: '1/2', alignment: 'left' },
+        },
+      },
+    },
+}
