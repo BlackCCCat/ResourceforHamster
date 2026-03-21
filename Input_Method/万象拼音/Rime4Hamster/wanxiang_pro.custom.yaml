@@ -130,14 +130,17 @@ patch:
           - lua/data/abbrev.txt
           - lua/data/chengyu.txt
 
-  # 输入引擎
-  engine/processors/@before 3: lua_processor@*select_character # 以词定字，有了辅助码了，想开启可以注释掉
-
-  # 以下两个bool防止表情和翻译下面出现辅助码
-  emoji/+:
-    inherit_comment: false
-  chinese_english/+:
-    inherit_comment: false
+  super_processor:
+    enable_backspace_limit: true # 开启/关闭退格限制
+    enable_seg_loop: true # 开启/关闭分词符（'）循环
+    enable_tone_fallback: true # 启用声调回退
+    enable_predict_space: false # 启用联想空格打断，直接上屏空格并清空联想，对齐大厂，如果用原生librime-predict这个还有用留着
+    kp_number_mode: auto # 小键盘模式 (auto / compose)
+    limit_repeated: "8,40" #格式："最大重复声母数,最大候选字数"
+    select_character: "[,]" # 开启以词定字，自动拆解第一位上屏首字，第二位上屏尾字
+    # 下面这些写法都支持：
+    # select_character: "[,]"                      # [ 上屏首字，] 上屏尾字（推荐）
+    # select_character: "bracketleft, bracketright"  # [ 上屏首字，] 上屏尾字（英文全拼）
 
   # @符号增加邮箱后缀
   punctuator/half_shape/+:
@@ -158,7 +161,18 @@ patch:
       - "〗"
       - "』"
 
-  super_tips/tips_key: "Break" # "backslash" # Lua 配置: 超级tips上屏按键
+  super_tips:
+    db_name: "lua/tips" # 可选字段，不写的话默认使用 "lua/tips"，相对路径
+    tips_key: "Break" # key英文单词不清楚去default找
+    files: # 自定义数据文件列表（可选，不配置则使用默认文件）
+      - lua/data/tips_show.txt # 仍可保留默认文件
+      #- lua/data/my_tips.txt     # 用户自定义文件
+    disabled_types:
+      - "禁用类型A"
+      - "禁用类型B"
+      # 禁用的 tips 类型，初始化 tips 数据库的时候会直接忽略相关规则，修改部署后生效
+      # 可选项为：偏旁，符号，化学式，时间，符号，组字，翻译，表情，货币，车牌, 单位
+
   key_binder/bindings/+: # 也可以再增加方案专有的
     - { when: always, toggle: chinese_english, accept: Control+e } # 切换翻译功能
     - { when: always, toggle: chaifen_switch, accept: Control+c } # 切换拆分功能
@@ -173,9 +187,6 @@ patch:
       - wanxiang_algebra:/pro/小鹤双拼 # 可选输入方案名称：自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
       - wanxiang_algebra:/pro/直接辅助 #辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
       #- 自然码提权
-
-  # 取消注释以开启自动无词频造词
-  add_user_dict/enable_auto_phrase: true
 
   # 自定义短语
   custom_phrase/user_dict: custom_phrase_double # 需要手动创建 custom_phrase_double.txt 文件

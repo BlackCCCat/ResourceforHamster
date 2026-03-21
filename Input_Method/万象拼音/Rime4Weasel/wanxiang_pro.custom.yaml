@@ -129,15 +129,29 @@ patch:
           - lua/data/abbrev.txt
           - lua/data/chengyu.txt
 
-  # 以下两个bool防止表情和翻译下面出现辅助码
-  emoji/+:
-    inherit_comment: false
-  chinese_english/+:
-    inherit_comment: false
+  super_processor:
+    enable_backspace_limit: true # 开启/关闭退格限制
+    enable_seg_loop: true # 开启/关闭分词符（'）循环
+    enable_tone_fallback: true # 启用声调回退
+    enable_predict_space: false # 启用联想空格打断，直接上屏空格并清空联想，对齐大厂，如果用原生librime-predict这个还有用留着
+    kp_number_mode: auto # 小键盘模式 (auto / compose)
+    limit_repeated: "8,40" #格式："最大重复声母数,最大候选字数"
+    select_character: "[,]" # 开启以词定字，自动拆解第一位上屏首字，第二位上屏尾字
+    # 下面这些写法都支持：
+    # select_character: "[,]"                      # [ 上屏首字，] 上屏尾字（推荐）
+    # select_character: "bracketleft, bracketright"  # [ 上屏首字，] 上屏尾字（英文全拼）
 
-  # 从 default 继承快捷键
-  # key_binder/tips_key: backslash
-  # key_binder/search: "`"             # 辅码引导符，要添加到 speller/alphabet
+  super_tips:
+    db_name: "lua/tips" # 可选字段，不写的话默认使用 "lua/tips"，相对路径
+    tips_key: "comma" # key英文单词不清楚去default找
+    files: # 自定义数据文件列表（可选，不配置则使用默认文件）
+      - lua/data/tips_show.txt # 仍可保留默认文件
+      #- lua/data/my_tips.txt     # 用户自定义文件
+    disabled_types:
+      - "禁用类型A"
+      - "禁用类型B"
+      # 禁用的 tips 类型，初始化 tips 数据库的时候会直接忽略相关规则，修改部署后生效
+      # 可选项为：偏旁，符号，化学式，时间，符号，组字，翻译，表情，货币，车牌, 单位
 
   # 拼写设定
   speller/algebra:
@@ -160,9 +174,6 @@ patch:
     - "n月j日"
   # 自定义短语
   custom_phrase/user_dict: custom_phrase_double # 需要手动创建 custom_phrase_double.txt 文件
-
-  # 取消注释以开启自动无词频造词
-  add_user_dict/enable_auto_phrase: true
 
 #下面的数据有需要的可以patch引用
 #特殊优化：部分音节字极少，几乎不参与构词，则提升对应四码字的优先级，仅对小鹤双拼有效，其他双拼方案需作对应修改）

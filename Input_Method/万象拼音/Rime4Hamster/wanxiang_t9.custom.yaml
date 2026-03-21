@@ -1,7 +1,6 @@
 patch:
   t9/isDisplayOriginalPreedit: false # false避免显示数字
 
-  super_tips/tips_key: "Break"
   key_binder/bindings/+: # 也可以再增加方案专有的
     - { when: always, toggle: chinese_english, accept: Control+e } # 切换翻译功能
     - { when: always, toggle: super_tips, accept: Control+t } # 切换超级提示
@@ -41,24 +40,28 @@ patch:
       states: [中标, 英标]
     - name: full_shape #全角、半角字符输出
       states: [半角, 全角]
-    - name: emoji #候选出现emoji滤镜，会显示在相应的候选后面，万象侧重于tips提示，避免候选被占用，因此默认为reset: 0，归属opencc emoji滤镜
+    - name: emoji #候选出现emoji滤镜，会显示在相应的候选后面，万象侧重于tips提示，避  候选被占用，因此默认为reset: 0，归属opencc emoji滤镜
       states: [表情关, 表情开]
-    - name: chinese_english #候选进入翻译模式滤镜，会显示在相应的候选后面，万象侧重于tips提示，避免候选被占用，归属opencc 翻译滤镜
+    - name: chinese_english #候选进入翻译模式滤镜，会显示在相应的候选后面，万象侧重于tips提示，  免候选被占用，归属opencc 翻译滤镜
       states: [翻译关, 翻译开]
+    - name: charset_filter #字符集过滤，默认开启8105通规显示，即小字集，可通过开关实时开启全字集  快捷键配套ctrl+g,归属：super_filter.lua
+      states: [大字集, 小字集]
       reset: 0
-    - options: [s2s, s2t, s2hk, s2tw] # 简繁转换开关组，可以在一个空选项和多个实际“- simplifier@s2hk”引入的项目之前切换，这是一个开关组，你可以将其中任意一个s2s等设置为toggle快捷键，多次按下将轮询
+    - name: prediction
+      states: [预测关, 预测开] # 这个名称能用于插件也能用于万象的lua实现，用来开启关闭预测功能
+    - options: [raw_input, tone_display, full_pinyin] #开启后在输入编码的位置实时转换为带声调全拼或者不  声调全拼，不开启则采用系统配置原始编码，影响的是preedit_format,归属：super_preedit.lua
+      states: [原编码, 有声调, 无声调]
+      reset: 2 #对于开关组从0开始数，第几个就reset几可设为默认
+    - options: [s2s, s2t, s2hk, s2tw] # 简繁转换开关组，可以在一个空选项和多个实际“- simplifier@s2hk”  入的项目之前切换，这是一个开关组，你可以将其中任意一个s2s等设置为toggle快捷键，多次按下将轮询
       states: [简体, 通繁, 港繁, 臺繁]
-      reset: 0
-    - name: tone_hint #开启后在候选的注释里面实时显示全拼声调，不开启则采用系统配置，影响的是comment_format，归属：super_comment.lua
-      states: [读音关, 读音开]
-    - name: super_tips #开启后在输入编码后面的提示区显示实时的提示数据，受tips数据库影响，表情、翻译、车牌、符号等对应关系数据，并可实现句号上屏，不开启则默认，影响的是segment.prompt参数，归属：super_tips.lua
+    - options: [comment_off, tone_hint, toneless_hint] #开启后在候选的注释里面实时显  全拼声调，不开启则采用系统配置，影响的是comment_format，归属：super_comment.lua
+      states: [注释关, 有声调, 无声调]
+      reset: 2 #对于9键，仓、元书用这个参数选择拼音，所以固定为无声调输出，其他前端用户可以适当patch修改
+    - name: super_tips #开启后在输入编码后面的提示区显示实时的提示数据，受tips数据库影响，  情、翻译、车牌、符号等对应关系数据，并可实现句号上屏，不开启则默认，影响的是segment.prompt参数，归  ：super_tips.lua
       states: [提示关, 提示开]
       reset: 1
     - name: abbrev
       states: [简码关, 简码开]
-      reset: 1
-    - name: prediction
-      states: [预测关, 预测开]
       reset: 1
 
   super_replacer:
@@ -135,3 +138,27 @@ patch:
         # 然后空码或只有英文等自定义词组的时候直接全部兜底显示,这个新的设计简化的应用层面,我们只需要维护一个数据库即可.
         files:
           - lua/data/t9_abbrev.txt # 格式：zm\t怎么|在吗
+
+  super_processor:
+    enable_backspace_limit: true # 开启/关闭退格限制
+    enable_seg_loop: true # 开启/关闭分词符（'）循环
+    enable_tone_fallback: true # 启用声调回退
+    enable_predict_space: false # 启用联想空格打断，直接上屏空格并清空联想，对齐大厂，如果用原生librime-predict这个还有用留着
+    kp_number_mode: auto # 小键盘模式 (auto / compose)
+    limit_repeated: "8,40" #格式："最大重复声母数,最大候选字数"
+    select_character: "[,]" # 开启以词定字，自动拆解第一位上屏首字，第二位上屏尾字
+    # 下面这些写法都支持：
+    # select_character: "[,]"                      # [ 上屏首字，] 上屏尾字（推荐）
+    # select_character: "bracketleft, bracketright"  # [ 上屏首字，] 上屏尾字（英文全拼）
+
+  super_tips:
+    db_name: "lua/tips" # 可选字段，不写的话默认使用 "lua/tips"，相对路径
+    tips_key: "Break" # key英文单词不清楚去default找
+    files: # 自定义数据文件列表（可选，不配置则使用默认文件）
+      - lua/data/tips_show.txt # 仍可保留默认文件
+      #- lua/data/my_tips.txt     # 用户自定义文件
+    disabled_types:
+      - "禁用类型A"
+      - "禁用类型B"
+      # 禁用的 tips 类型，初始化 tips 数据库的时候会直接忽略相关规则，修改部署后生效
+      # 可选项为：偏旁，符号，化学式，时间，符号，组字，翻译，表情，货币，车牌, 单位
