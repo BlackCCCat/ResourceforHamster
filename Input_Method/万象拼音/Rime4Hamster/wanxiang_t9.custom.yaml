@@ -19,6 +19,17 @@ patch:
     derived: "💡" # 派生
     fallback: "❗"
 
+  user_predict:
+    db_name: lua/predict # 数据库名称（默认 predict，将生成 predict.userdb 文件夹）
+    max_candidates: 10 # 屏幕最多显示的联想词数量
+    max_predictions: 5 # 连续触发预测的最高次数限制
+    expiry_days: 90 # 绝对寿命（天）：不命中则物理销毁
+    activation_days: 7 # 激活期限（天）：冷冻期内输入第2次转正
+    max_memory_branches: 15 # 分支上限：单前缀最多保留15个后续预测
+    decay_rate: 0.85 # 衰减率：单日时间权重打 85 折
+    enable_predict_space: false # true: 联想时按空格上屏空格; false: 默认行为（根据输入法设定选词等）一般手机开电脑关
+    context_timeout: 5000 # 上文超时时间毫秒
+
   # 开关
   # reset: 默认状态。注释掉后，切换窗口时不会重置到默认状态。
   # states: 方案选单显示的名称。可以注释掉，仍可以通过快捷键切换。
@@ -48,14 +59,7 @@ patch:
       reset: 1
     - name: prediction
       states: [预测关, 预测开]
-
-  engine/processors/@before 0: predictor
-  engine/translators/@before 0: predict_translator
-
-  predictor:
-    db: wanxiang-lts-zh-hans-predict.db
-    max_candidates: 10
-    max_iterations: 1
+      reset: 1
 
   super_replacer:
     db_name: lua/replacer
