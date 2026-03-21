@@ -1,4 +1,5 @@
 // 组装拼音九键键盘，汇合共享布局上下文、九键分组规格和样式注册。
+local buttonInteraction = import '../../shared/buttonHelpers/buttonInteraction.libsonnet';
 local hintSymbolsData = import '../../shared/data/hintSymbolsData.libsonnet';
 local swipeData = import '../../shared/data/swipeData.libsonnet';
 local functions = import '../../shared/functionButtons/iPhone.libsonnet';
@@ -8,15 +9,14 @@ local center = import '../../shared/styles/center.libsonnet';
 local color = import '../../shared/styles/color.libsonnet';
 local fontSize = import '../../shared/styles/fontSize.libsonnet';
 local hintSymbolsStyles = import '../../shared/styles/hintSymbolsStyles.libsonnet';
+local utils = import '../../shared/styles/keyStyles.libsonnet';
 local others = import '../../shared/styles/others.libsonnet';
 local slideButtonStyles = import '../../shared/styles/slideButtonStyles.libsonnet';
 local styleFactories = import '../../shared/styles/styleFactories.libsonnet';
-local pinyin9T9 = import 't9.libsonnet';
-local panels = import 'panels.libsonnet';
 local swipeKeyStyles = import '../../shared/styles/swipeKeyStyles.libsonnet';
-local buttonInteraction = import '../../shared/buttonHelpers/buttonInteraction.libsonnet';
 local toolbar = import '../../shared/toolbar/iPhone.libsonnet';
-local utils = import '../../shared/styles/keyStyles.libsonnet';
+local panels = import 'panels.libsonnet';
+local pinyin9T9 = import 't9.libsonnet';
 
 {
   createButtonFactory(context, swipeUp, swipeDown, t9Letters)::
@@ -349,5 +349,5 @@ local utils = import '../../shared/styles/keyStyles.libsonnet';
     panels.build(context, theme, orientation) +
     utils.genNumberStyles(fontSize, color, theme, center) +
     functionButtonStyles.genFuncKeyStyles(fontSize, color, theme, center) +
-    functions.makeFunctionButtons(orientation, {}, 'numeric'),
+    functions.makeFunctionButtons(orientation, {}, 't9'),
 }

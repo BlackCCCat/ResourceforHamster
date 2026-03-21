@@ -56,7 +56,7 @@ local createNotification(key, notificationType, bg, actionMap, swipeUpMap, swipe
 local buildFunctionButtons(Settings, keyboardType, bg, swipeUp, swipeDown, size, orderedKeys) =
   std.foldl(
     function(acc, key)
-      acc + {
+      acc {
         [key + 'Button']: createFunctionButton(
           key,
           bg,
@@ -74,7 +74,7 @@ local buildFunctionButtons(Settings, keyboardType, bg, swipeUp, swipeDown, size,
           key,
           'preeditChanged',
           bg,
-          specs.notificationActionMap,
+          specs.resolveNotificationActionMap(keyboardType),
           specs.notificationSwipeUpMap,
           specs.notificationSwipeDownMap,
           specs.notificationRepeatMap

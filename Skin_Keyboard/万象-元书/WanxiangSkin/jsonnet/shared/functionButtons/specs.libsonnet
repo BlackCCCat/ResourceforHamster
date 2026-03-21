@@ -107,13 +107,32 @@
     right: { action: { sendKeys: 'Down' } },
   },
 
+  resolveNotificationActionMap(keyboardType)::
+    if keyboardType == 't9' then
+      self.notificationActionMap {
+        select: { action: { sendKeys: '`7' } },
+        cut: { action: { sendKeys: '`8' } },
+        copy: { action: { sendKeys: '`9' } },
+        paste: { action: { sendKeys: '`0' } },
+      }
+    else
+      self.notificationActionMap,
+
+
   notificationEnabled(Settings, keyboardType, key)::
     local config =
       if std.objectHas(Settings, 'function_button_config') && std.type(Settings.function_button_config) == 'object' then
         Settings.function_button_config
       else
         {};
-    if std.member(['select', 'cut', 'copy', 'paste', 'tail'], key) && std.member(['alphabetic', 'numeric'], keyboardType) then
+    local disabledKeys =
+      if keyboardType == 't9' then
+        ['tail']
+      else if std.member(['alphabetic', 'numeric'], keyboardType) then
+        ['select', 'cut', 'copy', 'paste', 'tail']
+      else
+        [];
+    if std.member(disabledKeys, key) then
       false
     else
       if std.objectHas(config, 'enable_notification') then config.enable_notification else true,
