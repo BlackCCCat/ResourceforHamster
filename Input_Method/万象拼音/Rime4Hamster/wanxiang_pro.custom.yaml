@@ -31,6 +31,7 @@ patch:
   switches/@5/reset: 1 # 默认开启拆分
   switches/@6/reset: 0 # 默认开启大字集
   switches/@7/reset: 1 # 默认提示开
+  switches/@8/reset: 1 # 预测默认开
   switches/@10/reset: 1 # 默认辅助开
   switches/@11/reset: 0 # 默认简体中文
   switches/@12/reset: 1 # 默认简码开
