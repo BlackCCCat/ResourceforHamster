@@ -357,3 +357,7 @@
   - `jsonnet/keyboards/numeric9/builder.libsonnet`
 - iPad 数字键盘横屏：
   - 当前回退到竖屏布局，入口在 `jsonnet/keyboards/numeric9/iPad.libsonnet`
+
+
+- `jsonnet/shared/toolbar/iPhone.libsonnet`
+  - 读取 `horizon_candidate_button`，决定横向候选栏右侧显示展开按钮、收起键盘按钮或留空。

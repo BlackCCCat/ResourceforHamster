@@ -41,6 +41,7 @@ Use it when the user asks to:
 - add or adjust toolbar buttons such as `simplified_traditional` for `#简繁切换`, or `undo` / `redo` for `#undo` and `#redo`
 - adjust toolbar slide direction such as `content_right_to_left`
 - adjust `toolbar_config.toolbar_height` or `toolbar_config.ipad.toolbar_height`
+- adjust `horizon_candidate_button` for the horizontal candidate trailing button
 - update README or module documentation after code changes
 - fix regressions inside the selected keyboard root
 

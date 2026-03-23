@@ -85,8 +85,11 @@ WanxiangSkin/
   - 空格键是否显示“万象”。
 - `ios26_style`
   - 是否启用 iOS26 风格。
-- `showExpandButton`
-  - 是否显示候选栏展开按钮。
+- `horizon_candidate_button`
+  - 控制横向候选栏右侧按钮。
+  - `0`：不显示。
+  - `1`：显示候选栏展开按钮。
+  - `2`：显示收起键盘按钮。
 
 ### 功能行配置
 - `function_button_config.with_functions_row`

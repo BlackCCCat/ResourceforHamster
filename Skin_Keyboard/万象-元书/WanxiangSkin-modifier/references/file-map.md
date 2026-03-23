@@ -204,6 +204,7 @@ Typical edits:
 - toolbar foreground style objects such as `simplified_traditional`, `undo`, and `redo` in `iPhone.libsonnet`
 - iPhone or iPad ordering rules
 - toolbar menu behavior
+- horizontal candidate trailing button controlled by `horizon_candidate_button` in `jsonnet/Custom.libsonnet` and rendered in `jsonnet/shared/toolbar/iPhone.libsonnet`
 - horizontalSymbols content direction such as `content_right_to_left`
 - toolbar height such as `toolbar_config.toolbar_height` or `toolbar_config.ipad.toolbar_height`
 
