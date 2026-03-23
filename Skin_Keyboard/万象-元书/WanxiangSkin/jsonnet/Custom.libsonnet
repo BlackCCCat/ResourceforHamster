@@ -155,8 +155,11 @@
     preedit_swipeup_action: '辅助筛选',
   },
 
-  // 是否开启候选栏展开按钮
-  showExpandButton: false,
+  // 横向候选栏最右侧按钮：
+  // 0: 无
+  // 1: 展开候选按钮
+  // 2: 收起键盘按钮（开启预测时建议使用，方便收起键盘）
+  horizon_candidate_button: 2,
 
   // 工具栏布局配置
   toolbar_config: {

@@ -157,7 +157,7 @@ local getToolBar(theme, overrides={}) =
           subviews: [
             { Cell: 'horizontalCandidates' },
             // { Cell: 'clearPreeditButton' },
-            if Settings.showExpandButton then { Cell: 'expandButton' } else {},
+            if Settings.horizon_candidate_button == 1 then { Cell: 'expandButton' } else if Settings.horizon_candidate_button == 2 then { Cell: 'toolbarButtonHideStyle'} else {},
           ],
         },
       },
