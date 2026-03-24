@@ -133,6 +133,19 @@ patch:
     # select_character: "[,]"                      # [ 上屏首字，] 上屏尾字（推荐）
     # select_character: "bracketleft, bracketright"  # [ 上屏首字，] 上屏尾字（英文全拼）
 
+  user_predict:
+    db_name: lua/predict # 数据库名称（默认 predict，将生成 predict.userdb 文件夹）
+    enable_post_predict: true # 上屏后预测
+    enable_context_reorder: true # 输入时调频
+    max_candidates: 10 # 屏幕最多显示的联想词数量
+    max_predictions: 3 # 连续触发预测的最高次数限制
+    expiry_days: 90 # 绝对寿命（天）：不命中则物理销毁
+    activation_days: 7 # 激活期限（天）：冷冻期内输入第2次转正
+    max_memory_branches: 15 # 分支上限：单前缀最多保留15个后续预测
+    decay_rate: 0.85 # 衰减率：单日时间权重打 85 折
+    enable_predict_space: false # true: 联想时按空格上屏空格; false: 默认行为（根据输入法设定选词等）一般手机开电脑关，这里有个布尔转换，空格当空格时其他按键打断，空格当上屏则，其他按键当作空格，有：Tab、Alt、右键、\斜杠
+    context_timeout: 5000 # 上文超时时间毫秒
+
   super_tips:
     db_name: "lua/tips" # 可选字段，不写的话默认使用 "lua/tips"，相对路径
     tips_key: "comma" # key英文单词不清楚去default找
