@@ -148,7 +148,7 @@ local getToolBar(theme, overrides={}) =
 
     // 横向候选文字栏调式
     horizontalCandidatesStyle: {
-      insets: { left: 5, top: 3 },
+      insets: { left: 5, right: 10, },
       backgroundStyle: 'toolbarBackgroundStyle',
     },
     horizontalCandidatesLayout: [
