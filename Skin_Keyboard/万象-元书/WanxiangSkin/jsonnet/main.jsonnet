@@ -12,6 +12,12 @@ local config = {
       floating: 'pinyin_26_portrait',
     },
   },
+  temp_pinyin: {
+    iPhone: {
+      portrait: 'temp_pinyin_portrait',
+      landscape: 'temp_pinyin_landscape',
+    },
+  },
   alphabetic: {
     iPhone: {
       portrait: 'alphabetic_26_portrait',
@@ -50,6 +56,7 @@ local pinyin =
   else if Settings.keyboard_layout == 14 then import 'keyboards/pinyin14/iPhone.libsonnet'
   else if Settings.keyboard_layout == 9 then import 'keyboards/pinyin9/iPhone.libsonnet'
   else import 'keyboards/pinyin26/iPhone.libsonnet';
+local temp_pinyin = import 'keyboards/tempPinyin/iPhone.libsonnet';
 local alphabetic = import 'keyboards/alphabetic26/iPhone.libsonnet';
 local numeric = import 'keyboards/numeric9/iPhone.libsonnet';
 local panel = import 'entries/panel.jsonnet';
@@ -73,6 +80,7 @@ local render(module, prefix) = {
   'config.yaml': std.manifestYamlDoc(config, indent_array_in_object=true, quote_keys=false),
 } +
 render(pinyin, 'pinyin_26') +
+render(temp_pinyin, 'temp_pinyin') +
 render(ipad_pinyin, 'ipad_pinyin_26') +
 render(alphabetic, 'alphabetic_26') +
 render(ipad_alphabetic, 'ipad_alphabetic_26') +

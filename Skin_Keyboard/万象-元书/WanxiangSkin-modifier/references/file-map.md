@@ -49,6 +49,16 @@ Use for:
 - Chinese 26-key entry and assembly
 - wiring shared 26-key layout, letters, and system-key modules into the final keyboard
 
+### `jsonnet/keyboards/tempPinyin/`
+
+Main files:
+- `iPhone.libsonnet`
+
+Use for:
+- temporary pinyin 26-key wrapper output
+- overriding only `cn2enButton` action, notification, and foreground when non-26 English keyboards swipe back into pinyin 26-key
+- overriding temp-pinyin space-key marker text and swipe actions independently of `show_wanxiang`
+
 ### `jsonnet/keyboards/common/keyboard26/`
 
 Main files:
@@ -100,6 +110,7 @@ Use for:
 - English 26-key system keys
 - English 26-key `123Button` behavior
 - English 26-key 123Button swipe indicators and click-bubble behavior
+- non-26 English keyboard `en2cnButton` swipe-up and space-key swipe-up behavior
 
 ### `jsonnet/keyboards/pinyin14/`
 

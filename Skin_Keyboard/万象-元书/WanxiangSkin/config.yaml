@@ -28,3 +28,7 @@ pinyin:
   iPhone:
     landscape: "pinyin_26_landscape"
     portrait: "pinyin_26_portrait"
+temp_pinyin:
+  iPhone:
+    landscape: "temp_pinyin_landscape"
+    portrait: "temp_pinyin_portrait"

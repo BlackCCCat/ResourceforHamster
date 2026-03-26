@@ -135,6 +135,7 @@ local returnKeyHelpers = import '../../shared/buttonHelpers/returnKey.libsonnet'
       false
     ) + {
       action: { keyboardType: 'pinyin' },
+      [if settings.keyboard_layout != 26 then 'swipeUpAction']: { keyboardType: 'temp_pinyin' },
     },
     en2cnButtonForegroundStyle:
       // 生成中英切换按钮前景。
@@ -184,6 +185,7 @@ local returnKeyHelpers = import '../../shared/buttonHelpers/returnKey.libsonnet'
         if settings.show_wanxiang then 'spaceButtonForegroundStyle1' else null,
       ],
       action: 'space',
+      [if settings.keyboard_layout != 26 then 'swipeUpAction']: { sendKeys: 'Shift+space' },
     },
     // 主空格键
     spaceButtonForegroundStyle: makeSpaceForegroundStyle(),
@@ -198,6 +200,7 @@ local returnKeyHelpers = import '../../shared/buttonHelpers/returnKey.libsonnet'
     ) + {
       backgroundStyle: 'alphabeticBackgroundStyle',
       action: 'space',
+      [if settings.keyboard_layout != 26 then 'swipeUpAction']: { sendKeys: 'Shift+space' },
     },
     // 左侧空格键
     spaceFirstButtonForegroundStyle: makeSpaceForegroundStyle(),
@@ -215,6 +218,7 @@ local returnKeyHelpers = import '../../shared/buttonHelpers/returnKey.libsonnet'
         if settings.show_wanxiang then 'spaceSecondButtonForegroundStyle1' else null,
       ],
       action: 'space',
+      [if settings.keyboard_layout != 26 then 'swipeUpAction']: { sendKeys: 'Shift+space' },
     },
     // 右侧空格键
     spaceSecondButtonForegroundStyle: makeSpaceForegroundStyle(),

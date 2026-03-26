@@ -36,6 +36,7 @@ WanxiangSkin/
 
 当前目录：
 - `jsonnet/keyboards/pinyin26/`
+- `jsonnet/keyboards/tempPinyin/`
 - `jsonnet/keyboards/alphabetic26/`
 - `jsonnet/keyboards/pinyin18/`
 - `jsonnet/keyboards/pinyin14/`
@@ -158,6 +159,18 @@ WanxiangSkin/
 ### Toolbar 配置
 - `toolbar_config.toolbar_height`
   - iPhone 工具栏高度。
+
+### 非 26 键英文键盘切回拼音 26 键
+- 9 键、14 键、18 键使用英文键盘时：
+  - `en2cnButton` 上划切到 `temp_pinyin`
+  - `spaceButton`、`spaceFirstButton`、`spaceSecondButton` 上划发送 `Shift+space`
+- `temp_pinyin` 是一个临时拼音 26 键入口：
+  - 复用拼音 26 键主体
+  - `cn2enButton` 点击返回英文键盘
+  - `cn2enButton` 不挂通知
+  - `cn2enButton` 前景改为返回语义的 SF Symbol
+  - `spaceButton` / `spaceSecondButton` 固定显示 `RIME`
+  - `spaceButton` / `spaceFirstButton` / `spaceSecondButton` 上划发送 `Shift+space`
 - `toolbar_config.toolbar_menu`
   - 是否启用键盘菜单页面。
 - `toolbar_config.content_right_to_left`

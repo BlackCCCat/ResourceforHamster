@@ -41,6 +41,19 @@
 - 改中文 26 键入口装配。
 - 接线 26 键共用布局、字母规格和系统键模块。
 
+### `jsonnet/keyboards/tempPinyin/`
+职责：
+- 临时拼音 26 键入口。
+- 复用中文 26 键主体，并只覆写返回英文键盘所需的 `cn2enButton`。
+
+主要文件：
+- `iPhone.libsonnet`
+
+改这里的情况：
+- 调整非 26 键英文键盘上划切回拼音 26 键后的返回路径。
+- 改 `temp_pinyin` 中 `cn2enButton` 的动作、通知与前景图标。
+- 改 `temp_pinyin` 中空格键的固定 `RIME` 标识与 `Shift+space` 上划动作。
+
 ### `jsonnet/keyboards/alphabetic26/`
 职责：
 - 英文 26 键实现。
@@ -55,6 +68,8 @@
 改这里的情况：
 - 改英文 26 键系统键。
 - 改英文 26 键 `123Button` 行为。
+- 改 9/14/18 英文键盘的 `en2cnButton` 上划切到 `temp_pinyin`。
+- 改 9/14/18 英文键盘空格键上划发送 `Shift+space`。
 
 ### `jsonnet/keyboards/pinyin18/`
 职责：
