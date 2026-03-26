@@ -9,7 +9,7 @@ local config = {
     iPad: {
       portrait: 'ipad_pinyin_26_portrait',
       landscape: 'ipad_pinyin_26_landscape',
-      floating: 'ipad_pinyin_26_portrait',
+      floating: 'pinyin_26_portrait',
     },
   },
   alphabetic: {
@@ -20,7 +20,7 @@ local config = {
     iPad: {
       portrait: 'ipad_alphabetic_26_portrait',
       landscape: 'ipad_alphabetic_26_landscape',
-      floating: 'ipad_alphabetic_26_portrait',
+      floating: 'alphabetic_26_portrait',
     },
   },
   numeric: {
@@ -31,7 +31,7 @@ local config = {
     iPad: {
       portrait: 'ipad_numeric_9_portrait',
       landscape: 'ipad_numeric_9_landscape',
-      floating: 'ipad_numeric_9_portrait',
+      floating: 'numeric_9_portrait',
     },
   },
 

@@ -73,6 +73,12 @@ Use it when the user asks to:
    - for numeric bottom-row swaps, prefer `jsonnet/Custom.libsonnet` + `jsonnet/keyboards/numeric9/layout.libsonnet`
    - for `123Button` interaction changes on 26-key / 14-key / 18-key, prefer `jsonnet/Custom.libsonnet` + `jsonnet/keyboards/common/systemKeys26/systemKeysSwitcher.libsonnet`; only touch `jsonnet/keyboards/alphabetic26/systemKeys.libsonnet` when English 26-key should match
    - for iPad `123Button`, use `jsonnet/keyboards/common/keyboard26/iPadBuilder.libsonnet`
+- for iPad 26-key row structure changes such as Tab, dual Shift, dual 123, bottom-row comma placement, swipe-up period, or dismiss-key placement, edit `jsonnet/keyboards/common/keyboard26/layout.libsonnet` and `jsonnet/keyboards/common/keyboard26/iPadBuilder.libsonnet` together
+- for iPad 26-key shift notification parity, bottom-row comma display, or landscape-only spacing, prefer `jsonnet/keyboards/common/keyboard26/iPadBuilder.libsonnet`
+- for iPad Chinese/English 26-key letter-size alignment, edit both `jsonnet/keyboards/pinyin26/iPad.libsonnet` and `jsonnet/keyboards/alphabetic26/iPad.libsonnet`
+- for iPad 26-key edge spacing or per-key width adjustments such as the second-row `a` gap or enter width, edit `jsonnet/keyboards/common/keyboard26/layout.libsonnet` and `jsonnet/keyboards/common/keyboard26/iPadBuilder.libsonnet` together
+- when matching iPad row-2 letter visuals, keep all visible letter widths aligned; only `a` should use extra outer width with right-aligned bounds for left-side gap
+- for iPad third-row edge-balance changes, keep the middle seven letter keys stable and adjust only left Shift / Tab / right Shift in `jsonnet/keyboards/common/keyboard26/layout.libsonnet` and `jsonnet/keyboards/common/keyboard26/iPadBuilder.libsonnet`
    - `button_123_config.show_swipe_indicators` only controls 123Button swipe-corner indicators; it must not change swipe actions themselves
    - for 9-key / numeric `symbolButton` interaction changes, prefer `jsonnet/Custom.libsonnet` + `jsonnet/shared/buttonHelpers/buttonInteraction.libsonnet` + `jsonnet/keyboards/pinyin9/builder.libsonnet` / `jsonnet/keyboards/numeric9/builder.libsonnet`; do not touch bottom-row swap logic unless placement itself changes
    - for shared layout assembly changes, prefer `jsonnet/keyboards/common/layoutAssembly/keyboardLayoutAssembly.libsonnet` + `jsonnet/shared/data/layoutData.libsonnet`; only touch `jsonnet/shared/functionButtons/functionRowPatch.libsonnet` when the function-row insertion rule itself changes

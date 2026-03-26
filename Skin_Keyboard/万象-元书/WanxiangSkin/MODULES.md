@@ -101,6 +101,7 @@
 - 同时影响中英文 26 键共用布局。
 - 同时影响中英文 26 键字母规格。
 - 同时影响 iPad 26 键的共用覆盖构建流程。
+- iPad 26 键的独立四行结构、双 Shift、双 123、Tab 与收起键盘按钮也在这里收口。
 
 ### `jsonnet/keyboards/common/systemKeys26/`
 职责：
@@ -361,3 +362,12 @@
 
 - `jsonnet/shared/toolbar/iPhone.libsonnet`
   - 读取 `horizon_candidate_button`，决定横向候选栏右侧显示展开按钮、收起键盘按钮或留空。
+
+- `jsonnet/keyboards/common/keyboard26/layout.libsonnet`
+  - iPad 26 键当前采用独立四行布局：首行删除、次行更宽回车、第三行双 Shift + Tab、底行双 123 + 逗号 + 中英切换 + 收起键盘。
+- `jsonnet/keyboards/common/keyboard26/iPadBuilder.libsonnet`
+  - 负责 iPad 专用按钮定义与尺寸覆写，包括 `tabButton`、`rightShiftButton`、`ipad123ButtonRight`、`dismissButton`。
+  - 负责给底行逗号键补充上划句号动作，并保留逗号/句号双前景显示。
+  - 负责让右侧 Shift 与左侧 Shift 使用一致的通知逻辑，并调整第二行 `a` 键留白、字母可视宽度、回车键宽度以及第三行左右边缘键宽度平衡。
+- `jsonnet/keyboards/alphabetic26/iPad.libsonnet`
+  - 负责英文 iPad 26 键入口覆写，包括与中文 iPad 26 键对齐的字母字号。

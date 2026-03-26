@@ -62,6 +62,14 @@ Use for:
 - shared 26-key layout
 - shared 26-key letter spec
 - shared iPad 26-key overlay assembly
+- iPad 26-key row structure such as Tab, dual Shift, dual 123, bottom-row comma placement, swipe-up period, and dismiss key
+- iPad-specific right Shift notification parity and landscape spacing
+
+### `jsonnet/keyboards/pinyin26/iPad.libsonnet` and `jsonnet/keyboards/alphabetic26/iPad.libsonnet`
+
+Use for:
+- iPad Chinese/English 26-key entry-level font-size overrides
+- keeping Chinese and English iPad letter size consistent
 
 ### `jsonnet/keyboards/common/systemKeys26/`
 

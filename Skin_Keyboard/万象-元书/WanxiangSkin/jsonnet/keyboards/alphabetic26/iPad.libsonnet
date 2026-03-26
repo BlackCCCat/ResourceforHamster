@@ -26,6 +26,7 @@ local config = {
   styleGenerator(fontSize, color, theme, center): keyStyles.genAlphabeticStyles(fontSize, color, theme, center),
   fontSizeOverrides: {
     '按键前景文字大小': 24,
+    '26键字母前景文字大小': 24,
     '上划文字大小': 12,
     '下划文字大小': 12,
     'toolbar按键前景sf符号大小': 20,

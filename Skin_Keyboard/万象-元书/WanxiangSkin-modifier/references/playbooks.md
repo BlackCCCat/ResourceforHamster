@@ -101,7 +101,13 @@ Notes:
    - `jsonnet/keyboards/alphabetic26/systemKeys.libsonnet`
 4. If iPad 26-key should match, also edit:
    - `jsonnet/keyboards/common/keyboard26/iPadBuilder.libsonnet`
-5. Keep the behavior split clear:
+   - `jsonnet/keyboards/common/keyboard26/layout.libsonnet`
+   - use `iPadBuilder.libsonnet` for iPad-only system-key actions or bottom-row punctuation behavior
+   - use `iPadBuilder.libsonnet` for right Shift notification parity or landscape-only spacing adjustments
+5. If only iPad Chinese/English letter size should match, also inspect:
+   - `jsonnet/keyboards/pinyin26/iPad.libsonnet`
+   - `jsonnet/keyboards/alphabetic26/iPad.libsonnet`
+6. Keep the behavior split clear:
    - slide mode -> `type: 'horizontalSymbols'` + dataSource
    - long-press mode -> `hintSymbolsStyle`
    - swipe mode -> `swipeUpAction` / `swipeDownAction`
@@ -115,6 +121,7 @@ Notes:
    - `jsonnet -e "(import '<keyboard-root>/jsonnet/entries/alphabetic_26.jsonnet').new('light','portrait')"`
 8. If iPad also changed, additionally validate:
    - `jsonnet -e "(import '<keyboard-root>/jsonnet/entries/ipad_pinyin_26.jsonnet').new('light','portrait')"`
+   - `jsonnet -e "(import '<keyboard-root>/jsonnet/entries/ipad_alphabetic_26.jsonnet').new('light','portrait')"`
 
 ## Change 9-key bottom-row button order
 
