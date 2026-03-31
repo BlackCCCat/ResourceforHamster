@@ -18,7 +18,7 @@ local pinyin14Layout = import '../../pinyin14/layout.libsonnet';
   getKeyboardLayout(context)::
     local baseLayout =
       keyboardLayoutBaseData.getKeyboardLayout(context.theme) +
-      keyboard26Layout.getKeyboardLayout(context.theme) +
+      keyboard26Layout.getKeyboardLayout(context.theme, context.Settings) +
       pinyin18Layout.getKeyboardLayout(context.theme) +
       pinyin14Layout.getKeyboardLayout(context.theme);
     if context.withFunctionsRow then

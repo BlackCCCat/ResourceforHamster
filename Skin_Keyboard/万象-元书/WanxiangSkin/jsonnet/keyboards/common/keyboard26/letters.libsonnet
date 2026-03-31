@@ -19,6 +19,7 @@ local entries = [
   ['j', 'normal'],
   ['k', 'normal'],
   ['l', 'l'],
+  [';', 'normal'],
   ['z', 'normal'],
   ['x', 'normal'],
   ['c', 'normal'],
@@ -29,9 +30,12 @@ local entries = [
 ];
 
 local letters = [entry[0] for entry in entries];
+local letters26 = std.filter(function(key) key != ';', letters);
 
 {
-  letters: letters,
+  letters: letters26,
+  letters27: letters,
+  getLetters(includeSemicolon=false): if includeSemicolon then letters else letters26,
 
   resolveTemplate(orientation, sizeBlock, template)::
     local isPortrait = orientation == 'portrait';
@@ -54,10 +58,23 @@ local letters = [entry[0] for entry in entries];
       }
     ) else error 'Unknown 26-key template: ' + template,
 
-  get26KeySpecs(orientation, keyboardLayout)::
+  get26KeySpecs(orientation, keyboardLayout, includeSemicolon=false)::
     local sizeBlock = keyboardLayout[if orientation == 'portrait' then '竖屏按键尺寸' else '横屏按键尺寸'];
     [
-      { key: entry[0] } + self.resolveTemplate(orientation, sizeBlock, entry[1])
-      for entry in entries
+      {
+        key: entry[0],
+      } + self.resolveTemplate(
+        orientation,
+        sizeBlock,
+        if includeSemicolon && std.member(['a', 'l'], entry[0]) then
+          'normal'
+        else if includeSemicolon && entry[0] == 'g' then
+          't'
+        else if includeSemicolon && entry[0] == 'h' then
+          'y'
+        else
+          entry[1]
+      )
+      for entry in (if includeSemicolon then entries else std.filter(function(entry) entry[0] != ';', entries))
     ],
 }

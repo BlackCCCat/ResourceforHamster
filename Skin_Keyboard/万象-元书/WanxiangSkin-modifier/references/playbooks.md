@@ -46,6 +46,15 @@ Notes:
     - `button_123_config.show_swipe_indicators` only controls the corner indicators
     - it must not change `swipeUpAction` or `swipeDownAction`
 - Example:
+  - `keyboard_layout = 27`
+  - readers:
+    - `jsonnet/keyboards/common/layoutAssembly/keyboardLayoutAssembly.libsonnet`
+    - `jsonnet/keyboards/common/keyboard26/layout.libsonnet`
+    - `jsonnet/keyboards/common/keyboard26/letters.libsonnet`
+    - `jsonnet/keyboards/pinyin26/builder.libsonnet`
+  - affected entry:
+    - `jsonnet/entries/pinyin_26.jsonnet`
+- Example:
   - `button_symbol_config`
   - readers:
     - `jsonnet/shared/buttonHelpers/buttonInteraction.libsonnet`

@@ -31,13 +31,27 @@ local functionButtonStyles = import '../../shared/functionButtons/styles.libsonn
     local theme = context.theme;
     local orientation = context.orientation;
     local settings = context.Settings;
+    local includeSemicolon = settings.keyboard_layout == 27;
     local swipeDataRoot = swipeData.genSwipeData(context.deviceType);
     local swipeUp = if std.objectHas(swipeDataRoot, 'swipe_up') then swipeDataRoot.swipe_up else {};
     local swipeDown = if std.objectHas(swipeDataRoot, 'swipe_down') then swipeDataRoot.swipe_down else {};
-    local letterSpecs = letter26KeysSpecs.get26KeySpecs(orientation, keyboardLayout);
+    local letterSpecs = letter26KeysSpecs.get26KeySpecs(orientation, keyboardLayout, includeSemicolon);
     local letterKeys = [spec.key for spec in letterSpecs];
     local hintStyles = hintSymbolsStyles.getStyle(theme, hintSymbolsData.pinyin);
-    local createButton = self.createButtonFactory(context, swipeUp, swipeDown, letter26KeysSpecs.letters);
+    local extra27HintStyles =
+      if includeSemicolon then
+        {
+          ';ButtonHintForegroundStyle': utils.makeTextStyle(
+            ';',
+            fontSize['26键字母前景文字大小'],
+            color[theme]['按键前景颜色'],
+            color[theme]['按键前景颜色'],
+            center['划动气泡文字偏移']
+          ),
+        }
+      else
+        {};
+    local createButton = self.createButtonFactory(context, swipeUp, swipeDown, letter26KeysSpecs.getLetters(includeSemicolon));
     keyboardLayout[if orientation == 'portrait' then '竖屏中文26键' else '横屏中文26键'] +
     swipeKeyStyles.getStyle('cn', theme, swipeUp, swipeDown) +
     hintStyles +
@@ -54,5 +68,6 @@ local functionButtonStyles = import '../../shared/functionButtons/styles.libsonn
     } +
     keyHelpers.letterButtons(letterSpecs, createButton, hintStyles) +
     keyHelpers.hintStyles(letterKeys) +
+    extra27HintStyles +
     systemKeysPinyin26.build(theme, orientation, keyboardLayout, settings, color, fontSize, center, createButton, hintStyles, letterSpecs),
 }

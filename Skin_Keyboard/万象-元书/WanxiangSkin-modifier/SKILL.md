@@ -31,6 +31,7 @@ Use it when the user asks to:
 - add or change `Custom.libsonnet` options
 - expose or adjust 9-key bottom-row position options such as swapping `123` and symbol
 - expose or adjust numeric keyboard bottom-row position options such as swapping return and the switch-keyboard button
+- expose or adjust `keyboard_layout = 27` for the Sougou double-pinyin 27-key variant
 - expose or adjust `button_123_config` to switch 26-key / 14-key / 18-key / iPad `123Button` between slide, long-press menu, and swipe actions
 - expose or adjust `button_123_config.show_swipe_indicators` to control only the 123Button swipe-corner indicators
 - expose or adjust `button_symbol_config` to switch 9-key / numeric `symbolButton` between slide, long-press menu, and swipe actions
@@ -82,6 +83,7 @@ Use it when the user asks to:
 - for iPad Chinese/English 26-key letter-size alignment, edit both `jsonnet/keyboards/pinyin26/iPad.libsonnet` and `jsonnet/keyboards/alphabetic26/iPad.libsonnet`
    - for iPad 26-key edge spacing or per-key width adjustments such as the second-row `a` gap or enter width, edit `jsonnet/keyboards/common/keyboard26/layout.libsonnet` and `jsonnet/keyboards/common/keyboard26/iPadBuilder.libsonnet` together
    - for non-26 English keyboard swipes back into pinyin 26-key, prefer `jsonnet/keyboards/alphabetic26/systemKeys.libsonnet` plus a thin wrapper under `jsonnet/keyboards/tempPinyin/`
+   - for `keyboard_layout = 27`, prefer `jsonnet/keyboards/common/keyboard26/layout.libsonnet` + `jsonnet/keyboards/common/keyboard26/letters.libsonnet` + `jsonnet/keyboards/pinyin26/builder.libsonnet`
 - when matching iPad row-2 letter visuals, keep all visible letter widths aligned; only `a` should use extra outer width with right-aligned bounds for left-side gap
 - for iPad third-row edge-balance changes, keep the middle seven letter keys stable and adjust only left Shift / Tab / right Shift in `jsonnet/keyboards/common/keyboard26/layout.libsonnet` and `jsonnet/keyboards/common/keyboard26/iPadBuilder.libsonnet`
    - `button_123_config.show_swipe_indicators` only controls 123Button swipe-corner indicators; it must not change swipe actions themselves

@@ -21,7 +21,7 @@ local build(theme, orientation, keyboardLayout=null) =
     defaultContext,
     defaultSwipeUp,
     defaultSwipeDown,
-    letter26KeysSpecs.letters
+    letter26KeysSpecs.getLetters(Settings.keyboard_layout == 27)
   ),
   keyboard(theme, orientation, keyboardLayout):
     build(theme, orientation, keyboardLayout),

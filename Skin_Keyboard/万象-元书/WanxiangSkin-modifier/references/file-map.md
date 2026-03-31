@@ -11,6 +11,7 @@ Inside `<keyboard-root>`:
 - config entry:
   - `jsonnet/Custom.libsonnet`
   - public layout toggles such as `swap_9_123_symbol` and `swap_numeric_return_symbol`
+  - `keyboard_layout = 27` for the Sougou double-pinyin 27-key variant
   - public `123Button` interaction config such as `button_123_config`
   - `button_123_config.show_swipe_indicators` only affects 123Button swipe-corner indicator visibility
   - public 9-key / numeric symbol-button interaction config such as `button_symbol_config`
@@ -72,6 +73,7 @@ Use for:
 - shared 26-key layout
 - shared 26-key letter spec
 - shared iPad 26-key overlay assembly
+- Chinese 27-key variant based on 26-key layout, including `;` key placement and second-row sizing
 - iPad 26-key row structure such as Tab, dual Shift, dual 123, bottom-row comma placement, swipe-up period, and dismiss key
 - iPad-specific right Shift notification parity and landscape spacing
 

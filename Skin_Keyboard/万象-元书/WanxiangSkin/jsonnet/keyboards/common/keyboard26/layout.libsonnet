@@ -14,7 +14,8 @@ local ipadBottomSmallSize = { width: { percentage: 1 / 11 } };
 local ipadBottomSpaceSize = { width: { percentage: 5 / 11 } };
 
 {
-  getKeyboardLayout(theme)::
+  getKeyboardLayout(theme, Settings=null)::
+    local use27Key = Settings != null && std.objectHas(Settings, 'keyboard_layout') && Settings.keyboard_layout == 27;
     local makeKeyboardBackgroundStyle() =
       // 生成键盘区域背景。
       styleFactories.makeGeometryStyle(color[theme]['键盘背景颜色']);
@@ -53,6 +54,7 @@ local ipadBottomSpaceSize = { width: { percentage: 5 / 11 } };
                       { Cell: 'jButton' },
                       { Cell: 'kButton' },
                       { Cell: 'lButton' },
+                      if use27Key then { Cell: ';Button' } else {},
                     ],
                   },
                 },
@@ -268,11 +270,11 @@ local ipadBottomSpaceSize = { width: { percentage: 5 / 11 } };
                       {
                         HStack: {
                           subviews: [
-                            { Cell: 'gButton' },
-                            { Cell: 'hButton' },
-                            { Cell: 'jButton' },
-                            { Cell: 'kButton' },
-                            { Cell: 'lButton' },
+                            if use27Key then { Cell: 'hButton' } else { Cell: 'gButton' },
+                            if use27Key then { Cell: 'jButton' } else { Cell: 'hButton' },
+                            if use27Key then { Cell: 'kButton' } else { Cell: 'jButton' },
+                            if use27Key then { Cell: 'lButton' } else { Cell: 'kButton' },
+                            if use27Key then { Cell: ';Button' } else { Cell: 'lButton' },
                           ],
                         },
                       },
