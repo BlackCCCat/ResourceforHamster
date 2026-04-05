@@ -102,6 +102,13 @@ patch:
         files:
           - lua/data/abbrev.txt
           - lua/data/chengyu.txt
+      - option: chaifen_switch
+        cand_type: chaifen
+        mode: comment
+        tags: [abc]
+        prefix: "_cf_"
+        files:
+          - lua/data/chaifen.txt 
 
   super_processor:
     enable_backspace_limit: true # 开启/关闭退格限制
