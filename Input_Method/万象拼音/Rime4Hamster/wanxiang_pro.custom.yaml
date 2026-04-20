@@ -25,6 +25,15 @@ patch:
     decay_rate: 0.85 # 衰减率：单日时间权重打 85 折
     enable_predict_space: false # true: 联想时按空格上屏空格; false: 默认行为（根据输入法设定选词等）一般手机开电脑关，这里有个布尔转换，空格当空格时其他按键打断，空格当上屏则，其他按键当作空格，有：Tab、Alt、右键、\斜杠
     context_timeout: 5000 # 上文超时时间毫秒
+    custom_classifiers: # 数字后量词调频，如平时chuan传，输入数字后，首选为串，结果如：1串，想关闭清空列表即可
+      - 个只名位口头匹条群批伙 # 人物动物
+      - 张把件台部块根颗粒滴片朵面扇顶栋座所辆艘架盏支枝杆 # 物品建筑
+      - 双对副套打串束排阵堆叠摞扎 # 成组集合
+      - 杯瓶盒包份碗锅盆桶袋罐盘 # 包装容器
+      - 次场局回趟顿番遍声项宗桩款步招 # 动作事件
+      - 年月天周岁秒分刻代期届任夜季 # 时间周期
+      - 本册篇首句段卷幅节堂门帖字行 # 文化作品
+      - 米寸尺里斤两吨克升元角毛笔百千万亿 # 度量货币
 
   switches/@0/reset: 0 # 默认中文状态
   switches/@4/reset: 0 # 默认翻译关闭
@@ -108,7 +117,7 @@ patch:
         tags: [abc]
         prefix: "_cf_"
         files:
-          - lua/data/chaifen.txt 
+          - lua/data/chaifen.txt
 
   super_processor:
     enable_backspace_limit: true # 开启/关闭退格限制
