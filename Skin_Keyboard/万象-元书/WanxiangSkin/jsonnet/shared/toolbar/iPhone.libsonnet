@@ -306,6 +306,12 @@ local getToolBar(theme, overrides={}) =
     toolbarButtonUndoForegroundStyle: makeToolbarSystemImageForegroundStyle('arrow.uturn.left.circle.fill'),
     toolbarButtonRedoStyle: makeToolbarButtonStyle('toolbarButtonRedoForegroundStyle', { shortcut: '#redo' }),
     toolbarButtonRedoForegroundStyle: makeToolbarSystemImageForegroundStyle('arrow.uturn.right.circle.fill'),
+    toolbarButtonCutStyle: makeToolbarButtonStyle('toolbarButtonCutForegroundStyle', { shortcut: '#cut' }),
+    toolbarButtonCutForegroundStyle: makeToolbarSystemImageForegroundStyle('scissors'),
+    toolbarButtonCopyStyle: makeToolbarButtonStyle('toolbarButtonCopyForegroundStyle', { shortcut: '#copy' }),
+    toolbarButtonCopyForegroundStyle: makeToolbarSystemImageForegroundStyle('arrow.up.doc.on.clipboard'),
+    toolbarButtonPasteStyle: makeToolbarButtonStyle('toolbarButtonPasteForegroundStyle', { shortcut: '#paste' }),
+    toolbarButtonPasteForegroundStyle: makeToolbarSystemImageForegroundStyle('doc.on.clipboard.fill'),
     // 输入法与皮肤工具
     toolbarButtonRimeSwitcherStyle: makeToolbarButtonStyle('toolbarButtonRimeSwitcherForegroundStyle', { shortcut: '#RimeSwitcher' }),
     toolbarButtonRimeSwitcherForegroundStyle: makeToolbarSystemImageForegroundStyle('filemenu.and.selection'),
@@ -398,6 +404,10 @@ local getToolBar(theme, overrides={}) =
       {
         name: '置顶',
         action: { sendKeys: 'Control+p' },
+      },
+      {
+        name: '移除',
+        action: { sendKeys: 'Control+Delete' },
       },
     ],
   };

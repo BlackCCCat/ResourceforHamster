@@ -224,12 +224,13 @@ If order changes do not appear, also inspect:
 Typical edits:
 - new toolbar button IDs
 - toolbar action mapping
-- toolbar foreground style objects such as `simplified_traditional`, `undo`, and `redo` in `iPhone.libsonnet`
+- toolbar foreground style objects such as `simplified_traditional`, `undo`, `redo`, `cut`, `copy`, and `paste` in `iPhone.libsonnet`
 - iPhone or iPad ordering rules
 - toolbar menu behavior
 - horizontal candidate trailing button controlled by `horizon_candidate_button` in `jsonnet/Custom.libsonnet` and rendered in `jsonnet/shared/toolbar/iPhone.libsonnet`
 - horizontalSymbols content direction such as `content_right_to_left`
 - toolbar height such as `toolbar_config.toolbar_height` or `toolbar_config.ipad.toolbar_height`
+- candidate long-press menu entries such as `candidateContextMenu`
 
 ## Shared styles and helpers
 

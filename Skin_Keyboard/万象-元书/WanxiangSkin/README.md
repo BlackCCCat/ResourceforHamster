@@ -187,6 +187,10 @@ WanxiangSkin/
 - `toolbar_config.segmented`
 - `toolbar_config.carousel`
   - iPhone toolbar 两种模式的按钮配置。
+  - 可选按钮 ID 额外支持：
+    - `cut`
+    - `copy`
+    - `paste`
 - `toolbar_config.ipad.toolbar_height`
   - iPad 工具栏高度。
 - `toolbar_config.ipad.toolbar_menu`
@@ -205,6 +209,7 @@ WanxiangSkin/
 - 中英文 iPad 26 键统一使用相同的 26 键字母字号覆写。
 - 工具栏可选按钮新增 `simplified_traditional`，用于触发 `#简繁切换`。
 - 工具栏可选按钮新增 `undo` / `redo`，分别触发 `#undo` 与 `#redo`。
+- 工具栏可选按钮支持 `cut` / `copy` / `paste`，并复用功能按键的同款 SF Symbol。
 
 ## 横屏布局说明
 

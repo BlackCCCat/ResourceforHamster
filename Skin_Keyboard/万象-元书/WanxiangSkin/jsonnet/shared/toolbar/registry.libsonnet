@@ -120,6 +120,21 @@ local shared = import 'config.libsonnet';
       slideStyleName: 'toolbarButtonRedoStyle',
       action: { shortcut: '#redo' },
     },
+    cut: {
+      cellName: 'toolbarButtonCutStyle',
+      slideStyleName: 'toolbarButtonCutStyle',
+      action: { shortcut: '#cut' },
+    },
+    copy: {
+      cellName: 'toolbarButtonCopyStyle',
+      slideStyleName: 'toolbarButtonCopyStyle',
+      action: { shortcut: '#copy' },
+    },
+    paste: {
+      cellName: 'toolbarButtonPasteStyle',
+      slideStyleName: 'toolbarButtonPasteStyle',
+      action: { shortcut: '#paste' },
+    },
     simplified_traditional: {
       cellName: 'toolbarButtonchangeSimplifiedandTraditionalStyle',
       slideStyleName: 'toolbarButtonchangeSimplifiedandTraditionalStyle',

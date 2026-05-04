@@ -92,8 +92,10 @@ Notes:
 3. Edit `jsonnet/shared/toolbar/iPhoneRenderer.libsonnet` or `jsonnet/shared/toolbar/iPadRenderer.libsonnet` when changing layout rules or horizontalSymbols direction, such as `content_right_to_left`.
 4. If the change affects toolbar height, also inspect the reader path that applies `toolbar_config.toolbar_height` or `toolbar_config.ipad.toolbar_height`.
 5. If the change affects the horizontal candidate trailing button, inspect `horizon_candidate_button` in `jsonnet/Custom.libsonnet` and the branch in `jsonnet/shared/toolbar/iPhone.libsonnet`.
-6. Update `Custom.libsonnet` docs if a new public button ID becomes available, including IDs such as `simplified_traditional`, `undo`, and `redo`.
-7. If the new button uses the standard toolbar system-image foreground style pattern, prefer extending the local helper in `jsonnet/shared/toolbar/iPhone.libsonnet` instead of duplicating style objects.
+6. Update `Custom.libsonnet` docs if a new public button ID becomes available, including IDs such as `simplified_traditional`, `undo`, `redo`, `cut`, `copy`, and `paste`.
+7. If the toolbar edit action should mirror the function-row visual language, align its SF Symbol with `jsonnet/shared/functionButtons/styles.libsonnet`.
+8. If the change touches the candidate long-press menu, edit `candidateContextMenu` in `jsonnet/shared/toolbar/iPhone.libsonnet`.
+9. If the new button uses the standard toolbar system-image foreground style pattern, prefer extending the local helper in `jsonnet/shared/toolbar/iPhone.libsonnet` instead of duplicating style objects.
 
 ## Add a compact layout
 

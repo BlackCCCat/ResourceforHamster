@@ -239,6 +239,7 @@
   - iPad toolbar 入口。
 - `registry.libsonnet`
   - toolbar 按钮注册表。
+  - `cut` / `copy` / `paste` 这类可选编辑按钮也在这里注册。
 - `config.libsonnet`
   - toolbar 配置读取与公共 helper。
 - `iPhoneRenderer.libsonnet`
@@ -252,6 +253,8 @@
 - 新增 toolbar 按钮。
 - `registry.libsonnet` 中的 `simplified_traditional` 可作为工具栏配置按钮，样式定义位于 `iPhone.libsonnet`。
 - `registry.libsonnet` 中的 `undo` / `redo` 可作为工具栏配置按钮，样式定义位于 `iPhone.libsonnet`。
+- `registry.libsonnet` 中的 `cut` / `copy` / `paste` 可作为工具栏配置按钮，样式定义位于 `iPhone.libsonnet`。
+- 调整候选词长按菜单 `candidateContextMenu`。
 - 调整 iPhone / iPad toolbar 布局。
 - 调整 `toolbar_config.toolbar_height` 与 `toolbar_config.ipad.toolbar_height`。
 - 调整 segmented / carousel 行为。

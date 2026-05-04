@@ -214,6 +214,9 @@
     // simplified_traditional: 简繁切换
     // undo: 撤销
     // redo: 重做
+    // cut: 剪切
+    // copy: 复制
+    // paste: 粘贴
 
     segmented: {
       // 第一种布局

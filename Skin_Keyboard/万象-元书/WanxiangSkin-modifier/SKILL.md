@@ -40,7 +40,7 @@ Use it when the user asks to:
 - adjust the dedicated landscape numeric split layout, including function-row visibility, left-side symbol panels, and slot swapping
 - add a new layout such as a compact layout variant
 - adjust toolbar structure or available toolbar IDs
-- add or adjust toolbar buttons such as `simplified_traditional` for `#简繁切换`, or `undo` / `redo` for `#undo` and `#redo`
+- add or adjust toolbar buttons such as `simplified_traditional` for `#简繁切换`, `undo` / `redo` for `#undo` and `#redo`, or `cut` / `copy` / `paste`
 - adjust toolbar slide direction such as `content_right_to_left`
 - adjust `toolbar_config.toolbar_height` or `toolbar_config.ipad.toolbar_height`
 - adjust `horizon_candidate_button` for the horizontal candidate trailing button
