@@ -13,6 +13,10 @@ patch:
     derived: "💡" # 派生
     fallback: "❗"
 
+  force_upper_aux:
+    hotkey: "period" #用来固定候选的快捷键，原理是用双大写字母定字,能用组合键能用符号Tab等，按一下固定当前可见候选，按两下固定N-1个字状态下记录的字
+    symbol: "›" #用来替代双大写字母辅助的preedit视觉拉长的问题
+
   user_predict:
     db_name: lua/predict # 数据库名称（默认 predict，将生成 predict.userdb 文件夹）
     enable_post_predict: true # 上屏后预测

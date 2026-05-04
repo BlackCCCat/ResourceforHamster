@@ -19,6 +19,10 @@ patch:
     derived: "💡" # 派生
     fallback: "❗"
 
+  force_upper_aux:
+    hotkey: "period" #用来固定候选的快捷键，原理是用双大写字母定字,能用组合键能用符号Tab等，按一下固定当前可见候选，按两下固定N-1个字状态下记录的字
+    symbol: "›" #用来替代双大写字母辅助的preedit视觉拉长的问题
+
   # 输入引擎
   engine/processors/@before 1: lua_processor@*select_character # 以词定字，有了辅助码了，想开启可以注释掉
 
@@ -107,7 +111,7 @@ patch:
         tags: [abc]
         prefix: "_cf_"
         files:
-          - lua/data/chaifen.txt 
+          - lua/data/chaifen.txt
 
   super_processor:
     enable_backspace_limit: true # 开启/关闭退格限制
