@@ -64,7 +64,7 @@ Notes:
     - assisted direction action changes to uppercase letter
     - assisted direction swipe bubble is hidden
     - original swipe symbols move into long-press menu
-    - long-press default selection becomes `2`
+    - long-press default selection switches to the original assisted symbol
 - Example:
   - `button_symbol_config`
   - readers:

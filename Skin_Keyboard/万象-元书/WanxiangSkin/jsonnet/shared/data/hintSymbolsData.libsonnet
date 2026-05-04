@@ -57,41 +57,41 @@ local makeAction(instance) =
     y: {
       selectedIndex: 1,
       list: [
-        { action: { character: 'y' }, label: { text: 'y' } },
-        { action: { character: 'Y' }, label: { text: 'Y' } },
         { action: { sendKeys: 'KP_6' }, label: { text: '₆' } },
+        { action: { character: 'Y' }, label: { text: 'Y' } },
+        { action: { character: 'y' }, label: { text: 'y' } },
       ],
     },
     u: {
       selectedIndex: 1,
       list: [
-        { action: { character: 'u' }, label: { text: 'u' } },
-        { action: { character: 'U' }, label: { text: 'U' } },
         { action: { sendKeys: 'KP_7' }, label: { text: '₇' } },
+        { action: { character: 'U' }, label: { text: 'U' } },
+        { action: { character: 'u' }, label: { text: 'u' } },
       ],
     },
     i: {
       selectedIndex: 1,
       list: [
-        { action: { character: 'i' }, label: { text: 'i' } },
-        { action: { character: 'I' }, label: { text: 'I' } },
         { action: { sendKeys: 'KP_8' }, label: { text: '₈' } },
+        { action: { character: 'I' }, label: { text: 'I' } },
+        { action: { character: 'i' }, label: { text: 'i' } },
       ],
     },
     o: {
       selectedIndex: 1,
       list: [
-        { action: { character: 'o' }, label: { text: 'o' } },
-        { action: { character: 'O' }, label: { text: 'O' } },
         { action: { sendKeys: 'KP_9' }, label: { text: '₉' } },
+        { action: { character: 'O' }, label: { text: 'O' } },
+        { action: { character: 'o' }, label: { text: 'o' } },
       ],
     },
     p: {
       selectedIndex: 1,
       list: [
-        { action: { character: 'p' }, label: { text: 'p' } },
-        { action: { character: 'P' }, label: { text: 'P' } },
         { action: { sendKeys: 'KP_0' }, label: { text: '₀' } },
+        { action: { character: 'P' }, label: { text: 'P' } },
+        { action: { character: 'p' }, label: { text: 'p' } },
       ],
     },
 
