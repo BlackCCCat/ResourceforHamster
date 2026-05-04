@@ -19,7 +19,7 @@ local makeAction(instance) =
       list: [
         { action: { character: 'q' }, label: { text: 'q' } },  // action同仓皮肤定义，label可选text/systemImageName, 具体见仓皮肤文档
         { action: { character: 'Q' }, label: { text: 'Q' } },
-        { action: { sendKeys: 'KP_1' }, label: { text: '1' } },
+        { action: { sendKeys: 'KP_1' }, label: { text: '₁' } },
       ],
     },
     w: {
@@ -27,7 +27,7 @@ local makeAction(instance) =
       list: [
         { action: { character: 'w' }, label: { text: 'w' } },
         { action: { character: 'W' }, label: { text: 'W' } },
-        { action: { sendKeys: 'KP_2' }, label: { text: '2' } },
+        { action: { sendKeys: 'KP_2' }, label: { text: '₂' } },
       ],
     },
     e: {
@@ -35,7 +35,7 @@ local makeAction(instance) =
       list: [
         { action: { character: 'e' }, label: { text: 'e' } },
         { action: { character: 'E' }, label: { text: 'E' } },
-        { action: { sendKeys: 'KP_3' }, label: { text: '3' } },
+        { action: { sendKeys: 'KP_3' }, label: { text: '₃' } },
       ],
     },
     r: {
@@ -43,7 +43,7 @@ local makeAction(instance) =
       list: [
         { action: { character: 'r' }, label: { text: 'r' } },
         { action: { character: 'R' }, label: { text: 'R' } },
-        { action: { sendKeys: 'KP_4' }, label: { text: '4' } },
+        { action: { sendKeys: 'KP_4' }, label: { text: '₄' } },
       ],
     },
     t: {
@@ -51,7 +51,7 @@ local makeAction(instance) =
       list: [
         { action: { character: 't' }, label: { text: 't' } },
         { action: { character: 'T' }, label: { text: 'T' } },
-        { action: { sendKeys: 'KP_5' }, label: { text: '5' } },
+        { action: { sendKeys: 'KP_5' }, label: { text: '₅' } },
       ],
     },
     y: {
@@ -59,7 +59,7 @@ local makeAction(instance) =
       list: [
         { action: { character: 'y' }, label: { text: 'y' } },
         { action: { character: 'Y' }, label: { text: 'Y' } },
-        { action: { sendKeys: 'KP_6' }, label: { text: '6' } },
+        { action: { sendKeys: 'KP_6' }, label: { text: '₆' } },
       ],
     },
     u: {
@@ -67,7 +67,7 @@ local makeAction(instance) =
       list: [
         { action: { character: 'u' }, label: { text: 'u' } },
         { action: { character: 'U' }, label: { text: 'U' } },
-        { action: { sendKeys: 'KP_7' }, label: { text: '7' } },
+        { action: { sendKeys: 'KP_7' }, label: { text: '₇' } },
       ],
     },
     i: {
@@ -75,7 +75,7 @@ local makeAction(instance) =
       list: [
         { action: { character: 'i' }, label: { text: 'i' } },
         { action: { character: 'I' }, label: { text: 'I' } },
-        { action: { sendKeys: 'KP_8' }, label: { text: '8' } },
+        { action: { sendKeys: 'KP_8' }, label: { text: '₈' } },
       ],
     },
     o: {
@@ -83,7 +83,7 @@ local makeAction(instance) =
       list: [
         { action: { character: 'o' }, label: { text: 'o' } },
         { action: { character: 'O' }, label: { text: 'O' } },
-        { action: { sendKeys: 'KP_9' }, label: { text: '9' } },
+        { action: { sendKeys: 'KP_9' }, label: { text: '₉' } },
       ],
     },
     p: {
@@ -91,7 +91,7 @@ local makeAction(instance) =
       list: [
         { action: { character: 'p' }, label: { text: 'p' } },
         { action: { character: 'P' }, label: { text: 'P' } },
-        { action: { sendKeys: 'KP_0' }, label: { text: '0' } },
+        { action: { sendKeys: 'KP_0' }, label: { text: '₀' } },
       ],
     },
 
@@ -319,7 +319,7 @@ local makeAction(instance) =
       list: [
         { action: { character: 'q' }, label: { text: 'q' } },  // action同仓皮肤定义，label可选text/systemImageName, 具体见仓皮肤文档
         { action: { character: 'Q' }, label: { text: 'Q' } },
-        { action: { sendKeys: 'KP_1' }, label: { text: '1' } },
+        { action: { sendKeys: 'KP_1' }, label: { text: '₁' } },
       ],
     },
     we: {
@@ -329,7 +329,7 @@ local makeAction(instance) =
         { action: { character: 'W' }, label: { text: 'W' } },
         { action: { character: 'e' }, label: { text: 'e' } },
         { action: { character: 'E' }, label: { text: 'E' } },
-        { action: { sendKeys: 'KP_2' }, label: { text: '2' } },
+        { action: { sendKeys: 'KP_2' }, label: { text: '₂' } },
       ],
     },
     rt: {
@@ -337,7 +337,7 @@ local makeAction(instance) =
       list: [
         { action: { character: 'r' }, label: { text: 'r' } },
         { action: { character: 'R' }, label: { text: 'R' } },
-        { action: { sendKeys: 'KP_3' }, label: { text: '3' } },
+        { action: { sendKeys: 'KP_3' }, label: { text: '₃' } },
         { action: { character: 't' }, label: { text: 't' } },
         { action: { character: 'T' }, label: { text: 'T' } },
       ],
@@ -347,7 +347,7 @@ local makeAction(instance) =
       list: [
         { action: { character: 'y' }, label: { text: 'y' } },
         { action: { character: 'Y' }, label: { text: 'Y' } },
-        { action: { sendKeys: 'KP_4' }, label: { text: '4' } },
+        { action: { sendKeys: 'KP_4' }, label: { text: '₄' } },
       ],
     },
     u: {
@@ -355,7 +355,7 @@ local makeAction(instance) =
       list: [
         { action: { character: 'u' }, label: { text: 'u' } },
         { action: { character: 'U' }, label: { text: 'U' } },
-        { action: { sendKeys: 'KP_5' }, label: { text: '5' } },
+        { action: { sendKeys: 'KP_5' }, label: { text: '₅' } },
       ],
     },
     io: {
@@ -365,7 +365,7 @@ local makeAction(instance) =
         { action: { character: 'I' }, label: { text: 'I' } },
         { action: { character: 'o' }, label: { text: 'o' } },
         { action: { character: 'O' }, label: { text: 'O' } },
-        { action: { sendKeys: 'KP_6' }, label: { text: '6' } },
+        { action: { sendKeys: 'KP_6' }, label: { text: '₆' } },
       ],
     },
 
@@ -374,7 +374,7 @@ local makeAction(instance) =
       list: [
         { action: { character: 'p' }, label: { text: 'p' } },
         { action: { character: 'P' }, label: { text: 'P' } },
-        { action: { sendKeys: 'KP_7' }, label: { text: '7' } },
+        { action: { sendKeys: 'KP_7' }, label: { text: '₇' } },
       ],
     },
 
@@ -383,7 +383,7 @@ local makeAction(instance) =
       list: [
         { action: { character: 'a' }, label: { text: 'a' } },
         { action: { character: 'A' }, label: { text: 'A' } },
-        { action: { sendKeys: 'KP_8' }, label: { text: '8' } },
+        { action: { sendKeys: 'KP_8' }, label: { text: '₈' } },
 
       ],
     },
@@ -396,7 +396,7 @@ local makeAction(instance) =
         { action: { character: 'S' }, label: { text: 'S' } },
         { action: { character: 'd' }, label: { text: 'd' } },
         { action: { character: 'D' }, label: { text: 'D' } },
-        { action: { sendKeys: 'KP_9' }, label: { text: '9' } },
+        { action: { sendKeys: 'KP_9' }, label: { text: '₉' } },
       ],
     },
 
@@ -407,7 +407,7 @@ local makeAction(instance) =
         { action: { character: 'F' }, label: { text: 'F' } },
         { action: { character: 'g' }, label: { text: 'g' } },
         { action: { character: 'G' }, label: { text: 'G' } },
-        { action: { sendKeys: 'KP_0' }, label: { text: '0' } },
+        { action: { sendKeys: 'KP_0' }, label: { text: '₀' } },
       ],
     },
 
@@ -524,7 +524,7 @@ local makeAction(instance) =
         { action: { character: 'Q' }, label: { text: 'Q' } },
         { action: { character: 'w' }, label: { text: 'w' } },
         { action: { character: 'W' }, label: { text: 'W' } },
-        { action: { sendKeys: 'KP_1' }, label: { text: '1' } },
+        { action: { sendKeys: 'KP_1' }, label: { text: '₁' } },
       ],
     },
     er: {
@@ -535,7 +535,7 @@ local makeAction(instance) =
         { action: { character: 'E' }, label: { text: 'E' } },
         { action: { character: 'r' }, label: { text: 'r' } },
         { action: { character: 'R' }, label: { text: 'R' } },
-        { action: { sendKeys: 'KP_2' }, label: { text: '2' } },
+        { action: { sendKeys: 'KP_2' }, label: { text: '₂' } },
       ],
     },
     ty: {
@@ -545,7 +545,7 @@ local makeAction(instance) =
         { action: { character: 'T' }, label: { text: 'T' } },
         { action: { character: 'y' }, label: { text: 'y' } },
         { action: { character: 'Y' }, label: { text: 'Y' } },
-        { action: { sendKeys: 'KP_3' }, label: { text: '3' } },
+        { action: { sendKeys: 'KP_3' }, label: { text: '₃' } },
 
       ],
     },
@@ -556,7 +556,7 @@ local makeAction(instance) =
         { action: { character: 'U' }, label: { text: 'U' } },
         { action: { character: 'i' }, label: { text: 'i' } },
         { action: { character: 'I' }, label: { text: 'I' } },
-        { action: { sendKeys: 'KP_4' }, label: { text: '4' } },
+        { action: { sendKeys: 'KP_4' }, label: { text: '₄' } },
       ],
     },
     op: {
@@ -566,7 +566,7 @@ local makeAction(instance) =
         { action: { character: 'O' }, label: { text: 'O' } },
         { action: { character: 'p' }, label: { text: 'p' } },
         { action: { character: 'P' }, label: { text: 'P' } },
-        { action: { sendKeys: 'KP_5' }, label: { text: '5' } },
+        { action: { sendKeys: 'KP_5' }, label: { text: '₅' } },
       ],
     },
 
@@ -578,7 +578,7 @@ local makeAction(instance) =
         { action: { character: 'A' }, label: { text: 'A' } },
         { action: { character: 's' }, label: { text: 's' } },
         { action: { character: 'S' }, label: { text: 'S' } },
-        { action: { sendKeys: 'KP_6' }, label: { text: '6' } },
+        { action: { sendKeys: 'KP_6' }, label: { text: '₆' } },
       ],
     },
 
@@ -589,7 +589,7 @@ local makeAction(instance) =
         { action: { character: 'D' }, label: { text: 'D' } },
         { action: { character: 'f' }, label: { text: 'f' } },
         { action: { character: 'F' }, label: { text: 'F' } },
-        { action: { sendKeys: 'KP_7' }, label: { text: '7' } },
+        { action: { sendKeys: 'KP_7' }, label: { text: '₇' } },
 
       ],
     },
@@ -602,7 +602,7 @@ local makeAction(instance) =
         { action: { character: 'G' }, label: { text: 'G' } },
         { action: { character: 'h' }, label: { text: 'h' } },
         { action: { character: 'H' }, label: { text: 'H' } },
-        { action: { sendKeys: 'KP_8' }, label: { text: '8' } },
+        { action: { sendKeys: 'KP_8' }, label: { text: '₈' } },
       ],
     },
 
@@ -613,7 +613,7 @@ local makeAction(instance) =
         { action: { character: 'J' }, label: { text: 'J' } },
         { action: { character: 'k' }, label: { text: 'k' } },
         { action: { character: 'K' }, label: { text: 'K' } },
-        { action: { sendKeys: 'KP_9' }, label: { text: '9' } },
+        { action: { sendKeys: 'KP_9' }, label: { text: '₉' } },
       ],
     },
 
@@ -622,7 +622,7 @@ local makeAction(instance) =
       list: [
         { action: { character: 'l' }, label: { text: 'l' } },
         { action: { character: 'L' }, label: { text: 'L' } },
-        { action: { sendKeys: 'KP_0' }, label: { text: '0' } },
+        { action: { sendKeys: 'KP_0' }, label: { text: '₀' } },
       ],
     },
 
