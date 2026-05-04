@@ -10,7 +10,7 @@ patch:
   super_comment/chaifen: "chaifen"
   super_comment/cand_type:
     user_phrase: "📌" # 自造词
-    sentence: "💬" # 模型造句
+    sentence: "☁️" # 模型造句
     phrase: "🏷" # 字典词库
     table: "🗂" # 表
     user_table: "📝" # custom_phrase
