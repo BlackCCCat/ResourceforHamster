@@ -1,13 +1,17 @@
 // 定义 26 键共享按钮工厂，统一前景样式与滑动动作接线。
 {
   create(context, swipeUp, swipeDown, options):: (
+    local swipeUpForeground =
+      if std.objectHas(options, 'foregroundSwipeUp') then options.foregroundSwipeUp else swipeUp;
+    local swipeDownForeground =
+      if std.objectHas(options, 'foregroundSwipeDown') then options.foregroundSwipeDown else swipeDown;
     local buildForegroundNames(key, isUpper) =
       std.filter(
         function(x) x != null,
         [
           key + if isUpper then 'ButtonUppercasedStateForegroundStyle' else 'ButtonForegroundStyle',
-          if context.Settings.show_swipe && std.objectHas(swipeUp, key) then key + 'ButtonUpForegroundStyle' else null,
-          if context.Settings.show_swipe && std.objectHas(swipeDown, key) then key + 'ButtonDownForegroundStyle' else null,
+          if context.Settings.show_swipe && std.objectHas(swipeUpForeground, key) then key + 'ButtonUpForegroundStyle' else null,
+          if context.Settings.show_swipe && std.objectHas(swipeDownForeground, key) then key + 'ButtonDownForegroundStyle' else null,
         ]
       );
     function(key, size, bounds, root, isUpper=true)

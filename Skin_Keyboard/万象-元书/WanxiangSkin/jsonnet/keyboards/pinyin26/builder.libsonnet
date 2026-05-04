@@ -20,24 +20,103 @@ local functions = import '../../shared/functionButtons/iPhone.libsonnet';
 local functionButtonStyles = import '../../shared/functionButtons/styles.libsonnet';
 
 {
-  createButtonFactory(context, swipeUp, swipeDown, letters)::
+  createButtonFactory(context, swipeUp, swipeDown, letters, foregroundSwipeUp=swipeUp, foregroundSwipeDown=swipeDown)::
     keyboard26ButtonFactory.create(context, swipeUp, swipeDown, {
       actionFactory(key): { character: key },
       uppercasedActionFactory(key): { character: std.asciiUpper(key) },
       notificationFactory(key): if std.member(letters, key) then [key + 'ButtonBackslashNotification'] else null,
+      foregroundSwipeUp: foregroundSwipeUp,
+      foregroundSwipeDown: foregroundSwipeDown,
     }),
+
+  resolveSwipeAssistMode(context)::
+    if context.deviceType == 'iPhone' && context.Settings.keyboard_layout == 26 then
+      if std.member(['up', 'down', 'all'], context.Settings.swipe_assist_mode) then context.Settings.swipe_assist_mode else 'none'
+    else
+      'none',
+
+  applySwipeAssistToMap(baseMap, letters, mode):: {
+    [key]:
+      if mode != 'none' && std.member(letters, key) then
+        baseMap[key] + { action: { character: std.asciiUpper(key) } }
+      else
+        baseMap[key]
+    for key in std.objectFields(baseMap)
+  },
+
+  removeSwipeAssistLabels(baseMap, letters, mode):: {
+    [key]:
+      if mode != 'none' && std.member(letters, key) && std.objectHas(baseMap[key], 'label') then
+        { [field]: baseMap[key][field] for field in std.objectFields(baseMap[key]) if field != 'label' }
+      else
+        baseMap[key]
+    for key in std.objectFields(baseMap)
+  },
+
+  extendHintDataForSwipeAssist(baseHintData, sourceMaps, letters, mode):: {
+    [key]:
+      if mode != 'none' && std.member(letters, key) then
+        baseHintData[key] {
+          selectedIndex: 2,
+          list: baseHintData[key].list + std.flattenArrays([
+            if std.objectHas(sourceMap, key) && std.objectHas(sourceMap[key], 'label') then
+              [
+                {
+                  action: sourceMap[key].action,
+                  label: sourceMap[key].label,
+                } + if std.objectHas(sourceMap[key], 'fontSize') then { fontSize: sourceMap[key].fontSize } else {}
+              ]
+            else
+              []
+            for sourceMap in sourceMaps
+          ]),
+        }
+      else
+        baseHintData[key]
+    for key in std.objectFields(baseHintData)
+  },
 
   build(context, keyboardLayout)::
     local theme = context.theme;
     local orientation = context.orientation;
     local settings = context.Settings;
     local includeSemicolon = settings.keyboard_layout == 27;
+    local swipeAssistMode = self.resolveSwipeAssistMode(context);
     local swipeDataRoot = swipeData.genSwipeData(context.deviceType);
-    local swipeUp = if std.objectHas(swipeDataRoot, 'swipe_up') then swipeDataRoot.swipe_up else {};
-    local swipeDown = if std.objectHas(swipeDataRoot, 'swipe_down') then swipeDataRoot.swipe_down else {};
+    local rawSwipeUp = if std.objectHas(swipeDataRoot, 'swipe_up') then swipeDataRoot.swipe_up else {};
+    local rawSwipeDown = if std.objectHas(swipeDataRoot, 'swipe_down') then swipeDataRoot.swipe_down else {};
+    local swipeUp =
+      if std.member(['up', 'all'], swipeAssistMode) then
+        self.applySwipeAssistToMap(rawSwipeUp, letter26KeysSpecs.letters, swipeAssistMode)
+      else
+        rawSwipeUp;
+    local swipeDown =
+      if std.member(['down', 'all'], swipeAssistMode) then
+        self.applySwipeAssistToMap(rawSwipeDown, letter26KeysSpecs.letters, swipeAssistMode)
+      else
+        rawSwipeDown;
+    local swipeUpHint =
+      if std.member(['up', 'all'], swipeAssistMode) then
+        self.removeSwipeAssistLabels(rawSwipeUp, letter26KeysSpecs.letters, swipeAssistMode)
+      else
+        rawSwipeUp;
+    local swipeDownHint =
+      if std.member(['down', 'all'], swipeAssistMode) then
+        self.removeSwipeAssistLabels(rawSwipeDown, letter26KeysSpecs.letters, swipeAssistMode)
+      else
+        rawSwipeDown;
     local letterSpecs = letter26KeysSpecs.get26KeySpecs(orientation, keyboardLayout, includeSemicolon);
     local letterKeys = [spec.key for spec in letterSpecs];
-    local hintStyles = hintSymbolsStyles.getStyle(theme, hintSymbolsData.pinyin);
+    local hintData =
+      if swipeAssistMode == 'up' then
+        self.extendHintDataForSwipeAssist(hintSymbolsData.pinyin, [rawSwipeUp], letter26KeysSpecs.letters, swipeAssistMode)
+      else if swipeAssistMode == 'down' then
+        self.extendHintDataForSwipeAssist(hintSymbolsData.pinyin, [rawSwipeDown], letter26KeysSpecs.letters, swipeAssistMode)
+      else if swipeAssistMode == 'all' then
+        self.extendHintDataForSwipeAssist(hintSymbolsData.pinyin, [rawSwipeUp, rawSwipeDown], letter26KeysSpecs.letters, swipeAssistMode)
+      else
+        hintSymbolsData.pinyin;
+    local hintStyles = hintSymbolsStyles.getStyle(theme, hintData);
     local extra27HintStyles =
       if includeSemicolon then
         {
@@ -51,9 +130,11 @@ local functionButtonStyles = import '../../shared/functionButtons/styles.libsonn
         }
       else
         {};
-    local createButton = self.createButtonFactory(context, swipeUp, swipeDown, letter26KeysSpecs.getLetters(includeSemicolon));
+    local enableSwipeUpHint = !std.member(['up', 'all'], swipeAssistMode);
+    local enableSwipeDownHint = !std.member(['down', 'all'], swipeAssistMode);
+    local createButton = self.createButtonFactory(context, swipeUp, swipeDown, letter26KeysSpecs.getLetters(includeSemicolon), rawSwipeUp, rawSwipeDown);
     keyboardLayout[if orientation == 'portrait' then '竖屏中文26键' else '横屏中文26键'] +
-    swipeKeyStyles.getStyle('cn', theme, swipeUp, swipeDown) +
+    swipeKeyStyles.getStyle('cn', theme, swipeUp, swipeDown, fontSize, rawSwipeUp, rawSwipeDown, swipeUpHint, swipeDownHint) +
     hintStyles +
     toolbar.getToolBar(theme) +
     utils.genPinyinStyles(fontSize, color, theme, center) +
@@ -67,7 +148,7 @@ local functionButtonStyles = import '../../shared/functionButtons/styles.libsonn
       keyboardHeight: others[if orientation == 'portrait' then '竖屏' else '横屏']['keyboard高度'],
     } +
     keyHelpers.letterButtons(letterSpecs, createButton, hintStyles) +
-    keyHelpers.hintStyles(letterKeys) +
+    keyHelpers.hintStyles(letterKeys, 'alphabeticHintBackgroundStyle', enableSwipeUpHint, enableSwipeDownHint) +
     extra27HintStyles +
     systemKeysPinyin26.build(theme, orientation, keyboardLayout, settings, color, fontSize, center, createButton, hintStyles, letterSpecs),
 }

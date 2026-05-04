@@ -55,6 +55,17 @@ Notes:
   - affected entry:
     - `jsonnet/entries/pinyin_26.jsonnet`
 - Example:
+  - `swipe_assist_mode`
+  - readers:
+    - `jsonnet/keyboards/pinyin26/builder.libsonnet`
+  - affected entry:
+    - `jsonnet/entries/pinyin_26.jsonnet`
+  - side effects:
+    - assisted direction action changes to uppercase letter
+    - assisted direction swipe bubble is hidden
+    - original swipe symbols move into long-press menu
+    - long-press default selection becomes `2`
+- Example:
   - `button_symbol_config`
   - readers:
     - `jsonnet/shared/buttonHelpers/buttonInteraction.libsonnet`

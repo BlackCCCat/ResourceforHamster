@@ -8,6 +8,7 @@
 职责：
 - 所有可配置项入口。
 - 包括布局、字号、toolbar、功能行、按钮交互开关。
+- `swipe_assist_mode` 控制中文 26 键的上划/下划辅助输入模式，以及长按索引与上下划气泡显隐。
 - `keyboard_layout = 27` 时启用搜狗双拼 27 键变体。
 
 ### `jsonnet/main.jsonnet`
@@ -42,6 +43,7 @@
 - 改中文 26 键入口装配。
 - 接线 26 键共用布局、字母规格和系统键模块。
 - `keyboard_layout = 27` 时仍走这里的入口装配。
+- 中文 26 键的 `swipe_assist_mode` 也在这里接入。
 
 ### `jsonnet/keyboards/tempPinyin/`
 职责：

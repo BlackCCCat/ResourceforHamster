@@ -104,7 +104,7 @@ local hintForeground(key, Settings, colorMap, fontSizeConfig, hintTextCenter) = 
     swipeStyle(hintTextCenter, colorMap, fontSizeConfig)['按下气泡样式'],
 };
 
-local finalStyles(type, theme, swipe_up, swipe_down, fontSizeConfig) =
+local finalStyles(type, theme, swipe_up, swipe_down, fontSizeConfig, swipe_up_foreground, swipe_down_foreground, swipe_up_hint, swipe_down_hint) =
   local colorMap = color[theme];
   local centerUpText = if type == 'number' then center['数字键盘上划文字偏移'] else center['上划文字偏移'];
   local centerUpImage = if type == 'number' then center['数字键盘上划sf符号偏移'] else center['上划文字偏移'];
@@ -117,7 +117,7 @@ local finalStyles(type, theme, swipe_up, swipe_down, fontSizeConfig) =
              function(acc, key)
                acc + directionalForeground(
                  key,
-                 swipe_up[key],
+                 swipe_up_foreground[key],
                  type,
                  'ButtonUpForegroundStyle',
                  '上划样式',
@@ -128,14 +128,14 @@ local finalStyles(type, theme, swipe_up, swipe_down, fontSizeConfig) =
                  colorMap,
                  fontSizeConfig
                ),
-             std.objectFields(swipe_up),
+             std.objectFields(swipe_up_foreground),
              {}
            ) +
            std.foldl(
              function(acc, key)
                acc + directionalForeground(
                  key,
-                 swipe_down[key],
+                 swipe_down_foreground[key],
                  type,
                  'ButtonDownForegroundStyle',
                  '下划样式',
@@ -146,14 +146,14 @@ local finalStyles(type, theme, swipe_up, swipe_down, fontSizeConfig) =
                  colorMap,
                  fontSizeConfig
                ),
-             std.objectFields(swipe_down),
+             std.objectFields(swipe_down_foreground),
              {}
            ) +
            std.foldl(
              function(acc, key)
                acc + hintBubbleForeground(
                  key,
-                 swipe_up[key],
+                 swipe_up_hint[key],
                  type,
                  'ButtonSwipeUpHintForegroundStyle',
                  '上划气泡前景样式',
@@ -163,14 +163,14 @@ local finalStyles(type, theme, swipe_up, swipe_down, fontSizeConfig) =
                  colorMap,
                  fontSizeConfig
                ),
-             std.objectFields(swipe_up),
+             std.objectFields(swipe_up_hint),
              {}
            ) +
            std.foldl(
              function(acc, key)
                acc + hintBubbleForeground(
                  key,
-                 swipe_down[key],
+                 swipe_down_hint[key],
                  type,
                  'ButtonSwipeDownHintForegroundStyle',
                  '下划气泡前景样式',
@@ -180,7 +180,7 @@ local finalStyles(type, theme, swipe_up, swipe_down, fontSizeConfig) =
                  colorMap,
                  fontSizeConfig
                ),
-             std.objectFields(swipe_down),
+             std.objectFields(swipe_down_hint),
              {}
            ) +
            if type != 'number' then
@@ -193,7 +193,7 @@ local finalStyles(type, theme, swipe_up, swipe_down, fontSizeConfig) =
                    fontSizeConfig,
                    hintTextCenter
                  ),
-               std.objectFields(swipe_up),
+               std.objectFields(swipe_up_foreground),
                {}
              )
            else
@@ -201,5 +201,25 @@ local finalStyles(type, theme, swipe_up, swipe_down, fontSizeConfig) =
   };
 
 {
-  getStyle(type, theme, swipe_up, swipe_down, fontSizeConfig=fontSize): finalStyles(type, theme, swipe_up, swipe_down, fontSizeConfig).style,
+  getStyle(
+    type,
+    theme,
+    swipe_up,
+    swipe_down,
+    fontSizeConfig=fontSize,
+    swipe_up_foreground=swipe_up,
+    swipe_down_foreground=swipe_down,
+    swipe_up_hint=swipe_up,
+    swipe_down_hint=swipe_down
+  ): finalStyles(
+       type,
+       theme,
+       swipe_up,
+       swipe_down,
+       fontSizeConfig,
+       swipe_up_foreground,
+       swipe_down_foreground,
+       swipe_up_hint,
+       swipe_down_hint
+     ).style,
 }
