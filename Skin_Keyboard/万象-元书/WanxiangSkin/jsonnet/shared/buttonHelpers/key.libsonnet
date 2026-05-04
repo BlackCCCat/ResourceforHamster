@@ -1,7 +1,7 @@
 // 提供重复按键对象与长按样式包装的共享辅助函数。
 {
-  hintStyle(key, backgroundStyle='alphabeticHintBackgroundStyle', enableSwipeUp=true, enableSwipeDown=true):: {
-    [key + 'ButtonHintStyle']: {
+  hintStyle(key, backgroundStyle='alphabeticHintBackgroundStyle', enableSwipeUp=true, enableSwipeDown=true, styleName='ButtonHintStyle'):: {
+    [key + styleName]: {
       backgroundStyle: backgroundStyle,
       foregroundStyle: key + 'ButtonHintForegroundStyle',
       [if enableSwipeUp then 'swipeUpForegroundStyle']: key + 'ButtonSwipeUpHintForegroundStyle',
@@ -9,9 +9,9 @@
     },
   },
 
-  hintStyles(keys, backgroundStyle='alphabeticHintBackgroundStyle', enableSwipeUp=true, enableSwipeDown=true):: 
+  hintStyles(keys, backgroundStyle='alphabeticHintBackgroundStyle', enableSwipeUp=true, enableSwipeDown=true, styleName='ButtonHintStyle'):: 
     std.foldl(
-      function(acc, key) acc + self.hintStyle(key, backgroundStyle, enableSwipeUp, enableSwipeDown),
+      function(acc, key) acc + self.hintStyle(key, backgroundStyle, enableSwipeUp, enableSwipeDown, styleName),
       keys,
       {}
     ),

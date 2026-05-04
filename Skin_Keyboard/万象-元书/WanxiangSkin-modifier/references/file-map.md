@@ -12,7 +12,7 @@ Inside `<keyboard-root>`:
   - `jsonnet/Custom.libsonnet`
   - public layout toggles such as `swap_9_123_symbol` and `swap_numeric_return_symbol`
   - `keyboard_layout = 27` for the Sougou double-pinyin 27-key variant
-  - `swipe_assist_mode` for Chinese 26-key swipe-assist input, swipe-bubble visibility, long-press ordering, and default selection
+  - `swipe_assist_mode` for Chinese 26-key swipe-assist input, including the switch between default `keyboardAction` notifications and `preeditChanged` assist notifications, plus swipe-bubble visibility, long-press ordering, and default selection
   - public `123Button` interaction config such as `button_123_config`
   - `button_123_config.show_swipe_indicators` only affects 123Button swipe-corner indicator visibility
   - public 9-key / numeric symbol-button interaction config such as `button_symbol_config`

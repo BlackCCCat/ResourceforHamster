@@ -61,7 +61,9 @@ Notes:
   - affected entry:
     - `jsonnet/entries/pinyin_26.jsonnet`
   - side effects:
-    - assisted direction action changes to uppercase letter
+    - `none` keeps the original `keyboardAction` foreground notification
+    - assisted direction action changes to uppercase letter through `preeditChanged` notifications
+    - non-notification state keeps the original swipe action
     - assisted direction swipe bubble is hidden
     - original swipe symbols move into long-press menu
     - long-press default selection switches to the original assisted symbol

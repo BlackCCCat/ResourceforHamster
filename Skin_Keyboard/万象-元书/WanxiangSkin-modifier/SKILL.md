@@ -35,7 +35,7 @@ Use it when the user asks to:
 - expose or adjust `button_123_config` to switch 26-key / 14-key / 18-key / iPad `123Button` between slide, long-press menu, and swipe actions
 - expose or adjust `button_123_config.show_swipe_indicators` to control only the 123Button swipe-corner indicators
 - expose or adjust `button_symbol_config` to switch 9-key / numeric `symbolButton` between slide, long-press menu, and swipe actions
-- expose or adjust `swipe_assist_mode` for Chinese 26-key swipe-assist input, swipe-bubble visibility, long-press ordering, and default selection
+- expose or adjust `swipe_assist_mode` for Chinese 26-key swipe-assist input, including the switch between default `keyboardAction` foreground notifications and `preeditChanged` assist notifications, plus swipe-bubble visibility, long-press ordering, and default selection
 - adjust the dedicated landscape 9-key split layout, including function-row visibility, `collection`, and `verticalCandidates`
 - adjust the dedicated landscape numeric split layout, including function-row visibility, left-side symbol panels, and slot swapping
 - add a new layout such as a compact layout variant

@@ -8,7 +8,7 @@
 职责：
 - 所有可配置项入口。
 - 包括布局、字号、toolbar、功能行、按钮交互开关。
-- `swipe_assist_mode` 控制中文 26 键的上划/下划辅助输入模式，以及长按排序、默认索引与上下划气泡显隐。
+- `swipe_assist_mode` 控制中文 26 键的上划/下划辅助输入模式；`none` 时保留原有 `keyboardAction` 前景通知，非 `none` 时切换为 `preeditChanged` 通知覆写辅助态划动动作；同时影响长按排序、默认索引与上下划气泡显隐。
 - `keyboard_layout = 27` 时启用搜狗双拼 27 键变体。
 
 ### `jsonnet/main.jsonnet`

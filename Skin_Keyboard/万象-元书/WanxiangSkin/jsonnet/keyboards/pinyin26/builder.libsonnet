@@ -20,11 +20,21 @@ local functions = import '../../shared/functionButtons/iPhone.libsonnet';
 local functionButtonStyles = import '../../shared/functionButtons/styles.libsonnet';
 
 {
-  createButtonFactory(context, swipeUp, swipeDown, letters, foregroundSwipeUp=swipeUp, foregroundSwipeDown=swipeDown)::
+  createButtonFactory(context, swipeUp, swipeDown, letters, swipeAssistMode='none', foregroundSwipeUp=swipeUp, foregroundSwipeDown=swipeDown)::
     keyboard26ButtonFactory.create(context, swipeUp, swipeDown, {
       actionFactory(key): { character: key },
       uppercasedActionFactory(key): { character: std.asciiUpper(key) },
-      notificationFactory(key): if std.member(letters, key) then [key + 'ButtonBackslashNotification'] else null,
+      notificationFactory(key):
+        if std.member(letters, key) then
+          std.filter(
+            function(x) x != null,
+            [
+              if swipeAssistMode == 'none' then key + 'ButtonBackslashNotification' else null,
+              if swipeAssistMode != 'none' then key + 'ButtonSwipeAssistNotification' else null,
+            ]
+          )
+        else
+          null,
       foregroundSwipeUp: foregroundSwipeUp,
       foregroundSwipeDown: foregroundSwipeDown,
     }),
@@ -35,19 +45,14 @@ local functionButtonStyles = import '../../shared/functionButtons/styles.libsonn
     else
       'none',
 
+  assistedDirectionEnabled(mode, direction)::
+    (direction == 'up' && std.member(['up', 'all'], mode)) ||
+    (direction == 'down' && std.member(['down', 'all'], mode)),
+
   applySwipeAssistToMap(baseMap, letters, mode):: {
     [key]:
       if mode != 'none' && std.member(letters, key) then
         baseMap[key] + { action: { character: std.asciiUpper(key) } }
-      else
-        baseMap[key]
-    for key in std.objectFields(baseMap)
-  },
-
-  removeSwipeAssistLabels(baseMap, letters, mode):: {
-    [key]:
-      if mode != 'none' && std.member(letters, key) && std.objectHas(baseMap[key], 'label') then
-        { [field]: baseMap[key][field] for field in std.objectFields(baseMap[key]) if field != 'label' }
       else
         baseMap[key]
     for key in std.objectFields(baseMap)
@@ -140,6 +145,38 @@ local functionButtonStyles = import '../../shared/functionButtons/styles.libsonn
     else
       1,
 
+  buildAssistNotificationForegroundNames(settings, swipeUp, swipeDown, key)::
+    std.filter(
+      function(x) x != null,
+      [
+        key + 'ButtonForegroundStyle',
+        if settings.show_swipe && std.objectHas(swipeUp, key) then key + 'ButtonUpForegroundStyle' else null,
+        if settings.show_swipe && std.objectHas(swipeDown, key) then key + 'ButtonDownForegroundStyle' else null,
+      ]
+    ),
+
+  createSwipeAssistNotification(key, bounds, settings, swipeUp, swipeDown, mode):: {
+    notificationType: 'preeditChanged',
+    [if bounds != {} then 'bounds']: bounds,
+    backgroundStyle: 'alphabeticBackgroundStyle',
+    foregroundStyle: $.buildAssistNotificationForegroundNames(settings, swipeUp, swipeDown, key),
+    hintStyle: key + 'ButtonSwipeAssistHintStyle',
+    [if $.assistedDirectionEnabled(mode, 'up') then 'swipeUpAction']: { character: std.asciiUpper(key) },
+    [if $.assistedDirectionEnabled(mode, 'down') then 'swipeDownAction']: { character: std.asciiUpper(key) },
+  },
+
+  swipeAssistNotifications(letterSpecs, settings, swipeUp, swipeDown, mode):: {
+    [spec.key + 'ButtonSwipeAssistNotification']: $.createSwipeAssistNotification(
+      spec.key,
+      if std.objectHas(spec, 'bounds') then spec.bounds else {},
+      settings,
+      swipeUp,
+      swipeDown,
+      mode
+    )
+    for spec in letterSpecs
+  },
+
   extendHintDataForSwipeAssist(baseHintData, sourceMaps, letters, mode):: {
     [key]:
       if mode != 'none' && std.member(letters, key) then
@@ -170,26 +207,8 @@ local functionButtonStyles = import '../../shared/functionButtons/styles.libsonn
     local swipeDataRoot = swipeData.genSwipeData(context.deviceType);
     local rawSwipeUp = if std.objectHas(swipeDataRoot, 'swipe_up') then swipeDataRoot.swipe_up else {};
     local rawSwipeDown = if std.objectHas(swipeDataRoot, 'swipe_down') then swipeDataRoot.swipe_down else {};
-    local swipeUp =
-      if std.member(['up', 'all'], swipeAssistMode) then
-        self.applySwipeAssistToMap(rawSwipeUp, letter26KeysSpecs.letters, swipeAssistMode)
-      else
-        rawSwipeUp;
-    local swipeDown =
-      if std.member(['down', 'all'], swipeAssistMode) then
-        self.applySwipeAssistToMap(rawSwipeDown, letter26KeysSpecs.letters, swipeAssistMode)
-      else
-        rawSwipeDown;
-    local swipeUpHint =
-      if std.member(['up', 'all'], swipeAssistMode) then
-        self.removeSwipeAssistLabels(rawSwipeUp, letter26KeysSpecs.letters, swipeAssistMode)
-      else
-        rawSwipeUp;
-    local swipeDownHint =
-      if std.member(['down', 'all'], swipeAssistMode) then
-        self.removeSwipeAssistLabels(rawSwipeDown, letter26KeysSpecs.letters, swipeAssistMode)
-      else
-        rawSwipeDown;
+    local swipeUp = rawSwipeUp;
+    local swipeDown = rawSwipeDown;
     local letterSpecs = letter26KeysSpecs.get26KeySpecs(orientation, keyboardLayout, includeSemicolon);
     local letterKeys = [spec.key for spec in letterSpecs];
     local hintData =
@@ -215,11 +234,11 @@ local functionButtonStyles = import '../../shared/functionButtons/styles.libsonn
         }
       else
         {};
-    local enableSwipeUpHint = !std.member(['up', 'all'], swipeAssistMode);
-    local enableSwipeDownHint = !std.member(['down', 'all'], swipeAssistMode);
-    local createButton = self.createButtonFactory(context, swipeUp, swipeDown, letter26KeysSpecs.getLetters(includeSemicolon), rawSwipeUp, rawSwipeDown);
+    local enableSwipeUpAssistHint = !self.assistedDirectionEnabled(swipeAssistMode, 'up');
+    local enableSwipeDownAssistHint = !self.assistedDirectionEnabled(swipeAssistMode, 'down');
+    local createButton = self.createButtonFactory(context, swipeUp, swipeDown, letter26KeysSpecs.getLetters(includeSemicolon), swipeAssistMode, rawSwipeUp, rawSwipeDown);
     keyboardLayout[if orientation == 'portrait' then '竖屏中文26键' else '横屏中文26键'] +
-    swipeKeyStyles.getStyle('cn', theme, swipeUp, swipeDown, fontSize, rawSwipeUp, rawSwipeDown, swipeUpHint, swipeDownHint) +
+    swipeKeyStyles.getStyle('cn', theme, swipeUp, swipeDown) +
     hintStyles +
     toolbar.getToolBar(theme) +
     utils.genPinyinStyles(fontSize, color, theme, center) +
@@ -233,7 +252,21 @@ local functionButtonStyles = import '../../shared/functionButtons/styles.libsonn
       keyboardHeight: others[if orientation == 'portrait' then '竖屏' else '横屏']['keyboard高度'],
     } +
     keyHelpers.letterButtons(letterSpecs, createButton, hintStyles) +
-    keyHelpers.hintStyles(letterKeys, 'alphabeticHintBackgroundStyle', enableSwipeUpHint, enableSwipeDownHint) +
+    keyHelpers.hintStyles(letterKeys) +
+    (if swipeAssistMode != 'none' then
+       keyHelpers.hintStyles(
+         letterKeys,
+         'alphabeticHintBackgroundStyle',
+         enableSwipeUpAssistHint,
+         enableSwipeDownAssistHint,
+         'ButtonSwipeAssistHintStyle'
+       )
+     else
+       {}) +
     extra27HintStyles +
+    (if swipeAssistMode != 'none' then
+       self.swipeAssistNotifications(letterSpecs, settings, rawSwipeUp, rawSwipeDown, swipeAssistMode)
+     else
+       {}) +
     systemKeysPinyin26.build(theme, orientation, keyboardLayout, settings, color, fontSize, center, createButton, hintStyles, letterSpecs),
 }
