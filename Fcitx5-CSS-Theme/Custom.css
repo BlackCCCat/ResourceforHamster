@@ -1,54 +1,75 @@
-/* 让 comment 出现在 text 下方 + 更美观的留白 + 序号垂直居中 */
+/* 让 comment 出现在 text 下方 + 更紧凑的整体布局 */
 .fcitx-candidate .fcitx-candidate-inner {
     display: grid;
     grid-template-columns: auto auto 1fr; /* mark | label | content */
     grid-template-rows: auto auto; /* text / comment */
-    column-gap: 6px;
-    row-gap: 2px;
 
-    /* ✅ 增加候选项上下（及左右一点）内边距，避免贴边 */
-    padding: 6px 10px;
+    /* 候选项之间更紧凑 */
+    column-gap: 5px;
+    row-gap: 1px;
+
+    /* 整体 padding 稍微收紧 */
+    padding: 4px 8px;
+
     align-items: center;
 }
 
-/* ✅ 选中态左侧竖条：垂直居中于 text+comment 整体 */
+/* 选中态左侧竖条 */
 .fcitx-candidate .fcitx-mark {
     grid-column: 1;
     grid-row: 1 / span 2;
 
-    align-self: center; /* 关键：垂直居中 */
-    justify-self: center; /* 水平也居中（避免贴边） */
+    align-self: center;
+    justify-self: center;
 
-    /* 可选：让竖条更像“指示条” */
-    height: 70%; /* 竖条高度相对候选项整体（可调：60%~85%） */
-    border-radius: 999px; /* 圆角 */
+    height: 68%;
+    border-radius: 999px;
 }
 
-/* ✅ 序号：跨两行 + 垂直居中于“text+comment”整体 */
+/* 序号 */
 .fcitx-candidate .fcitx-label {
     grid-column: 2;
     grid-row: 1 / span 2;
+
     align-self: center;
+
+    /* 稍微紧凑一点 */
+    line-height: 1;
+
+    /* 可选：稍微加粗但不要太占空间 */
+    font-weight: 500;
 }
 
-/* ✅ 序号稍微变大一点 */
-/* .fcitx-candidate .fcitx-label {
-/*  font-size: 1.05em;   /* 想再大就 1.1em / 1.15em */
-/*  font-weight: 600;    /* 可选：更清晰一点 */
-/*  line-height: 1;      /* 避免字体变大后上下撑开 */
-/* }
-
-/* 候选词文字：第一行 */
+/* 候选词文字 */
 .fcitx-candidate .fcitx-text {
     grid-column: 3;
     grid-row: 1;
+
+    /* 候选字稍微大一点 */
+    font-size: 1.08em;
+    line-height: 1.15;
+
+    /* 稍微加一点字重，更清晰 */
+    font-weight: 500;
 }
 
-/* 注释：第二行 */
+/* 注释 */
 .fcitx-candidate .fcitx-comment {
     grid-column: 3;
     grid-row: 2;
-    font-size: 0.85em;
-    opacity: 0.75;
-    line-height: 1.1;
+
+    /* comment 与候选字颜色一致 */
+    color: inherit;
+
+    /* 比正文略小即可 */
+    font-size: 0.82em;
+
+    /* 去掉变灰效果 */
+    opacity: 1;
+
+    /* 更紧凑 */
+    line-height: 1.05;
+
+    /* 减少和正文距离 */
+    margin-top: -1px;
 }
