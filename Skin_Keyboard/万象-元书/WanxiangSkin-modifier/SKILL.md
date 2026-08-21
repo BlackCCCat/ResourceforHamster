@@ -47,6 +47,7 @@ Use it when the user asks to:
 - adjust non-26 English keyboard escape paths such as swiping `en2cnButton` into `temp_pinyin`
 - add or adjust temporary keyboard wrappers such as `temp_pinyin`
 - adjust `temp_pinyin`-specific space-key marker text or swipe behavior
+- adjust the `cn2en` long-press menu and its Rime option labels such as `rimeOptionLabel$s2s`
 - update README or module documentation after code changes
 - fix regressions inside the selected keyboard root
 
@@ -85,6 +86,7 @@ Use it when the user asks to:
    - for iPad 26-key edge spacing or per-key width adjustments such as the second-row `a` gap or enter width, edit `jsonnet/keyboards/common/keyboard26/layout.libsonnet` and `jsonnet/keyboards/common/keyboard26/iPadBuilder.libsonnet` together
    - for non-26 English keyboard swipes back into pinyin 26-key, prefer `jsonnet/keyboards/alphabetic26/systemKeys.libsonnet` plus a thin wrapper under `jsonnet/keyboards/tempPinyin/`
    - for `keyboard_layout = 27`, prefer `jsonnet/keyboards/common/keyboard26/layout.libsonnet` + `jsonnet/keyboards/common/keyboard26/letters.libsonnet` + `jsonnet/keyboards/pinyin26/builder.libsonnet`
+   - for `cn2en` long-press menu entries, edit `jsonnet/shared/data/hintSymbolsData.libsonnet`; preserve `rimeOptionLabel$<option>` values because 元书 resolves them dynamically from the corresponding Rime option
 - when matching iPad row-2 letter visuals, keep all visible letter widths aligned; only `a` should use extra outer width with right-aligned bounds for left-side gap
 - for iPad third-row edge-balance changes, keep the middle seven letter keys stable and adjust only left Shift / Tab / right Shift in `jsonnet/keyboards/common/keyboard26/layout.libsonnet` and `jsonnet/keyboards/common/keyboard26/iPadBuilder.libsonnet`
    - `button_123_config.show_swipe_indicators` only controls 123Button swipe-corner indicators; it must not change swipe actions themselves
@@ -137,6 +139,7 @@ jsonnet '<keyboard-root>/jsonnet/main.jsonnet' >/tmp/wanxiang_restructured_main.
 - Preserve user-tuned component settings unless explicitly asked to change them, especially:
   - `jsonnet/keyboards/pinyin9/builder.libsonnet` -> `verticalCandidates.insets`
   - `jsonnet/keyboards/numeric9/panels.libsonnet` / component settings for `landscapeNumericSymbols`
+- Do not replace `cn2en.list[*].label.text` values using `rimeOptionLabel$<option>` with fixed display text unless the user explicitly requests static labels.
 
 ## File map
 

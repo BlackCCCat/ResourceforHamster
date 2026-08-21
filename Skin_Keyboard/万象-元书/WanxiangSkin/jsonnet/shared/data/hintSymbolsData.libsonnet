@@ -246,20 +246,20 @@ local makeAction(instance) =
     },
     cn2en: {
       selectedIndex: 1,
-      size: { width: 50, height: 53 },
+      size: { width: 65, height: 53 },
       list: [
-        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '简中' } },
-        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '繁中' } },
-        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '港中' } },
-        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '台中' } },
-        { action: { sendKeys: 'Control+e' }, label: { text: '翻译' } },
-        { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },
-        { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },
-        { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '简开' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '简关' } },
-        { action: { sendKeys: 'Control+c' }, label: { text: '拆分' } },
-        { action: { sendKeys: 'Control+c' }, label: { text: '拆关' } },
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: 'rimeOptionLabel$s2s' } },
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: 'rimeOptionLabel$s2t' } },
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: 'rimeOptionLabel$s2hk' } },
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: 'rimeOptionLabel$s2tw' } },
+        { action: { sendKeys: 'Control+e' }, label: { text: 'rimeOptionLabel$chinese_english' } },
+        { action: { sendKeys: 'Control+e' }, label: { text: 'rimeOptionLabel$chinese_english' } },
+        { action: { sendKeys: 'Control+t' }, label: { text: 'rimeOptionLabel$super_tips' } },
+        { action: { sendKeys: 'Control+t' }, label: { text: 'rimeOptionLabel$super_tips' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: 'rimeOptionLabel$abbrev' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: 'rimeOptionLabel$abbrev' } },
+        { action: { sendKeys: 'Control+c' }, label: { text: 'rimeOptionLabel$chaifen_switch' } },
+        { action: { sendKeys: 'Control+c' }, label: { text: 'rimeOptionLabel$chaifen_switch' } },
       ],
     },
     enter: {
@@ -297,18 +297,18 @@ local makeAction(instance) =
     number0: { size: { width: 50, height: 55 }, selectedIndex: 0, list: [{ action: makeAction('0'), label: { text: '0' } }] },
     cn2en: {
       selectedIndex: 1,
-      size: { width: 50, height: 53 },
+      size: { width: 65, height: 53 },
       list: [
-        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '简中' } },  //0*
-        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '繁中' } },  //1
-        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '港中' } },  //2
-        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '台中' } },  //3
-        { action: { sendKeys: 'Control+e' }, label: { text: '翻译' } },  //4*
-        { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },  //5
-        { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },  //6*
-        { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },  //7
-        { action: { sendKeys: 'Control+q' }, label: { text: '简开' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '简关' } },
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: 'rimeOptionLabel$s2s' } }, //0*
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: 'rimeOptionLabel$s2t' } }, //1
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: 'rimeOptionLabel$s2hk' } }, //2
+        { action: { sendKeys: 'Control+Shift+4' }, label: { text: 'rimeOptionLabel$s2tw' } }, //3
+        { action: { sendKeys: 'Control+e' }, label: { text: 'rimeOptionLabel$chinese_english' } },  //4*
+        { action: { sendKeys: 'Control+e' }, label: { text: 'rimeOptionLabel$chinese_english' } },  //5
+        { action: { sendKeys: 'Control+t' }, label: { text: 'rimeOptionLabel$super_tips' } },  //6*
+        { action: { sendKeys: 'Control+t' }, label: { text: 'rimeOptionLabel$super_tips' } },  //7
+        { action: { sendKeys: 'Control+q' }, label: { text: 'rimeOptionLabel$abbrev' } },
+        { action: { sendKeys: 'Control+q' }, label: { text: 'rimeOptionLabel$abbrev' } },
       ],
     },
   },
@@ -493,18 +493,18 @@ local makeAction(instance) =
     },
     cn2en: {
       selectedIndex: 1,
-      size: { width: 50, height: 53 },
+      size: { width: 65, height: 53 },
       list: [
-        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '简中' } },  //0*
-        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '繁中' } },  //1
-        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '港中' } },  //2
-        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '台中' } },  //3
-        { action: { sendKeys: 'Control+e' }, label: { text: '翻译' } },  //4*
-        { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },  //5
-        { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },
-        { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '简开' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '简关' } },
+      { action: { sendKeys: 'Control+Shift+4' }, label: { text: 'rimeOptionLabel$s2s' } }, //0*
+      { action: { sendKeys: 'Control+Shift+4' }, label: { text: 'rimeOptionLabel$s2t' } }, //1
+      { action: { sendKeys: 'Control+Shift+4' }, label: { text: 'rimeOptionLabel$s2hk' } }, //2
+      { action: { sendKeys: 'Control+Shift+4' }, label: { text: 'rimeOptionLabel$s2tw' } }, //3
+      { action: { sendKeys: 'Control+e' }, label: { text: 'rimeOptionLabel$chinese_english' } },  //4*
+      { action: { sendKeys: 'Control+e' }, label: { text: 'rimeOptionLabel$chinese_english' } },  //5
+      { action: { sendKeys: 'Control+t' }, label: { text: 'rimeOptionLabel$super_tips' } },  //6*
+      { action: { sendKeys: 'Control+t' }, label: { text: 'rimeOptionLabel$super_tips' } },  //7
+      { action: { sendKeys: 'Control+q' }, label: { text: 'rimeOptionLabel$abbrev' } },
+      { action: { sendKeys: 'Control+q' }, label: { text: 'rimeOptionLabel$abbrev' } },
       ],
     },
     enter: {
@@ -673,18 +673,18 @@ local makeAction(instance) =
     },
     cn2en: {
       selectedIndex: 1,
-      size: { width: 50, height: 53 },
+      size: { width: 65, height: 53 },
       list: [
-        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '简中' } },  //0*
-        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '繁中' } },  //1
-        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '港中' } },  //2
-        { action: { sendKeys: 'Control+Shift+4' }, label: { text: '台中' } },  //3
-        { action: { sendKeys: 'Control+e' }, label: { text: '翻译' } },  //4*
-        { action: { sendKeys: 'Control+e' }, label: { text: '原文' } },  //5
-        { action: { sendKeys: 'Control+t' }, label: { text: '提示' } },
-        { action: { sendKeys: 'Control+t' }, label: { text: '提关' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '简开' } },
-        { action: { sendKeys: 'Control+q' }, label: { text: '简关' } },
+      { action: { sendKeys: 'Control+Shift+4' }, label: { text: 'rimeOptionLabel$s2s' } }, //0*
+      { action: { sendKeys: 'Control+Shift+4' }, label: { text: 'rimeOptionLabel$s2t' } }, //1
+      { action: { sendKeys: 'Control+Shift+4' }, label: { text: 'rimeOptionLabel$s2hk' } }, //2
+      { action: { sendKeys: 'Control+Shift+4' }, label: { text: 'rimeOptionLabel$s2tw' } }, //3
+      { action: { sendKeys: 'Control+e' }, label: { text: 'rimeOptionLabel$chinese_english' } },  //4*
+      { action: { sendKeys: 'Control+e' }, label: { text: 'rimeOptionLabel$chinese_english' } },  //5
+      { action: { sendKeys: 'Control+t' }, label: { text: 'rimeOptionLabel$super_tips' } },  //6*
+      { action: { sendKeys: 'Control+t' }, label: { text: 'rimeOptionLabel$super_tips' } },  //7
+      { action: { sendKeys: 'Control+q' }, label: { text: 'rimeOptionLabel$abbrev' } },
+      { action: { sendKeys: 'Control+q' }, label: { text: 'rimeOptionLabel$abbrev' } },
       ],
     },
     enter: {

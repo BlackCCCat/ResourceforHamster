@@ -263,6 +263,8 @@ Use these when changing reusable styles, foreground generation, or helper logic.
 
 Use these for pure shared data updates.
 
+The `cn2en.list` entries in `hintSymbolsData.libsonnet` use 元书's runtime label form `rimeOptionLabel$<option>`. Keep these values dynamic so each long-press item displays the label for its current Rime option state; do not simplify them back to fixed Chinese text.
+
 ## Documentation
 
 Update both when changing public configuration or maintenance-facing structure:
