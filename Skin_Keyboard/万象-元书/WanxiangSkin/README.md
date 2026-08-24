@@ -1,235 +1,132 @@
-# 目录
+# WanxiangSkin
 
-## 当前结构
+`WanxiangSkin` 是面向元书输入法（Hamster3）的万象键盘皮肤。Jsonnet 源码按构建、视觉、组件和键盘族四层组织；公开配置集中在 `jsonnet/Custom.libsonnet`。
+
+## 目录结构
 
 ```text
-WanxiangSkin/
-├── README.md
-├── MODULES.md
-└── jsonnet/
-    ├── Custom.libsonnet
-    ├── main.jsonnet
-    ├── entries/
-    ├── keyboards/
-    └── shared/
+jsonnet/
+├── Custom.libsonnet
+├── main.jsonnet
+├── build/                  # 输出配置、键盘注册与构建上下文
+├── design/                 # 颜色、字号、偏移和样式工厂
+├── components/             # 按键、系统键、功能行、工具栏与候选栏
+└── keyboards/              # 各键盘族的独立实现与专属数据
 ```
 
-### `jsonnet/entries/`
-- 对外入口层。
-- 每个文件只负责把请求转发到对应键盘实现。
+`main.jsonnet` 通过 `build/keyboardRegistry.libsonnet` 调用各键盘入口，键盘入口从 `build/context.libsonnet` 取得已解析的设备与布局上下文。键盘族可以复用 `components` 和 `design`，公共组件不引用具体键盘族。`tempPinyin` 是有意保留的例外，它在拼音 26 键结果上做少量覆写。
 
-主要文件：
-- `jsonnet/entries/pinyin_26.jsonnet`
-- `jsonnet/entries/alphabetic_26.jsonnet`
-- `jsonnet/entries/pinyin_18.jsonnet`
-- `jsonnet/entries/pinyin_14.jsonnet`
-- `jsonnet/entries/pinyin_9.jsonnet`
-- `jsonnet/entries/numeric_9.jsonnet`
-- `jsonnet/entries/ipad_pinyin_26.jsonnet`
-- `jsonnet/entries/ipad_alphabetic_26.jsonnet`
-- `jsonnet/entries/ipad_numeric_9.jsonnet`
-- `jsonnet/entries/panel.jsonnet`
-  - 仅暴露浮动面板入口，完整实现位于 `jsonnet/keyboards/float/panel.libsonnet`。
+## 主要模块
 
-### `jsonnet/keyboards/`
-- 按键盘类型组织实现。
+- `jsonnet/build/skinConfig.libsonnet`：生成 `config.yaml` 使用的皮肤和键盘映射。
+- `jsonnet/build/keyboardRegistry.libsonnet`：按 `keyboard_layout` 选择手机端拼音键盘，并注册其余输出键盘。
+- `jsonnet/build/context.libsonnet`：创建设备上下文、汇总布局并按配置插入功能行。
+- `jsonnet/design/appearance.libsonnet`：颜色、字号、偏移、动画和键盘高度。
+- `jsonnet/design/styleFactories.libsonnet`：文本、SF Symbol、图片和 geometry 样式工厂。
+- `jsonnet/components/systemKeys/`：拼音布局共用的 Shift、中英切换、123、退格、空格和回车键。
+- `jsonnet/components/toolbar/`：iPhone/iPad 工具栏注册、配置和渲染。
+- `jsonnet/components/candidates.libsonnet`：横向候选、纵向候选和候选词长按菜单。
+- `jsonnet/keyboards/keyboard26/`：中文 26/27 键、英文 26 键、iPad 26 键和临时拼音键盘。
+- `jsonnet/keyboards/pinyin14_18/`：14/18 键共用构建层及两个独立布局。
+- `jsonnet/keyboards/pinyin9/`、`jsonnet/keyboards/numeric9/`：九键和数字九键独立实现。
+- `jsonnet/keyboards/floatPanel/`：浮动面板键盘完整实现。
 
-当前目录：
-- `jsonnet/keyboards/pinyin26/`
-- `jsonnet/keyboards/tempPinyin/`
-- `jsonnet/keyboards/alphabetic26/`
-- `jsonnet/keyboards/pinyin18/`
-- `jsonnet/keyboards/pinyin14/`
-- `jsonnet/keyboards/pinyin9/`
-- `jsonnet/keyboards/numeric9/`
-- `jsonnet/keyboards/common/keyboard26/`
-- `jsonnet/keyboards/common/systemKeys26/`
-- `jsonnet/keyboards/common/pinyin14_18/`
-- `jsonnet/keyboards/common/layoutAssembly/`
-- `jsonnet/keyboards/float/`
-
-### `jsonnet/shared/`
-- 放多个键盘共用的能力。
-
-当前目录：
-- `jsonnet/shared/toolbar/`
-- `jsonnet/shared/functionButtons/`
-- `jsonnet/shared/styles/`
-- `jsonnet/shared/data/`
-- `jsonnet/shared/buttonHelpers/`
+详细职责和修改落点见 `MODULES.md`。
 
 ## 自定义配置
 
-### 基础配置
-- `keyboard_layout`
-  - 中文键盘布局。
-  - 可选值：`27`、`26`、`18`、`14`、`9`。
-  - `27` 为搜狗双拼用的 27 键变体，在 26 键基础上追加 `;` 键用于输入 `ing`。
-- `wanxiang_9_hintSymbol`
-  - 9 键长按符号是否直接上屏。
-- `swap_9_123_symbol`
-  - 9 键底行左下角 `123` 与符号按钮是否交换位置。
-  - 同时影响竖屏与横屏。
-- `swap_numeric_return_symbol`
-  - 数字键盘返回按钮与切换键盘按钮是否交换位置。
-  - 同时影响竖屏与横屏。
-- `is_wanxiang_18`
-  - 18 键是否使用万象转写规则。
-- `is_wanxiang_14`
-  - 14 键是否使用万象转写规则。
-- `is_letter_capital`
-  - 26 键字母是否显示大写。
-- `fix_sf_symbol`
-  - 是否修复部分 SF Symbol 显示问题。
-- `show_swipe`
-  - 是否显示上下划前景。
-- `swipe_assist_mode`
-  - 仅作用于中文 26 键。
-  - `none`：关闭。
-  - `none` 时保留原有的 `keyboardAction` 前景通知。
-  - 非 `none` 时改用 `preeditChanged` 通知覆写辅助态划动动作，避免通知冲突。
-  - 非通知状态下，上下划仍保持原始功能。
-  - `up`：通知状态下，上划输入对应字母大写，并把原上划内容追加到长按气泡，同时关闭上划气泡，默认长按索引切到原上划符号。
-  - `down`：通知状态下，下划输入对应字母大写，并把原下划内容追加到长按气泡，同时关闭下划气泡，默认长按索引切到原下划符号。
-  - `all`：通知状态下，上下划都输入对应字母大写，并把原上划、下划内容依次追加到长按气泡，同时关闭上下划气泡，默认长按索引切到原上划符号。
-- `show_wanxiang`
-  - 空格键是否显示“万象”。
-- `ios26_style`
-  - 是否启用 iOS26 风格。
-- `horizon_candidate_button`
-  - 控制横向候选栏右侧按钮。
-  - `0`：不显示。
-  - `1`：显示候选栏展开按钮。
-  - `2`：显示收起键盘按钮。
+### 布局与基础行为
 
-### 功能行配置
-- `function_button_config.with_functions_row`
-  - 按设备控制是否启用功能行。
-  - `iPhone` 和 `iPad` 分开配置。
+- `keyboard_layout`：`9`、`14`、`18`、`26` 或 `27`。
+- `27`：在中文 26 键第二行增加 `;`，用于搜狗双拼 `ing`。
+- `wanxiang_9_hintSymbol`：控制九键长按字符使用 `symbol` 还是 `character`。
+- `swap_9_123_symbol`：交换九键底行的 123 与符号按钮。
+- `swap_numeric_return_symbol`：交换数字键盘底行的返回与切换按钮。
+- `is_wanxiang_14`、`is_wanxiang_18`：控制 14/18 键字符动作。
+- `is_letter_capital`：控制字母常态显示。
+- `show_swipe`：控制普通按键上下划前景显示。
+- `show_wanxiang`：控制普通拼音空格上的“万象”。
+- `tips_button_action`：设定九键提示按钮的上屏动作。
+- `fix_sf_symbol`：使用兼容性更好的 SF Symbol。
+- `ios26_style`：启用 iOS 26 风格颜色覆盖。
+
+### 中文 26 键滑动辅助
+
+`swipe_assist_mode` 只作用于中文 26 键：
+
+- `none`：保留原始上下划动作和 `keyboardAction` 前景通知。
+- `up`：通知状态下，上划输入对应大写字母；原上划内容进入长按菜单。
+- `down`：通知状态下，下划输入对应大写字母；原下划内容进入长按菜单。
+- `all`：通知状态下，上下划均输入对应大写字母；原上划、下划内容依次进入长按菜单。
+
+辅助方向的滑动气泡会被关闭；长按菜单按左右对称规则排列，并把默认索引切到原辅助符号。实现位于 `jsonnet/keyboards/keyboard26/pinyin/swipeAssist.libsonnet`。
+
+### 功能行
+
+- `function_button_config.with_functions_row.iPhone`
+- `function_button_config.with_functions_row.iPad`
 - `function_button_config.enable_notification`
-  - 是否启用功能按键通知。
 - `function_button_config.order`
-  - 功能行顺序。
-  - 可用值：`left`、`head`、`select`、`cut`、`copy`、`paste`、`tail`、`right`。
 
-### `123Button` 配置
-- `button_123_config.enable_slide`
-  - `true`：保持 `horizontalSymbols` 滑动切换。
-  - `false`：改用二级交互配置。
-- `button_123_config.secondary_action_mode`
-  - `hint_symbols`：点击切数字键盘，长按菜单显示符号键盘和 emoji 键盘。
-  - `swipe`：点击切数字键盘，上下滑切换符号键盘和 emoji 键盘。
+顺序可使用 `left`、`head`、`select`、`cut`、`copy`、`paste`、`tail`、`right`。功能行布局会按有效按钮数量自动分配宽度。
+
+### 123Button
+
+- `button_123_config.enable_slide`：启用 `horizontalSymbols` 滑动选择。
+- `button_123_config.secondary_action_mode`：关闭 slide 后使用 `hint_symbols` 或 `swipe`。
 - `button_123_config.swipe_up_keyboard`
 - `button_123_config.swipe_down_keyboard`
-  - 当 `secondary_action_mode = 'swipe'` 时生效。
-  - 可选值：`symbolic`、`emojis`。
-- `button_123_config.show_swipe_indicators`
-  - 是否显示 `123Button` 的上下划角标。
-  - 默认 `false`。
-  - 只控制角标显示，不影响 swipe 动作本身。
-- 作用范围：
-  - 中文 26 键
-  - 英文 26 键
-  - 14 键
-  - 18 键
-  - iPad 26 键
+- `button_123_config.show_swipe_indicators`：只控制 123Button 上下划角标，默认不显示，不改变动作。
 
-### 九键 / 数字键盘符号按钮配置
+该配置覆盖中文 26/27 键、14 键、18 键、英文 26 键和 iPad 26 键；123Button 不显示点击气泡。
+
+### 九键与数字键盘符号按钮
+
 - `button_symbol_config.enable_slide`
-  - `true`：保持 `horizontalSymbols` 滑动切换。
-  - `false`：改用二级交互配置。
 - `button_symbol_config.secondary_action_mode`
-  - `hint_symbols`：点击切符号键盘，长按菜单只显示 emoji 键盘。
-  - `swipe`：点击切符号键盘，只保留上滑动作。
 - `button_symbol_config.swipe_up_keyboard`
-  - 当 `secondary_action_mode = 'swipe'` 时生效。
-  - 当前推荐保持为 `emojis`。
-- 不影响：
-  - `swap_9_123_symbol`
-  - `swap_numeric_return_symbol`
 
-### 字体和外观
-- `font_size_config`
-  - `pinyin_26_letter_font_size`
-  - `pinyin_14_18_letter_font_size`
-  - `pinyin_9_letter_font_size`
-  - `numeric_digit_font_size`
-- `button_insets`
-  - `portrait`
-  - `landscape`
-- `cornerRadius`
-  - 按键圆角。
+符号按钮配置不改变 `swap_9_123_symbol` 和 `swap_numeric_return_symbol` 的位置逻辑。
 
-### Shift 配置
-- `shift_config.enable_preedit`
-- `shift_config.preedit_action`
-- `shift_config.preedit_sf_symbol`
-- `shift_config.preedit_swipeup_action`
+### 候选栏与工具栏
 
-### Toolbar 配置
-- `toolbar_config.toolbar_height`
-  - iPhone 工具栏高度。
+- `horizon_candidate_button`：`0` 不显示、`1` 展开候选、`2` 收起键盘。
+- `toolbar_config.toolbar_height`：iPhone 工具栏高度。
+- `toolbar_config.ipad.toolbar_height`：iPad 工具栏高度。
+- `toolbar_config.mode`：`segmented` 或 `carousel`。
+- `toolbar_config.segmented`、`toolbar_config.carousel`：iPhone 工具栏按钮布局。
+- `toolbar_config.ipad.center_slide`：iPad 中间滑动按钮。
+- `toolbar_config.content_right_to_left`、`toolbar_config.ipad.content_right_to_left`：滑动内容方向。
+- `toolbar_config.toolbar_menu`、`toolbar_config.ipad.toolbar_menu`：菜单或浮动面板入口。
 
-### 非 26 键英文键盘切回拼音 26 键
-- 9 键、14 键、18 键使用英文键盘时：
-  - `en2cnButton` 上划切到 `temp_pinyin`
-  - `spaceButton`、`spaceFirstButton`、`spaceSecondButton` 上划发送 `Shift+space`
-- `temp_pinyin` 是一个临时拼音 26 键入口：
-  - 复用拼音 26 键主体
-  - `cn2enButton` 点击返回英文键盘
-  - `cn2enButton` 不挂通知
-  - `cn2enButton` 前景改为返回语义的 SF Symbol
-  - `spaceButton` / `spaceSecondButton` 固定显示 `RIME`
-  - `spaceButton` / `spaceFirstButton` / `spaceSecondButton` 上划发送 `Shift+space`
-- `toolbar_config.toolbar_menu`
-  - 是否启用键盘菜单页面。
-- `toolbar_config.content_right_to_left`
-  - iPhone toolbar 滑动区域方向。
-- `toolbar_config.mode`
-  - `segmented` 或 `carousel`。
-- `toolbar_config.segmented`
-- `toolbar_config.carousel`
-  - iPhone toolbar 两种模式的按钮配置。
-  - 可选按钮 ID 额外支持：
-    - `cut`
-    - `copy`
-    - `paste`
-- `toolbar_config.ipad.toolbar_height`
-  - iPad 工具栏高度。
-- `toolbar_config.ipad.toolbar_menu`
-- `toolbar_config.ipad.content_right_to_left`
-- `toolbar_config.ipad.center_slide`
-  - iPad toolbar 配置。
+可选按钮包括 `simplified_traditional`、`undo`、`redo`、`cut`、`copy`、`paste` 等，完整注册表位于 `jsonnet/components/toolbar/registry.libsonnet`。
 
-### iPad 26 键布局
-- 当前 iPad 26 键使用独立的四行布局。
-- 第一行右侧为删除键。
-- 第二行字母可视宽度与其他字母保持一致，仅在 `a` 键左侧保留留白，右侧为稍窄的回车键。
-- 第三行左 Shift 宽度与右侧 `Tab + Shift` 总宽度对齐，右 Shift 左侧追加 Tab。
-- 第四行从左到右为 Globe、123、逗号、空格、中英切换、123、收起键盘。
-- 空格左侧逗号键保留上划句号。
-- 右侧 Shift 与左侧 Shift 保持相同的通知能力。
-- 中英文 iPad 26 键统一使用相同的 26 键字母字号覆写。
-- 工具栏可选按钮新增 `simplified_traditional`，用于触发 `#简繁切换`。
-- 工具栏可选按钮新增 `undo` / `redo`，分别触发 `#undo` 与 `#redo`。
-- 工具栏可选按钮支持 `cut` / `copy` / `paste`，并复用功能按键的同款 SF Symbol。
+### 字号、边距与 Shift
 
-## 横屏布局说明
+- `font_size_config`：26 键、14/18 键、九键和数字键盘字号。
+- `button_insets.portrait`、`button_insets.landscape`：按键背景边距。
+- `cornerRadius`：按键圆角。
+- `shift_config`：Shift 预编辑动作、图标和上划动作。
 
-### 横屏 9 键
-- 使用独立横屏布局。
-- 布局树定义在：
-  - `jsonnet/keyboards/pinyin9/layout.libsonnet`
-- 顶部功能行是否显示受 `function_button_config.with_functions_row.iPhone` 控制。
-- 左下角和右下角按钮顺序受 `swap_9_123_symbol` 控制。
-- `collection`、`verticalCandidates`、符号按钮等组件定义在：
-  - `jsonnet/keyboards/pinyin9/panels.libsonnet`
+## 特殊键盘
 
-### 横屏数字键盘
-- iPhone 使用独立横屏布局。
-- iPad 横屏数字键盘回退到竖屏布局。
-- iPhone 横屏布局由 `jsonnet/keyboards/numeric9/layout.libsonnet` 管理。
-- 顶部功能行是否显示受 `function_button_config.with_functions_row.iPhone` 控制。
-- 返回按钮与切换键盘按钮顺序受 `swap_numeric_return_symbol` 控制。
-- `collection`、`landscapeNumericSymbols` 等组件定义在：
-  - `jsonnet/keyboards/numeric9/panels.libsonnet`
+### iPad 26 键
+
+iPad 使用独立四行布局：第一行右侧删除，第二行右侧回车，第三行双 Shift 且右侧 Shift 前有 Tab，第四行包含 Globe、双 123、逗号、空格、中英切换与收起键盘。逗号键上划句号。布局尺寸位于 `jsonnet/keyboards/keyboard26/base/iPadLayout.libsonnet`，按钮覆写位于 `jsonnet/keyboards/keyboard26/base/iPadBuilder.libsonnet`。
+
+### 临时拼音
+
+非 26 键布局的英文键盘可通过中英键上划进入 `temp_pinyin`。临时拼音复用中文 26 键主体，中英键返回英文键盘并移除通知；空格固定显示 `RIME`，上划发送 `Shift+space`。
+
+### 浮动键盘
+
+`config.yaml` 中 iPad `floating` 使用 iPhone 竖屏键盘。浮动面板键盘实现位于 `jsonnet/keyboards/floatPanel/keyboard.libsonnet`。
+
+## 编译
+
+```bash
+cd Skin_Keyboard/万象-元书/WanxiangSkin
+jsonnet jsonnet/main.jsonnet -o /tmp/WanxiangSkin.json
+```
+
+`main.jsonnet` 返回“输出路径 → YAML 文本”的对象。结构调整必须同时验证 9/14/18/26/27 键和 `swipe_assist_mode` 的各模式；修改公共样式或工具栏时还要覆盖浅色、深色、横屏、竖屏和 iPad 输出。

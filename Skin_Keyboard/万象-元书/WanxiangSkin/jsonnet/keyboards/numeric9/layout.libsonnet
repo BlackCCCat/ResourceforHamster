@@ -1,6 +1,6 @@
 // 定义数字键盘的横竖屏布局结构。
 local Settings = import '../../Custom.libsonnet';
-local functionButtonSpecs = import '../../shared/functionButtons/specs.libsonnet';
+local functionButtonSpecs = import '../../components/functionRow/specs.libsonnet';
 local numericBottomSlots =
   if Settings.swap_numeric_return_symbol then {
     left: 'symbolButton',

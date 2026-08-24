@@ -1,281 +1,115 @@
 # Playbooks
 
-All playbooks assume you already resolved one `<keyboard-root>`.
+所有命令默认在 `<keyboard-root>` 运行。
 
-## Add or change a Custom option
+## 修改 Custom 配置
 
-1. Edit `jsonnet/Custom.libsonnet`.
-2. Update all readers of that option with `rg`.
-3. If the option changes behavior, compile the affected entry file.
-4. Update `README.md` and `MODULES.md`.
+1. 编辑 `jsonnet/Custom.libsonnet`。
+2. 用 `rg '<option>' jsonnet` 检查全部读者。
+3. 在最窄责任层实现行为。
+4. 编译 `jsonnet/main.jsonnet`。
+5. 更新 `README.md`、`MODULES.md` 和维护 skill。
 
-Notes:
+常见读者：
 
-- If the option changes button placement instead of button behavior, update the owning layout file instead of a builder.
-- Example:
-  - `swap_9_123_symbol`
-  - reader: `jsonnet/keyboards/pinyin9/layout.libsonnet`
-  - affected entry: `jsonnet/entries/pinyin_9.jsonnet`
-- Example:
-  - `swap_numeric_return_symbol`
-  - reader: `jsonnet/keyboards/numeric9/layout.libsonnet`
-  - affected entry: `jsonnet/entries/numeric_9.jsonnet`
-- Example:
-  - `function_button_config.with_functions_row.iPhone`
-  - may also affect dedicated landscape 9-key and numeric split layouts
-  - readers:
-    - `jsonnet/keyboards/pinyin9/layout.libsonnet`
-    - `jsonnet/keyboards/numeric9/layout.libsonnet`
-  - affected entries:
-    - `jsonnet/entries/pinyin_9.jsonnet`
-    - `jsonnet/entries/numeric_9.jsonnet`
-- Example:
-  - `button_123_config`
-  - readers:
-    - `jsonnet/shared/buttonHelpers/buttonInteraction.libsonnet`
-    - `jsonnet/keyboards/common/systemKeys26/systemKeysSwitcher.libsonnet`
-    - `jsonnet/keyboards/alphabetic26/systemKeys.libsonnet`
-    - `jsonnet/keyboards/common/keyboard26/iPadBuilder.libsonnet`
-  - affected entries:
-    - `jsonnet/entries/pinyin_26.jsonnet`
-    - `jsonnet/entries/pinyin_18.jsonnet`
-    - `jsonnet/entries/pinyin_14.jsonnet`
-    - `jsonnet/entries/alphabetic_26.jsonnet`
-    - `jsonnet/entries/ipad_pinyin_26.jsonnet`
-  - note:
-    - `button_123_config.show_swipe_indicators` only controls the corner indicators
-    - it must not change `swipeUpAction` or `swipeDownAction`
-- Example:
-  - `keyboard_layout = 27`
-  - readers:
-    - `jsonnet/keyboards/common/layoutAssembly/keyboardLayoutAssembly.libsonnet`
-    - `jsonnet/keyboards/common/keyboard26/layout.libsonnet`
-    - `jsonnet/keyboards/common/keyboard26/letters.libsonnet`
-    - `jsonnet/keyboards/pinyin26/builder.libsonnet`
-  - affected entry:
-    - `jsonnet/entries/pinyin_26.jsonnet`
-- Example:
-  - `swipe_assist_mode`
-  - readers:
-    - `jsonnet/keyboards/pinyin26/builder.libsonnet`
-  - affected entry:
-    - `jsonnet/entries/pinyin_26.jsonnet`
-  - side effects:
-    - `none` keeps the original `keyboardAction` foreground notification
-    - assisted direction action changes to uppercase letter through `preeditChanged` notifications
-    - non-notification state keeps the original swipe action
-    - assisted direction swipe bubble is hidden
-    - original swipe symbols move into long-press menu
-    - long-press default selection switches to the original assisted symbol
-- Example:
-  - `button_symbol_config`
-  - readers:
-    - `jsonnet/shared/buttonHelpers/buttonInteraction.libsonnet`
-    - `jsonnet/keyboards/pinyin9/builder.libsonnet`
-    - `jsonnet/keyboards/numeric9/builder.libsonnet`
-  - affected entries:
-    - `jsonnet/entries/pinyin_9.jsonnet`
-    - `jsonnet/entries/numeric_9.jsonnet`
+- `keyboard_layout`：`build/keyboardRegistry`、`keyboard26/base/iPhoneLayout`、`keyboard26/base/letters`、`keyboard26/pinyin/builder`。
+- `swipe_assist_mode`：`keyboard26/pinyin/swipeAssist` 和 `builder`。
+- `button_123_config`：`components/key/interaction`、`components/systemKeys/keyboardSwitch`、英文 `systemKeys`、iPadBuilder。
+- `button_symbol_config`：`components/key/interaction`、九键 builder、数字 builder。
+- 功能行：`components/functionRow`、九键/数字布局和 `build/context`。
 
-## Add or change a function button
+## 修改 26/27 键布局
 
-1. Edit `jsonnet/shared/functionButtons/specs.libsonnet` first.
-2. If order is involved, also inspect `jsonnet/shared/functionButtons/functionRowPatch.libsonnet`.
-3. If the function row still does not appear in the final layout, inspect `jsonnet/keyboards/common/layoutAssembly/keyboardLayoutAssembly.libsonnet` together with `jsonnet/shared/data/layoutData.libsonnet`.
-3. If the change is only about function-button foreground styles or SF Symbols, prefer `jsonnet/shared/functionButtons/styles.libsonnet`.
-4. Only edit `jsonnet/shared/functionButtons/iPhone.libsonnet` if the current build logic cannot express the new button.
-5. Compile one keyboard with function row enabled.
-6. If buttons are removed from `function_button_config.order`, ensure the function-row layout still auto-distributes width across the remaining buttons.
+1. 字母规格改 `keyboards/keyboard26/base/letters.libsonnet`。
+2. 手机行结构改 `base/iPhoneLayout.libsonnet`。
+3. iPad 行结构与尺寸改 `base/iPadLayout.libsonnet`。
+4. iPad 按钮行为改 `base/iPadBuilder.libsonnet`。
+5. 验证中文、英文、iPad，以及 `keyboard_layout = 26/27`。
 
-## Change toolbar buttons
+## 修改滑动辅助
 
-1. Edit `jsonnet/shared/toolbar/registry.libsonnet` for IDs, styles, and actions.
-2. Edit `jsonnet/shared/toolbar/config.libsonnet` for config parsing.
-3. Edit `jsonnet/shared/toolbar/iPhoneRenderer.libsonnet` or `jsonnet/shared/toolbar/iPadRenderer.libsonnet` when changing layout rules or horizontalSymbols direction, such as `content_right_to_left`.
-4. If the change affects toolbar height, also inspect the reader path that applies `toolbar_config.toolbar_height` or `toolbar_config.ipad.toolbar_height`.
-5. If the change affects the horizontal candidate trailing button, inspect `horizon_candidate_button` in `jsonnet/Custom.libsonnet` and the branch in `jsonnet/shared/toolbar/iPhone.libsonnet`.
-6. Update `Custom.libsonnet` docs if a new public button ID becomes available, including IDs such as `simplified_traditional`, `undo`, `redo`, `cut`, `copy`, and `paste`.
-7. If the toolbar edit action should mirror the function-row visual language, align its SF Symbol with `jsonnet/shared/functionButtons/styles.libsonnet`.
-8. If the change touches the candidate long-press menu, edit `candidateContextMenu` in `jsonnet/shared/toolbar/iPhone.libsonnet`.
-9. If the new button uses the standard toolbar system-image foreground style pattern, prefer extending the local helper in `jsonnet/shared/toolbar/iPhone.libsonnet` instead of duplicating style objects.
+1. 模式解析、长按排序、索引、通知改 `keyboard26/pinyin/swipeAssist.libsonnet`。
+2. 原始滑动/长按数据改 `keyboard26/pinyin/data.libsonnet`。
+3. 保持 KP 显示文本和左右对称顺序。
+4. 验证 `none`、`up`、`down`、`all`。
+5. 检查通知冲突、滑动气泡显隐和长按默认索引。
 
-## Add a compact layout
+## 修改拼音系统键
 
-1. Add a new spec file under the owning keyboard directory.
-2. Reuse `jsonnet/keyboards/common/pinyin14_18/iPhone.libsonnet` if possible.
-3. Add a new entry under `jsonnet/entries/`.
-4. Update `jsonnet/main.jsonnet` if a new output is required.
-5. Update docs.
+- 退格/空格/回车：`components/systemKeys/editing.libsonnet`
+- Shift/中英切换：`components/systemKeys/inputMode.libsonnet`
+- 123Button：`components/systemKeys/keyboardSwitch.libsonnet`
+- 公共装配：`components/systemKeys/index.libsonnet`
+- cn2en 动态长按数据：`components/systemKeys/longPressData.libsonnet`
 
-## Change a 26-key system key
+修改后验证 26、14、18、九键；这些布局直接复用公共系统键。
 
-1. Locate the right module under `jsonnet/keyboards/pinyin26/` or `jsonnet/keyboards/alphabetic26/`.
-2. Prefer changing the most specific split module, such as shift, space, enter, or switcher.
-3. If the change affects both Chinese and English 26-key shared layout, letters, or iPad overlay assembly, inspect `jsonnet/keyboards/common/keyboard26/`.
-4. If the change affects shared 26-key system-key modules or assembly, inspect `jsonnet/keyboards/common/systemKeys26/`.
-5. Only touch the top-level 26-key builder if the change affects assembly outside the shared system-key modules.
+## 修改英文系统键或临时拼音
 
-## Add a temporary keyboard wrapper
+1. 英文系统键改 `keyboard26/alphabetic/systemKeys.libsonnet`。
+2. 非 26 键英文的 en2cn 上划与空格上划也在该文件。
+3. 临时拼音覆写改 `keyboard26/tempPinyin/keyboard.libsonnet`。
+4. 保持 temp_pinyin 中英键无通知，空格固定 `RIME`，上划 `Shift+space`。
 
-1. Add a new output mapping in:
-   - `jsonnet/main.jsonnet`
-   - `<keyboard-root>/config.yaml`
-2. Create a thin wrapper under:
-   - `jsonnet/keyboards/tempPinyin/iPhone.libsonnet`
-3. Reuse the base keyboard output and override only the minimal button fields.
-4. For the current `temp_pinyin` pattern:
-   - reuse `jsonnet/keyboards/pinyin26/iPhone.libsonnet`
-   - override `cn2enButton.action`
-   - remove `cn2enButton.notification`
-   - replace `cn2enButtonForegroundStyle` with a system-image style
-   - override `spaceButton` / `spaceFirstButton` / `spaceSecondButton` when temp-pinyin needs a fixed marker text or dedicated swipe-up action
-5. If non-26 English keyboards should swipe into this wrapper, also edit:
-   - `jsonnet/keyboards/alphabetic26/systemKeys.libsonnet`
+## 修改 14/18 键
 
-## Change 123Button interaction
+1. 共用构建改 `pinyin14_18/base/builder.libsonnet`。
+2. 复合按钮和系统键尺寸改 `base/buttons.libsonnet`。
+3. 单一布局的行结构改对应 `layout.libsonnet`。
+4. 键位规格、长按和滑动数据改对应 `data.libsonnet`。
+5. 分别验证 14 和 18，不通过拼音 26 键间接验证。
 
-1. If the interaction should be user-configurable, expose it in:
-   - `jsonnet/Custom.libsonnet`
-2. For Chinese 26-key and the compact 14/18 reuse path, edit:
-   - `jsonnet/keyboards/common/systemKeys26/systemKeysSwitcher.libsonnet`
-3. If English 26-key should match, also edit:
-   - `jsonnet/keyboards/alphabetic26/systemKeys.libsonnet`
-4. If iPad 26-key should match, also edit:
-   - `jsonnet/keyboards/common/keyboard26/iPadBuilder.libsonnet`
-   - `jsonnet/keyboards/common/keyboard26/layout.libsonnet`
-   - use `iPadBuilder.libsonnet` for iPad-only system-key actions or bottom-row punctuation behavior
-   - use `iPadBuilder.libsonnet` for right Shift notification parity or landscape-only spacing adjustments
-5. If only iPad Chinese/English letter size should match, also inspect:
-   - `jsonnet/keyboards/pinyin26/iPad.libsonnet`
-   - `jsonnet/keyboards/alphabetic26/iPad.libsonnet`
-6. Keep the behavior split clear:
-   - slide mode -> `type: 'horizontalSymbols'` + dataSource
-   - long-press mode -> `hintSymbolsStyle`
-   - swipe mode -> `swipeUpAction` / `swipeDownAction`
-   - `show_swipe_indicators` -> only control `123ButtonUpForegroundStyle` / `123ButtonDownForegroundStyle`
-   - if the user wants no click bubble, remove the 123Button `hintStyle` instead of touching swipe actions
-6. Validate with:
-   - `jsonnet -e "(import '<keyboard-root>/jsonnet/entries/pinyin_26.jsonnet').new('light','portrait')"`
-   - `jsonnet -e "(import '<keyboard-root>/jsonnet/entries/pinyin_18.jsonnet').new('light','portrait')"`
-   - `jsonnet -e "(import '<keyboard-root>/jsonnet/entries/pinyin_14.jsonnet').new('light','portrait')"`
-7. If English 26-key also changed, additionally validate:
-   - `jsonnet -e "(import '<keyboard-root>/jsonnet/entries/alphabetic_26.jsonnet').new('light','portrait')"`
-8. If iPad also changed, additionally validate:
-   - `jsonnet -e "(import '<keyboard-root>/jsonnet/entries/ipad_pinyin_26.jsonnet').new('light','portrait')"`
-   - `jsonnet -e "(import '<keyboard-root>/jsonnet/entries/ipad_alphabetic_26.jsonnet').new('light','portrait')"`
+## 修改九键或数字键盘
 
-## Change 9-key bottom-row button order
+1. 位置、横竖屏树和交换配置改 `layout.libsonnet`。
+2. 按钮动作/通知改 `builder.libsonnet`。
+3. collection、纵向候选或符号面板改 `panels.libsonnet`。
+4. 长按/滑动数据改 `data.libsonnet`。
+5. 检查 `swap_9_123_symbol` 或 `swap_numeric_return_symbol`。
 
-1. If the change is user-configurable, expose it in `jsonnet/Custom.libsonnet`.
-2. Implement the position swap in `jsonnet/keyboards/pinyin9/layout.libsonnet`.
-3. Treat this as a slot/layout change, not a button-action change.
-4. If the swapped buttons have different widths, swap the slot definitions together with the button names.
-5. Validate with:
-   - `jsonnet -e "(import '<keyboard-root>/jsonnet/entries/pinyin_9.jsonnet').new('light','portrait')"`
-6. Update:
-   - `README.md`
-   - `MODULES.md`
+## 修改功能行
 
-## Change 9-key / numeric symbolButton interaction
+1. 动作、顺序和通知规则改 `components/functionRow/specs.libsonnet`。
+2. SF Symbol 改 `components/functionRow/styles.libsonnet`。
+3. 按钮生成和布局插入改 `components/functionRow/index.libsonnet`。
+4. 检查 iPhone/iPad 开关、横屏九键和横屏数字键盘。
 
-1. If the interaction should be user-configurable, expose it in:
-   - `jsonnet/Custom.libsonnet`
-2. Edit:
-   - `jsonnet/keyboards/pinyin9/builder.libsonnet`
-   - `jsonnet/keyboards/numeric9/builder.libsonnet`
-3. Keep the behavior split clear:
-   - slide mode -> `type: 'horizontalSymbols'` + dataSource
-   - long-press mode -> `hintSymbolsStyle`, and the menu should only expose the secondary target
-   - swipe mode -> `swipeUpAction` only when the primary click action already occupies the base keyboard
-4. Do not break:
-   - `swap_9_123_symbol`
-   - `swap_numeric_return_symbol`
-5. Validate with:
-   - `jsonnet -e "(import '<keyboard-root>/jsonnet/entries/pinyin_9.jsonnet').new('light','portrait')"`
-   - `jsonnet -e "(import '<keyboard-root>/jsonnet/entries/numeric_9.jsonnet').new('light','portrait')"`
-6. Update:
-   - `README.md`
-   - `MODULES.md`
+## 修改工具栏或候选栏
 
-## Change landscape 9-key split layout
+1. 新按钮 ID、Cell 和动作改 `components/toolbar/registry.libsonnet`。
+2. 配置解析改 `components/toolbar/config.libsonnet`。
+3. 固定按钮样式和动作改 `components/toolbar/iPhone.libsonnet`。
+4. 布局或滑动方向改对应 Renderer。
+5. 候选栏、尾部按钮、翻页和候选长按菜单改 `components/candidates.libsonnet`。
+6. 检查 segmented、carousel、iPad center_slide 和 `horizon_candidate_button`。
 
-1. Treat this as a layout-layer task first.
-2. Edit:
-   - `jsonnet/keyboards/pinyin9/layout.libsonnet`
-3. Only edit:
-   - `jsonnet/keyboards/pinyin9/panels.libsonnet`
-   - `jsonnet/keyboards/pinyin9/builder.libsonnet`
-   when changing component definitions such as `collection`, `verticalCandidates`, or candidate cell style.
-4. Keep these responsibilities separate:
-   - button placement, left/right split, spacer width, function-row visibility -> layout
-   - `type: 't9Symbols'`, `type: 'verticalCandidates'`, candidate appearance -> panels/builder
-5. If the landscape layout should follow a Custom option, update:
-   - `jsonnet/Custom.libsonnet`
-   - all readers with `rg`
-6. Validate with:
-   - `jsonnet -e "(import '<keyboard-root>/jsonnet/entries/pinyin_9.jsonnet').new('light','landscape')"`
-7. Then run full compile if the change touches shared layout data:
-   - `jsonnet '<keyboard-root>/jsonnet/main.jsonnet' >/tmp/wanxiang_restructured_main.json`
+## 修改视觉
 
-## Change landscape numeric split layout
+1. 颜色、字号、偏移、动画、高度改 `design/appearance.libsonnet`。
+2. 可复用样式函数改 `design/styleFactories.libsonnet`。
+3. 基础按键背景改 `design/baseKeyStyles.libsonnet`。
+4. 验证 light/dark、portrait/landscape、iPhone/iPad。
 
-1. Treat this as a layout-layer task first.
-2. Edit:
-   - `jsonnet/keyboards/numeric9/layout.libsonnet`
-3. Only edit:
-   - `jsonnet/keyboards/numeric9/panels.libsonnet`
-   - `jsonnet/keyboards/numeric9/builder.libsonnet`
-   when changing component definitions such as `collection`, `landscapeNumericSymbols`, or symbol panel type.
-4. Keep these responsibilities separate:
-   - left/right split, spacer width, function-row visibility, slot swapping -> layout
-   - `type: 'symbols'`, `type: 't9Symbols'`, `type: 'categorySymbols'`, symbol data source -> panels/builder
-5. Preserve existing tuned component settings unless the user explicitly asks to change them, especially:
-   - `jsonnet/keyboards/pinyin9/builder.libsonnet` -> `verticalCandidates.insets`
-   - `jsonnet/keyboards/numeric9/panels.libsonnet` -> `landscapeNumericSymbols` component settings
-6. If the layout should follow a Custom option, update:
-   - `jsonnet/Custom.libsonnet`
-   - all readers with `rg`
-7. Validate with:
-   - `jsonnet -e "(import '<keyboard-root>/jsonnet/entries/numeric_9.jsonnet').new('light','landscape')"`
-8. Then run full compile if shared layout or config changed:
-   - `jsonnet '<keyboard-root>/jsonnet/main.jsonnet' >/tmp/wanxiang_restructured_main.json`
+## 新增完整键盘输出
 
-## Change a key SF Symbol
+1. 在 `keyboards/<family>/` 创建独立入口、布局和数据。
+2. 在 `build/keyboardRegistry.libsonnet` 注册模块。
+3. 在 `build/skinConfig.libsonnet` 增加 config 映射。
+4. 在 `main.jsonnet` 增加 render。
+5. 不创建一行式 `entries/`。
 
-1. First identify the button type:
-   - function button
-   - toolbar button
-   - 26-key system key
-   - shift preedit symbol from Custom
-   - shared symbol style used by multiple buttons
+## 回归验证
 
-2. Change the narrowest layer that owns the symbol:
-   - function buttons:
-     - `jsonnet/shared/functionButtons/specs.libsonnet`
-     - or `jsonnet/shared/functionButtons/iPhone.libsonnet` if symbol rendering is built there
-   - toolbar buttons:
-     - `jsonnet/shared/toolbar/registry.libsonnet`
-   - 26-key system keys:
-     - `jsonnet/keyboards/common/systemKeys26/*.libsonnet`
-     - or `jsonnet/keyboards/alphabetic26/systemKeys.libsonnet`
-   - config-driven symbol:
-     - `jsonnet/Custom.libsonnet`
+```bash
+jsonnet jsonnet/main.jsonnet -o /tmp/WanxiangSkin.json
+```
 
-3. If the SF Symbol should become user-configurable, expose it in `jsonnet/Custom.libsonnet` instead of hard-coding it.
+结构重构使用 Git 中修改前版本建立临时副本，逐项比较完整输出。至少覆盖：
 
-4. If you change any user-facing configuration, update:
-   - `README.md`
-   - `MODULES.md`
+- `keyboard_layout`: 9、14、18、26、27
+- `swipe_assist_mode`: none、up、down、all
+- light/dark
+- portrait/landscape
+- iPhone/iPad
 
-5. Validate with a targeted compile for the affected entry.
-
-## Fix regressions
-
-1. Reproduce the failure with a targeted `jsonnet -e` command.
-2. Trace upward from the failing file:
-   - entry file
-   - keyboard-level module
-   - shared helper or style
-   - runtime/layout
-3. Keep the fix local.
-4. Re-run targeted compile.
+最终使用 `rg -n "import .*?(shared/|entries/|keyboards/common/)" jsonnet` 确认源码中没有旧结构导入。

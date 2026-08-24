@@ -1,69 +1,6 @@
-local config = {
-  author: 'BlackCCCat',
-  name: '万象键盘',
-  pinyin: {
-    iPhone: {
-      portrait: 'pinyin_26_portrait',
-      landscape: 'pinyin_26_landscape',
-    },
-    iPad: {
-      portrait: 'ipad_pinyin_26_portrait',
-      landscape: 'ipad_pinyin_26_landscape',
-      floating: 'pinyin_26_portrait',
-    },
-  },
-  temp_pinyin: {
-    iPhone: {
-      portrait: 'temp_pinyin_portrait',
-      landscape: 'temp_pinyin_landscape',
-    },
-  },
-  alphabetic: {
-    iPhone: {
-      portrait: 'alphabetic_26_portrait',
-      landscape: 'alphabetic_26_landscape',
-    },
-    iPad: {
-      portrait: 'ipad_alphabetic_26_portrait',
-      landscape: 'ipad_alphabetic_26_landscape',
-      floating: 'alphabetic_26_portrait',
-    },
-  },
-  numeric: {
-    iPhone: {
-      portrait: 'numeric_9_portrait',
-      landscape: 'numeric_9_landscape',
-    },
-    iPad: {
-      portrait: 'ipad_numeric_9_portrait',
-      landscape: 'ipad_numeric_9_landscape',
-      floating: 'numeric_9_portrait',
-    },
-  },
-
-  panel: {
-    iPhone: {
-      portrait: 'panel_portrait',
-      landscape: 'panel_landscape',
-    },
-  },
-};
-
-local Settings = import 'Custom.libsonnet';
-
-local pinyin =
-  if Settings.keyboard_layout == 18 then import 'keyboards/pinyin18/iPhone.libsonnet'
-  else if Settings.keyboard_layout == 14 then import 'keyboards/pinyin14/iPhone.libsonnet'
-  else if Settings.keyboard_layout == 9 then import 'keyboards/pinyin9/iPhone.libsonnet'
-  else import 'keyboards/pinyin26/iPhone.libsonnet';
-local temp_pinyin = import 'keyboards/tempPinyin/iPhone.libsonnet';
-local alphabetic = import 'keyboards/alphabetic26/iPhone.libsonnet';
-local numeric = import 'keyboards/numeric9/iPhone.libsonnet';
-local panel = import 'entries/panel.jsonnet';
-
-local ipad_pinyin = import 'keyboards/pinyin26/iPad.libsonnet';
-local ipad_alphabetic = import 'keyboards/alphabetic26/iPad.libsonnet';
-local ipad_numeric = import 'keyboards/numeric9/iPad.libsonnet';
+// 皮肤总入口只负责渲染，不在此展开键盘选择与配置细节。
+local keyboards = import './build/keyboardRegistry.libsonnet';
+local config = import './build/skinConfig.libsonnet';
 
 
 // 输出文件生成
@@ -79,11 +16,11 @@ local render(module, prefix) = {
 {
   'config.yaml': std.manifestYamlDoc(config, indent_array_in_object=true, quote_keys=false),
 } +
-render(pinyin, 'pinyin_26') +
-render(temp_pinyin, 'temp_pinyin') +
-render(ipad_pinyin, 'ipad_pinyin_26') +
-render(alphabetic, 'alphabetic_26') +
-render(ipad_alphabetic, 'ipad_alphabetic_26') +
-render(numeric, 'numeric_9') +
-render(ipad_numeric, 'ipad_numeric_9') +
-render(panel, 'panel')
+render(keyboards.pinyin, 'pinyin_26') +
+render(keyboards.tempPinyin, 'temp_pinyin') +
+render(keyboards.iPadPinyin, 'ipad_pinyin_26') +
+render(keyboards.alphabetic, 'alphabetic_26') +
+render(keyboards.iPadAlphabetic, 'ipad_alphabetic_26') +
+render(keyboards.numeric, 'numeric_9') +
+render(keyboards.iPadNumeric, 'ipad_numeric_9') +
+render(keyboards.panel, 'panel')

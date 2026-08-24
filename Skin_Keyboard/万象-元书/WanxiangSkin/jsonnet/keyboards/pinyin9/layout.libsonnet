@@ -1,9 +1,10 @@
 // 定义拼音 9 键的横竖屏专属布局。
 local Settings = import '../../Custom.libsonnet';
-local functionButtonSpecs = import '../../shared/functionButtons/specs.libsonnet';
-local functionRowPatch = import '../../shared/functionButtons/functionRowPatch.libsonnet';
-local color = import '../../shared/styles/color.libsonnet';
-local styleFactories = import '../../shared/styles/styleFactories.libsonnet';
+local functionRowPatch = import '../../components/functionRow/index.libsonnet';
+local functionButtonSpecs = import '../../components/functionRow/specs.libsonnet';
+local appearance = import '../../design/appearance.libsonnet';
+local color = appearance.color;
+local styleFactories = import '../../design/styleFactories.libsonnet';
 
 local pinyin9bottomRowSlots =
   if Settings.swap_9_123_symbol then {

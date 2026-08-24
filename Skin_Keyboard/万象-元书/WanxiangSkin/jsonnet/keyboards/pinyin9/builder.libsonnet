@@ -1,22 +1,21 @@
 // 组装拼音九键键盘，汇合共享布局上下文、九键分组规格和样式注册。
-local buttonInteraction = import '../../shared/buttonHelpers/buttonInteraction.libsonnet';
-local hintSymbolsData = import '../../shared/data/hintSymbolsData.libsonnet';
-local swipeData = import '../../shared/data/swipeData.libsonnet';
-local functions = import '../../shared/functionButtons/iPhone.libsonnet';
-local functionButtonStyles = import '../../shared/functionButtons/styles.libsonnet';
-local animation = import '../../shared/styles/animation.libsonnet';
-local center = import '../../shared/styles/center.libsonnet';
-local color = import '../../shared/styles/color.libsonnet';
-local fontSize = import '../../shared/styles/fontSize.libsonnet';
-local hintSymbolsStyles = import '../../shared/styles/hintSymbolsStyles.libsonnet';
-local utils = import '../../shared/styles/keyStyles.libsonnet';
-local others = import '../../shared/styles/others.libsonnet';
-local slideButtonStyles = import '../../shared/styles/slideButtonStyles.libsonnet';
-local styleFactories = import '../../shared/styles/styleFactories.libsonnet';
-local swipeKeyStyles = import '../../shared/styles/swipeKeyStyles.libsonnet';
-local toolbar = import '../../shared/toolbar/iPhone.libsonnet';
-local panels = import 'panels.libsonnet';
-local pinyin9T9 = import 't9.libsonnet';
+local functionRow = import '../../components/functionRow/index.libsonnet';
+local functionButtonStyles = import '../../components/functionRow/styles.libsonnet';
+local buttonInteraction = import '../../components/key/interaction.libsonnet';
+local appearance = import '../../design/appearance.libsonnet';
+local pinyin9Data = import './data.libsonnet';
+local animation = appearance.animation;
+local center = appearance.center;
+local color = appearance.color;
+local fontSize = appearance.fontSize;
+local hintSymbolsStyles = import '../../components/key/longPress.libsonnet';
+local utils = import '../../components/key/factory.libsonnet';
+local others = appearance.others;
+local swipeStyles = import '../../components/key/swipe.libsonnet';
+local styleFactories = import '../../design/styleFactories.libsonnet';
+local toolbar = import '../../components/toolbar/iPhone.libsonnet';
+local panels = import './panels.libsonnet';
+local systemKeys = import '../../components/systemKeys/index.libsonnet';
 
 {
   createButtonFactory(context, swipeUp, swipeDown, t9Letters)::
@@ -61,7 +60,7 @@ local pinyin9T9 = import 't9.libsonnet';
         [if std.objectHas(root, styleKey + 'ButtonHintSymbolsStyle') then 'hintSymbolsStyle']: styleKey + 'ButtonHintSymbolsStyle',
       },
 
-  build(context, layoutRoot, p26Layout)::
+  build(context, layoutRoot)::
     local theme = context.theme;
     local orientation = context.orientation;
     local makeButtonBackground(normalKey, highlightKey) =
@@ -93,22 +92,22 @@ local pinyin9T9 = import 't9.libsonnet';
       ) + extra;
     local layoutName = if orientation == 'portrait' then '竖屏中文9键' else '横屏中文9键';
     local sizeName = if orientation == 'portrait' then '竖屏按键尺寸' else '横屏按键尺寸';
-    local swipeDataRoot = swipeData.genSwipeData(context.deviceType);
+    local swipeDataRoot = pinyin9Data.genSwipeData(context.deviceType);
     local swipeUp = if std.objectHas(swipeDataRoot, 'swipe_up_9') then swipeDataRoot.swipe_up_9 else {};
     local swipeDown = if std.objectHas(swipeDataRoot, 'swipe_down_9') then swipeDataRoot.swipe_down_9 else {};
-    local t9Letters = pinyin9T9.getLetters(context.Settings.is_letter_capital);
+    local t9Letters = pinyin9Data.getLetters(context.Settings.is_letter_capital);
     local createBaseButton = self.createButtonFactory(context, swipeUp, swipeDown, t9Letters);
     local createButtonWithHints = function(key, size, bounds, root, isUpper=true)
       local styleKey = if std.length(key) == 1 then 'number' + key else key;
       createBaseButton(key, size, bounds, root, isUpper) + {
-        // 9 键长按样式由 pinyin_9 hint 数据决定，不能依赖当前对象层的字段可见性判断。
-        [if std.objectHas(hintSymbolsData.pinyin_9, styleKey) then 'hintSymbolsStyle']: styleKey + 'ButtonHintSymbolsStyle',
+        // 九键长按样式直接读取 pinyin_9 数据，不受当前对象字段可见性影响。
+        [if std.objectHas(pinyin9Data.pinyin_9, styleKey) then 'hintSymbolsStyle']: styleKey + 'ButtonHintSymbolsStyle',
       };
     local layout = layoutRoot[layoutName];
-    local hintDataOnlyCn2en = { cn2en: hintSymbolsData.pinyin_9.cn2en };
+    local hintDataOnlyCn2en = { cn2en: pinyin9Data.pinyin_9.cn2en };
     local hintDataWithoutCn2en = {
-      [k]: hintSymbolsData.pinyin_9[k]
-      for k in std.objectFields(hintSymbolsData.pinyin_9)
+      [k]: pinyin9Data.pinyin_9[k]
+      for k in std.objectFields(pinyin9Data.pinyin_9)
       if k != 'cn2en'
     };
     local symbolButtonHelper = buttonInteraction.symbolButton;
@@ -117,7 +116,8 @@ local pinyin9T9 = import 't9.libsonnet';
     local useSwipeActions = !slideEnabled && symbolButtonHelper.secondaryActionMode(context.Settings) == 'swipe';
     local swipeTargets = symbolButtonHelper.swipeMapping(context.Settings);
     local symbolHintStyles = if useHintSymbols then hintSymbolsStyles.getStyle(theme, symbolButtonHelper.hintData) else {};
-    slideButtonStyles.slideButtonStyles(theme) +
+    local sharedSystemKeys = systemKeys.buildReusable(context, layoutRoot);
+    swipeStyles.slideButtonStyles(theme) +
     hintSymbolsStyles.getStyle(theme, hintDataOnlyCn2en) +
     {
       preeditHeight: others[if orientation == 'portrait' then '竖屏' else '横屏']['preedit高度'],
@@ -127,7 +127,7 @@ local pinyin9T9 = import 't9.libsonnet';
     layout +
     hintSymbolsStyles.getStyle(theme, hintDataWithoutCn2en) +
     symbolHintStyles +
-    swipeKeyStyles.getStyle('number', theme, swipeUp, swipeDown) +
+    swipeStyles.getStyle('number', theme, swipeUp, swipeDown) +
     {
       number1Button: createButtonWithHints('1', {}, {}, $, false) + {
         foregroundStyle: std.filter(function(x) x != null, [
@@ -153,7 +153,7 @@ local pinyin9T9 = import 't9.libsonnet';
     } +
     {
       ['number' + key + 'Button']: createButtonWithHints(key, {}, {}, $, false)
-      for key in pinyin9T9.digitKeys
+      for key in pinyin9Data.digitKeys
     } +
     {
       symbolButton: createButtonWithHints('symbol', layout[sizeName].symbolButton, {}, $, false) + {
@@ -196,8 +196,8 @@ local pinyin9T9 = import 't9.libsonnet';
           fontSize['按键前景文字大小'] - 3,
           center['功能键前景文字偏移'] { y: 0.5 }
         ),
-      cn2enButton: p26Layout.cn2enButton,
-      cn2enButtonForegroundStyle: p26Layout.cn2enButtonForegroundStyle,
+      cn2enButton: sharedSystemKeys.cn2enButton,
+      cn2enButtonForegroundStyle: sharedSystemKeys.cn2enButtonForegroundStyle,
       cn2enButtonHintSymbolsStyle: super['cn2enButtonHintSymbolsStyle'] + {
         symbolStyles: [
           'cn2enButtonHintSymbolsStyleOf0',
@@ -206,10 +206,10 @@ local pinyin9T9 = import 't9.libsonnet';
           'cn2enButtonHintSymbolsStyleOf8',
         ],
       },
-      cn2enButtonHintSymbolsStyleOf0: p26Layout.cn2enButtonHintSymbolsStyleOf0,
-      cn2enButtonHintSymbolsStyleOf4: p26Layout.cn2enButtonHintSymbolsStyleOf4,
-      cn2enButtonHintSymbolsStyleOf6: p26Layout.cn2enButtonHintSymbolsStyleOf6,
-      cn2enButtonHintSymbolsStyleOf8: p26Layout.cn2enButtonHintSymbolsStyleOf8,
+      cn2enButtonHintSymbolsStyleOf0: sharedSystemKeys.cn2enButtonHintSymbolsStyleOf0,
+      cn2enButtonHintSymbolsStyleOf4: sharedSystemKeys.cn2enButtonHintSymbolsStyleOf4,
+      cn2enButtonHintSymbolsStyleOf6: sharedSystemKeys.cn2enButtonHintSymbolsStyleOf6,
+      cn2enButtonHintSymbolsStyleOf8: sharedSystemKeys.cn2enButtonHintSymbolsStyleOf8,
       spaceRightButtonPreeditNotification: {
         notificationType: 'preeditChanged',
         backgroundStyle: 'alphabeticBackgroundStyle',
@@ -249,13 +249,13 @@ local pinyin9T9 = import 't9.libsonnet';
             if context.Settings.fix_sf_symbol then 'arrow.up.arrow.down' else 'chevron.compact.up.chevron.compact.down',
             fontSize['数字键盘数字前景字体大小']
           ),
-      spaceButton: p26Layout.spaceButton {
+      spaceButton: sharedSystemKeys.spaceButton {
         size: layout[sizeName].spaceButton,
         [if std.objectHas(swipeUp, 'space') then 'swipeUpAction']: swipeUp.space.action,
       },
-      spaceButtonForegroundStyle: p26Layout.spaceButtonForegroundStyle,
-      spaceButtonForegroundStyle1: if std.objectHas(p26Layout, 'spaceButtonForegroundStyle1') then p26Layout.spaceButtonForegroundStyle1 else {},
-      spaceButtonPreeditNotification: p26Layout.spaceButtonPreeditNotification,
+      spaceButtonForegroundStyle: sharedSystemKeys.spaceButtonForegroundStyle,
+      spaceButtonForegroundStyle1: if std.objectHas(sharedSystemKeys, 'spaceButtonForegroundStyle1') then sharedSystemKeys.spaceButtonForegroundStyle1 else {},
+      spaceButtonPreeditNotification: sharedSystemKeys.spaceButtonPreeditNotification,
       backspaceButton: createButtonWithHints('backspace', layout[sizeName].backspaceButton, {}, $, false) + {
         backgroundStyle: 'systemButtonBackgroundStyle',
         action: 'backspace',
@@ -331,7 +331,7 @@ local pinyin9T9 = import 't9.libsonnet';
       alphabeticBackgroundStyle: makeButtonBackground('字母键背景颜色-普通', '字母键背景颜色-高亮'),
       systemButtonBackgroundStyle: makeButtonBackground('功能键背景颜色-普通', '功能键背景颜色-高亮'),
       ButtonScaleAnimation: animation['26键按键动画'],
-      symbols: pinyin9T9.symbols,
+      symbols: pinyin9Data.symbols,
     } +
     {
       ['number' + key + 'LettersStyle']: {
@@ -349,5 +349,5 @@ local pinyin9T9 = import 't9.libsonnet';
     panels.build(context, theme, orientation) +
     utils.genNumberStyles(fontSize, color, theme, center) +
     functionButtonStyles.genFuncKeyStyles(fontSize, color, theme, center) +
-    functions.makeFunctionButtons(orientation, {}, 't9'),
+    functionRow.makeFunctionButtons(orientation, {}, 't9'),
 }

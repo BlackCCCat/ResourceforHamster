@@ -1,22 +1,20 @@
 // 组装数字 9 键键盘，汇合共享上下文、布局数据和样式注册。
-local hintSymbolsData = import '../../shared/data/hintSymbolsData.libsonnet';
-local swipeData = import '../../shared/data/swipeData.libsonnet';
-local functions = import '../../shared/functionButtons/iPhone.libsonnet';
-local functionButtonStyles = import '../../shared/functionButtons/styles.libsonnet';
-local animation = import '../../shared/styles/animation.libsonnet';
-local center = import '../../shared/styles/center.libsonnet';
-local color = import '../../shared/styles/color.libsonnet';
-local fontSize = import '../../shared/styles/fontSize.libsonnet';
-local hintSymbolsStyles = import '../../shared/styles/hintSymbolsStyles.libsonnet';
-local others = import '../../shared/styles/others.libsonnet';
-local slideButtonStyles = import '../../shared/styles/slideButtonStyles.libsonnet';
-local panels = import 'panels.libsonnet';
-local swipeKeyStyles = import '../../shared/styles/swipeKeyStyles.libsonnet';
-local buttonInteraction = import '../../shared/buttonHelpers/buttonInteraction.libsonnet';
-local styleFactories = import '../../shared/styles/styleFactories.libsonnet';
-local returnKeyHelpers = import '../../shared/buttonHelpers/returnKey.libsonnet';
-local toolbar = import '../../shared/toolbar/iPhone.libsonnet';
-local utils = import '../../shared/styles/keyStyles.libsonnet';
+local functionRow = import '../../components/functionRow/index.libsonnet';
+local functionButtonStyles = import '../../components/functionRow/styles.libsonnet';
+local appearance = import '../../design/appearance.libsonnet';
+local numericData = import './data.libsonnet';
+local animation = appearance.animation;
+local center = appearance.center;
+local color = appearance.color;
+local fontSize = appearance.fontSize;
+local hintSymbolsStyles = import '../../components/key/longPress.libsonnet';
+local others = appearance.others;
+local swipeStyles = import '../../components/key/swipe.libsonnet';
+local panels = import './panels.libsonnet';
+local buttonInteraction = import '../../components/key/interaction.libsonnet';
+local styleFactories = import '../../design/styleFactories.libsonnet';
+local keyFactory = import '../../components/key/factory.libsonnet';
+local toolbar = import '../../components/toolbar/iPhone.libsonnet';
 
 {
   createButtonFactory(context, swipeUp, swipeDown)::
@@ -35,7 +33,7 @@ local utils = import '../../shared/styles/keyStyles.libsonnet';
         action: if context.Settings.keyboard_layout == 9 then { symbol: key } else { character: key },
         [if std.objectHas(swipeUp, key) then 'swipeUpAction']: swipeUp[key].action,
         [if std.objectHas(swipeDown, key) then 'swipeDownAction']: swipeDown[key].action,
-        [if std.length(key) == 1 && std.objectHas(hintSymbolsData.number, 'number' + key) then 'hintSymbolsStyle']: 'number' + key + 'ButtonHintSymbolsStyle',
+        [if std.length(key) == 1 && std.objectHas(numericData.number, 'number' + key) then 'hintSymbolsStyle']: 'number' + key + 'ButtonHintSymbolsStyle',
         [if context.Settings.keyboard_layout == 9 && std.length(key) == 1 then 'notification']: [
           'number' + key + 'ButtonNotification',
         ],
@@ -80,7 +78,7 @@ local utils = import '../../shared/styles/keyStyles.libsonnet';
         centerValue
       ) + extra;
     local makeEnterForegroundStyle(textValue, useBlueText=false, withCenter=true, withInsets=true) =
-      returnKeyHelpers.makeForeground(
+      keyFactory.makeForeground(
         styleFactories,
         theme,
         color,
@@ -88,16 +86,16 @@ local utils = import '../../shared/styles/keyStyles.libsonnet';
         center,
         textValue,
         (if useBlueText then {
-          normalColor: color[theme]['长按选中字体颜色'],
-          highlightColor: color[theme]['长按非选中字体颜色'],
-        } else {}) +
+           normalColor: color[theme]['长按选中字体颜色'],
+           highlightColor: color[theme]['长按非选中字体颜色'],
+         } else {}) +
         (if withCenter then { center: center['功能键前景文字偏移'] } else {}) +
         (if withInsets then { insets: { top: 4, left: 3, bottom: 4, right: 3 } } else {})
       );
     local landscapeShowFunctions = context.Settings.function_button_config.with_functions_row.iPhone;
     local landscapeTopHeight = if landscapeShowFunctions then 0.17 else 0;
     local landscapeBottomHeight = if landscapeShowFunctions then 0.83 else 1;
-    local swipeDataRoot = swipeData.genSwipeData(context.deviceType);
+    local swipeDataRoot = numericData.genSwipeData(context.deviceType);
     local swipeUp = if std.objectHas(swipeDataRoot, 'number_swipe_up') then swipeDataRoot.number_swipe_up else {};
     local swipeDown = if std.objectHas(swipeDataRoot, 'number_swipe_up') then swipeDataRoot.number_swipe_down else {};
     local symbolButtonHelper = buttonInteraction.symbolButton;
@@ -107,7 +105,7 @@ local utils = import '../../shared/styles/keyStyles.libsonnet';
     local swipeTargets = symbolButtonHelper.swipeMapping(context.Settings);
     local createButton = self.createButtonFactory(context, swipeUp, swipeDown);
     local createNotification = self.createNotification;
-    slideButtonStyles.slideButtonStyles(theme) +
+    swipeStyles.slideButtonStyles(theme) +
     (if useHintSymbols then hintSymbolsStyles.getStyle(theme, symbolButtonHelper.hintData) else {}) +
     {
       preeditHeight: others[if orientation == 'portrait' then '竖屏' else '横屏']['preedit高度'],
@@ -350,10 +348,10 @@ local utils = import '../../shared/styles/keyStyles.libsonnet';
       ButtonScaleAnimation: animation['26键按键动画'],
     } +
     panels.build(context, theme, orientation) +
-    swipeKeyStyles.getStyle('number', theme, swipeUp, swipeDown) +
-    hintSymbolsStyles.getStyle(theme, hintSymbolsData.number) +
+    swipeStyles.getStyle('number', theme, swipeUp, swipeDown) +
+    hintSymbolsStyles.getStyle(theme, numericData.number) +
     toolbar.getToolBar(theme) +
-    utils.genNumberStyles(fontSize, color, theme, center) +
+    keyFactory.genNumberStyles(fontSize, color, theme, center) +
     functionButtonStyles.genFuncKeyStyles(fontSize, color, theme, center) +
-    functions.makeFunctionButtons('', {}, 'numeric'),
+    functionRow.makeFunctionButtons('', {}, 'numeric'),
 }

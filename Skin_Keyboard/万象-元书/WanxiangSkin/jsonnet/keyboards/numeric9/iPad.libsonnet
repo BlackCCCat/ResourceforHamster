@@ -1,15 +1,17 @@
+// 在手机数字九键结果上叠加平板尺寸、工具栏和高度配置。
 local Settings = import '../../Custom.libsonnet';
-local center = import '../../shared/styles/center.libsonnet';
-local color = import '../../shared/styles/color.libsonnet';
-local fontSize = import '../../shared/styles/fontSize.libsonnet';
-local keyStyles = import '../../shared/styles/keyStyles.libsonnet';
-local others = import '../../shared/styles/others.libsonnet';
-local toolbar_ipad = import '../../shared/toolbar/iPad.libsonnet';
-local numeric9 = import 'iPhone.libsonnet';
+local appearance = import '../../design/appearance.libsonnet';
+local center = appearance.center;
+local color = appearance.color;
+local fontSize = appearance.fontSize;
+local keyStyles = import '../../components/key/factory.libsonnet';
+local others = appearance.others;
+local iPadToolbar = import '../../components/toolbar/iPad.libsonnet';
+local numeric9 = import './keyboard.libsonnet';
 
 
 local ipad_fontSize = fontSize {
-  // 保持iPad默认更大，同时允许通过custom.numeric_digit_font_size联动调整
+  // iPad 数字字号使用较大基准，并与 Custom.numeric_digit_font_size 联动。
   '数字键盘数字前景字体大小': fontSize['数字键盘数字前景字体大小'] + 4,
   'toolbar按键前景sf符号大小': 20,
 };
@@ -24,7 +26,7 @@ local base = numeric9.layout('iPad');
 local ipad_keyboard(theme, orientation) =
   local base_orientation = if orientation == 'landscape' then 'portrait' else orientation;
   local base_def = base.new(theme, base_orientation);
-  local toolbar_def = toolbar_ipad.getToolBar(theme);
+  local toolbar_def = iPadToolbar.getToolBar(theme);
 
   local ipad_overrides =
     toolbar_def +

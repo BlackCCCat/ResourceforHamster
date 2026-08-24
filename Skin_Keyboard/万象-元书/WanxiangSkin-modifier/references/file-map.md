@@ -1,273 +1,81 @@
 # File Map
 
-Use this map to decide where to edit.
-
-## Root
-
-Resolve everything relative to one selected `<keyboard-root>`.
-
-Inside `<keyboard-root>`:
-
-- config entry:
-  - `jsonnet/Custom.libsonnet`
-  - public layout toggles such as `swap_9_123_symbol` and `swap_numeric_return_symbol`
-  - `keyboard_layout = 27` for the Sougou double-pinyin 27-key variant
-  - `swipe_assist_mode` for Chinese 26-key swipe-assist input, including the switch between default `keyboardAction` notifications and `preeditChanged` assist notifications, plus swipe-bubble visibility, long-press ordering, and default selection
-  - public `123Button` interaction config such as `button_123_config`
-  - `button_123_config.show_swipe_indicators` only affects 123Button swipe-corner indicator visibility
-  - public 9-key / numeric symbol-button interaction config such as `button_symbol_config`
-- output entry:
-  - `jsonnet/main.jsonnet`
-- maintenance docs:
-  - `README.md`
-  - `MODULES.md`
-
-## Entry files
-
-- `jsonnet/entries/pinyin_26.jsonnet`
-- `jsonnet/entries/alphabetic_26.jsonnet`
-- `jsonnet/entries/pinyin_18.jsonnet`
-- `jsonnet/entries/pinyin_14.jsonnet`
-- `jsonnet/entries/pinyin_9.jsonnet`
-- `jsonnet/entries/numeric_9.jsonnet`
-- `jsonnet/entries/ipad_pinyin_26.jsonnet`
-- `jsonnet/entries/ipad_alphabetic_26.jsonnet`
-- `jsonnet/entries/ipad_numeric_9.jsonnet`
-- `jsonnet/entries/panel.jsonnet`
-  - 浮动面板入口；完整实现位于 `jsonnet/keyboards/float/panel.libsonnet`
-
-Edit these only when changing entry wiring or adding a new keyboard type.
-
-## Keyboards
-
-### `jsonnet/keyboards/pinyin26/`
-
-Main files:
-- `iPhone.libsonnet`
-- `iPad.libsonnet`
-- `builder.libsonnet`
-
-Use for:
-- Chinese 26-key entry and assembly
-- wiring shared 26-key layout, letters, and system-key modules into the final keyboard
-- wiring Chinese 26-key swipe-assist mode into swipe actions and long-press hint data
-
-### `jsonnet/keyboards/tempPinyin/`
-
-Main files:
-- `iPhone.libsonnet`
-
-Use for:
-- temporary pinyin 26-key wrapper output
-- overriding only `cn2enButton` action, notification, and foreground when non-26 English keyboards swipe back into pinyin 26-key
-- overriding temp-pinyin space-key marker text and swipe actions independently of `show_wanxiang`
-
-### `jsonnet/keyboards/common/keyboard26/`
-
-Main files:
-- `buttonFactory.libsonnet`
-- `layout.libsonnet`
-- `letters.libsonnet`
-- `iPadBuilder.libsonnet`
-
-Use for:
-- shared 26-key button factory
-- shared 26-key layout
-- shared 26-key letter spec
-- shared iPad 26-key overlay assembly
-- Chinese 27-key variant based on 26-key layout, including `;` key placement and second-row sizing
-- iPad 26-key row structure such as Tab, dual Shift, dual 123, bottom-row comma placement, swipe-up period, and dismiss key
-- iPad-specific right Shift notification parity and landscape spacing
-
-### `jsonnet/keyboards/pinyin26/iPad.libsonnet` and `jsonnet/keyboards/alphabetic26/iPad.libsonnet`
-
-Use for:
-- iPad Chinese/English 26-key entry-level font-size overrides
-- keeping Chinese and English iPad letter size consistent
-
-### `jsonnet/keyboards/common/systemKeys26/`
-
-Main files:
-- `systemKeys.libsonnet`
-- `systemKeysSpec.libsonnet`
-- `systemKeysSwitcher.libsonnet`
-- `systemKeysShift.libsonnet`
-- `systemKeysBackspace.libsonnet`
-- `systemKeysCn2en.libsonnet`
-- `systemKeysSpace.libsonnet`
-- `systemKeysEnter.libsonnet`
-
-Use for:
-- shared 26-key system-key modules and assembly
-- `123Button`, `shift`, `backspace`, `space`, `enter`, and `cn2en` system-key behavior
-
-### `jsonnet/keyboards/alphabetic26/`
-
-Main files:
-- `iPhone.libsonnet`
-- `iPad.libsonnet`
-- `builder.libsonnet`
-- `letters.libsonnet`
-- `systemKeys.libsonnet`
-
-Use for:
-- English 26-key system keys
-- English 26-key `123Button` behavior
-- English 26-key 123Button swipe indicators and click-bubble behavior
-- non-26 English keyboard `en2cnButton` swipe-up and space-key swipe-up behavior
-
-### `jsonnet/keyboards/pinyin14/`
-
-Main files:
-- `iPhone.libsonnet`
-- `layout.libsonnet`
-- `specs.libsonnet`
-
-Use for:
-- 14-key layout and key spec changes
-
-### `jsonnet/keyboards/pinyin18/`
-
-Main files:
-- `iPhone.libsonnet`
-- `layout.libsonnet`
-- `specs.libsonnet`
-
-Use for:
-- 18-key layout and key spec changes
-
-### `jsonnet/keyboards/common/pinyin14_18/`
-
-Main files:
-- `iPhone.libsonnet`
-- `buttons.libsonnet`
-- `compactSpecFactory.libsonnet`
-
-Use for:
-- 14/18 shared pinyin build logic
-
-### `jsonnet/keyboards/pinyin9/`
-
-Main files:
-- `iPhone.libsonnet`
-- `layout.libsonnet`
-- `builder.libsonnet`
-- `panels.libsonnet`
-- `t9.libsonnet`
-
-Use for:
-- 9-key layout changes
-- `collection`, `verticalCandidates`, and `symbolButton`
-- 9-key landscape split layout
-- 9-key symbol-button assembly；共用配置解析位于 `jsonnet/shared/buttonHelpers/buttonInteraction.libsonnet`
-
-### `jsonnet/keyboards/numeric9/`
-
-Main files:
-- `iPhone.libsonnet`
-- `iPad.libsonnet`
-- `layout.libsonnet`
-- `builder.libsonnet`
-- `panels.libsonnet`
-
-Use for:
-- numeric keyboard layout changes
-- numeric keyboard return/switch slot swap
-- `collection` and `landscapeNumericSymbols`
-- iPad numeric keyboard entry behavior
-- numeric symbol-button assembly；共用配置解析位于 `jsonnet/shared/buttonHelpers/buttonInteraction.libsonnet`
-
-
-### `jsonnet/keyboards/float/`
-
-Main files:
-- `panel.libsonnet`
-
-Use for:
-- floating panel keyboard layout and button configuration
-
-## Shared layout assembly
-
-- `jsonnet/keyboards/common/layoutAssembly/keyboardLayoutAssembly.libsonnet`
-- `jsonnet/shared/data/layoutData.libsonnet`
-- `jsonnet/shared/functionButtons/functionRowPatch.libsonnet`
-
-Use for:
-- shared layout runtime context and final layout assembly
-- shared base layout data
-- function-row patching
-
-## Function buttons
-
-- `jsonnet/shared/functionButtons/iPhone.libsonnet`
-- `jsonnet/shared/functionButtons/specs.libsonnet`
-- `jsonnet/shared/functionButtons/styles.libsonnet`
-
-Typical edits:
-- button order
-- button actions
-- notification behavior
-- function-button-only foreground styles
-
-If order changes do not appear, also inspect:
-- `jsonnet/shared/functionButtons/functionRowPatch.libsonnet`
-
-## Toolbar
-
-- `jsonnet/shared/toolbar/iPhone.libsonnet`
-- `jsonnet/shared/toolbar/iPad.libsonnet`
-- `jsonnet/shared/toolbar/config.libsonnet`
-- `jsonnet/shared/toolbar/registry.libsonnet`
-- `jsonnet/shared/toolbar/iPhoneRenderer.libsonnet`
-- `jsonnet/shared/toolbar/iPadRenderer.libsonnet`
-
-Typical edits:
-- new toolbar button IDs
-- toolbar action mapping
-- toolbar foreground style objects such as `simplified_traditional`, `undo`, `redo`, `cut`, `copy`, and `paste` in `iPhone.libsonnet`
-- iPhone or iPad ordering rules
-- toolbar menu behavior
-- horizontal candidate trailing button controlled by `horizon_candidate_button` in `jsonnet/Custom.libsonnet` and rendered in `jsonnet/shared/toolbar/iPhone.libsonnet`
-- horizontalSymbols content direction such as `content_right_to_left`
-- toolbar height such as `toolbar_config.toolbar_height` or `toolbar_config.ipad.toolbar_height`
-- candidate long-press menu entries such as `candidateContextMenu`
-
-## Shared styles and helpers
-
-- `jsonnet/shared/buttonHelpers/key.libsonnet`
-- `jsonnet/shared/buttonHelpers/buttonInteraction.libsonnet`
-- `jsonnet/shared/buttonHelpers/returnKey.libsonnet`
-- `jsonnet/shared/styles/baseKeyStyles.libsonnet`
-- `jsonnet/shared/styles/keyStyles.libsonnet`
-- `jsonnet/shared/styles/styleFactories.libsonnet`
-- `jsonnet/shared/styles/slideButtonStyles.libsonnet`
-- `jsonnet/shared/styles/swipeKeyStyles.libsonnet`
-- `jsonnet/shared/styles/hintSymbolsStyles.libsonnet`
-- `jsonnet/shared/styles/color.libsonnet`
-- `jsonnet/shared/styles/fontSize.libsonnet`
-- `jsonnet/shared/styles/center.libsonnet`
-- `jsonnet/shared/styles/others.libsonnet`
-- `jsonnet/shared/styles/animation.libsonnet`
-
-Use these when changing reusable styles, foreground generation, or helper logic.
-
-`jsonnet/shared/buttonHelpers/buttonInteraction.libsonnet` is the shared source of truth for `button123` and `symbolButton` config parsing, long-press menu data, and swipe-target normalization.
-
-`jsonnet/shared/buttonHelpers/returnKey.libsonnet` is the shared source of truth for reusable enter-key foreground and `returnKeyType` notification assembly.
-
-## Shared data
-
-- `jsonnet/shared/data/hintSymbolsData.libsonnet`
-- `jsonnet/shared/data/swipeData.libsonnet`
-- `jsonnet/shared/data/swipeDataEn.libsonnet`
-
-Use these for pure shared data updates.
-
-The `cn2en.list` entries in `hintSymbolsData.libsonnet` use 元书's runtime label form `rimeOptionLabel$<option>`. Keep these values dynamic so each long-press item displays the label for its current Rime option state; do not simplify them back to fixed Chinese text.
-
-## Documentation
-
-Update both when changing public configuration or maintenance-facing structure:
-
-- `<keyboard-root>/README.md`
-- `<keyboard-root>/MODULES.md`
+所有路径相对 `<keyboard-root>`。
+
+## 入口与构建
+
+- `jsonnet/Custom.libsonnet`：公开配置。
+- `jsonnet/main.jsonnet`：最终渲染。
+- `jsonnet/build/skinConfig.libsonnet`：config 映射。
+- `jsonnet/build/keyboardRegistry.libsonnet`：输出键盘注册和拼音布局选择。
+- `jsonnet/build/context.libsonnet`：设备上下文、基础尺寸、布局汇总和功能行插入。
+
+## 视觉
+
+- `jsonnet/design/appearance.libsonnet`：animation、center、color、fontSize、others。
+- `jsonnet/design/styleFactories.libsonnet`：文本、图片、SF Symbol、geometry 工厂。
+- `jsonnet/design/baseKeyStyles.libsonnet`：基础按键背景和长按背景引用。
+
+## 按键组件
+
+- `jsonnet/components/key/factory.libsonnet`：按键、状态前景、长按包装和回车通知工厂。
+- `jsonnet/components/key/interaction.libsonnet`：123Button/symbolButton 配置解析。
+- `jsonnet/components/key/longPress.libsonnet`：长按样式生成。
+- `jsonnet/components/key/swipe.libsonnet`：上下划与滑动气泡样式。
+
+## 拼音系统键
+
+- `jsonnet/components/systemKeys/index.libsonnet`：公共装配入口。
+- `jsonnet/components/systemKeys/editing.libsonnet`：退格、空格、回车。
+- `jsonnet/components/systemKeys/inputMode.libsonnet`：Shift、中英切换。
+- `jsonnet/components/systemKeys/keyboardSwitch.libsonnet`：123Button。
+- `jsonnet/components/systemKeys/longPressData.libsonnet`：cn2en、spaceLeft、enter 长按数据。
+- `jsonnet/components/systemKeys/swipeData.libsonnet`：公共系统键滑动动作。
+
+## 功能行、工具栏与候选
+
+- `jsonnet/components/functionRow/index.libsonnet`：按钮与布局补丁。
+- `jsonnet/components/functionRow/specs.libsonnet`：动作、顺序、通知。
+- `jsonnet/components/functionRow/styles.libsonnet`：前景。
+- `jsonnet/components/toolbar/config.libsonnet`：配置解析。
+- `jsonnet/components/toolbar/registry.libsonnet`：可选按钮注册。
+- `jsonnet/components/toolbar/iPhone.libsonnet`、`iPad.libsonnet`：平台入口。
+- `jsonnet/components/toolbar/iPhoneRenderer.libsonnet`、`iPadRenderer.libsonnet`：布局渲染。
+- `jsonnet/components/candidates.libsonnet`：候选栏与候选词长按菜单。
+
+## 26/27 键
+
+- `jsonnet/keyboards/keyboard26/base/letters.libsonnet`：字母规格。
+- `jsonnet/keyboards/keyboard26/base/iPhoneLayout.libsonnet`：手机布局。
+- `jsonnet/keyboards/keyboard26/base/iPadLayout.libsonnet`：iPad 布局尺寸。
+- `jsonnet/keyboards/keyboard26/base/iPadBuilder.libsonnet`：iPad 覆写。
+- `jsonnet/keyboards/keyboard26/pinyin/keyboard.libsonnet`：中文入口。
+- `jsonnet/keyboards/keyboard26/pinyin/builder.libsonnet`：中文装配。
+- `jsonnet/keyboards/keyboard26/pinyin/data.libsonnet`：中文长按/滑动数据。
+- `jsonnet/keyboards/keyboard26/pinyin/swipeAssist.libsonnet`：滑动辅助。
+- `jsonnet/keyboards/keyboard26/pinyin/iPad.libsonnet`：中文 iPad。
+- `jsonnet/keyboards/keyboard26/alphabetic/keyboard.libsonnet`、`iPad.libsonnet`：英文入口。
+- `jsonnet/keyboards/keyboard26/alphabetic/builder.libsonnet`：英文装配。
+- `jsonnet/keyboards/keyboard26/alphabetic/systemKeys.libsonnet`：英文系统键。
+- `jsonnet/keyboards/keyboard26/alphabetic/data.libsonnet`：英文数据。
+- `jsonnet/keyboards/keyboard26/tempPinyin/keyboard.libsonnet`：临时拼音薄覆写。
+
+## 14/18 键
+
+- `jsonnet/keyboards/pinyin14_18/base/builder.libsonnet`：共用装配。
+- `jsonnet/keyboards/pinyin14_18/base/buttons.libsonnet`：复合键与系统键尺寸。
+- `jsonnet/keyboards/pinyin14_18/base/specFactory.libsonnet`：规格模板。
+- `jsonnet/keyboards/pinyin14_18/pinyin14/{keyboard,layout,data}.libsonnet`
+- `jsonnet/keyboards/pinyin14_18/pinyin18/{keyboard,layout,data}.libsonnet`
+
+## 九键、数字与浮动面板
+
+- `jsonnet/keyboards/pinyin9/{keyboard,layout,builder,panels,data}.libsonnet`
+- `jsonnet/keyboards/numeric9/{keyboard,layout,builder,panels,data}.libsonnet`
+- `jsonnet/keyboards/numeric9/iPad.libsonnet`
+- `jsonnet/keyboards/floatPanel/keyboard.libsonnet`
+
+## 文档
+
+- `README.md`：公开结构和配置说明。
+- `MODULES.md`：维护职责与落点。
