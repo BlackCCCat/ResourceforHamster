@@ -192,6 +192,7 @@
 
     // 可用按钮 ID:
     // script: 脚本
+    // command: 命令面板
     // note: 常用语
     // clipboard: 剪切板
     // hide: 收起键盘
@@ -290,6 +291,7 @@
       // safari: 浏览器打开剪切板内容
       // apple: App Store 搜索
       // script: 脚本
+      // command: 命令面板
       // note: 常用语
       // clipboard: 剪切板
       // symbol: 符号键盘

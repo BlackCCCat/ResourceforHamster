@@ -99,7 +99,7 @@ jsonnet/
 - `toolbar_config.content_right_to_left`、`toolbar_config.ipad.content_right_to_left`：滑动内容方向。
 - `toolbar_config.toolbar_menu`、`toolbar_config.ipad.toolbar_menu`：菜单或浮动面板入口。
 
-可选按钮包括 `simplified_traditional`、`undo`、`redo`、`cut`、`copy`、`paste` 等，完整注册表位于 `jsonnet/components/toolbar/registry.libsonnet`。
+可选按钮包括 `command`、`simplified_traditional`、`undo`、`redo`、`cut`、`copy`、`paste` 等；`command` 使用 `#toggleCommandView` 打开或关闭命令面板。完整注册表位于 `jsonnet/components/toolbar/registry.libsonnet`。
 
 ### 字号、边距与 Shift
 

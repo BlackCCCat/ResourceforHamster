@@ -54,7 +54,7 @@ description: Use when modifying the WanxiangSkin Hamster3 keyboard under Resourc
 - `button_symbol_config`：九键/数字键盘符号按钮交互，不改变位置交换配置。
 - `horizon_candidate_button`：横向候选栏尾部按钮。
 - `temp_pinyin`：返回英文键盘、固定 RIME 空格、上划 `Shift+space`。
-- 工具栏可选 `simplified_traditional`、`undo`、`redo`、`cut`、`copy`、`paste`。
+- 工具栏可选 `command`、`simplified_traditional`、`undo`、`redo`、`cut`、`copy`、`paste`；`command` 通过 `#toggleCommandView` 切换命令面板。
 
 ## 验证
 

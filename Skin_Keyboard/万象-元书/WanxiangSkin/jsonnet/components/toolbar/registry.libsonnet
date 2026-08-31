@@ -10,6 +10,11 @@ local shared = import './config.libsonnet';
       slideStyleName: 'toolbarButtonScriptStyle',
       action: { shortcutCommand: '#toggleScriptView' },
     },
+    command: {
+      cellName: 'toolbarButtonCommandStyle',
+      slideStyleName: 'toolbarButtonCommandStyle',
+      action: { shortcut: '#toggleCommandView' },
+    },
     note: {
       cellName: 'toolbarButtonNoteStyle',
       slideStyleName: 'toolbarButtonNoteStyle',
