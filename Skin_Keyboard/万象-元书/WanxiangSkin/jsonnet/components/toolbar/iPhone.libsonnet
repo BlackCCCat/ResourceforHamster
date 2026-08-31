@@ -185,7 +185,7 @@ local getToolBar(theme, overrides={}) =
     toolbarButtonEmojiStyle: makeToolbarButtonStyle('toolbarButtonEmojiForegroundStyle', { keyboardType: 'emojis' }),
     toolbarButtonEmojiForegroundStyle: makeToolbarSystemImageForegroundStyle('face.dashed.fill'),
     toolbarButtonSymbolStyle: makeToolbarButtonStyle('toolbarButtonSymbolForegroundStyle', { keyboardType: 'symbolic' }),
-    toolbarButtonSymbolForegroundStyle: makeToolbarSystemImageForegroundStyle('command.circle.fill'),
+    toolbarButtonSymbolForegroundStyle: makeToolbarSystemImageForegroundStyle('paragraphsign'),
     toolbarButtonClipboardStyle: makeToolbarButtonStyle('toolbarButton4ForegroundStyle', {
       shortcutCommand: '#showPasteboardView',
     }),
