@@ -127,7 +127,7 @@
         {};
     local disabledKeys =
       if keyboardType == 't9' then
-        ['tail']
+        ['select', 'cut', 'copy', 'paste', 'tail']
       else if std.member(['alphabetic', 'numeric'], keyboardType) then
         ['select', 'cut', 'copy', 'paste', 'tail']
       else
