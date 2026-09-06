@@ -43,7 +43,7 @@ jsonnet/
 - `swap_9_123_symbol`：交换九键底行的 123 与符号按钮。
 - `swap_numeric_return_symbol`：交换数字键盘底行的返回与切换按钮。
 - `is_wanxiang_14`、`is_wanxiang_18`：控制 14/18 键字符动作。
-- `is_letter_capital`：控制字母常态显示。
+- `is_letter_capital`：控制中文 9/14/17/18/26/27 键的字母常态大小写显示。
 - `show_swipe`：控制普通按键上下划前景显示。
 - `show_wanxiang`：控制普通拼音空格上的“万象”。
 - `tips_button_action`：设定九键提示按钮的上屏动作。
@@ -76,7 +76,7 @@ jsonnet/
 - `button_123_config.secondary_action_mode`：关闭 slide 后使用 `hint_symbols` 或 `swipe`。
 - `button_123_config.swipe_up_keyboard`
 - `button_123_config.swipe_down_keyboard`
-- `button_123_config.show_swipe_indicators`：只控制 123Button 上下划角标，默认不显示，不改变动作。
+- `button_123_config.show_swipe_indicators`：只控制 123Button 上下划角标，默认不显示，不受 `show_swipe` 影响，也不改变动作。
 
 该配置覆盖中文 26/27 键、14 键、17 键、18 键、英文 26 键和 iPad 26 键；123Button 不显示点击气泡。
 
@@ -106,7 +106,7 @@ jsonnet/
 - `font_size_config.pinyin_grouped_letter_font_size`：分组拼音（14/17/18 键）的字母前景字号。
 - `button_insets.portrait`、`button_insets.landscape`：按键背景边距。
 - `cornerRadius`：按键圆角。
-- `shift_config`：Shift 预编辑动作、图标和上划动作。
+- `shift_config`：Shift 预编辑动作与图标用于中文 26/27 键和 iPad 26 键，不作用于 14/17/18 键；`preedit_swipeup_action` 仅在中文 26 键生效。
 
 ## 特殊键盘
 

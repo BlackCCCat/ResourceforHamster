@@ -49,9 +49,11 @@ description: Use when modifying the WanxiangSkin Hamster3 keyboard under Resourc
 ## 功能要点
 
 - `pinyinGrouped`：分组拼音 14/17/18 键的共用键盘族，字号参数为 `pinyin_grouped_letter_font_size`。
+- `is_letter_capital`：控制中文 9/14/17/18/26/27 键的字母常态大小写，17 键的显式组合标签也必须遵循该配置。
 - `keyboard_layout = 27`：中文 26 键第二行追加 `;`。
 - `swipe_assist_mode`：仅中文 26 键；`none` 使用原通知，其他模式使用 `preeditChanged` 辅助通知并重排长按菜单。
-- `button_123_config.show_swipe_indicators`：只控制 123Button 角标，不控制动作。
+- `button_123_config.show_swipe_indicators`：只控制 123Button 角标，不受 `show_swipe` 影响，也不控制动作。
+- `shift_config`：预编辑动作与图标作用于中文 26/27 键和 iPad 26 键，不作用于 14/17/18 键；预编辑上划配置仅中文 26 键使用。
 - `button_symbol_config`：九键/数字键盘符号按钮交互，不改变位置交换配置。
 - `horizon_candidate_button`：横向候选栏尾部按钮。
 - `temp_pinyin`：返回英文键盘、固定 RIME 空格、上划 `Shift+space`。

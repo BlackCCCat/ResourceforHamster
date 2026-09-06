@@ -56,7 +56,7 @@
     ],
   },
 
-  // 26字母按键是否显示大写
+  // 中文拼音键盘字母按键是否显示大写（9/14/17/18/26/27键）
   is_letter_capital: false,
 
   // 是否修复部分 sf_symbol 不显示问题
@@ -72,7 +72,7 @@
   // all:  上下划都输入对应字母大写，并把原上划、下划内容依次追加到长按气泡
   swipe_assist_mode: 'none',
 
-  // 26键 / 14键 / 18键 的 123 按键交互配置
+  // 中文26/27键、14/17/18键、英文26键与 iPad 26键的 123 按键交互配置
   button_123_config: {
     // true: 保持当前 horizontalSymbols 滑动切换
     // false: 改用下方配置的长按菜单或上下滑动
@@ -89,7 +89,7 @@
     swipe_down_keyboard: 'symbolic',
 
     // 是否显示 123Button 的上下划角标
-    // 只影响角标显示，不影响 swipe 动作本身
+    // 只影响角标显示，不受 show_swipe 影响，也不影响 swipe 动作本身
     show_swipe_indicators: false,
   },
 
@@ -148,7 +148,7 @@
   // 按键圆角，常用值为 7 / 8 / 8.5。
   cornerRadius: 8,
 
-  // shift 特殊动作配置（仅用于26键）
+  // shift 预编辑配置（用于中文26/27键与 iPad 26键）
   shift_config: {
     // 是否启用 shift 的预编辑特殊动作
     enable_preedit: true,

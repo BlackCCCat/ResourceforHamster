@@ -53,7 +53,7 @@ local buttonInteraction = import '../../../components/key/interaction.libsonnet'
     local slideEnabled = button123.enableSlide(settings);
     local useHintSymbols = !slideEnabled && button123.secondaryActionMode(settings) == 'hint_symbols';
     local useSwipeActions = !slideEnabled && button123.secondaryActionMode(settings) == 'swipe';
-    local showIndicators = settings.show_swipe && useSwipeActions && button123.showSwipeIndicators(settings);
+    local showIndicators = useSwipeActions && button123.showSwipeIndicators(settings);
     local swipeTargets = button123.swipeMapping(settings);
     local extraHintStyles = if useHintSymbols then hintSymbolsStyles.getStyle(theme, button123.hintData) else {};
     local extraSwipeStyles =

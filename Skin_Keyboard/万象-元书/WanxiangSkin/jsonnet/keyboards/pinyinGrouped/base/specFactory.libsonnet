@@ -66,7 +66,11 @@
   buildKeys(entries, context, keyboardLayout):: [
     local template = self.resolveTemplate(keyboardLayout, context.orientation, entry[2]);
     local bounds = if std.objectHas(template, 'bounds') then template.bounds else null;
-    local label = if std.length(entry) >= 4 then entry[3] else $.makeLabel(entry[0], context.Settings.is_letter_capital);
+    local label =
+      if std.length(entry) >= 4 then
+        if context.Settings.is_letter_capital then std.asciiUpper(entry[3]) else entry[3]
+      else
+        $.makeLabel(entry[0], context.Settings.is_letter_capital);
     {
       id: entry[0],
       action: entry[1],

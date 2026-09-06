@@ -45,7 +45,11 @@
 
   // 从共享系统键集合提取分组拼音需要的按钮，并仅覆盖当前布局尺寸。
   commonSystemKeys(systemKeys, sizes, baseHintStyles):: {
-    shiftButton: systemKeys.shiftButton { size: { width: sizes.shift } },
+    // 分组拼音只使用 Shift 的常规状态，不继承 26 键的预编辑通知。
+    shiftButton: systemKeys.shiftButton {
+      size: { width: sizes.shift },
+      notification:: null,
+    },
     shiftButtonForegroundStyle: systemKeys.shiftButtonForegroundStyle,
     shiftButtonUppercasedForegroundStyle: systemKeys.shiftButtonUppercasedForegroundStyle,
     shiftButtonCapsLockedForegroundStyle: systemKeys.shiftButtonCapsLockedForegroundStyle,
