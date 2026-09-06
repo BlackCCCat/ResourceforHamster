@@ -60,13 +60,14 @@
 - `jsonnet/keyboards/keyboard26/alphabetic/data.libsonnet`：英文数据。
 - `jsonnet/keyboards/keyboard26/tempPinyin/keyboard.libsonnet`：临时拼音薄覆写。
 
-## 14/18 键
+## 分组拼音（14/17/18 键）
 
-- `jsonnet/keyboards/pinyin14_18/base/builder.libsonnet`：共用装配。
-- `jsonnet/keyboards/pinyin14_18/base/buttons.libsonnet`：复合键与系统键尺寸。
-- `jsonnet/keyboards/pinyin14_18/base/specFactory.libsonnet`：规格模板。
-- `jsonnet/keyboards/pinyin14_18/pinyin14/{keyboard,layout,data}.libsonnet`
-- `jsonnet/keyboards/pinyin14_18/pinyin18/{keyboard,layout,data}.libsonnet`
+- `jsonnet/keyboards/pinyinGrouped/base/builder.libsonnet`：共用装配。
+- `jsonnet/keyboards/pinyinGrouped/base/buttons.libsonnet`：复合键与系统键尺寸。
+- `jsonnet/keyboards/pinyinGrouped/base/specFactory.libsonnet`：规格模板。
+- `jsonnet/keyboards/pinyinGrouped/pinyin14/{keyboard,layout,data}.libsonnet`
+- `jsonnet/keyboards/pinyinGrouped/pinyin17/{keyboard,layout,data}.libsonnet`
+- `jsonnet/keyboards/pinyinGrouped/pinyin18/{keyboard,layout,data}.libsonnet`
 
 ## 九键、数字与浮动面板
 

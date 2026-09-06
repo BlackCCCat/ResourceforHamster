@@ -1,4 +1,4 @@
-// 组装 14 键与 18 键共用的拼音键盘逻辑。
+// 组装分组拼音（14/17/18 键）共用的键盘逻辑。
 local appearance = import '../../../design/appearance.libsonnet';
 local animation = appearance.animation;
 local center = appearance.center;
@@ -8,7 +8,7 @@ local hintSymbolsStyles = import '../../../components/key/longPress.libsonnet';
 local keyFactory = import '../../../components/key/factory.libsonnet';
 local baseKeyStyles = import '../../../design/baseKeyStyles.libsonnet';
 local others = appearance.others;
-local compactButtons = import './buttons.libsonnet';
+local groupedButtonFactory = import './buttons.libsonnet';
 local swipeStyles = import '../../../components/key/swipe.libsonnet';
 local toolbar = import '../../../components/toolbar/iPhone.libsonnet';
 local functionRow = import '../../../components/functionRow/index.libsonnet';
@@ -42,8 +42,8 @@ local systemKeys = import '../../../components/systemKeys/index.libsonnet';
         hintStyle: id + 'ButtonHintStyle',
         action: {
           local isWanxiangSetting =
-            std.type(wanxiangSetting) == "string"
-            && wanxiangSetting != ""
+            std.type(wanxiangSetting) == 'string'
+            && wanxiangSetting != ''
             && std.get(context.Settings, wanxiangSetting, false),
           character: if isWanxiangSetting then std.asciiUpper(actionKey) else actionKey,
         },
@@ -66,7 +66,7 @@ local systemKeys = import '../../../components/systemKeys/index.libsonnet';
     local swipeDown = if std.objectHas(swipeDataRoot, spec.swipeDownName) then swipeDataRoot[spec.swipeDownName] else {};
     local hintStyles = hintSymbolsStyles.getStyle(theme, familyData[spec.hintData]);
     local sharedSystemKeys = systemKeys.buildReusable(context, keyboardLayout);
-    local createButton = self.createButtonFactory(context, swipeUp, swipeDown, std.get(spec, "wanxiangSetting", null));
+    local createButton = self.createButtonFactory(context, swipeUp, swipeDown, std.get(spec, 'wanxiangSetting', null));
     keyboardLayout[spec.layoutName] +
     swipeStyles.getStyle('cn', theme, swipeUp, swipeDown) +
     toolbar.getToolBar(theme) +
@@ -81,8 +81,8 @@ local systemKeys = import '../../../components/systemKeys/index.libsonnet';
       toolbarHeight: others[if orientation == 'portrait' then '竖屏' else '横屏']['toolbar高度'],
       keyboardHeight: others[if orientation == 'portrait' then '竖屏' else '横屏']['keyboard高度'],
     } +
-    compactButtons.compactButtons(spec.keys, createButton, hintStyles, theme) +
-    compactButtons.compactForegroundStyles(spec.keys, fontSize, color, theme) +
-    compactButtons.commonSystemKeys(sharedSystemKeys, spec.sizes, hintStyles) +
+    groupedButtonFactory.buildButtons(spec.keys, createButton, hintStyles, theme) +
+    groupedButtonFactory.buildForegroundStyles(spec.keys, fontSize, color, theme) +
+    groupedButtonFactory.commonSystemKeys(sharedSystemKeys, spec.sizes, hintStyles) +
     keyFactory.hintStyles([k.id for k in spec.keys]),
 }

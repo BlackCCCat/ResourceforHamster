@@ -208,7 +208,7 @@ local layoutPatch = (
       columnStyle3: layoutDef.columnStyle3,
     },
 
-    compactLandscapeContent(column1Rows, column3Rows):: {
+    groupedPinyinLandscapeContent(column1Rows, column3Rows):: {
       HStack: {
         style: 'keyboardStyle',
         subviews: [
@@ -239,8 +239,8 @@ local layoutPatch = (
       },
     },
 
-    compactLandscapeLayoutPatch(layoutDef, column1Rows, column3Rows):: {
-      keyboardLayout: [$.splitFunctionRow($.functionRowOrderedKeys), $.compactLandscapeContent(column1Rows, column3Rows)],
+    groupedPinyinLandscapeLayoutPatch(layoutDef, column1Rows, column3Rows):: {
+      keyboardLayout: [$.splitFunctionRow($.functionRowOrderedKeys), $.groupedPinyinLandscapeContent(column1Rows, column3Rows)],
       rowofFunctionStyle: $.rowofFunctionStyle,
       keyboardStyle: layoutDef.keyboardStyle,
       keyboardBackgroundStyle: layoutDef.keyboardBackgroundStyle,
@@ -260,7 +260,7 @@ local layoutPatch = (
       'ipad英文26键': $.standardLayoutPatch(baseLayout['ipad英文26键']),
       '横屏中文26键': $.splitLayoutPatch(baseLayout['横屏中文26键']),
       '横屏英文26键': $.splitLayoutPatch(baseLayout['横屏英文26键']),
-      '横屏中文18键': $.compactLandscapeLayoutPatch(
+      '横屏中文18键': $.groupedPinyinLandscapeLayoutPatch(
         baseLayout['横屏中文18键'],
         [
           [$.rawCell(name) for name in pinyin18LandscapeRows.left[0]],
@@ -275,7 +275,7 @@ local layoutPatch = (
           [$.rawCell(name) for name in pinyin18LandscapeRows.right[3]],
         ]
       ),
-      '横屏中文17键': $.compactLandscapeLayoutPatch(
+      '横屏中文17键': $.groupedPinyinLandscapeLayoutPatch(
         baseLayout['横屏中文17键'],
         [
           [$.rawCell(name) for name in pinyin17LandscapeRows.left[0]],
@@ -290,7 +290,7 @@ local layoutPatch = (
           [$.rawCell(name) for name in pinyin17LandscapeRows.right[3]],
         ]
       ),
-      '横屏中文14键': $.compactLandscapeLayoutPatch(
+      '横屏中文14键': $.groupedPinyinLandscapeLayoutPatch(
         baseLayout['横屏中文14键'],
         [
           [$.rawCell(name) for name in pinyin14LandscapeRows.left[0]],

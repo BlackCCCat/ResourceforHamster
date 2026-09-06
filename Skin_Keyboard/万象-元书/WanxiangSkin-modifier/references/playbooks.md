@@ -42,7 +42,7 @@
 - 公共装配：`components/systemKeys/index.libsonnet`
 - cn2en 动态长按数据：`components/systemKeys/longPressData.libsonnet`
 
-修改后验证 26、14、18、九键；这些布局直接复用公共系统键。
+修改后验证 26、14、17、18、九键；这些布局直接复用公共系统键。
 
 ## 修改英文系统键或临时拼音
 
@@ -51,13 +51,13 @@
 3. 临时拼音覆写改 `keyboard26/tempPinyin/keyboard.libsonnet`。
 4. 保持 temp_pinyin 中英键无通知，空格固定 `RIME`，上划 `Shift+space`。
 
-## 修改 14/18 键
+## 修改分组拼音（14/17/18 键）
 
-1. 共用构建改 `pinyin14_18/base/builder.libsonnet`。
+1. 共用构建改 `pinyinGrouped/base/builder.libsonnet`。
 2. 复合按钮和系统键尺寸改 `base/buttons.libsonnet`。
 3. 单一布局的行结构改对应 `layout.libsonnet`。
 4. 键位规格、长按和滑动数据改对应 `data.libsonnet`。
-5. 分别验证 14 和 18，不通过拼音 26 键间接验证。
+5. 分别验证 14、17 和 18，不通过拼音 26 键间接验证。
 
 ## 修改九键或数字键盘
 
@@ -106,7 +106,7 @@ jsonnet jsonnet/main.jsonnet -o /tmp/WanxiangSkin.json
 
 结构重构使用 Git 中修改前版本建立临时副本，逐项比较完整输出。至少覆盖：
 
-- `keyboard_layout`: 9、14、18、26、27
+- `keyboard_layout`: 9、14、17、18、26、27
 - `swipe_assist_mode`: none、up、down、all
 - light/dark
 - portrait/landscape

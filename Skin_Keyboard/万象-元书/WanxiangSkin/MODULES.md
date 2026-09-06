@@ -52,7 +52,7 @@
 
 ### `jsonnet/components/systemKeys/`
 
-- `index.libsonnet`：可供 26、14、18、九键复用的拼音系统键装配。
+- `index.libsonnet`：可供 26、14、17、18、九键复用的拼音系统键装配。
 - `editing.libsonnet`：退格、空格和回车。
 - `inputMode.libsonnet`：Shift 与中英切换。
 - `keyboardSwitch.libsonnet`：123Button。
@@ -105,13 +105,13 @@
 
 - `keyboard.libsonnet`：有意复用拼音 26 键，只覆写返回英文键盘和 RIME 空格行为。
 
-### `jsonnet/keyboards/pinyin14_18/`
+### `jsonnet/keyboards/pinyinGrouped/`
 
-- `base/builder.libsonnet`：14/18 共用装配。
+- `base/builder.libsonnet`：分组拼音 14/17/18 键共用装配。
 - `base/buttons.libsonnet`：复合字母键和公共系统键尺寸覆写。
 - `base/specFactory.libsonnet`：按方向解析键位模板。
-- `pinyin14/`、`pinyin18/`：各自的 `keyboard`、`layout` 和 `data`。
-- 两个布局直接复用 `components/systemKeys`，不构建完整拼音 26 键。
+- `pinyin14/`、`pinyin17/`、`pinyin18/`：各自的 `keyboard`、`layout` 和 `data`。
+- 三个布局直接复用 `components/systemKeys`，不构建完整拼音 26 键。
 
 ### `jsonnet/keyboards/pinyin9/`
 
@@ -145,7 +145,7 @@
 | 改拼音/英文长按或滑动数据 | 对应键盘族的 `data.libsonnet` |
 | 改拼音系统键 | `components/systemKeys/` |
 | 改英文系统键 | `keyboards/keyboard26/alphabetic/systemKeys.libsonnet` |
-| 改 14/18 共同行为 | `keyboards/pinyin14_18/base/` |
+| 改分组拼音共同行为 | `keyboards/pinyinGrouped/base/` |
 | 改九键或数字布局 | 对应目录的 `layout.libsonnet` |
 | 改 123/symbol 配置解析 | `components/key/interaction.libsonnet` |
 | 改功能行 | `components/functionRow/` |

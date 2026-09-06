@@ -27,7 +27,7 @@ jsonnet/
 - `jsonnet/components/toolbar/`：iPhone/iPad 工具栏注册、配置和渲染。
 - `jsonnet/components/candidates.libsonnet`：横向候选、纵向候选和候选词长按菜单。
 - `jsonnet/keyboards/keyboard26/`：中文 26/27 键、英文 26 键、iPad 26 键和临时拼音键盘。
-- `jsonnet/keyboards/pinyin14_18/`：14/18 键共用构建层及两个独立布局。
+- `jsonnet/keyboards/pinyinGrouped/`：分组拼音键盘族，包含 14/17/18 键共用构建层及三个独立布局。
 - `jsonnet/keyboards/pinyin9/`、`jsonnet/keyboards/numeric9/`：九键和数字九键独立实现。
 - `jsonnet/keyboards/floatPanel/`：浮动面板键盘完整实现。
 
@@ -37,7 +37,7 @@ jsonnet/
 
 ### 布局与基础行为
 
-- `keyboard_layout`：`9`、`14`、`18`、`26` 或 `27`。
+- `keyboard_layout`：`9`、`14`、`17`、`18`、`26` 或 `27`。
 - `27`：在中文 26 键第二行增加 `;`，用于搜狗双拼 `ing`。
 - `wanxiang_9_hintSymbol`：控制九键长按字符使用 `symbol` 还是 `character`。
 - `swap_9_123_symbol`：交换九键底行的 123 与符号按钮。
@@ -78,7 +78,7 @@ jsonnet/
 - `button_123_config.swipe_down_keyboard`
 - `button_123_config.show_swipe_indicators`：只控制 123Button 上下划角标，默认不显示，不改变动作。
 
-该配置覆盖中文 26/27 键、14 键、18 键、英文 26 键和 iPad 26 键；123Button 不显示点击气泡。
+该配置覆盖中文 26/27 键、14 键、17 键、18 键、英文 26 键和 iPad 26 键；123Button 不显示点击气泡。
 
 ### 九键与数字键盘符号按钮
 
@@ -103,7 +103,7 @@ jsonnet/
 
 ### 字号、边距与 Shift
 
-- `font_size_config`：26 键、14/18 键、九键和数字键盘字号。
+- `font_size_config.pinyin_grouped_letter_font_size`：分组拼音（14/17/18 键）的字母前景字号。
 - `button_insets.portrait`、`button_insets.landscape`：按键背景边距。
 - `cornerRadius`：按键圆角。
 - `shift_config`：Shift 预编辑动作、图标和上划动作。
@@ -129,4 +129,4 @@ cd Skin_Keyboard/万象-元书/WanxiangSkin
 jsonnet jsonnet/main.jsonnet -o /tmp/WanxiangSkin.json
 ```
 
-`main.jsonnet` 返回“输出路径 → YAML 文本”的对象。结构调整必须同时验证 9/14/18/26/27 键和 `swipe_assist_mode` 的各模式；修改公共样式或工具栏时还要覆盖浅色、深色、横屏、竖屏和 iPad 输出。
+`main.jsonnet` 返回“输出路径 → YAML 文本”的对象。结构调整必须同时验证 9/14/17/18/26/27 键和 `swipe_assist_mode` 的各模式；修改公共样式或工具栏时还要覆盖浅色、深色、横屏、竖屏和 iPad 输出。

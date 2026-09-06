@@ -124,8 +124,8 @@
     // 仅控制26字母键(q~m)前景文字大小
     pinyin_26_letter_font_size: 20,
 
-    // 仅控制14/18键字母前景文字大小
-    pinyin_14_18_letter_font_size: 20,
+    // 仅控制分组拼音（14/17/18键）字母前景文字大小
+    pinyin_grouped_letter_font_size: 20,
 
     // 仅控制9键字母前景文字大小
     pinyin_9_letter_font_size: 20,

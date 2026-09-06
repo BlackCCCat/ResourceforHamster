@@ -1,4 +1,4 @@
-// 定义 14 键与 18 键共用的规格辅助逻辑。
+// 定义分组拼音（14/17/18 键）共用的键位规格生成逻辑。
 {
   makeLabel(id, isCapital):: (
     local letters = std.stringChars(id);
@@ -60,7 +60,7 @@
     } else if template == '18r3r' then {
       width: if isPortrait then portrait['18键Row3Size'].width.percentage else landscape['18键横屏Row1RightSize'].width.percentage,
     } else
-      error 'Unknown compact template: ' + template
+      error '未知的分组拼音模板：' + template
   ),
 
   buildKeys(entries, context, keyboardLayout):: [

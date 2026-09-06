@@ -296,7 +296,7 @@
 
       '按键前景文字大小': 20,
       '26键字母前景文字大小': if std.objectHas(customFontSize, 'pinyin_26_letter_font_size') then customFontSize.pinyin_26_letter_font_size else 20,
-      '14/18键字母前景文字大小': if std.objectHas(customFontSize, 'pinyin_14_18_letter_font_size') then customFontSize.pinyin_14_18_letter_font_size else 20,
+      '分组拼音字母前景文字大小': if std.objectHas(customFontSize, 'pinyin_grouped_letter_font_size') then customFontSize.pinyin_grouped_letter_font_size else 20,
       '按键前景sf符号大小': 15,
       '功能按键sf符号大小': 17,
 

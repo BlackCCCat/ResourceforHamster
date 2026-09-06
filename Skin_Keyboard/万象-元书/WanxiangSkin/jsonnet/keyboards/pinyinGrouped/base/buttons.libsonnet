@@ -1,6 +1,6 @@
-// 组装 14 键与 18 键共用的按钮集合。
+// 生成分组拼音（14/17/18 键）共用的按钮与前景样式。
 {
-  compactButtons(keys, createButton, root, theme):: {
+  buildButtons(keys, createButton, root, theme):: {
     [k.id + 'Button']: createButton(
       k.id,
       k.action,
@@ -12,12 +12,12 @@
     for k in keys
   },
 
-  compactForegroundStyles(keys, fontSize, color, theme)::
-    local baseLetterFontSize = fontSize['14/18键字母前景文字大小'];
+  buildForegroundStyles(keys, fontSize, color, theme)::
+    local baseLetterFontSize = fontSize['分组拼音字母前景文字大小'];
     local normalizeLabel(label) = std.strReplace(label, ' ', '');
     local getLetterFontSize(label) =
-      local compactLabel = normalizeLabel(label);
-      if std.length(compactLabel) <= 1 then baseLetterFontSize
+      local normalizedLabel = normalizeLabel(label);
+      if std.length(normalizedLabel) <= 1 then baseLetterFontSize
       else if baseLetterFontSize >= 22 then baseLetterFontSize - 2
       else if baseLetterFontSize >= 18 then baseLetterFontSize - 1
       else baseLetterFontSize;
@@ -43,7 +43,7 @@
       for k in keys
     },
 
-  // 从共享系统键集合提取 14/18 键需要的按钮，并仅覆盖本布局尺寸。
+  // 从共享系统键集合提取分组拼音需要的按钮，并仅覆盖当前布局尺寸。
   commonSystemKeys(systemKeys, sizes, baseHintStyles):: {
     shiftButton: systemKeys.shiftButton { size: { width: sizes.shift } },
     shiftButtonForegroundStyle: systemKeys.shiftButtonForegroundStyle,

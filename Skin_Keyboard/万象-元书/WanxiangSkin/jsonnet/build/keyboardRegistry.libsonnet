@@ -2,9 +2,9 @@
 local Settings = import '../Custom.libsonnet';
 
 local pinyin =
-  if Settings.keyboard_layout == 18 then import '../keyboards/pinyin14_18/pinyin18/keyboard.libsonnet'
-  else if Settings.keyboard_layout == 17 then import '../keyboards/pinyin14_18/pinyin17/keyboard.libsonnet'
-  else if Settings.keyboard_layout == 14 then import '../keyboards/pinyin14_18/pinyin14/keyboard.libsonnet'
+  if Settings.keyboard_layout == 18 then import '../keyboards/pinyinGrouped/pinyin18/keyboard.libsonnet'
+  else if Settings.keyboard_layout == 17 then import '../keyboards/pinyinGrouped/pinyin17/keyboard.libsonnet'
+  else if Settings.keyboard_layout == 14 then import '../keyboards/pinyinGrouped/pinyin14/keyboard.libsonnet'
   else if Settings.keyboard_layout == 9 then import '../keyboards/pinyin9/keyboard.libsonnet'
   else import '../keyboards/keyboard26/pinyin/keyboard.libsonnet';
 

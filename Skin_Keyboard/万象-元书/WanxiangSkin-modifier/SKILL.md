@@ -24,7 +24,7 @@ description: Use when modifying the WanxiangSkin Hamster3 keyboard under Resourc
 3. 修改最窄责任层，先数据/规格，再 builder，最后布局。
 4. 每批修改后运行 `jsonnet jsonnet/main.jsonnet -o /tmp/WanxiangSkin.json`。
 5. 公共层修改同时验证浅色/深色、横屏/竖屏、iPhone/iPad。
-6. 布局选择或滑动辅助修改验证 9/14/18/26/27 与 `none/up/down/all`。
+6. 布局选择或滑动辅助修改验证 9/14/17/18/26/27 与 `none/up/down/all`。
 7. 公开配置或目录职责变化同步更新 `README.md`、`MODULES.md` 和本 skill。
 
 ## 修改优先级
@@ -48,6 +48,7 @@ description: Use when modifying the WanxiangSkin Hamster3 keyboard under Resourc
 
 ## 功能要点
 
+- `pinyinGrouped`：分组拼音 14/17/18 键的共用键盘族，字号参数为 `pinyin_grouped_letter_font_size`。
 - `keyboard_layout = 27`：中文 26 键第二行追加 `;`。
 - `swipe_assist_mode`：仅中文 26 键；`none` 使用原通知，其他模式使用 `preeditChanged` 辅助通知并重排长按菜单。
 - `button_123_config.show_swipe_indicators`：只控制 123Button 角标，不控制动作。

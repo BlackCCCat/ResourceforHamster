@@ -1,5 +1,5 @@
 // 描述「乱序 17 键」键位规格，并维护该布局专用的长按与上下划数据。
-local compactShared = import '../base/specFactory.libsonnet';
+local groupedSpecFactory = import '../base/specFactory.libsonnet';
 
 local Settings = import '../../../Custom.libsonnet';
 local familyData = {
@@ -18,7 +18,7 @@ local familyData = {
         spaceLeft: if isPortrait then keyboardLayout['竖屏按键尺寸']['spaceLeft键size'].width else keyboardLayout['横屏按键尺寸']['spaceLeft键size'].width,
         enter: if isPortrait then keyboardLayout['竖屏按键尺寸']['enter键size'].width else keyboardLayout['横屏按键尺寸']['enter键size'].width,
       },
-      keys: compactShared.buildKeys(
+      keys: groupedSpecFactory.buildKeys(
         [
           ['hp', 'h', '17r1', 'hp'],
           ['s', 's', '17r1', 'Sh'],
