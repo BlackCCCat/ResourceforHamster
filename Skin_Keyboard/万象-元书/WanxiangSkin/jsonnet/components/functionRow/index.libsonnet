@@ -249,10 +249,11 @@ local layoutPatch = (
       columnStyle3: layoutDef.columnStyle3,
     },
 
-    getPatch(baseLayout, pinyin18LandscapeRows, pinyin14LandscapeRows):: {
+    getPatch(baseLayout, pinyin18LandscapeRows, pinyin17LandscapeRows, pinyin14LandscapeRows):: {
       '竖屏中文9键': $.standardLayoutPatch(baseLayout['竖屏中文9键']),
       '竖屏中文26键': $.standardLayoutPatch(baseLayout['竖屏中文26键']),
       '竖屏中文18键': $.standardLayoutPatch(baseLayout['竖屏中文18键']),
+      '竖屏中文17键': $.standardLayoutPatch(baseLayout['竖屏中文17键']),
       '竖屏中文14键': $.standardLayoutPatch(baseLayout['竖屏中文14键']),
       'ipad中文26键': $.standardLayoutPatch(baseLayout['ipad中文26键']),
       '竖屏英文26键': $.standardLayoutPatch(baseLayout['竖屏英文26键']),
@@ -272,6 +273,21 @@ local layoutPatch = (
           [$.rawCell(name) for name in pinyin18LandscapeRows.right[1]],
           [$.rawCell(name) for name in pinyin18LandscapeRows.right[2]],
           [$.rawCell(name) for name in pinyin18LandscapeRows.right[3]],
+        ]
+      ),
+      '横屏中文17键': $.compactLandscapeLayoutPatch(
+        baseLayout['横屏中文17键'],
+        [
+          [$.rawCell(name) for name in pinyin17LandscapeRows.left[0]],
+          [$.rawCell(name) for name in pinyin17LandscapeRows.left[1]],
+          [$.rawCell(name) for name in pinyin17LandscapeRows.left[2]],
+          [$.rawCell(name) for name in pinyin17LandscapeRows.left[3]],
+        ],
+        [
+          [$.rawCell(name) for name in pinyin17LandscapeRows.right[0]],
+          [$.rawCell(name) for name in pinyin17LandscapeRows.right[1]],
+          [$.rawCell(name) for name in pinyin17LandscapeRows.right[2]],
+          [$.rawCell(name) for name in pinyin17LandscapeRows.right[3]],
         ]
       ),
       '横屏中文14键': $.compactLandscapeLayoutPatch(

@@ -192,6 +192,7 @@ local functionRow = import '../components/functionRow/index.libsonnet';
 local keyboard26IPhoneLayout = import '../keyboards/keyboard26/base/iPhoneLayout.libsonnet';
 local keyboard26IPadLayout = import '../keyboards/keyboard26/base/iPadLayout.libsonnet';
 local pinyin18Layout = import '../keyboards/pinyin14_18/pinyin18/layout.libsonnet';
+local pinyin17Layout = import '../keyboards/pinyin14_18/pinyin17/layout.libsonnet';
 local pinyin14Layout = import '../keyboards/pinyin14_18/pinyin14/layout.libsonnet';
 
 {
@@ -206,17 +207,20 @@ local pinyin14Layout = import '../keyboards/pinyin14_18/pinyin14/layout.libsonne
 
   getKeyboardLayout(context)::
     local pinyin18LandscapeRows = pinyin18Layout.getLandscapePatchRows();
+    local pinyin17LandscapeRows = pinyin17Layout.getLandscapePatchRows();
     local pinyin14LandscapeRows = pinyin14Layout.getLandscapePatchRows();
     local baseLayout =
       keyboardLayoutBaseData.getKeyboardLayout(context.theme) +
       keyboard26IPhoneLayout.getKeyboardLayout(context.theme, context.Settings) +
       keyboard26IPadLayout.getKeyboardLayout(context.theme, context.Settings) +
       pinyin18Layout.getKeyboardLayout(context.theme) +
+      pinyin17Layout.getKeyboardLayout(context.theme) +
       pinyin14Layout.getKeyboardLayout(context.theme);
     if context.withFunctionsRow then
       baseLayout + functionRow.getPatch(
         baseLayout,
         pinyin18LandscapeRows,
+        pinyin17LandscapeRows,
         pinyin14LandscapeRows
       )
     else
