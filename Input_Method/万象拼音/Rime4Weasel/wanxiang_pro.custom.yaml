@@ -169,7 +169,7 @@ patch:
     - "y年n月j日"
     - "n月j日"
   # 自定义短语
-  custom_phrase/user_dict: custom_phrase_double # 需要手动创建 custom_phrase_double.txt 文件
+  custom_phrase/dictionary: custom_phrase_double # 需要手动创建 custom_phrase_double.txt 文件
 
 #下面的数据有需要的可以patch引用
 #特殊优化：部分音节字极少，几乎不参与构词，则提升对应四码字的优先级，仅对小鹤双拼有效，其他双拼方案需作对应修改）
