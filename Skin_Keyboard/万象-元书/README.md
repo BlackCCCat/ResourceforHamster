@@ -52,7 +52,18 @@
 
 `keyboard_layout` 现在只决定**默认布局**（即 `config.yaml` 里 `pinyin` 主槽指向哪一套，以及英文键盘、数字键盘等共享键盘的行为）；构建时六套布局会全部产出到 `light/`、`dark/`，并分别注册为 `pinyin9`、`pinyin14`、`pinyin17`、`pinyin18`、`pinyin26`、`pinyin27` 槽位，运行时通过工具栏按钮打开的布局切换面板互相跳转。
 
-> 面板切到 9/14/17/18 键时，按照 `Custom.libsonnet` 的 `keyboard_layout_schemas` 同时切换对应 Rime 方案，默认分别为 `wanxiang_t9i`、`wanxiang_14`、`wanxiang_17`、`wanxiang_18`。26/27 键只切皮肤键盘，不自动切回原方案。请确认这些方案已在设备上部署并加入 `schema_list`；不存在的方案名不会自动创建。
+> 面板切到任一中文布局时，按照 `Custom.libsonnet` 的 `keyboard_layout_schemas` 同时切换对应 Rime 方案：
+>
+> | 布局 | 方案 |
+> |---|---|
+> | 9 键 | `wanxiang_t9i` |
+> | 14 键 | `wanxiang_14` |
+> | 17 键 | `wanxiang_17` |
+> | 18 键 | `wanxiang_18` |
+> | 26 键 | `wanxiang_pro` |
+> | 27 键 | `wanxiang_pro` |
+>
+> 请确认这些方案已在设备上部署并加入 `schema_list`；不存在的方案名不会自动创建。离开九键后若仍停留在九键方案，请自行切回 `wanxiang`。
 
 **目前的限制**：面板使用 `keyboardType` 跳转，切换只对当前键盘会话有效；收起再打开会按 `config.yaml` 的 `pinyin` 主槽恢复到 `keyboard_layout` 默认值（默认 26），不会记住上次选的布局。参考皮肤的 9↔26 保持效果来自同一 `pinyin_9` 键盘文件内嵌的双布局 `split` 状态，并由 `#toggleSplitState` 切换；这不是 `keyboardType` 跳到另一键盘槽位，也不能直接扩展为六态。元书皮肤层是否有持久存取任意布局编号的接口，尚未找到可验证的资料。
 
@@ -119,7 +130,7 @@
 | 参数 | 默认值 | 作用范围 | 说明 |
 | --- | --- | --- | --- |
 | `keyboard_layout` | `26` | iPhone 中文键盘 | 默认布局，选择 `9/14/17/18/26/27` 键 |
-| `keyboard_layout_schemas` | `{ '9': 'wanxiang_t9i', '14': 'wanxiang_14', '17': 'wanxiang_17', '18': 'wanxiang_18' }` | 布局切换浮动面板 | 这些布局的按钮通过 `combine` 同时切换皮肤键盘和 Rime 方案；26/27 键只切键盘 |
+| `keyboard_layout_schemas` | 见下表 | 布局切换浮动面板 | 选择中文布局时同时切换皮肤键盘和 Rime 方案 |
 | `wanxiang_9_hintSymbol` | `true` | 中文九键 | `true` 使长按字符直接上屏，`false` 作为 Rime 字符输入 |
 | `swap_9_123_symbol` | `false` | 中文九键 | 交换左下角 123 键与符号键 |
 | `swap_numeric_return_symbol` | `false` | 数字键盘 | 交换返回键与符号切换键 |

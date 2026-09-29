@@ -6,6 +6,30 @@ alphabetic:
   iPhone:
     landscape: "alphabetic_26_landscape"
     portrait: "alphabetic_26_portrait"
+alphabetic14:
+  iPhone:
+    landscape: "alphabetic_14_landscape"
+    portrait: "alphabetic_14_portrait"
+alphabetic17:
+  iPhone:
+    landscape: "alphabetic_17_landscape"
+    portrait: "alphabetic_17_portrait"
+alphabetic18:
+  iPhone:
+    landscape: "alphabetic_18_landscape"
+    portrait: "alphabetic_18_portrait"
+alphabetic26:
+  iPhone:
+    landscape: "alphabetic_26_landscape"
+    portrait: "alphabetic_26_portrait"
+alphabetic27:
+  iPhone:
+    landscape: "alphabetic_27_landscape"
+    portrait: "alphabetic_27_portrait"
+alphabetic9:
+  iPhone:
+    landscape: "alphabetic_9_landscape"
+    portrait: "alphabetic_9_portrait"
 author: "BlackCCCat"
 keyboard_switcher:
   iPhone:

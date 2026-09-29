@@ -10,7 +10,6 @@ local familyData = {
       hintData: 'pinyin_14',
       swipeUpName: 'swipe_up_14',
       swipeDownName: 'swipe_down_14',
-      wanxiangSetting: 'is_wanxiang_14',
       sizes: {
         shift: if isPortrait then keyboardLayout['竖屏按键尺寸']['shift键size'].width else keyboardLayout['横屏按键尺寸']['14键横屏shift键size'].width,
         backspace: if isPortrait then keyboardLayout['竖屏按键尺寸']['backspace键size'].width else keyboardLayout['横屏按键尺寸']['14键横屏backspace键size'].width,

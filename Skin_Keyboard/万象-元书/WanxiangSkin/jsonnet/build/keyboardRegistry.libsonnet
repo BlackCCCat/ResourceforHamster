@@ -13,6 +13,8 @@
   layoutSwitch: import '../keyboards/layoutSwitch/keyboard.libsonnet',
 
   tempPinyin: import '../keyboards/keyboard26/tempPinyin/keyboard.libsonnet',
+  pinyinWithReturn: import '../keyboards/returnPath/pinyin.libsonnet',
+  alphabeticFromPinyin: import '../keyboards/keyboard26/alphabetic/fromPinyin.libsonnet',
   alphabetic: import '../keyboards/keyboard26/alphabetic/keyboard.libsonnet',
   numeric: import '../keyboards/numeric9/keyboard.libsonnet',
   panel: import '../keyboards/floatPanel/keyboard.libsonnet',

@@ -1,11 +1,17 @@
 // 定义皮肤元信息，以及各输入类型在不同设备方向下对应的输出键盘名。
 local Settings = import '../Custom.libsonnet';
 
-// iPhone 中文拼音布局槽位：文件名由布局编号直接决定。
+// iPhone 中文拼音与英文返回布局槽位：文件名由布局编号直接决定。
 local pinyinSlot(layout) = {
   iPhone: {
     portrait: 'pinyin_' + std.toString(layout) + '_portrait',
     landscape: 'pinyin_' + std.toString(layout) + '_landscape',
+  },
+};
+local alphabeticSlot(layout) = {
+  iPhone: {
+    portrait: 'alphabetic_' + std.toString(layout) + '_portrait',
+    landscape: 'alphabetic_' + std.toString(layout) + '_landscape',
   },
 };
 
@@ -31,6 +37,13 @@ local pinyinSlot(layout) = {
   pinyin18: pinyinSlot(18),
   pinyin26: pinyinSlot(26),
   pinyin27: pinyinSlot(27),
+  // iPhone 英文键盘按来源中文布局区分；iPad 仍沿用 alphabetic 主槽。
+  alphabetic9: alphabeticSlot(9),
+  alphabetic14: alphabeticSlot(14),
+  alphabetic17: alphabeticSlot(17),
+  alphabetic18: alphabeticSlot(18),
+  alphabetic26: alphabeticSlot(26),
+  alphabetic27: alphabeticSlot(27),
   // 布局切换浮动面板，由工具栏 keyboard_switcher 打开。
   keyboard_switcher: {
     iPhone: {
@@ -46,8 +59,8 @@ local pinyinSlot(layout) = {
   },
   alphabetic: {
     iPhone: {
-      portrait: 'alphabetic_26_portrait',
-      landscape: 'alphabetic_26_landscape',
+      portrait: 'alphabetic_' + std.toString(Settings.keyboard_layout) + '_portrait',
+      landscape: 'alphabetic_' + std.toString(Settings.keyboard_layout) + '_landscape',
     },
     iPad: {
       portrait: 'ipad_alphabetic_26_portrait',

@@ -11,12 +11,14 @@
   keyboard_layout: 26,
 
   // 布局切换浮动面板使用的 Rime 方案名；按需修改为设备上已部署的方案 ID。
-  // 26/27 键不绑定方案，只切换皮肤键盘。
+  // 选择任一中文布局时，同时切换下方绑定的方案。
   keyboard_layout_schemas: {
     '9': 'wanxiang_t9i',
     '14': 'wanxiang_14',
     '17': 'wanxiang_17',
     '18': 'wanxiang_18',
+    '26': 'wanxiang_pro',
+    '27': 'wanxiang_pro',
   },
 
   // 9键按键长按符号是否直接上屏
@@ -26,11 +28,8 @@
   // 数字键盘是否交换左侧返回按钮和右侧切换键盘按钮位置
   swap_numeric_return_symbol: false,
 
-  // 是否使用万象18键转写规则（大写转写）
-  is_wanxiang_18: true,
-
-  // 是否使用万象14键转写规则（大写转写）
-  is_wanxiang_14: true,
+  // 是否使用万象方案对应的分组大写编码：14/18 键固定发大写代表键。
+  // 17 键保持原有小写代表键规则，便于搭配 pro/乱序17。
 
   // 功能按键配置
   function_button_config: {
