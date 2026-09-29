@@ -196,7 +196,7 @@ local getToolBar(theme, overrides={}) =
     toolbarButtonKeyboardSwitcherStyle: makeToolbarButtonStyle('toolbarButtonKeyboardSwitcherForegroundStyle', {
       floatKeyboardType: 'keyboard_switcher',
     }),
-    toolbarButtonKeyboardSwitcherForegroundStyle: makeToolbarSystemImageForegroundStyle('square.grid.2x2.fill'),
+    toolbarButtonKeyboardSwitcherForegroundStyle: makeToolbarSystemImageForegroundStyle('square.grid.3x2.fill'),
 
     // 搜索与外部打开
     toolbarButtonSafariStyle: makeToolbarButtonStyle('toolbarButton5ForegroundStyle', { openURL: '#pasteboardContent' }),

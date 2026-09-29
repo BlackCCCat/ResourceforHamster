@@ -10,6 +10,15 @@
   // 其他值会回退到 26
   keyboard_layout: 26,
 
+  // 布局切换浮动面板使用的 Rime 方案名；按需修改为设备上已部署的方案 ID。
+  // 26/27 键不绑定方案，只切换皮肤键盘。
+  keyboard_layout_schemas: {
+    '9': 'wanxiang_t9i',
+    '14': 'wanxiang_14',
+    '17': 'wanxiang_17',
+    '18': 'wanxiang_18',
+  },
+
   // 9键按键长按符号是否直接上屏
   wanxiang_9_hintSymbol: true,
   // 9键键盘是否交换左下角数字键盘和符号键盘按钮位置

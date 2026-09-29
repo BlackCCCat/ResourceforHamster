@@ -37,7 +37,8 @@ jsonnet/
 
 ### 布局与基础行为
 
-- `keyboard_layout`：`9`、`14`、`17`、`18`、`26` 或 `27`。
+- `keyboard_layout`：`9`、`14`、`17`、`18`、`26` 或 `27`，选择默认中文布局。
+- `keyboard_layout_schemas`：布局切换面板绑定的 Rime 方案名，默认 9/14/17/18 键分别是 `wanxiang_t9i`、`wanxiang_14`、`wanxiang_17`、`wanxiang_18`；26/27 键不绑定方案。
 - `27`：在中文 26 键第二行增加 `;`，用于搜狗双拼 `ing`。
 - `wanxiang_9_hintSymbol`：控制九键长按字符使用 `symbol` 还是 `character`。
 - `swap_9_123_symbol`：交换九键底行的 123 与符号按钮。

@@ -7,20 +7,20 @@ local color = appearance.color;
 local fontSize = appearance.fontSize;
 local styleFactories = import '../../design/styleFactories.libsonnet';
 
-// 只有 9 键需要绑定输入方案（T9 用 wanxiang_t9i），因此它用 combine 同时切键盘与方案。
-// 其余布局都跑在 wanxiang 上，只切键盘，不碰当前方案，避免覆盖用户选择的其它方案。
+// 9/14/17/18 键的方案名从 Custom.keyboard_layout_schemas 读取；26/27 键只切皮肤布局。
 local layouts = [
-  { key: 'Switch9', slot: 'pinyin9', icon: '9.square.fill', label: '9键', schema: 'wanxiang_t9i' },
-  { key: 'Switch14', slot: 'pinyin14', icon: '14.square.fill', label: '14键' },
-  { key: 'Switch17', slot: 'pinyin17', icon: '17.square.fill', label: '17键' },
-  { key: 'Switch18', slot: 'pinyin18', icon: '18.square.fill', label: '18键' },
-  { key: 'Switch26', slot: 'pinyin26', icon: '26.square.fill', label: '26键' },
-  { key: 'Switch27', slot: 'pinyin27', icon: '27.square.fill', label: '27键' },
+  { key: 'Switch9', slot: 'pinyin9', icon: '9.square.fill', label: '9键', number: '9' },
+  { key: 'Switch14', slot: 'pinyin14', icon: '14.square.fill', label: '14键', number: '14' },
+  { key: 'Switch17', slot: 'pinyin17', icon: '17.square.fill', label: '17键', number: '17' },
+  { key: 'Switch18', slot: 'pinyin18', icon: '18.square.fill', label: '18键', number: '18' },
+  { key: 'Switch26', slot: 'pinyin26', icon: '26.square.fill', label: '26键', number: '26' },
+  { key: 'Switch27', slot: 'pinyin27', icon: '27.square.fill', label: '27键', number: '27' },
 ];
 
 local switchAction(layout) =
-  if std.objectHas(layout, 'schema') then
-    { combine: [{ keyboardType: layout.slot }, { switchRimeSchema: layout.schema }] }
+  local schemas = Settings.keyboard_layout_schemas;
+  if std.objectHas(schemas, layout.number) && std.type(schemas[layout.number]) == 'string' && schemas[layout.number] != '' then
+    { combine: [{ keyboardType: layout.slot }, { switchRimeSchema: schemas[layout.number] }] }
   else
     { keyboardType: layout.slot };
 
