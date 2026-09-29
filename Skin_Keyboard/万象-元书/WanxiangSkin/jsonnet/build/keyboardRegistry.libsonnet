@@ -9,7 +9,7 @@
   pinyin18: import '../keyboards/pinyinGrouped/pinyin18/keyboard.libsonnet',
   pinyin26: import '../keyboards/keyboard26/pinyin/keyboard.libsonnet',
 
-  // 布局切换浮动面板（由工具栏 keyboard_swotcher 打开）。
+  // 布局切换浮动面板（由工具栏 keyboard_switcher 打开）。
   layoutSwitch: import '../keyboards/layoutSwitch/keyboard.libsonnet',
 
   tempPinyin: import '../keyboards/keyboard26/tempPinyin/keyboard.libsonnet',

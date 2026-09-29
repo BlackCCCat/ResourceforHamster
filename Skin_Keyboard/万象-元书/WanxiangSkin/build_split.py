@@ -23,7 +23,7 @@ SKIN = os.path.dirname(os.path.abspath(__file__))
 
 # (组名, 模块路径, 输出前缀, layoutOverride)
 GROUPS = [
-    ("layoutSwitch", "jsonnet/keyboards/layoutSwitch/keyboard.libsonnet", "keyboard_swotcher", None),
+    ("layoutSwitch", "jsonnet/keyboards/layoutSwitch/keyboard.libsonnet", "keyboard_switcher", None),
     ("pinyin9", "jsonnet/keyboards/pinyin9/keyboard.libsonnet", "pinyin_9", 9),
     ("pinyin14", "jsonnet/keyboards/pinyinGrouped/pinyin14/keyboard.libsonnet", "pinyin_14", 14),
     ("pinyin17", "jsonnet/keyboards/pinyinGrouped/pinyin17/keyboard.libsonnet", "pinyin_17", 17),

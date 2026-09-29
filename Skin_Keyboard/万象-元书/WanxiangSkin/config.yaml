@@ -7,10 +7,10 @@ alphabetic:
     landscape: "alphabetic_26_landscape"
     portrait: "alphabetic_26_portrait"
 author: "BlackCCCat"
-keyboard_swotcher:
+keyboard_switcher:
   iPhone:
-    landscape: "keyboard_swotcher_landscape"
-    portrait: "keyboard_swotcher_portrait"
+    landscape: "keyboard_switcher_landscape"
+    portrait: "keyboard_switcher_portrait"
 name: "万象键盘"
 numeric:
   iPad:

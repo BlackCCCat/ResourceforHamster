@@ -31,11 +31,11 @@ local pinyinSlot(layout) = {
   pinyin18: pinyinSlot(18),
   pinyin26: pinyinSlot(26),
   pinyin27: pinyinSlot(27),
-  // 布局切换浮动面板，由工具栏 keyboard_swotcher 打开。
-  keyboard_swotcher: {
+  // 布局切换浮动面板，由工具栏 keyboard_switcher 打开。
+  keyboard_switcher: {
     iPhone: {
-      portrait: 'keyboard_swotcher_portrait',
-      landscape: 'keyboard_swotcher_landscape',
+      portrait: 'keyboard_switcher_portrait',
+      landscape: 'keyboard_switcher_landscape',
     },
   },
   temp_pinyin: {

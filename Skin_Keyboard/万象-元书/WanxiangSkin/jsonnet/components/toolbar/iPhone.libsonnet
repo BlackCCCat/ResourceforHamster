@@ -194,7 +194,7 @@ local getToolBar(theme, overrides={}) =
     toolbarButton4ForegroundStyle: makeToolbarSystemImageForegroundStyle('list.bullet.clipboard.fill'),
     // 布局切换面板入口
     toolbarButtonKeyboardSwitcherStyle: makeToolbarButtonStyle('toolbarButtonKeyboardSwitcherForegroundStyle', {
-      floatKeyboardType: 'keyboard_swotcher',
+      floatKeyboardType: 'keyboard_switcher',
     }),
     toolbarButtonKeyboardSwitcherForegroundStyle: makeToolbarSystemImageForegroundStyle('square.grid.2x2.fill'),
 

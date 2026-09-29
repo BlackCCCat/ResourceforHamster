@@ -39,7 +39,7 @@ local pinyinOutputs = std.foldl(
 pinyinOutputs + {
   'config.yaml': std.manifestYamlDoc(config, indent_array_in_object=true, quote_keys=false),
 } +
-render(keyboards.layoutSwitch, 'keyboard_swotcher') +
+render(keyboards.layoutSwitch, 'keyboard_switcher') +
 render(keyboards.tempPinyin, 'temp_pinyin') +
 render(keyboards.iPadPinyin, 'ipad_pinyin_26') +
 render(keyboards.alphabetic, 'alphabetic_26') +
