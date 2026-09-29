@@ -41,8 +41,8 @@ local systemKeys = import '../../../components/systemKeys/index.libsonnet';
         [if std.length(actionKey) == 1 then 'capsLockedStateForegroundStyle']: self.uppercasedStateForegroundStyle,
         hintStyle: id + 'ButtonHintStyle',
         action: {
-          // 14/18 键方案使用万象分组大写代表键；17 键维持自身的乱序小写编码。
-          character: if std.member([14, 18], context.Settings.keyboard_layout) then std.asciiUpper(actionKey) else actionKey,
+          // 14/17/18 键均发小写代表键；大写仅通过 uppercasedStateAction（shift）触发。
+          character: actionKey,
         },
         [if std.length(actionKey) == 1 then 'uppercasedStateAction']: {
           character: std.asciiUpper(actionKey),
