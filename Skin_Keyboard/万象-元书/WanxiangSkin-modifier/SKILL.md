@@ -51,6 +51,8 @@ description: Use when modifying the WanxiangSkin Hamster3 keyboard under Resourc
 - `pinyinGrouped`：分组拼音 14/17/18 键的共用键盘族，字号参数为 `pinyin_grouped_letter_font_size`。
 - `is_letter_capital`：控制中文 9/14/17/18/26/27 键的字母常态大小写，17 键的显式组合标签也必须遵循该配置。
 - `keyboard_layout = 27`：中文 26 键第二行追加 `;`。
+- 布局运行时切换：六套中文布局全部产出并注册为 `pinyin9`~`pinyin27` 槽位；`keyboards/layoutSwitch/` 是布局切换浮动面板，由工具栏 ID `keyboard_swotcher` 打开；只有 9 键按钮用 `combine` 绑定 `switchRimeSchema: wanxiang_t9i`，其余按钮只用 `keyboardType`。新增布局必须同时更新 `keyboardRegistry.libsonnet`、`skinConfig.libsonnet`、`main.jsonnet` 和 `layoutSwitch/keyboard.libsonnet` 的 `layouts` 列表。
+- `buildContext.withLayout(Settings, layout)`：布局相关分支必须读本布局的值；不要再让拼音键盘直接读 `Custom.libsonnet` 的全局 `keyboard_layout`。
 - `swipe_assist_mode`：仅中文 26 键；`none` 使用原通知，其他模式使用 `preeditChanged` 辅助通知并重排长按菜单。
 - `button_123_config.show_swipe_indicators`：只控制 123Button 角标，不受 `show_swipe` 影响，也不控制动作。
 - `shift_config`：预编辑动作与图标作用于中文 26/27 键和 iPad 26 键，不作用于 14/17/18 键；预编辑上划配置仅中文 26 键使用。
@@ -65,5 +67,7 @@ description: Use when modifying the WanxiangSkin Hamster3 keyboard under Resourc
 cd <keyboard-root>
 jsonnet jsonnet/main.jsonnet -o /tmp/WanxiangSkin.json
 ```
+
+若该命令报 `FATAL ERROR: a memory allocation error occurred`（输出已达 57 个文件，内存受限环境会遇到），改用分进程构建 `python3 build_split.py`，输出与 `main.jsonnet` 一致。
 
 针对单个键盘可直接导入其 `keyboard.libsonnet` 调用 `new(theme, orientation)`。完整路径和操作清单见 `references/file-map.md` 与 `references/playbooks.md`。

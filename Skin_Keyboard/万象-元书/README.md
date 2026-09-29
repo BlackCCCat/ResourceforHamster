@@ -9,6 +9,7 @@
 ## 主要特性
 
 - 中文键盘可选 `9`、`14`、`17`、`18`、`26` 和 `27` 键，英文键盘统一使用 26 键。
+- 全部中文布局同时打包进皮肤，工具栏的 `keyboard_swotcher` 打开布局切换浮动面板，运行时在 9/14/17/18/26/27 键之间直接跳转，无需重新生成皮肤。
 - 支持 iPhone 横竖屏、iPad 独立四行布局与 iPad 浮动键盘。
 - 支持浅色/深色配色、iOS 26 风格、按键间距、圆角和分类字号调整。
 - 支持功能行、预编辑通知动作、上下划、长按菜单、候选词操作和纵向候选。
@@ -48,6 +49,10 @@
 | `9` | 中文九键 | 支持 T9 字母分组、长按字符和上下划符号 |
 
 传入其他数值时会回退到 26 键。英文键盘不随该选项改变键数，始终使用 26 键。
+
+`keyboard_layout` 现在只决定**默认布局**（即 `config.yaml` 里 `pinyin` 主槽指向哪一套，以及英文键盘、数字键盘等共享键盘的行为）；构建时六套布局会全部产出到 `light/`、`dark/`，并分别注册为 `pinyin9`、`pinyin14`、`pinyin17`、`pinyin18`、`pinyin26`、`pinyin27` 槽位，运行时通过工具栏按钮打开的布局切换面板互相跳转。
+
+> 只有 9 键需要绑定输入方案：面板上的 9 键按钮用 `combine` 同时执行 `keyboardType: pinyin9` 与 `switchRimeSchema: wanxiang_t9i`；其余布局只切键盘、不改方案。若要在切到 9 键后能正常组词，需要先把 `wanxiang_t9i` 加进 Rime 的 `schema_list`。注意从 9 键切回其它布局时不会自动切回方案，需要自行用方案菜单切回 `wanxiang`。
 
 ## 按键与预编辑功能
 
@@ -260,7 +265,7 @@ toolbar_config: {
     left_fixed: 'script',
     left_slide: ['google', 'safari', 'apple', 'bing'],
     center_fixed: 'menu_or_panel',
-    right_slide: ['note', 'clipboard', 'symbol', 'emoji'],
+    right_slide: ['note', 'clipboard', 'keyboard_swotcher', 'symbol', 'emoji'],
     right_fixed: 'hide',
   },
 
@@ -271,6 +276,7 @@ toolbar_config: {
       'google',
       'note',
       'clipboard',
+      'keyboard_swotcher',
       'emoji',
       'symbol',
       'skin_adjust',
@@ -335,6 +341,7 @@ iPhone 与 iPad 共用同一组 ID：
 | `symbols` | 使用 `#toggleSymbolBar` 打开/关闭符号栏 |
 | `note` | 打开常用语 |
 | `clipboard` | 打开剪切板 |
+| `keyboard_swotcher` | 打开布局切换浮动面板，在 9/14/17/18/26/27 键之间跳转 |
 | `hide` | 收起键盘 |
 | `menu_or_panel` | 根据 `toolbar_menu` 打开键盘菜单或内置浮动键盘 |
 | `google` | Google 搜索剪切板内容 |
@@ -429,6 +436,14 @@ jsonnet jsonnet/main.jsonnet -o /tmp/WanxiangSkin.json
 ```bash
 jsonnet -m . jsonnet/main.jsonnet
 ```
+
+> 六套中文布局全部产出后共有 57 个输出文件，`main.jsonnet` 需要一次性把它们全部留在内存里。
+> 在内存受限环境（例如 iSH）会报 `FATAL ERROR: a memory allocation error occurred`。
+> 这种情况下用分进程构建，输出与 `main.jsonnet` 完全一致：
+>
+> ```bash
+> python3 build_split.py
+> ```
 
 修改键盘布局或公共组件后，建议至少验证：
 

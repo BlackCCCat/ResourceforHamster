@@ -196,6 +196,11 @@ local pinyin17Layout = import '../keyboards/pinyinGrouped/pinyin17/layout.libson
 local pinyin14Layout = import '../keyboards/pinyinGrouped/pinyin14/layout.libsonnet';
 
 {
+  // 按布局覆写 Settings 的 keyboard_layout。
+  // 同一皮肤要同时产出多套拼音布局，布局相关分支必须读“本布局的值”而不是 Custom 的全局默认值。
+  withLayout(Settings, layout)::
+    if layout == null then Settings else Settings + { keyboard_layout: layout },
+
   new(Settings, theme, orientation, deviceType='iPhone'):: {
     Settings: Settings,
     theme: theme,

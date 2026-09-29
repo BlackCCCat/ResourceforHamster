@@ -192,6 +192,11 @@ local getToolBar(theme, overrides={}) =
       shortcutCommand: '#showPasteboardView',
     }),
     toolbarButton4ForegroundStyle: makeToolbarSystemImageForegroundStyle('list.bullet.clipboard.fill'),
+    // 布局切换面板入口
+    toolbarButtonKeyboardSwitcherStyle: makeToolbarButtonStyle('toolbarButtonKeyboardSwitcherForegroundStyle', {
+      floatKeyboardType: 'keyboard_swotcher',
+    }),
+    toolbarButtonKeyboardSwitcherForegroundStyle: makeToolbarSystemImageForegroundStyle('square.grid.2x2.fill'),
 
     // 搜索与外部打开
     toolbarButtonSafariStyle: makeToolbarButtonStyle('toolbarButton5ForegroundStyle', { openURL: '#pasteboardContent' }),

@@ -4,13 +4,13 @@ local buildContext = import '../../../build/context.libsonnet';
 local groupedKeyboardBuilder = import '../base/builder.libsonnet';
 local pinyin18Data = import './data.libsonnet';
 
-local build(theme, orientation, keyboardLayout=null) =
-  local context = buildContext.new(Settings, theme, orientation, 'iPhone');
+local build(theme, orientation, keyboardLayout=null, layoutOverride=null) =
+  local context = buildContext.new(buildContext.withLayout(Settings, layoutOverride), theme, orientation, 'iPhone');
   local resolvedKeyboardLayout = if keyboardLayout == null then buildContext.getKeyboardLayout(context) else keyboardLayout;
   local spec = pinyin18Data.getSpec(context, resolvedKeyboardLayout);
   groupedKeyboardBuilder.build(context, resolvedKeyboardLayout, spec, pinyin18Data);
 
 {
-  new(theme, orientation):
-    build(theme, orientation),
+  new(theme, orientation, layoutOverride=null):
+    build(theme, orientation, null, layoutOverride),
 }

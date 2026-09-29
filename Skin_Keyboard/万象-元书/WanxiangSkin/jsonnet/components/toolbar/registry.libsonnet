@@ -30,6 +30,12 @@ local shared = import './config.libsonnet';
       slideStyleName: 'toolbarButtonClipboardStyle',
       action: { shortcutCommand: '#showPasteboardView' },
     },
+    // 打开布局切换浮动面板（config.yaml 的 keyboard_swotcher 槽位）。
+    keyboard_swotcher: {
+      cellName: 'toolbarButtonKeyboardSwitcherStyle',
+      slideStyleName: 'toolbarButtonKeyboardSwitcherStyle',
+      action: { floatKeyboardType: 'keyboard_swotcher' },
+    },
     hide: {
       cellName: 'toolbarButtonHideStyle',
       slideStyleName: 'toolbarButtonHideStyle',

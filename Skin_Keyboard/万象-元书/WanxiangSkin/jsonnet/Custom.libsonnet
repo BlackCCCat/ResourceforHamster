@@ -197,6 +197,7 @@
     // symbols: 符号栏
     // note: 常用语
     // clipboard: 剪切板
+    // keyboard_swotcher: 布局切换浮动面板（9/14/17/18/26/27 键互相切换）
     // hide: 收起键盘
     // menu_or_panel: 键盘菜单或浮动键盘
     // google: Google 搜索
@@ -238,6 +239,7 @@
       right_slide: [
         'note',
         'clipboard',
+        'keyboard_swotcher',
         'symbol',
         'emoji',
         // 数组末尾可继续添加按钮 ID。
@@ -256,6 +258,7 @@
         'google',
         'note',
         'clipboard',
+        'keyboard_swotcher',
         'emoji',
         'symbol',
         'skin_adjust',

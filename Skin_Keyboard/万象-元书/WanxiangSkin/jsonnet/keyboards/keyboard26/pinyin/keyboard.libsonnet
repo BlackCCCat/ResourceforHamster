@@ -10,8 +10,8 @@ local defaultSwipeDataRoot = swipeData.genSwipeData(defaultContext.deviceType);
 local defaultSwipeUp = if std.objectHas(defaultSwipeDataRoot, 'swipe_up') then defaultSwipeDataRoot.swipe_up else {};
 local defaultSwipeDown = if std.objectHas(defaultSwipeDataRoot, 'swipe_down') then defaultSwipeDataRoot.swipe_down else {};
 
-local build(theme, orientation, keyboardLayout=null) =
-  local context = buildContext.new(Settings, theme, orientation, 'iPhone');
+local build(theme, orientation, keyboardLayout=null, layoutOverride=null) =
+  local context = buildContext.new(buildContext.withLayout(Settings, layoutOverride), theme, orientation, 'iPhone');
   local resolvedKeyboardLayout = if keyboardLayout == null then buildContext.getKeyboardLayout(context) else keyboardLayout;
   keyboard26Builder.build(context, resolvedKeyboardLayout);
 
@@ -24,6 +24,6 @@ local build(theme, orientation, keyboardLayout=null) =
   ),
   keyboard(theme, orientation, keyboardLayout):
     build(theme, orientation, keyboardLayout),
-  new(theme, orientation):
-    build(theme, orientation),
+  new(theme, orientation, layoutOverride=null):
+    build(theme, orientation, null, layoutOverride),
 }
