@@ -50,11 +50,11 @@
 
 传入其他数值时会回退到 26 键。英文键盘不随该选项改变键数，始终使用 26 键。
 
-`keyboard_layout` 现在只决定**默认布局**（即 `config.yaml` 里 `pinyin` 主槽指向哪一套，以及英文键盘、数字键盘等共享键盘的行为）；构建时六套布局会全部产出到 `light/`、`dark/`，并分别注册为 `pinyin9`、`pinyin14`、`pinyin17`、`pinyin18`、`pinyin26`、`pinyin27` 槽位，运行时通过工具栏按钮打开的布局切换面板互相跳转。
+`keyboard_layout` 决定默认布局（iPhone `pinyin` 主槽的普通态）；紧随其后的 `split_keyboard_layout` 决定配对布局（Split 态），默认是 **26 ↔ 9**。两者均可填 `9/14/17/18/26/27`，不能相同；无效或相同值会回退到另一有效布局。六套独立布局仍同时打包。
 
-> 只有 9 键需要绑定输入方案：面板上的 9 键按钮用 `combine` 同时执行 `keyboardType: pinyin9` 与 `switchRimeSchema: wanxiang_t9i`；其余布局只切键盘、不改方案。若要在切到 9 键后能正常组词，需要先把 `wanxiang_t9i` 加进 Rime 的 `schema_list`。注意从 9 键切回其它布局时不会自动切回方案，需要自行用方案菜单切回 `wanxiang`。
+面板选择默认/配对布局时切回 `pinyin` 主槽并按需要切换 Split；选择剩余四种布局仍走临时 `keyboardType` 跳转。**只有选择 9 键时**组合切换 `wanxiang_t9i` 方案，选择其他布局不更改方案；离开九键后若仍停留在九键方案，请自行切回 `wanxiang`。需要预先在 Rime `schema_list` 中加入 `wanxiang_t9i`。
 
-**目前的限制**：面板使用 `keyboardType` 跳转，切换只对当前键盘会话有效；收起再打开会按 `config.yaml` 的 `pinyin` 主槽恢复到 `keyboard_layout` 默认值（默认 26），不会记住上次选的布局。参考皮肤的 9↔26 保持效果来自同一 `pinyin_9` 键盘文件内嵌的双布局 `split` 状态，并由 `#toggleSplitState` 切换；这不是 `keyboardType` 跳到另一键盘槽位，也不能直接扩展为六态。元书皮肤层是否有持久存取任意布局编号的接口，尚未找到可验证的资料。
+Split 与单手模式互斥。两态在重新弹出键盘后是否保持，以及从浮动面板调用 `keyboardType` + `#toggleSplitState` 的先后效果，需要在元书真机实测；不能保证四种临时布局在重开后保持。
 
 ## 按键与预编辑功能
 
@@ -118,7 +118,8 @@
 
 | 参数 | 默认值 | 作用范围 | 说明 |
 | --- | --- | --- | --- |
-| `keyboard_layout` | `26` | iPhone 中文键盘 | 选择 `9/14/17/18/26/27` 键 |
+| `keyboard_layout` | `26` | iPhone 中文键盘 | 默认布局，选择 `9/14/17/18/26/27` 键 |
+| `split_keyboard_layout` | `9` | iPhone 中文键盘 | 与默认布局成对承载在 `pinyin` 主槽的 Split 态；须与默认布局不同 |
 | `wanxiang_9_hintSymbol` | `true` | 中文九键 | `true` 使长按字符直接上屏，`false` 作为 Rime 字符输入 |
 | `swap_9_123_symbol` | `false` | 中文九键 | 交换左下角 123 键与符号键 |
 | `swap_numeric_return_symbol` | `false` | 数字键盘 | 交换返回键与符号切换键 |
@@ -439,13 +440,7 @@ jsonnet jsonnet/main.jsonnet -o /tmp/WanxiangSkin.json
 jsonnet -m . jsonnet/main.jsonnet
 ```
 
-> 六套中文布局全部产出后共有 57 个输出文件，`main.jsonnet` 需要一次性把它们全部留在内存里。
-> 在内存受限环境（例如 iSH）会报 `FATAL ERROR: a memory allocation error occurred`。
-> 这种情况下用分进程构建，输出与 `main.jsonnet` 完全一致：
->
-> ```bash
-> python3 build_split.py
-> ```
+> 六套中文布局加一套 Split 承载键盘的输出较多，`main.jsonnet` 在内存受限环境（例如 iSH）可能会报 `FATAL ERROR: a memory allocation error occurred`；建议在内存充足的电脑或元书开发者模式中构建。皮肤目录不再包含 Python 构建脚本。
 
 修改键盘布局或公共组件后，建议至少验证：
 

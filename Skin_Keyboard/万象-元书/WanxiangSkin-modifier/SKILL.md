@@ -51,8 +51,9 @@ description: Use when modifying the WanxiangSkin Hamster3 keyboard under Resourc
 - `pinyinGrouped`：分组拼音 14/17/18 键的共用键盘族，字号参数为 `pinyin_grouped_letter_font_size`。
 - `is_letter_capital`：控制中文 9/14/17/18/26/27 键的字母常态大小写，17 键的显式组合标签也必须遵循该配置。
 - `keyboard_layout = 27`：中文 26 键第二行追加 `;`。
-- 布局运行时切换：六套中文布局全部产出并注册为 `pinyin9`~`pinyin27` 槽位；`keyboards/layoutSwitch/` 是布局切换浮动面板，由工具栏 ID `keyboard_switcher` 打开；只有 9 键按钮用 `combine` 绑定 `switchRimeSchema: wanxiang_t9i`，其余按钮只用 `keyboardType`。新增布局必须同时更新 `keyboardRegistry.libsonnet`、`skinConfig.libsonnet`、`main.jsonnet` 和 `layoutSwitch/keyboard.libsonnet` 的 `layouts` 列表。
-- 目前 `keyboardType` 切换只对当前键盘会话有效，收起重开恢复 `pinyin` 主槽。不要宣称六种布局可持久记忆；参考皮肤使用的是一个键盘文件内的双态 `split` + `#toggleSplitState`，不能直接推广为六态。
+- `split_keyboard_layout`：与 `keyboard_layout` 不同的另一种拼音布局，与默认布局共同承载在 `pinyin` 主槽，`#toggleSplitState` 切换；Split 与单手模式互斥。
+- 布局运行时切换：六套中文布局全部产出并注册为 `pinyin9`~`pinyin27` 槽位；`keyboards/layoutSwitch/` 是布局切换浮动面板，由工具栏 ID `keyboard_switcher` 打开；只有 9 键按钮用 `combine` 绑定 `switchRimeSchema: wanxiang_t9i`，其余按钮不绑定方案。新增布局必须同时更新 `keyboardRegistry.libsonnet`、`skinConfig.libsonnet`、`main.jsonnet` 和 `layoutSwitch/keyboard.libsonnet` 的 `layouts` 列表。
+- `pinyin` 主槽采用 `keyboards/splitCarrier/` 双布局承载：默认/配对布局共用 Split 状态，其余四种布局为临时跳转。Split 与单手模式互斥；浮动面板切换动作及重新弹出后的保持情况必须真机验证，不能宣称六种布局都持久记忆。
 - `buildContext.withLayout(Settings, layout)`：布局相关分支必须读本布局的值；不要再让拼音键盘直接读 `Custom.libsonnet` 的全局 `keyboard_layout`。
 - `swipe_assist_mode`：仅中文 26 键；`none` 使用原通知，其他模式使用 `preeditChanged` 辅助通知并重排长按菜单。
 - `button_123_config.show_swipe_indicators`：只控制 123Button 角标，不受 `show_swipe` 影响，也不控制动作。
@@ -69,6 +70,6 @@ cd <keyboard-root>
 jsonnet jsonnet/main.jsonnet -o /tmp/WanxiangSkin.json
 ```
 
-若该命令报 `FATAL ERROR: a memory allocation error occurred`（输出已达 57 个文件，内存受限环境会遇到），改用分进程构建 `python3 build_split.py`，输出与 `main.jsonnet` 一致。
+若该命令在内存受限环境报 `FATAL ERROR: a memory allocation error occurred`，请改在内存充足的电脑或元书开发者模式中构建；皮肤目录不包含 Python 构建脚本。
 
 针对单个键盘可直接导入其 `keyboard.libsonnet` 调用 `new(theme, orientation)`。完整路径和操作清单见 `references/file-map.md` 与 `references/playbooks.md`。

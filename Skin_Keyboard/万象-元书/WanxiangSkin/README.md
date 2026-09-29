@@ -19,7 +19,7 @@ jsonnet/
 ## 主要模块
 
 - `jsonnet/build/skinConfig.libsonnet`：生成 `config.yaml` 使用的皮肤和键盘映射。
-- `jsonnet/build/keyboardRegistry.libsonnet`：按 `keyboard_layout` 选择手机端拼音键盘，并注册其余输出键盘。
+- `jsonnet/build/keyboardRegistry.libsonnet`：注册六种手机端拼音布局及其余输出键盘；`keyboards/splitCarrier/` 将默认与配对布局合成主键盘。
 - `jsonnet/build/context.libsonnet`：创建设备上下文、汇总布局并按配置插入功能行。
 - `jsonnet/design/appearance.libsonnet`：颜色、字号、偏移、动画和键盘高度。
 - `jsonnet/design/styleFactories.libsonnet`：文本、SF Symbol、图片和 geometry 样式工厂。
@@ -37,7 +37,8 @@ jsonnet/
 
 ### 布局与基础行为
 
-- `keyboard_layout`：`9`、`14`、`17`、`18`、`26` 或 `27`。
+- `keyboard_layout`：`9`、`14`、`17`、`18`、`26` 或 `27`，决定 iPhone 中文主键盘的默认布局。
+- `split_keyboard_layout`：与默认布局成对承载于主键盘 Split 态的另一个布局（默认 9）。
 - `27`：在中文 26 键第二行增加 `;`，用于搜狗双拼 `ing`。
 - `wanxiang_9_hintSymbol`：控制九键长按字符使用 `symbol` 还是 `character`。
 - `swap_9_123_symbol`：交换九键底行的 123 与符号按钮。
