@@ -1,7 +1,6 @@
 // 皮肤总入口只负责渲染，不在此展开键盘选择与配置细节。
 local keyboards = import './build/keyboardRegistry.libsonnet';
 local config = import './build/skinConfig.libsonnet';
-local splitCarrier = import './keyboards/splitCarrier/keyboard.libsonnet';
 
 
 // 输出文件生成
@@ -40,7 +39,6 @@ local pinyinOutputs = std.foldl(
 pinyinOutputs + {
   'config.yaml': std.manifestYamlDoc(config, indent_array_in_object=true, quote_keys=false),
 } +
-render(splitCarrier, 'pinyin_split') +
 render(keyboards.layoutSwitch, 'keyboard_switcher') +
 render(keyboards.tempPinyin, 'temp_pinyin') +
 render(keyboards.iPadPinyin, 'ipad_pinyin_26') +

@@ -18,25 +18,8 @@ local layouts = [
   { key: 'Switch27', slot: 'pinyin27', icon: '27.square.fill', label: '27键' },
 ];
 
-local splitCarrier = import '../splitCarrier/keyboard.libsonnet';
-local withNineSchema(layout, action) =
-  if layout.slot != 'pinyin9' then action
-  else if std.objectHas(action, 'combine') then
-    { combine: action.combine + [{ switchRimeSchema: 'wanxiang_t9i' }] }
-  else
-    { combine: [action, { switchRimeSchema: 'wanxiang_t9i' }] };
-// 面板在 floatKeyboard 上下文执行：#toggleSplitState 是全局开关；
-// paired 两键分别在普通/Split 态覆写动作，避免重复点选时错误反转。
-local switchAction(layout, inSplit=false) =
-  if layout.key == 'Switch' + std.toString(splitCarrier.primaryLayout) then
-    withNineSchema(layout,
-      if inSplit then { combine: [{ keyboardType: 'pinyin' }, { shortcut: '#toggleSplitState' }] }
-      else { keyboardType: 'pinyin' })
-  else if layout.key == 'Switch' + std.toString(splitCarrier.secondaryLayout) then
-    withNineSchema(layout,
-      if inSplit then { keyboardType: 'pinyin' }
-      else { combine: [{ keyboardType: 'pinyin' }, { shortcut: '#toggleSplitState' }] })
-  else if std.objectHas(layout, 'schema') then
+local switchAction(layout) =
+  if std.objectHas(layout, 'schema') then
     { combine: [{ keyboardType: layout.slot }, { switchRimeSchema: layout.schema }] }
   else
     { keyboardType: layout.slot };
@@ -51,9 +34,6 @@ local createButton(key, action, sf_symbol, text, theme, size={ height: '1/2' }) 
       key + 'ButtonForegroundStyle2',
     ],
     action: action,
-    [if key == 'Switch' + std.toString(splitCarrier.primaryLayout) || key == 'Switch' + std.toString(splitCarrier.secondaryLayout) then 'split']: {
-      action: switchAction({ key: key, slot: 'pinyin' + std.substr(key, 6, std.length(key) - 6) }, true),
-    },
   },
   [key + 'ButtonForegroundStyle']: {
     buttonStyleType: 'systemImage',

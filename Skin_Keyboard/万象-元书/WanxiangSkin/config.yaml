@@ -30,8 +30,8 @@ pinyin:
     landscape: "ipad_pinyin_26_landscape"
     portrait: "ipad_pinyin_26_portrait"
   iPhone:
-    landscape: "pinyin_split_landscape"
-    portrait: "pinyin_split_portrait"
+    landscape: "pinyin_26_landscape"
+    portrait: "pinyin_26_portrait"
 pinyin14:
   iPhone:
     landscape: "pinyin_14_landscape"

@@ -15,8 +15,8 @@ local pinyinSlot(layout) = {
   // 主槽：跟随 Custom.keyboard_layout，保持「默认布局」语义不变。
   pinyin: {
     iPhone: {
-      portrait: 'pinyin_split_portrait',
-      landscape: 'pinyin_split_landscape',
+      portrait: 'pinyin_' + std.toString(Settings.keyboard_layout) + '_portrait',
+      landscape: 'pinyin_' + std.toString(Settings.keyboard_layout) + '_landscape',
     },
     iPad: {
       portrait: 'ipad_pinyin_26_portrait',

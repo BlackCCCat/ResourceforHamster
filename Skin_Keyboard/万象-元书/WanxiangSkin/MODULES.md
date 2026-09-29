@@ -17,7 +17,7 @@
 ### `jsonnet/build/`
 
 - `skinConfig.libsonnet`：皮肤元信息和 `config.yaml` 键盘映射。
-- `keyboardRegistry.libsonnet`：注册所有输出模块；中文拼音不再按 `keyboard_layout` 单选，9/14/17/18/26/27 六套布局全部产出，由 `config.yaml` 的 `pinyin9`~`pinyin27` 槽位配合 `action.keyboardType` 运行时互切；`splitCarrier/` 将默认布局与 `split_keyboard_layout` 合成一个主槽的双态键盘。
+- `keyboardRegistry.libsonnet`：注册所有输出模块；中文拼音不再按 `keyboard_layout` 单选，9/14/17/18/26/27 六套布局全部产出，由 `config.yaml` 的 `pinyin9`~`pinyin27` 槽位配合 `action.keyboardType` 运行时互切。
 - `context.libsonnet`：设备上下文、基础尺寸、键盘布局汇总和功能行插入；`withLayout()` 负责按布局覆写 `Settings.keyboard_layout`。
 
 旧的一行式 `entries/` 已取消。新增完整输出键盘时直接更新 `keyboardRegistry.libsonnet`、`skinConfig.libsonnet` 和 `main.jsonnet`。
