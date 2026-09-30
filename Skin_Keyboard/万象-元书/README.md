@@ -9,7 +9,7 @@
 ## 主要特性
 
 - 中文键盘可选 `9`、`14`、`17`、`18`、`26` 和 `27` 键，英文键盘统一使用 26 键。
-- 全部中文布局同时打包进皮肤；`enable_layout_switcher` 开启后，工具栏的 `keyboard_switcher` 打开布局切换浮动面板，运行时在 9/14/17/18/26/27 键之间直接跳转并绑定对应方案（默认关闭，关闭时按钮不显示、不绑方案）。
+- `enable_layout_switcher` 默认关闭，此时只构建 `keyboard_layout` 指定的默认布局；开启后构建全部中文布局，并通过工具栏的 `keyboard_switcher` 在 9/14/17/18/26/27 键之间直接跳转并绑定对应方案。
 - 支持 iPhone 横竖屏、iPad 独立四行布局与 iPad 浮动键盘。
 - 支持浅色/深色配色、iOS 26 风格、按键间距、圆角和分类字号调整。
 - 支持功能行、预编辑通知动作、上下划、长按菜单、候选词操作和纵向候选。
@@ -43,16 +43,16 @@
 | --- | --- | --- |
 | `26` | 中文 26 键 | 默认布局，支持 `swipe_assist_mode` |
 | `27` | 搜狗双拼 27 键 | 在 26 键第二行增加 `;` 键，用于输入 `ing` |
-| `18` | 分组拼音 18 键 | 可由 `is_wanxiang_18` 控制万象转写动作 |
+| `18` | 分组拼音 18 键 | 发送小写代表键，Shift 状态发送大写代表键 |
 | `17` | 乱序分组拼音 17 键 | 支持复合字母标签、长按与上下划 |
-| `14` | 分组拼音 14 键 | 可由 `is_wanxiang_14` 控制万象转写动作 |
+| `14` | 分组拼音 14 键 | 发送小写代表键，Shift 状态发送大写代表键 |
 | `9` | 中文九键 | 支持 T9 字母分组、长按字符和上下划符号 |
 
 传入其他数值时会回退到 26 键。英文键盘不随该选项改变键数，始终使用 26 键。
 
-`keyboard_layout` 现在只决定**默认布局**（即 `config.yaml` 里 `pinyin` 主槽指向哪一套，以及英文键盘、数字键盘等共享键盘的行为）；构建时六套布局会全部产出到 `light/`、`dark/`，并分别注册为 `pinyin9`、`pinyin14`、`pinyin17`、`pinyin18`、`pinyin26`、`pinyin27` 槽位，运行时通过工具栏按钮打开的布局切换面板互相跳转。
+`keyboard_layout` 决定 `config.yaml` 中 `pinyin` 主槽使用的默认布局。`enable_layout_switcher: false` 时只构建该布局及其英文返回路径；开启后六套布局全部产出到 `light/`、`dark/`，并分别注册为 `pinyin9`、`pinyin14`、`pinyin17`、`pinyin18`、`pinyin26`、`pinyin27` 槽位，运行时通过工具栏按钮打开的布局切换面板互相跳转。
 
-> `enable_layout_switcher: true` 时，面板切到任一中文布局会按照 `Custom.libsonnet` 的 `keyboard_layout_schemas` 同时切换对应 Rime 方案（默认关闭，此时只显示皮肤布局、不切方案）：
+> `enable_layout_switcher: true` 时，面板切到任一中文布局会按照 `Custom.libsonnet` 的 `keyboard_layout_schemas` 同时切换对应 Rime 方案：
 >
 > | 布局 | 方案 |
 > |---|---|
@@ -130,13 +130,11 @@
 | 参数 | 默认值 | 作用范围 | 说明 |
 | --- | --- | --- | --- |
 | `keyboard_layout` | `26` | iPhone 中文键盘 | 默认布局，选择 `9/14/17/18/26/27` 键 |
-| `enable_layout_switcher` | `false` | 全局 | 布局切换功能总开关：`false` 时工具栏不显示 `keyboard_switcher` 按钮、`keyboard_layout_schemas` 不生效 |
+| `enable_layout_switcher` | `false` | 全局 | 布局切换功能总开关：`false` 时只构建默认布局且不显示切换按钮；`true` 时构建全部布局 |
 | `keyboard_layout_schemas` | 见下表 | 布局切换浮动面板 | 仅 `enable_layout_switcher: true` 时生效；选择中文布局时同时切换皮肤键盘和 Rime 方案 |
 | `wanxiang_9_hintSymbol` | `true` | 中文九键 | `true` 使长按字符直接上屏，`false` 作为 Rime 字符输入 |
 | `swap_9_123_symbol` | `false` | 中文九键 | 交换左下角 123 键与符号键 |
 | `swap_numeric_return_symbol` | `false` | 数字键盘 | 交换返回键与符号切换键 |
-| `is_wanxiang_18` | `true` | 18 键 | 使用万象 18 键大写转写规则 |
-| `is_wanxiang_14` | `true` | 14 键 | 使用万象 14 键大写转写规则 |
 | `is_letter_capital` | `false` | 中文 9/14/17/18/26/27 键 | 只改变字母常态显示，不改变按键输入动作 |
 | `fix_sf_symbol` | `false` | 全局兼容图标 | 用兼容性更好的 SF Symbol 替换部分新图标 |
 | `show_swipe` | `true` | 具有上下划数据的键盘 | 只控制上下划前景是否显示，不关闭实际划动动作 |
@@ -452,7 +450,7 @@ jsonnet jsonnet/main.jsonnet -o /tmp/WanxiangSkin.json
 jsonnet -m . jsonnet/main.jsonnet
 ```
 
-> 六套中文布局输出较多，`main.jsonnet` 在内存受限环境（例如 iSH）可能报 `FATAL ERROR: a memory allocation error occurred`；请改在内存充足的电脑或元书开发者模式中构建。皮肤内不再包含 Python 构建脚本。
+> 开启布局切换后会同时输出六套中文布局，`main.jsonnet` 在内存受限环境（例如 iSH）可能报 `FATAL ERROR: a memory allocation error occurred`；请改在内存充足的电脑或元书开发者模式中构建。皮肤内不再包含 Python 构建脚本。
 
 修改键盘布局或公共组件后，建议至少验证：
 

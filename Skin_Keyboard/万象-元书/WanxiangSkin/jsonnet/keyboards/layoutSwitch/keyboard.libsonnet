@@ -7,8 +7,7 @@ local color = appearance.color;
 local fontSize = appearance.fontSize;
 local styleFactories = import '../../design/styleFactories.libsonnet';
 
-// 六种布局的方案名统一从 Custom.keyboard_layout_schemas 读取。
-// enable_layout_switcher 关闭时只切皮肤键盘、不绑定方案。
+// 六种布局的方案名统一从 Custom.keyboard_layout_schemas 读取；本面板仅在布局切换开启时输出。
 local layouts = [
   { key: 'Switch9', slot: 'pinyin9', icon: '9.square.fill', label: '9键', number: '9' },
   { key: 'Switch14', slot: 'pinyin14', icon: '14.square.fill', label: '14键', number: '14' },

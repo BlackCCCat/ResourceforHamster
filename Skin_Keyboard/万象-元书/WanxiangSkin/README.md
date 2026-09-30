@@ -38,13 +38,12 @@ jsonnet/
 ### 布局与基础行为
 
 - `keyboard_layout`：`9`、`14`、`17`、`18`、`26` 或 `27`，选择默认中文布局。
-- `enable_layout_switcher`：布局切换功能总开关，默认 `false`；关闭时工具栏不显示 `keyboard_switcher` 按钮，`keyboard_layout_schemas` 不生效。
+- `enable_layout_switcher`：布局切换功能总开关，默认 `false`；关闭时只构建默认布局且不显示 `keyboard_switcher`，开启时构建全部布局。
 - `keyboard_layout_schemas`：布局切换面板绑定的 Rime 方案名，9/14/17/18/26/27 键分别是 `wanxiang_t9i`、`wanxiang_14`、`wanxiang_17`、`wanxiang_18`、`wanxiang_pro`、`wanxiang_pro`；仅开关开启时生效。
 - `27`：在中文 26 键第二行增加 `;`，用于搜狗双拼 `ing`。
 - `wanxiang_9_hintSymbol`：控制九键长按字符使用 `symbol` 还是 `character`。
 - `swap_9_123_symbol`：交换九键底行的 123 与符号按钮。
 - `swap_numeric_return_symbol`：交换数字键盘底行的返回与切换按钮。
-- `is_wanxiang_14`、`is_wanxiang_18`：控制 14/18 键字符动作。
 - `is_letter_capital`：控制中文 9/14/17/18/26/27 键的字母常态大小写显示。
 - `show_swipe`：控制普通按键上下划前景显示。
 - `show_wanxiang`：控制普通拼音空格上的“万象”。

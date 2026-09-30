@@ -11,8 +11,8 @@
   keyboard_layout: 26,
 
   // 布局切换功能总开关（默认关闭）。
-  // false: 工具栏不注册 keyboard_switcher 按钮（配置数组里写了也会被自动过滤），面板按钮不绑定方案。
-  // true:  工具栏显示 keyboard_switcher 按钮，且面板切布局时按下方 keyboard_layout_schemas 绑定 Rime 方案。
+  // false: 只构建 keyboard_layout 指定的默认布局，工具栏不注册 keyboard_switcher 按钮。
+  // true:  构建全部布局并显示 keyboard_switcher 按钮，切换时按下方配置绑定 Rime 方案。
   enable_layout_switcher: false,
 
   // 布局切换浮动面板使用的 Rime 方案名；按需修改为设备上已部署的方案 ID。
@@ -33,8 +33,7 @@
   // 数字键盘是否交换左侧返回按钮和右侧切换键盘按钮位置
   swap_numeric_return_symbol: false,
 
-  // 是否使用万象方案对应的分组大写编码：14/18 键固定发大写代表键。
-  // 17 键保持原有小写代表键规则，便于搭配 pro/乱序17。
+  // 14/17/18 键发送小写代表键，大写仅由 Shift 状态触发。
 
   // 功能按键配置
   function_button_config: {

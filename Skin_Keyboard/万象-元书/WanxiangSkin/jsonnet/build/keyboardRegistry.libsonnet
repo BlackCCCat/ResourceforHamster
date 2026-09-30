@@ -1,8 +1,7 @@
 // 汇总最终参与输出的键盘模块。
-// 中文拼音不再按 Custom.keyboard_layout 单选：全部布局都会产出，
-// 由 config.yaml 中的 pinyin9/14/17/18/26/27 槽位配合 action.keyboardType 在运行时互相跳转。
+// 注册可参与输出的全部键盘模块；main.jsonnet 再按布局切换开关选择实际产物。
 {
-  // iPhone 中文拼音的全部布局。26 与 27 共用同一键盘族，靠 new() 的 layoutOverride 区分分号键。
+  // iPhone 中文拼音模块。26 与 27 共用同一键盘族，靠 new() 的 layoutOverride 区分分号键。
   pinyin9: import '../keyboards/pinyin9/keyboard.libsonnet',
   pinyin14: import '../keyboards/pinyinGrouped/pinyin14/keyboard.libsonnet',
   pinyin17: import '../keyboards/pinyinGrouped/pinyin17/keyboard.libsonnet',
