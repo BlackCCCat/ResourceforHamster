@@ -9,7 +9,7 @@
 ## 主要特性
 
 - 中文键盘可选 `9`、`14`、`17`、`18`、`26` 和 `27` 键，英文键盘统一使用 26 键。
-- 全部中文布局同时打包进皮肤，工具栏的 `keyboard_switcher` 打开布局切换浮动面板，运行时在 9/14/17/18/26/27 键之间直接跳转，无需重新生成皮肤。
+- 全部中文布局同时打包进皮肤；`enable_layout_switcher` 开启后，工具栏的 `keyboard_switcher` 打开布局切换浮动面板，运行时在 9/14/17/18/26/27 键之间直接跳转并绑定对应方案（默认关闭，关闭时按钮不显示、不绑方案）。
 - 支持 iPhone 横竖屏、iPad 独立四行布局与 iPad 浮动键盘。
 - 支持浅色/深色配色、iOS 26 风格、按键间距、圆角和分类字号调整。
 - 支持功能行、预编辑通知动作、上下划、长按菜单、候选词操作和纵向候选。
@@ -52,7 +52,7 @@
 
 `keyboard_layout` 现在只决定**默认布局**（即 `config.yaml` 里 `pinyin` 主槽指向哪一套，以及英文键盘、数字键盘等共享键盘的行为）；构建时六套布局会全部产出到 `light/`、`dark/`，并分别注册为 `pinyin9`、`pinyin14`、`pinyin17`、`pinyin18`、`pinyin26`、`pinyin27` 槽位，运行时通过工具栏按钮打开的布局切换面板互相跳转。
 
-> 面板切到任一中文布局时，按照 `Custom.libsonnet` 的 `keyboard_layout_schemas` 同时切换对应 Rime 方案：
+> `enable_layout_switcher: true` 时，面板切到任一中文布局会按照 `Custom.libsonnet` 的 `keyboard_layout_schemas` 同时切换对应 Rime 方案（默认关闭，此时只显示皮肤布局、不切方案）：
 >
 > | 布局 | 方案 |
 > |---|---|
@@ -130,7 +130,8 @@
 | 参数 | 默认值 | 作用范围 | 说明 |
 | --- | --- | --- | --- |
 | `keyboard_layout` | `26` | iPhone 中文键盘 | 默认布局，选择 `9/14/17/18/26/27` 键 |
-| `keyboard_layout_schemas` | 见下表 | 布局切换浮动面板 | 选择中文布局时同时切换皮肤键盘和 Rime 方案 |
+| `enable_layout_switcher` | `false` | 全局 | 布局切换功能总开关：`false` 时工具栏不显示 `keyboard_switcher` 按钮、`keyboard_layout_schemas` 不生效 |
+| `keyboard_layout_schemas` | 见下表 | 布局切换浮动面板 | 仅 `enable_layout_switcher: true` 时生效；选择中文布局时同时切换皮肤键盘和 Rime 方案 |
 | `wanxiang_9_hintSymbol` | `true` | 中文九键 | `true` 使长按字符直接上屏，`false` 作为 Rime 字符输入 |
 | `swap_9_123_symbol` | `false` | 中文九键 | 交换左下角 123 键与符号键 |
 | `swap_numeric_return_symbol` | `false` | 数字键盘 | 交换返回键与符号切换键 |
@@ -355,7 +356,7 @@ iPhone 与 iPad 共用同一组 ID：
 | `symbols` | 使用 `#toggleSymbolBar` 打开/关闭符号栏 |
 | `note` | 打开常用语 |
 | `clipboard` | 打开剪切板 |
-| `keyboard_switcher` | 打开布局切换浮动面板，在 9/14/17/18/26/27 键之间跳转 |
+| `keyboard_switcher` | 打开布局切换浮动面板，在 9/14/17/18/26/27 键之间跳转（需 `enable_layout_switcher: true`，否则不显示） |
 | `hide` | 收起键盘 |
 | `menu_or_panel` | 根据 `toolbar_menu` 打开键盘菜单或内置浮动键盘 |
 | `google` | Google 搜索剪切板内容 |

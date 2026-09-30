@@ -51,7 +51,7 @@ description: Use when modifying the WanxiangSkin Hamster3 keyboard under Resourc
 - `pinyinGrouped`：分组拼音 14/17/18 键的共用键盘族，字号参数为 `pinyin_grouped_letter_font_size`。
 - `is_letter_capital`：控制中文 9/14/17/18/26/27 键的字母常态大小写，17 键的显式组合标签也必须遵循该配置。
 - `keyboard_layout = 27`：中文 26 键第二行追加 `;`。
-- 布局运行时切换：六套中文布局全部产出并注册为 `pinyin9`~`pinyin27` 槽位；英文键盘按来源布局产出 `alphabetic9`~`alphabetic27`，中英互切回到原中文布局。`keyboards/layoutSwitch/` 是布局切换浮动面板，由工具栏 ID `keyboard_switcher` 打开；六种布局均由 `Custom.keyboard_layout_schemas` 绑定对应 Rime 方案。14/18 键固定发大写代表键配合万象分组转写，17 键维持小写配合 `乱序17`。
+- 布局运行时切换：受 `Custom.enable_layout_switcher` 总开关控制（默认 false）。开启时：工具栏 registry 才注册 `keyboard_switcher` ID（关闭时配置数组中的同名项被 `getToolbarIds` 自动过滤），面板切布局按 `Custom.keyboard_layout_schemas` 绑定 Rime 方案。关闭时面板按钮只切 `keyboardType` 不绑方案。六套中文布局产出并注册为 `pinyin9`~`pinyin27` 槽位；英文键盘按来源布局产出 `alphabetic9`~`alphabetic27`，中英互切回到原中文布局。14/18 键发小写代表键，17 键发小写代表键（前者此前有大写历史，勿回退）。
 - 目前 `keyboardType` 切换只对当前键盘会话有效，收起重开恢复 `pinyin` 主槽。不要宣称六种布局可持久记忆；参考皮肤使用的是一个键盘文件内的双态 `split` + `#toggleSplitState`，不能直接推广为六态。
 - `buildContext.withLayout(Settings, layout)`：布局相关分支必须读本布局的值；不要再让拼音键盘直接读 `Custom.libsonnet` 的全局 `keyboard_layout`。
 - `swipe_assist_mode`：仅中文 26 键；`none` 使用原通知，其他模式使用 `preeditChanged` 辅助通知并重排长按菜单。

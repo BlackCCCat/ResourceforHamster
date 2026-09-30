@@ -10,8 +10,13 @@
   // 其他值会回退到 26
   keyboard_layout: 26,
 
+  // 布局切换功能总开关（默认关闭）。
+  // false: 工具栏不注册 keyboard_switcher 按钮（配置数组里写了也会被自动过滤），面板按钮不绑定方案。
+  // true:  工具栏显示 keyboard_switcher 按钮，且面板切布局时按下方 keyboard_layout_schemas 绑定 Rime 方案。
+  enable_layout_switcher: false,
+
   // 布局切换浮动面板使用的 Rime 方案名；按需修改为设备上已部署的方案 ID。
-  // 选择任一中文布局时，同时切换下方绑定的方案。
+  // 仅在 enable_layout_switcher: true 时生效；选择任一中文布局时同时切换绑定的方案。
   keyboard_layout_schemas: {
     '9': 'wanxiang_t9i',
     '14': 'wanxiang_14',

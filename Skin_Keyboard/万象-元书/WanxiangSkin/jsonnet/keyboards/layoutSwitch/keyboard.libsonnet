@@ -8,6 +8,7 @@ local fontSize = appearance.fontSize;
 local styleFactories = import '../../design/styleFactories.libsonnet';
 
 // 六种布局的方案名统一从 Custom.keyboard_layout_schemas 读取。
+// enable_layout_switcher 关闭时只切皮肤键盘、不绑定方案。
 local layouts = [
   { key: 'Switch9', slot: 'pinyin9', icon: '9.square.fill', label: '9键', number: '9' },
   { key: 'Switch14', slot: 'pinyin14', icon: '14.square.fill', label: '14键', number: '14' },
@@ -19,7 +20,10 @@ local layouts = [
 
 local switchAction(layout) =
   local schemas = Settings.keyboard_layout_schemas;
-  if std.objectHas(schemas, layout.number) && std.type(schemas[layout.number]) == 'string' && schemas[layout.number] != '' then
+  if Settings.enable_layout_switcher
+     && std.objectHas(schemas, layout.number)
+     && std.type(schemas[layout.number]) == 'string'
+     && schemas[layout.number] != '' then
     { combine: [{ keyboardType: layout.slot }, { switchRimeSchema: schemas[layout.number] }] }
   else
     { keyboardType: layout.slot };
