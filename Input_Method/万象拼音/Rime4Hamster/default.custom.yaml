@@ -1,7 +1,13 @@
+customization:
+  distribution_code_name: hamster3
+  distribution_version: ""
+  generator: "Rime::SwitcherSettings"
+  modified_time: "Wed Sep 30 10:44:13 2026"
+  rime_version: 1.17.0
 patch:
-  menu/page_size: 6  # 默认候选词显示个数
-
-  # 方案列表
   schema_list:
-    - schema: wanxiang         
-    - schema: melt_eng
+    - {schema: wanxiang_pro}
+    - {schema: wanxiang_english}
+    - {schema: wanxiang_14}
+    - {schema: wanxiang_17}
+    - {schema: wanxiang_18}

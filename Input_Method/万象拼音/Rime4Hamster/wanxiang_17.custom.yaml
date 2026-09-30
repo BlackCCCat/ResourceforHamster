@@ -1,0 +1,210 @@
+patch:
+  page_size: 5  # 候选词个数
+
+  super_comment/candidate_length: 30         # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理    
+  super_comment/chaifen: "chaifen"
+  super_comment/cand_type:
+    user_phrase: "📌" # 自造词
+    sentence: "💬" # 模型造句
+    phrase: "🏷" # 字典词库
+    table: "🗂" # 表
+    user_table: "📝" # custom_phrase
+    completion: "♾️" # 补全
+    abbrev: "🚀" # 简码
+    derived: "💡" # 派生
+    fallback: "❗"
+
+  force_upper_aux:
+    hotkey: "period" #用来固定候选的快捷键，原理是用双大写字母定字,能用组合键能用符号Tab等，按一下固定当前可见候选，按两下固定N-1个字状态下记录的字
+    symbol: "›" #用来替代双大写字母辅助的preedit视觉拉长的问题
+  
+
+  
+  switches/@0/reset: 0 # 默认中文状态
+  switches/@4/reset: 0 # 默认翻译关闭
+  switches/@5/reset: 1 # 默认开启拆分
+  switches/@6/reset: 0 # 默认开启大字集
+  switches/@7/reset: 1 # 默认提示开
+  switches/@8/reset: 1 # 预测默认开
+  switches/@10/reset: 1 # 默认辅助开
+  switches/@11/reset: 0 # 默认简体中文
+  switches/@12/reset: 1 # 默认简码开
+
+
+
+  super_processor:
+    enable_backspace_limit: true # 开启/关闭退格限制
+    enable_seg_loop: true # 开启/关闭分词符（'）循环
+    enable_tone_fallback: true # 启用声调回退
+    enable_predict_space: false # 启用联想空格打断，直接上屏空格并清空联想，对齐大厂，如果用原生librime-predict这个还有用留着
+    kp_number_mode: auto # 小键盘模式 (auto / compose)
+    limit_repeated: "8,40" #格式："最大重复声母数,最大候选字数"
+    select_character: "[,]" # 开启以词定字，自动拆解第一位上屏首字，第二位上屏尾字
+    # 下面这些写法都支持：
+    # select_character: "[,]"                      # [ 上屏首字，] 上屏尾字（推荐）
+    # select_character: "bracketleft, bracketright"  # [ 上屏首字，] 上屏尾字（英文全拼）
+
+  super_tips:
+    db_name: "tips" # 可选字段，不写的话默认使用 "lua/tips"，相对路径
+    tips_key: "Break" # key英文单词不清楚去default找
+    files: # 自定义数据文件列表（可选，不配置则使用默认文件）
+      - lua/data/tips_show.txt # 仍可保留默认文件
+      - lua/data/tips_user.txt     # 用户自定义文件
+    disabled_types:
+      - "禁用类型A"
+      - "禁用类型B"
+      # 禁用的 tips 类型，初始化 tips 数据库的时候会直接忽略相关规则，修改部署后生效
+      # 可选项为：偏旁，符号，化学式，时间，符号，组字，翻译，表情，货币，车牌, 单位
+
+
+  # @符号增加邮箱后缀
+  punctuator/half_shape/+:
+    '@':
+     - '@'
+     - '@gmail.com'
+     - '@outlook.com'
+     - '@qq.com'
+     - '@163.com'
+    '[':
+     - '〔'
+     - '｛'
+     - '〖'
+     - '『'
+    ']':
+     - '〕'
+     - '｝'
+     - '〗'
+     - '』'
+
+
+  cn_en/user_dict: en_dicts/flypy           # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
+  
+
+
+  # key_binder/search: "`"             # 辅码引导符，要添加到 speller/alphabet
+  key_binder/bindings/+:             # 也可以再增加方案专有的
+    - { when: always, toggle: chinese_english, accept: Control+e }       # 切换翻译功能
+    - { when: always, toggle: chaifen_switch, accept: Control+c }       # 切换拆分功能
+    - { when: always, toggle: s2s, accept: Control+Shift+4 }       # 切换简繁
+    - { when: always, toggle: super_tips, accept: Control+t }       # 切换超级提示
+    - { when: always, toggle: abbrev, accept: Control+q } # 切换简码模式
+
+
+
+
+
+  # 拼写设定
+  speller/algebra:
+    __patch:
+      - wanxiang_algebra:/pro/乱序17
+      - wanxiang_algebra:/pro/直接辅助
+
+  # 取消注释以开启自动无词频造词
+  add_user_dict/enable_auto_phrase: true
+
+
+# 自定义短语
+  custom_phrase/dictionary: custom_phrase_double   # 需要手动创建 custom_phrase_double.dict.yaml 文件
+
+
+
+  #下面用于对/rq和N20250101这样的日期候选自定义（顺序、类型、候选个数）由你完全掌控，前面是对于公历后面默认携带农历
+  # 通用日期时间格式化函数（供 /rq、/sj、/dt、N0101、N20150101 场景复用）
+  # 支持转义：
+  #   \X       —— 转义单个字符 X，按字面量输出（如 \Y \m \H 等）
+  #   [[...]]  —— 区块整体按字面量输出
+  #
+  # 约定占位符：
+  # 【日期】
+  #   Y  四位年份           0000-9999  例：2025
+  #   y  两位年份           00-99      例：25
+  #   m  月（前导零）        01-12      例：02
+  #   n  月（不带前导零）     1-12       例：2
+  #   d  日（前导零）        01-31      例：09
+  #   j  日（不带前导零）     1-31       例：9
+  #
+  # 【时间】
+  #   H  24小时（前导零）   00-23      例：08
+  #   G  24小时（不带零）   0-23       例：8
+  #   I  12小时（前导零）   01-12      例：08
+  #   l  12小时（不带零）   1-12       例：8   （注意是小写 L）
+  #   M  分钟（前导零）     00-59      例：05
+  #   S  秒（前导零）       00-59      例：09
+  #   p  am/pm（小写）     am / pm
+  #   P  AM/PM（大写）     AM / PM
+  # 【时区】
+  #   O  带冒号格式        +08:00、-04:30、+05:45
+  #   o  不带冒号格式      +0800、-0430、+0545
+  date_formats:
+    - "Y年m月d日"
+    - "Y-m-d"
+    - "Y/m/d"
+    - "Y.m.d"
+    - "Ymd"
+    - "Y年n月j日"
+    - "y年n月j日"
+    - "n月j日"
+  time_formats:
+    - "H点M分"
+    - "H:M"
+    - "H:M:S"
+    - "H时M分S秒"
+    - "下午I:M"
+    - "I:M P"
+  datetime_formats:
+    - "Y-m-d H:M:S"
+    - "Y-m-dTH:M:S O"
+    - "YmdHMS"
+    - "Y年m月d日 H点M分"
+    - "y/m/d I:M p"
+
+#下面的数据有需要的可以patch引用
+#特殊优化：部分音节字极少，几乎不参与构词，则提升对应四码字的优先级，仅对小鹤双拼有效，其他双拼方案需作对应修改）
+小鹤双拼提权:
+  __append:
+    - derive/^(.*?)(\d?);(bl|dx|df|eg|fn|kw|ny|tw|vw|yd|rx|fs|ix)$/$1$3/
+    - derive/^(.*?)(\d?);.*?,(bl|dx|df|eg|fn|kw|ny|tw|vw|yd|rx|fs|ix)$/$1$3/
+    - derive/^(.*?)(\d?);.*?,.*?,(bl|dx|df|eg|fn|kw|ny|tw|vw|yd|rx|fs|ix)$/$1$3/
+    - derive/^(.*?)(\d?);.*?,.*?,.*?,(bl|dx|df|eg|fn|kw|ny|tw|vw|yd|rx|fs|ix)$/$1$3/
+#特殊优化：部分音节字极少，几乎不参与构词，则提升对应四码字的优先级，仅对自然码有效，其他双拼方案需作对应修改）
+自然码提权:
+  __append:
+    - derive/^(.*?)(\d?);(bd|dw|df|dw|yl|rw|fs|iw)$/$1$3/
+    - derive/^(.*?)(\d?);.*?,(bd|dw|df|dw|yl|rw|fs|iw)$/$1$3/
+    - derive/^(.*?)(\d?);.*?,.*?,(bd|dw|df|dw|yl|rw|fs|iw)$/$1$3/
+    - derive/^(.*?)(\d?);.*?,.*?,.*?,(bd|dw|df|dw|yl|rw|fs|iw)$/$1$3/
+模糊音: 
+  __append:
+    # n - l
+    - derive/^l/n
+    - derive/^n/l
+    # r - y     开头
+    - derive/^y/r
+    - derive/^r/y
+    # h - f     开头
+    - derive/^h/f
+    - derive/^f/h
+    # r - l     开头
+    - derive/^r/l
+    - derive/^l/r
+    # k - g     开头
+    - derive/^k/g
+    - derive/^g/k
+    # an - ang
+    - derive/([ui]?)([āáǎàa])ng(.*)$/$1$2n$3
+    - derive/([ui]?)([āáǎàa])n(.*)$/$1$2ng$3
+    # en - eng
+    - derive/([ēéěèe])ng(.*)$/$1n$2
+    - derive/([ēéěèe])n(.*)$/$1ng$2
+    # in - ing
+    - derive/([īíǐìi])ng(.*)$/$1n$2
+    - derive/([īíǐìi])n(.*)$/$1ng$2
+    # c - ch
+    - derive/^c([^h]*)/ch$1
+    - derive/^ch/c
+    # z - zh
+    - derive/^z([^h]*)/zh$1
+    - derive/^zh/z
+    # s - sh
+    - derive/^s([^h]*)/sh$1
+    - derive/^sh/s
