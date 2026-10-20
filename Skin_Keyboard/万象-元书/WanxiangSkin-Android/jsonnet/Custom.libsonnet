@@ -1,0 +1,342 @@
+// 集中配置键盘布局、按键交互、工具栏与设备端显示参数。
+{
+  // 当前中文键盘布局（实际生效配置）
+  // 26: 全键（pinyin_26）
+  // 27: 27键（搜狗双拼）
+  // 18: 18键（pinyin_18）
+  // 17: 17键（pinyin_17）
+  // 14: 14键（pinyin_14）
+  // 9:  九键（pinyin_9）
+  // 其他值会回退到 26
+  keyboard_layout: 26,
+
+  // 布局切换功能总开关（默认关闭）。
+  // false: 只构建 keyboard_layout 指定的默认布局，工具栏不注册 keyboard_switcher 按钮。
+  // true:  构建全部布局并显示 keyboard_switcher 按钮，切换时按下方配置绑定 Rime 方案。
+  enable_layout_switcher: false,
+
+  // 布局切换浮动面板使用的 Rime 方案名；按需修改为设备上已部署的方案 ID。
+  // 仅在 enable_layout_switcher: true 时生效；选择任一中文布局时同时切换绑定的方案。
+  keyboard_layout_schemas: {
+    '9': 'wanxiang_t9i',
+    '14': 'wanxiang_14',
+    '17': 'wanxiang_17',
+    '18': 'wanxiang_18',
+    '26': 'wanxiang_pro',
+    '27': 'wanxiang_pro',
+  },
+
+  // 9键按键长按符号是否直接上屏
+  wanxiang_9_hintSymbol: true,
+  // 9键键盘是否交换左下角数字键盘和符号键盘按钮位置
+  swap_9_123_symbol: false,
+  // 数字键盘是否交换左侧返回按钮和右侧切换键盘按钮位置
+  swap_numeric_return_symbol: false,
+
+  // 14/17/18 键发送小写代表键，大写仅由 Shift 状态触发。
+
+  // 功能按键配置
+  function_button_config: {
+    // 是否启用功能行（按设备区分）
+    with_functions_row: {
+      iPhone: true,
+      iPad: false,
+    },
+
+    // 是否启用功能按键通知功能
+    enable_notification: true,
+
+    // 功能行按钮顺序；移除某项后对应按钮不再显示。
+    // 可用值:
+    // left: 左移
+    // head: 行首
+    // select: 选择
+    // cut: 剪切
+    // copy: 复制
+    // paste: 粘贴
+    // tail: 行尾
+    // right: 右移
+    order: [
+      'left',
+      'head',
+      'select',
+      'cut',
+      'copy',
+      'paste',
+      'tail',
+      'right',
+    ],
+  },
+
+  // 中文拼音键盘字母按键是否显示大写（9/14/17/18/26/27键）
+  is_letter_capital: false,
+
+  // 是否修复部分 sf_symbol 不显示问题
+  fix_sf_symbol: false,
+
+  // 是否显示上下划前景
+  show_swipe: true,
+
+  // 中文 26 键划动辅助模式
+  // none: 关闭
+  // up:   上划输入对应字母大写，并把原上划内容追加到长按气泡
+  // down: 下划输入对应字母大写，并把原下划内容追加到长按气泡
+  // all:  上下划都输入对应字母大写，并把原上划、下划内容依次追加到长按气泡
+  swipe_assist_mode: 'none',
+
+  // 中文26/27键、14/17/18键、英文26键与 iPad 26键的 123 按键交互配置
+  button_123_config: {
+    // true: 保持当前 horizontalSymbols 滑动切换
+    // false: 改用下方配置的长按菜单或上下滑动
+    enable_slide: false,
+
+    // 当 enable_slide 为 false 时生效
+    // hint_symbols: 使用长按菜单显示「符号键盘 / emoji键盘」
+    // swipe: 使用上下滑动切换「符号键盘 / emoji键盘」
+    secondary_action_mode: 'swipe',
+
+    // 当 secondary_action_mode 为 swipe 时生效
+    // 可选值: symbolic / emojis
+    swipe_up_keyboard: 'emojis',
+    swipe_down_keyboard: 'symbolic',
+
+    // 是否显示 123Button 的上下划角标
+    // 只影响角标显示，不受 show_swipe 影响，也不影响 swipe 动作本身
+    show_swipe_indicators: false,
+  },
+
+  // 九键 / 数字键盘的符号按钮交互配置
+  button_symbol_config: {
+    // true: 保持当前 horizontalSymbols 滑动切换
+    // false: 改用下方配置的长按菜单或上下滑动
+    enable_slide: false,
+
+    // 当 enable_slide 为 false 时生效
+    // hint_symbols: 使用长按菜单显示「emoji键盘」
+    // swipe: 仅使用上滑切换到次级键盘
+    secondary_action_mode: 'swipe',
+
+    // 当 secondary_action_mode 为 swipe 时生效
+    // symbolButton 点击动作本身进入 symbolic，次级目标保留 emoji 键盘。
+    swipe_up_keyboard: 'emojis',
+  },
+
+  // tips 上屏动作
+  // 万象默认可改为 { character: ',' }
+  tips_button_action: { sendKeys: 'Break' },
+
+  // 空格按键是否显示“万象”标识
+  show_wanxiang: true,
+
+  // 是否启用 iOS26 风格（统一按键颜色，Light模式下调整高亮）
+  ios26_style: true,
+
+  // 字号配置
+  font_size_config: {
+    // 仅控制26字母键(q~m)前景文字大小
+    pinyin_26_letter_font_size: 20,
+
+    // 仅控制分组拼音（14/17/18键）字母前景文字大小
+    pinyin_grouped_letter_font_size: 20,
+
+    // 仅控制9键字母前景文字大小
+    pinyin_9_letter_font_size: 20,
+
+    // 仅控制数字键盘数字前景文字大小
+    numeric_digit_font_size: 20,
+  },
+
+  // 按键间距
+  button_insets: {
+    // 较大竖屏间距示例:
+    // { top: 5, left: 3, bottom: 5, right: 3 }
+    portrait: { top: 3.8, left: 2.5, right: 2.5, bottom: 3.8 },
+
+    // 较大横屏间距示例:
+    // { top: 3, left: 2, bottom: 3, right: 2 }
+    landscape: { top: 2.2, left: 1.8, bottom: 2.2, right: 1.8 },
+  },
+
+  // 按键圆角，常用值为 7 / 8 / 8.5。
+  cornerRadius: 8,
+
+  // shift 预编辑配置（用于中文26/27键与 iPad 26键）
+  shift_config: {
+    // 是否启用 shift 的预编辑特殊动作
+    enable_preedit: true,
+
+    // shift 在预编辑状态的动作
+    preedit_action: { character: '/' },
+
+    // shift 在预编辑状态显示的 sf symbol
+    // 为空时使用默认符号
+    preedit_sf_symbol: '',
+
+    // 26键shift按键预编辑状态上划操作
+    // 可选：分词、辅助筛选，分词为'，辅助筛选为`
+    preedit_swipeup_action: '辅助筛选',
+  },
+
+  // 横向候选栏最右侧按钮：
+  // 0: 无
+  // 1: 展开候选按钮
+  // 2: 收起键盘按钮，可在预测开启时保留收起入口。
+  horizon_candidate_button: 2,
+
+  // 工具栏布局配置
+  toolbar_config: {
+    // 是否启用键盘菜单页面
+    // false: 使用皮肤内置的悬浮键盘
+    // true: 使用 app 的 keyboardMenu
+    toolbar_menu: false,
+
+    // 工具栏高度（在开启comment的情况下，该高度比较合适，如果不开启，使用30或者40都可以）
+    toolbar_height: 50,
+
+    // 工具栏滑动区域按钮显示方向
+    content_right_to_left: false,
+
+    // segmented:
+    // 固定按钮 + 左侧横向滑动 + 固定中间按钮 + 右侧横向滑动 + 固定收起按钮
+    //
+    // carousel:
+    // 固定首按钮 + 中间整体横向滑动 + 固定尾按钮
+    mode: 'segmented',
+
+    // 可用按钮 ID:
+    // script: 脚本
+    // command: 命令面板
+    // symbols: 符号栏
+    // note: 常用语
+    // clipboard: 剪切板
+    // keyboard_switcher: 布局切换浮动面板（9/14/17/18/26/27 键互相切换）
+    // hide: 收起键盘
+    // menu_or_panel: 键盘菜单或浮动键盘
+    // google: Google 搜索
+    // baidu: 百度搜索
+    // bing: Bing 搜索
+    // safari: 浏览器打开剪切板内容
+    // apple: App Store 搜索（仅 iOS；安卓默认不显示）
+    // keyboard_settings: 键盘设置
+    // keyboard_skins: 皮肤管理
+    // skin_adjust: 皮肤调整
+    // keyboard_performance: 内存占用
+    // rime_switcher: 方案切换
+    // embedding_toggle: 内嵌开关
+    // symbol: 符号键盘
+    // emoji: 表情键盘
+    // left_hand: 左手键盘
+    // right_hand: 右手键盘
+    // switch_keyboard: 切换手机键盘
+    // simplified_traditional: 简繁切换
+    // undo: 撤销
+    // redo: 重做
+    // cut: 剪切
+    // copy: 复制
+    // paste: 粘贴
+
+    segmented: {
+      // 第一种布局
+      left_fixed: 'script',
+      left_slide: [
+        'command',
+        'symbols',
+        'google',
+        'safari',
+        'bing',
+        // 数组末尾可继续添加按钮 ID。
+      ],
+      center_fixed: 'menu_or_panel',
+      right_slide: [
+        'note',
+        'clipboard',
+        'keyboard_switcher',
+        'symbol',
+        'emoji',
+        // 数组末尾可继续添加按钮 ID。
+      ],
+      right_fixed: 'hide',
+    },
+
+    carousel: {
+      // 第二种布局
+      // 中间区域当前显示 5 个按钮，只有按钮数量超过 5 个时才会产生横向滑动
+      left_fixed: 'menu_or_panel',
+      center_slide: [
+        'script',
+        'command',
+        'symbols',
+        'google',
+        'note',
+        'clipboard',
+        'keyboard_switcher',
+        'emoji',
+        'symbol',
+        'skin_adjust',
+        'keyboard_settings',
+        'keyboard_skins',
+        'baidu',
+        'bing',
+        // 数组末尾可继续添加按钮 ID。
+      ],
+      right_fixed: 'hide',
+    },
+
+    // iPad 工具栏
+    // 首按钮固定为 menu_or_panel
+    // 末按钮固定为 hide
+    // 中间为显示 11 个按钮的横向滑动区域
+    ipad: {
+      // 是否启用键盘菜单页面
+      // false: 使用皮肤内置的悬浮键盘
+      // true: 使用 app 的 keyboardMenu
+      toolbar_menu: false,
+
+      // 工具栏滑动区域按钮显示方向
+      content_right_to_left: false,
+
+      // 工具栏高度（在开启comment的情况下，iPad上该高度比较合适）
+      toolbar_height: 57,
+
+      // 可用按钮 ID:
+      // keyboard_settings: 键盘设置
+      // keyboard_skins: 皮肤管理
+      // skin_adjust: 皮肤调整
+      // keyboard_performance: 内存占用
+      // embedding_toggle: 内嵌开关
+      // rime_switcher: 方案切换
+      // google: Google 搜索
+      // baidu: 百度搜索
+      // bing: Bing 搜索
+      // safari: 浏览器打开剪切板内容
+      // apple: App Store 搜索（仅 iOS；安卓默认不显示）
+      // script: 脚本
+      // command: 命令面板
+      // symbols: 符号栏
+      // note: 常用语
+      // clipboard: 剪切板
+      // symbol: 符号键盘
+      // emoji: 表情键盘
+      // 中间区域当前显示 11 个按钮，只有按钮数量超过 11 个时才会产生横向滑动
+      center_slide: [
+        'keyboard_settings',
+        'command',
+        'symbols',
+        // 'keyboard_skins',
+        'embedding_toggle',
+        // 'rime_switcher',
+        'google',
+        'safari',
+        'script',
+        'note',
+        'clipboard',
+        'symbol',
+        'emoji',
+        'baidu',
+        'bing',
+        'skin_adjust',
+        'keyboard_performance',
+      ],
+    },
+  },
+}
