@@ -30,7 +30,7 @@ switches:
     states: [半角, 全角]
   - name: emoji  #候选出现emoji滤镜，会显示在相应的候选后面，万象侧重于tips提示，避免候选被占用，因此默认为reset: 0，归属opencc emoji滤镜
     states: [表情关, 表情开]
-  - name: chinese_english  #候选进入翻译模式滤镜，会显示在相应的候选后面，万象侧重于tips提示，避免候选被占用，快捷键配套ctrl+e,归属opencc 翻译滤镜
+  - name: english_chinese  #候选进入翻译模式滤镜，会显示在相应的候选后面，万象侧重于tips提示，避免候选被占用，快捷键配套ctrl+e,归属opencc 翻译滤镜
     states: [翻译关, 翻译开]
   - name: chaifen_switch  #开启后在候选的注释里面实时显示辅助码的拆分提醒优先级高于普通辅助提醒，不开启则采用系统配置，快捷键配套ctrl+c,影响的是comment_format，归属：super_comment.lua
     states: [拆分关, 拆分开]
@@ -352,7 +352,7 @@ key_binder:
     # 分号用于次选，微软、搜狗双拼不可启用
     #- { when: has_menu, accept: semicolon, send: 2 }
     # 使用Control+e进入翻译模式
-    - {when: has_menu, accept: "Control+e", toggle: chinese_english}
+    - {when: has_menu, accept: "Control+e", toggle: english_chinese}
     # 使用快捷键Control+c拆分显示
     - {when: has_menu, accept: "Control+c", toggle: chaifen_switch}
     # 使用快捷键Control+a开启和关闭辅助码显示
@@ -567,7 +567,7 @@ super_replacer:
       files:
         - lua/data/chaifen.txt
     # 场景2：输入 'hello' -> 显示 'hello 〔你好 | 哈喽〕'
-    - option: chinese_english
+    - option: english_chinese
       mode: append  # <--- 添加注释模式
       comment_mode: none
       tags: [abc]

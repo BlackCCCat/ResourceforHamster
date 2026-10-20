@@ -54,7 +54,7 @@ patch:
         files:
           - lua/data/emoji.txt
       # 场景2：输入 'hello' -> 显示 'hello 〔你好 | 哈喽〕'
-      - option: chinese_english
+      - option: english_chinese
         mode: append # <--- 添加注释模式
         comment_mode: none
         tags: [abc]

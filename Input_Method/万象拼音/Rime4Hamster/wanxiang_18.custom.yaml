@@ -83,7 +83,7 @@ patch:
 
   # key_binder/search: "`"             # 辅码引导符，要添加到 speller/alphabet
   key_binder/bindings/+:             # 也可以再增加方案专有的
-    - { when: always, toggle: chinese_english, accept: Control+e }       # 切换翻译功能
+    - { when: always, toggle: english_chinese, accept: Control+e }       # 切换翻译功能
     - { when: always, toggle: chaifen_switch, accept: Control+c }       # 切换拆分功能
     - { when: always, toggle: s2s, accept: Control+Shift+4 }       # 切换简繁
     - { when: always, toggle: super_tips, accept: Control+t }       # 切换超级提示

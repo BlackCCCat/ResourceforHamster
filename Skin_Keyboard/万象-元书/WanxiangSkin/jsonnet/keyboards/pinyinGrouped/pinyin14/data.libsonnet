@@ -205,8 +205,8 @@ familyData {
         { action: { sendKeys: 'Control+Shift+4' }, label: { text: 'rimeOptionLabel$s2t' } },  //1
         { action: { sendKeys: 'Control+Shift+4' }, label: { text: 'rimeOptionLabel$s2hk' } },  //2
         { action: { sendKeys: 'Control+Shift+4' }, label: { text: 'rimeOptionLabel$s2tw' } },  //3
-        { action: { sendKeys: 'Control+e' }, label: { text: 'rimeOptionLabel$chinese_english' } },  //4*
-        { action: { sendKeys: 'Control+e' }, label: { text: 'rimeOptionLabel$chinese_english' } },  //5
+        { action: { sendKeys: 'Control+e' }, label: { text: 'rimeOptionLabel$english_chinese' } },  //4*
+        { action: { sendKeys: 'Control+e' }, label: { text: 'rimeOptionLabel$english_chinese' } },  //5
         { action: { sendKeys: 'Control+t' }, label: { text: 'rimeOptionLabel$super_tips' } },  //6*
         { action: { sendKeys: 'Control+t' }, label: { text: 'rimeOptionLabel$super_tips' } },  //7
         { action: { sendKeys: 'Control+q' }, label: { text: 'rimeOptionLabel$abbrev' } },
