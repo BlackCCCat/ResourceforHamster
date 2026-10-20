@@ -477,7 +477,7 @@ git tag wanxiangskin-2026.09.09.1
 git push origin wanxiangskin-2026.09.09.1
 ```
 
-发布流程会将 Tag 写入 `version.txt`，生成 `WanxiangSkin.cskin`，并将 `WanxiangSkin-modifier` 作为 ZIP 一同上传到 Release。
+发布流程会将 Tag 分别写入两个皮肤的 `version.txt`，生成 `WanxiangSkin.cskin` 和 `WanxiangSkin-Android.cskin`，并将 `WanxiangSkin-modifier` 作为 ZIP 一同上传到 Release。
 
 ## 皮肤修改 Skill
 
