@@ -29,7 +29,7 @@
 3. 在元书输入法的皮肤页面选择“万象键盘”。
 4. 部署配套的 Rime 配置后重新部署输入方案。
 
-也可使用[自动下载并导入的快捷指令](https://www.icloud.com/shortcuts/2aff51bac0bf41c6b9285a423d05176f)。
+也可使用[自动下载并导入的快捷指令](https://www.icloud.com/shortcuts/d212c933f4354ff5ab3069ff58f6cd75)。
 
 ### 方式二：导入源码并自定义
 
