@@ -55,6 +55,7 @@ patch:
   switches/@8/reset: 1 # 默认简码开
   switches/@10/reset: 1 # 默认提示开
   switches/@11/reset: 0 # 默认大字集
+  
 
   super_replacer:
     db_name: replacer
