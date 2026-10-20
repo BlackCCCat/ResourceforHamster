@@ -89,8 +89,8 @@ local inputModeModule = (
       },
       cn2enButtonHintSymbolsStyleOf4: baseHintStyles.cn2enButtonHintSymbolsStyleOf4 {
         foregroundStyle: [
-          { styleName: 'cn2enButtonHintSymbolsForegroundStyleOf4', conditionKey: 'rime$chinese_english', conditionValue: 'true' },
-          { styleName: 'cn2enButtonHintSymbolsForegroundStyleOf5', conditionKey: 'rime$chinese_english', conditionValue: 'false' },
+          { styleName: 'cn2enButtonHintSymbolsForegroundStyleOf4', conditionKey: 'rime$english_chinese', conditionValue: 'true' },
+          { styleName: 'cn2enButtonHintSymbolsForegroundStyleOf5', conditionKey: 'rime$english_chinese', conditionValue: 'false' },
         ],
       },
       cn2enButtonHintSymbolsStyleOf6: baseHintStyles.cn2enButtonHintSymbolsStyleOf6 {
