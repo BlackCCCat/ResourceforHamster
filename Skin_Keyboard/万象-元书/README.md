@@ -1,6 +1,6 @@
 # 万象键盘·元书皮肤
 
-另有独立的 [Android 兼容测试版](WanxiangSkin-Android/README.md)；其图标素材授权及发布状态见该目录说明。
+另有独立的 [Android 原生图标兼容测试版](WanxiangSkin-Android/README.md)。
 
 `WanxiangSkin` 是一套面向 [元书输入法（Hamster3）](https://apps.apple.com/us/app/%E5%85%83%E4%B9%A6%E8%BE%93%E5%85%A5%E6%B3%95/id6744464701) 的万象键盘皮肤。皮肤以 Jsonnet 维护，支持 iPhone、iPad、浅色/深色模式以及多种中文键盘布局，公开配置集中在 [`WanxiangSkin/jsonnet/Custom.libsonnet`](WanxiangSkin/jsonnet/Custom.libsonnet)。
 

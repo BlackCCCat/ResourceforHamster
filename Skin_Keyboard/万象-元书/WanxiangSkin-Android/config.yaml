@@ -40,9 +40,3 @@ temp_pinyin:
   iPhone:
     landscape: "temp_pinyin_landscape"
     portrait: "temp_pinyin_portrait"
-
-fontFace:
-  - url: "WanxiangIcons.ttf"
-    ranges:
-      - location: 57344
-        length: 166
