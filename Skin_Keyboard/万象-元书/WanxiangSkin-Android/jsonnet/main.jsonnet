@@ -1,7 +1,7 @@
 // 皮肤总入口只负责渲染，不在此展开键盘选择与配置细节。
 local keyboards = import './build/keyboardRegistry.libsonnet';
 local config = import './build/skinConfig.libsonnet';
-local bundledIcons = import './design/bundledIcons.libsonnet';
+local platformIcons = import './design/platformIcons.libsonnet';
 
 
 // 输出文件生成
@@ -10,7 +10,7 @@ local orientations = ['portrait', 'landscape'];
 
 // 先实体化键盘对象，避免递归映射反复求值布局构造器。
 local manifestKeyboard(keyboard) =
-  std.toString(bundledIcons.adapt(std.parseJson(std.toString(keyboard))));
+  std.toString(platformIcons.adapt(std.parseJson(std.toString(keyboard))));
 
 local render(module, prefix) = {
   [theme + '/' + prefix + '_' + orientation + '.yaml']: manifestKeyboard(module.new(theme, orientation))
@@ -52,7 +52,7 @@ local alphabeticOutputs = std.foldl(
 );
 
 pinyinOutputs + alphabeticOutputs + {
-  'config.yaml': std.manifestYamlDoc(config + { fontFace: [bundledIcons.fontFace] + (if std.objectHas(config, 'fontFace') then config.fontFace else []) }, indent_array_in_object=true, quote_keys=false),
+  'config.yaml': std.manifestYamlDoc(config, indent_array_in_object=true, quote_keys=false),
 } +
 (if config.layoutSwitcherEnabled then render(keyboards.layoutSwitch, 'keyboard_switcher') else {}) +
 render(keyboards.tempPinyin, 'temp_pinyin') +

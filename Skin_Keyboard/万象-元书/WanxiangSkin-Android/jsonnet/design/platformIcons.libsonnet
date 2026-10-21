@@ -1,4 +1,4 @@
-// Android 图标显式映射；iOS 保留原 SF Symbols 名称。
+// 安卓独立皮肤：直接使用官方支持的 material: 图标名，不依赖字体私用区。
 // 官方格式：https://ihsiao.com/apps/hamster/v3/docs/guides/skins/styles/#systemimage
 local names = {
   "calculator": "calculate",
@@ -23,7 +23,7 @@ local names = {
   "apple.logo": "apps",
   "apple.terminal.fill": "terminal",
   "arrow.right.to.line.compact": "keyboard_tab",
-  "arrow.up.doc.on.clipboard": "file_upload",
+  "arrow.up.doc.on.clipboard": "content_copy",
   "arrow.uturn.left.circle.fill": "undo",
   "arrow.uturn.right.circle.fill": "redo",
   "arrowshape.turn.up.left.fill": "arrow_back",
@@ -75,7 +75,7 @@ local names = {
   "scissors": "content_cut",
   "selection.pin.in.out": "select_all",
   "shift": "arrow_upward",
-  "shift.fill": "keyboard_capslock",
+  "shift.fill": "arrow_circle_up",
   "space": "space_bar",
   "square.and.line.vertical.and.square.filled": "flip_to_back",
   "square.and.pencil": "edit",
@@ -86,19 +86,29 @@ local names = {
   "tshirt.fill": "checkroom"
 };
 local icon(name) =
-  if std.type(name) != 'string' then name
-  // 自定义图标或 material: 名称交由应用处理，避免阻断用户定制。
-  else if std.objectHas(names, name) then { ios: name, android: names[name] }
+  if std.type(name) == 'object' && std.objectHas(name, 'android') then
+    if std.startsWith(name.android, 'material:') then name.android else 'material:' + name.android
+  else if std.type(name) != 'string' then name
+  else if std.objectHas(names, name) then 'material:' + names[name]
   else name;
+local isNumbers(value) = std.objectHas(value, 'systemImageName')
+  && std.member(['numbers', 'textformat.123'], value.systemImageName);
 {
-  // 在输出边界递归转换，覆盖条件样式、候选栏、长按菜单和划动角标。
-  // 保留所有动作、布局、配色和尺寸字段。
+  // 递归覆盖普通/预编辑状态、工具栏、长按菜单及划动角标。
   adapt(value)::
     if std.type(value) == 'array' then [$.adapt(item) for item in value]
-    else if std.type(value) == 'object' then {
+    else if std.type(value) != 'object' then value
+    else if isNumbers(value) then {
+      [key]: value[key]
+      for key in std.objectFields(value)
+      if key != 'systemImageName' && key != 'highlightSystemImageName' && key != 'buttonStyleType'
+    } + {
+      text: '123',
+      [if std.objectHas(value, 'buttonStyleType') then 'buttonStyleType']: 'text',
+    }
+    else {
       [key]: if key == 'systemImageName' || key == 'highlightSystemImageName'
              then icon(value[key]) else $.adapt(value[key])
       for key in std.objectFields(value)
-    }
-    else value,
+    },
 }
