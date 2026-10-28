@@ -210,7 +210,7 @@ local toolbar = import '../../components/toolbar/iPhone.libsonnet';
       },
       returnButton: createButton('return', {}, {}, $) + {
         backgroundStyle: 'systemButtonBackgroundStyle',
-        action: 'returnPrimaryKeyboard',
+        action: 'returnLastKeyboard',
       },
       returnButtonForegroundStyle:
         // 生成返回键前景。
