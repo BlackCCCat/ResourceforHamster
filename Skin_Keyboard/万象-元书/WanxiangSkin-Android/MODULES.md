@@ -54,7 +54,7 @@
 
 - `index.libsonnet`：可供 26、14、17、18、九键复用的拼音系统键装配。
 - `editing.libsonnet`：退格、空格和回车。
-- `inputMode.libsonnet`：Shift 与中英切换。
+- `inputMode.libsonnet`：Shift 与中英切换；预编辑滑动动作同时供 iPad 右 Shift 使用。
 - `keyboardSwitch.libsonnet`：123Button。
 - `longPressData.libsonnet`：中英切换、空格左键和回车的共用长按数据；`cn2en` 使用 `rimeOptionLabel$<option>` 动态标签。
 - `swipeData.libsonnet`：系统键共用上下划动作。

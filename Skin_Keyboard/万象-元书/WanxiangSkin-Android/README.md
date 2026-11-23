@@ -16,6 +16,8 @@
 
 核心配置在 `jsonnet/Custom.libsonnet`。计算器、日期、金额转换等功能依赖已部署的万象方案及对应 Lua 模块。
 
+`shift_config.preedit_swipedown_action` 控制预编辑状态下 Shift 的下滑动作，默认「分词」，可改为「辅助筛选」。
+
 支持候选字筛选面板的元书版本可将 `horizon_candidate_button` 设为 `1`，并将 `use_candidate_filter_panel` 设为 `true`。重新运行 `main.jsonnet` 后，候选栏展开键打开内置筛选面板。
 
 工具栏第二个指令入口使用 `terminal`，第三个使用 `auto_awesome` 星光标识，表情左侧的符号键盘入口使用 `emoji_symbols`。本次图标调整保留各入口原动作；第三个仍调用 `#toggleSymbolBar`。Google、Bing、百度搜索分别使用 `search`、`travel_explore`、`manage_search` 区分。

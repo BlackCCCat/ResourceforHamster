@@ -1,6 +1,7 @@
 // 组装平板端 26 键键盘，在手机端 26 键构建结果上叠加平板覆盖。
 local Settings = import '../../../Custom.libsonnet';
 local buttonInteraction = import '../../../components/key/interaction.libsonnet';
+local inputMode = import '../../../components/systemKeys/inputMode.libsonnet';
 local appearance = import '../../../design/appearance.libsonnet';
 local center = appearance.center;
 local color = appearance.color;
@@ -223,12 +224,7 @@ local styleFactories = import '../../../design/styleFactories.libsonnet';
         backgroundStyle: 'systemButtonBackgroundStyle',
         foregroundStyle: 'rightShiftButtonPreeditForegroundStyle',
         action: Settings.shift_config.preedit_action,
-        swipeUpAction:
-          if Settings.keyboard_layout == 26 && Settings.shift_config.preedit_swipeup_action == '辅助筛选' then
-            { character: '`' }
-          else
-            { character: "'" },
-      },
+      } + inputMode.shiftPreeditSwipeActions(Settings),
       rightShiftButtonPreeditForegroundStyle: makeSystemImageForeground(
         if Settings.shift_config.preedit_sf_symbol != '' then
           Settings.shift_config.preedit_sf_symbol

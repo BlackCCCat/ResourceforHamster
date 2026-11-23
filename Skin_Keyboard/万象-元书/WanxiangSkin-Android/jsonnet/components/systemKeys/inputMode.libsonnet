@@ -1,4 +1,13 @@
 // 汇总 Shift 状态键与中英切换键，统一维护输入模式相关系统键。
+local shiftPreeditSwipeActions(Settings) = {
+  swipeUpAction: {
+    character: if Settings.keyboard_layout == 26 && Settings.shift_config.preedit_swipeup_action == '辅助筛选' then '`' else "'",
+  },
+  swipeDownAction: {
+    character: if std.get(Settings.shift_config, 'preedit_swipedown_action', '分词') == '辅助筛选' then '`' else "'",
+  },
+};
+
 local shiftModule = (
   local styleFactories = import '../../design/styleFactories.libsonnet';
 
@@ -38,8 +47,7 @@ local shiftModule = (
           backgroundStyle: 'systemButtonBackgroundStyle',
           foregroundStyle: 'shiftButtonPreeditForegroundStyle',
           action: Settings.shift_config.preedit_action,
-          swipeUpAction: if Settings.keyboard_layout == 26 && Settings.shift_config.preedit_swipeup_action == '辅助筛选' then { character: '`' } else { character: "'" },
-        },
+        } + shiftPreeditSwipeActions(Settings),
         shiftButtonPreeditForegroundStyle:
           // 生成 Shift 预编辑图标前景。
           makeShiftForegroundStyle(
@@ -125,6 +133,8 @@ local inputModeModule = (
 );
 
 {
+  shiftPreeditSwipeActions: shiftPreeditSwipeActions,
+
   buildShift(theme, orientation, keyboardLayout, Settings, color, fontSize, createButton, baseHintStyles)::
     shiftModule.build(theme, orientation, keyboardLayout, Settings, color, fontSize, createButton, baseHintStyles),
 

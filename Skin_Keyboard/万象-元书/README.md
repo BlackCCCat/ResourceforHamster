@@ -251,6 +251,7 @@ shift_config: {
   preedit_action: { character: '/' },
   preedit_sf_symbol: '',
   preedit_swipeup_action: '辅助筛选',
+  preedit_swipedown_action: '分词',
 },
 ```
 
@@ -258,6 +259,7 @@ shift_config: {
 - `preedit_action`：Shift 在预编辑状态的点击动作。
 - `preedit_sf_symbol`：预编辑状态的 SF Symbol；空字符串使用皮肤默认图标。
 - `preedit_swipeup_action`：可选“分词”或“辅助筛选”，仅当 `keyboard_layout == 26` 时使用辅助筛选的反引号动作。
+- `preedit_swipedown_action`：预编辑状态下滑 Shift，默认“分词”（单引号），可改为“辅助筛选”（反引号）。原版和 Android 版均可配置，iPad 左右 Shift 使用同一选项。
 
 整组配置用于中文 26/27 键和 iPad 26 键，不作用于 14/17/18 键。
 

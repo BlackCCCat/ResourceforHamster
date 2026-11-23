@@ -56,7 +56,7 @@ description: Use when modifying the WanxiangSkin Hamster3 keyboard under Resourc
 - `buildContext.withLayout(Settings, layout)`：布局相关分支必须读本布局的值；不要再让拼音键盘直接读 `Custom.libsonnet` 的全局 `keyboard_layout`。
 - `swipe_assist_mode`：仅中文 26 键；`none` 使用原通知，其他模式使用 `preeditChanged` 辅助通知并重排长按菜单。
 - `button_123_config.show_swipe_indicators`：只控制 123Button 角标，不受 `show_swipe` 影响，也不控制动作。
-- `shift_config`：预编辑动作与图标作用于中文 26/27 键和 iPad 26 键，不作用于 14/17/18 键；预编辑上划配置仅中文 26 键使用。
+- `shift_config`：配置中文 26/27 键和 iPad 26 键的 Shift 预编辑动作与图标。上划的辅助筛选受 `keyboard_layout == 26` 限制；下划默认分词，可选辅助筛选。iPad 右 Shift 复用 `inputMode.shiftPreeditSwipeActions`。
 - `button_symbol_config`：九键/数字键盘符号按钮交互，不改变位置交换配置。
 - `horizon_candidate_button` 选择横向候选栏尾部按钮；仅在值为 `1` 时，`use_candidate_filter_panel` 决定展开键打开哪种面板。原纵向候选栏的返回键继续关闭原面板。
 - `temp_pinyin`：返回英文键盘、固定 RIME 空格、上划 `Shift+space`。

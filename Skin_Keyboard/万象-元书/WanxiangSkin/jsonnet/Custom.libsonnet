@@ -175,6 +175,9 @@
     // 26键shift按键预编辑状态上划操作
     // 可选：分词、辅助筛选，分词为'，辅助筛选为`
     preedit_swipeup_action: '辅助筛选',
+
+    // Shift 预编辑下滑动作，可选「分词」或「辅助筛选」。
+    preedit_swipedown_action: '分词',
   },
 
   // 横向候选栏最右侧按钮：

@@ -108,7 +108,7 @@ jsonnet/
 - `font_size_config.pinyin_grouped_letter_font_size`：分组拼音（14/17/18 键）的字母前景字号。
 - `button_insets.portrait`、`button_insets.landscape`：按键背景边距。
 - `cornerRadius`：按键圆角。
-- `shift_config`：Shift 预编辑动作与图标用于中文 26/27 键和 iPad 26 键，不作用于 14/17/18 键；`preedit_swipeup_action` 仅在中文 26 键生效。
+- `shift_config`：配置中文 26/27 键和 iPad 26 键的 Shift 预编辑动作与图标。上滑仅在 `keyboard_layout == 26` 时可用辅助筛选；`preedit_swipedown_action` 默认分词，可改为辅助筛选。
 
 ## 特殊键盘
 
