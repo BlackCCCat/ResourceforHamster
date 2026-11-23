@@ -72,7 +72,7 @@ local fontSize = appearance.fontSize;
       },
       expandButton: makeToolbarButtonStyle(
         'expandButtonForegroundStyle',
-        { shortcut: '#candidatesBarStateToggle' }
+        { shortcut: if std.get(Settings, 'use_candidate_filter_panel', false) then '#candidateFilterPanelToggle' else '#candidatesBarStateToggle' }
       ),
       expandButtonForegroundStyle: makeToolbarSystemImageForegroundStyle('chevron.down', {
         normalColor: color[theme]['按键前景颜色'],
@@ -127,6 +127,7 @@ local fontSize = appearance.fontSize;
       ),
       verticalCandidateReturnButton: makeSystemButtonStyle(
         'verticalCandidateReturnButtonForegroundStyle',
+        // 原纵向候选栏的返回键始终关闭该栏。
         { shortcut: '#candidatesBarStateToggle' }
       ),
       verticalCandidateBackspaceButton: makeSystemButtonStyle('backspaceButtonForegroundStyle', 'backspace'),

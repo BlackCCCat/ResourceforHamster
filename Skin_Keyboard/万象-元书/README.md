@@ -145,6 +145,7 @@
 | `ios26_style` | `true` | 浅色/深色键盘 | 启用 iOS 26 风格的按键颜色覆写 |
 | `cornerRadius` | `8` | 通用按键和长按背景 | 调整按键圆角 |
 | `horizon_candidate_button` | `2` | 横向候选栏 | `0` 不显示，`1` 显示展开候选键，`2` 显示收起键盘键 |
+| `use_candidate_filter_panel` | `false` | 展开候选键 | 设为 `true` 后打开元书内置候选字筛选面板，需搭配 `horizon_candidate_button: 1` |
 
 ### 字号与按键间距
 
@@ -385,6 +386,7 @@ iPhone 与 iPad 共用同一组 ID：
 ## 候选栏与浮动键盘
 
 - 横向候选栏右侧按钮由 `horizon_candidate_button` 控制。
+- 原版与 Android 版可将 `horizon_candidate_button` 设为 `1`，并将 `use_candidate_filter_panel` 设为 `true`，重新运行 `main.jsonnet` 后，输入中文时点候选栏右侧的展开键即可打开筛选面板。需要元书版本支持 [候选字筛选面板](https://ihsiao.com/apps/hamster/v3/docs/guides/skins/candidate-filter-panel/)。
 - 纵向候选栏底部提供上翻页、下翻页、返回和删除键。
 - 当 `toolbar_menu == false` 时，工具栏的 `menu_or_panel` 打开 `panel` 浮动键盘。
 - iPad 的 `floating` 不使用 iPad 四行布局，而是分别复用 iPhone 竖屏的拼音 26 键、英文 26 键和数字九键。

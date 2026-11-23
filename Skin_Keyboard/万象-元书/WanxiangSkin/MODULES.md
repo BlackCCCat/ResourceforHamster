@@ -75,6 +75,7 @@
 ### `jsonnet/components/candidates.libsonnet`
 
 - 横向候选、纵向候选、展开/翻页/返回/删除按钮。
+- `use_candidate_filter_panel` 只切换横向候选栏展开按钮的动作；原纵向候选栏的返回键仍关闭原面板。
 - `candidateContextMenu` 的“左移、右移、重置、置顶、移除”。
 
 ## 4. 键盘族

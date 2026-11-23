@@ -92,6 +92,7 @@ jsonnet/
 ### 候选栏与工具栏
 
 - `horizon_candidate_button`：`0` 不显示、`1` 展开候选、`2` 收起键盘。
+- `use_candidate_filter_panel`：默认关闭；设为 `true` 且右侧按钮设为 `1` 时，展开键打开元书内置候选字筛选面板。
 - `toolbar_config.toolbar_height`：iPhone 工具栏高度。
 - `toolbar_config.ipad.toolbar_height`：iPad 工具栏高度。
 - `toolbar_config.mode`：`segmented` 或 `carousel`。

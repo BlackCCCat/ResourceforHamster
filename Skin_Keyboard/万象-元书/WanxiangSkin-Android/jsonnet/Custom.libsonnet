@@ -183,6 +183,9 @@
   // 2: 收起键盘按钮，可在预测开启时保留收起入口。
   horizon_candidate_button: 2,
 
+  // 展开候选时使用元书内置的候选字筛选面板，仅在右侧按钮设为 1 时生效。
+  use_candidate_filter_panel: false,
+
   // 工具栏布局配置
   toolbar_config: {
     // 是否启用键盘菜单页面
